@@ -1,0 +1,5 @@
+export enum TouchType {
+    CLICK = 'CLICK',
+    WEB_TO_APP_AUTO_REDIRECT = 'WEB_TO_APP_AUTO_REDIRECT',
+    IMPRESSION = 'IMPRESSION'
+}
