@@ -9,12 +9,12 @@ export default function App() {
     React.useEffect(() => {
         Affise.init(
             new AffiseInitProperties(
-                'appId',
-                false,
-                'partParamName',
-                'partParamNameToken',
-                'appToken',
-                'secretId'
+                'Your appId', //Change to your app id
+                true, //Add your custom rule to determine if this is a production build
+                null, //Change to your partParamName
+                null, //Change to your partParamNameToken
+                null, //Change to your appToken
+                'Your secretId' //Change to your secretId
             )
         );
     });

@@ -43,13 +43,17 @@ referrer.
 This is a [Node.js](https://nodejs.org/en/) module available through the
 [npm registry](https://www.npmjs.com/).
 
-Installation is done using the
-[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+Installation using npm
 
 ```console
 npm install affise-attribution-lib
 ```
 
+Installation using yarn
+
+```console
+yarn add affise-attribution-lib
+```
 
 ### Initialize
 
@@ -58,7 +62,7 @@ After dependency is added, and  project is sync with `npm install` and initializ
 
 ```typescript
 import {
-  Affise, 
+  Affise,
   AffiseInitProperties
 } from 'affise-attribution-lib';
 
@@ -68,12 +72,12 @@ export default function App() {
     React.useEffect(() => {
         Affise.init(
             new AffiseInitProperties(
-                'appId',
-                false,
-                'partParamName',
-                'partParamNameToken',
-                'appToken',
-                'secretId'
+                'Your appId', //Change to your app id
+                true, //Add your custom rule to determine if this is a production build
+                null, //Change to your partParamName
+                null, //Change to your partParamNameToken
+                null, //Change to your appToken
+                'Your secretId' //Change to your secretId
             )
         );
     });
@@ -99,7 +103,7 @@ For a minimal working functionality your app needs to declare internet permissio
 </manifest>
 ```
 
-OAID certificate in your project
+OAID certificate in your project (Optional)
 `example/android/app/src/main/assets/oaid.cert.pem`
 
 #### iOS
@@ -215,7 +219,7 @@ class Presenter {
     };
 
     Affise.sendEvent(
-      AddToCartEvent(
+      new AddToCartEvent(
         items,
         Date.now(),
         "groceries"
@@ -294,7 +298,7 @@ class Presenter {
       "items": "cookies, potato, milk",
     };
 
-    const event = AddToCartEvent(
+    const event = new AddToCartEvent(
       items,
       Date.now(),
     );

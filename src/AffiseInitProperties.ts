@@ -1,22 +1,22 @@
 import type {AutoCatchingType} from "./events/AutoCatchingType";
 
 export class AffiseInitProperties {
-  affiseAppId: string;
+  affiseAppId?: string | null;
   isProduction: boolean;
-  partParamName: string;
-  partParamNameToken: string;
-  appToken: string;
-  secretId: string;
+  partParamName?: string | null;
+  partParamNameToken?: string | null;
+  appToken?: string | null;
+  secretId?: string | null;
   enabledMetrics: boolean;
   autoCatchingClickEvents?: AutoCatchingType[];
 
   constructor(
-    affiseAppId: string,
+    affiseAppId?: string | null,
     isProduction: boolean = true,
-    partParamName: string,
-    partParamNameToken: string,
-    appToken: string,
-    secretId: string,
+    partParamName?: string | null,
+    partParamNameToken?: string | null,
+    appToken?: string | null,
+    secretId?: string | null,
     enabledMetrics: boolean = false,
     autoCatchingClickEvents: AutoCatchingType[] = []
   ) {
