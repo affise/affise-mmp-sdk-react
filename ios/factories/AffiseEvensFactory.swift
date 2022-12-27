@@ -40,6 +40,7 @@ internal class AffiseEvensFactory: AffiseBaseEvensFactory, AffiseBaseEvens {
        case "Rate": return eventRateEvent(map)
        case "ReEngage": return eventReEngageEvent(map)
        case "Reserve": return eventReserveEvent(map)
+       case "Sales": return eventSalesEvent(map)
        case "Search": return eventSearchEvent(map)
        case "Share": return eventShareEvent(map)
        case "SpendCredits": return eventSpendCreditsEvent(map)
@@ -544,21 +545,37 @@ internal class AffiseEvensFactory: AffiseBaseEvensFactory, AffiseBaseEvens {
        return event
    }
 
-  private func eventReserveEvent(_ map: [String: Any?]?) -> ReserveEvent {
-      let (timeStamp, userData) = getUserDataAndTimeStamp(
-          map,
-          "affise_event_reserve_timestamp"
-      )
-      let reserve = getSerializeArrayOfArray(map, "affise_event_reserve")
+   private func eventReserveEvent(_ map: [String: Any?]?) -> ReserveEvent {
+       let (timeStamp, userData) = getUserDataAndTimeStamp(
+           map,
+           "affise_event_reserve_timestamp"
+       )
+       let reserve = getSerializeArrayOfArray(map, "affise_event_reserve")
 
-      var event = ReserveEvent(
-          reserve: reserve,
-          timeStampMillis: timeStamp,
-          userData: userData
-      )
-      addPredefinedParameters(event: &event, map: map)
-      return event
-  }
+       var event = ReserveEvent(
+           reserve: reserve,
+           timeStampMillis: timeStamp,
+           userData: userData
+       )
+       addPredefinedParameters(event: &event, map: map)
+       return event
+   }
+
+   private func eventSalesEvent(_ map: [String: Any?]?) -> SalesEvent {
+       let (timeStamp, userData) = getUserDataAndTimeStamp(
+           map,
+           "affise_event_sales_timestamp"
+       )
+       let salesData = getArrayOfData(map, "affise_event_sales")
+
+       var event = SalesEvent(
+           salesData: share,
+           timeStampMillis: timeStamp,
+           userData: userData
+       )
+       addPredefinedParameters(event: &event, map: map)
+       return event
+   }
 
    private func eventSearchEvent(_ map: [String: Any?]?) -> SearchEvent {
        let (timeStamp, userData) = getUserDataAndTimeStamp(

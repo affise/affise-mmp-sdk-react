@@ -57,8 +57,7 @@ yarn add affise-attribution-lib
 
 ### Initialize
 
-After dependency is added, and  project is sync with `npm install` and initialize.
-
+After dependency is added, and project is sync with `npm install` and initialize.
 
 ```typescript
 import {
@@ -93,6 +92,7 @@ export default function App() {
 ### Requirements
 
 #### Android
+
 Minimal Android SDK version is 21
 
 For a minimal working functionality your app needs to declare internet permission:
@@ -114,7 +114,6 @@ Add key `NSUserTrackingUsageDescription` to `Info.plist` as in `example/ios/Affi
 <key>NSUserTrackingUsageDescription</key>
 <string>This identifier will be used for tracking.</string>
 ```
-
 
 # Features
 
@@ -209,22 +208,15 @@ For example, we want to track what items usually user adds to shopping cart. To 
 following code
 
 ```typescript
-import {Affise, AddToCartEvent} from 'affise-attribution-lib';
-
+import { Affise, AddToCartEvent } from 'affise-attribution-lib';
 
 class Presenter {
   onUserAddsItemsToCart(item: string) {
     const items = {
-      items: "cookies, potato, milk",
+      items: 'cookies, potato, milk',
     };
 
-    Affise.sendEvent(
-      new AddToCartEvent(
-        items,
-        Date.now(),
-        "groceries"
-      )
-    );
+    Affise.sendEvent(new AddToCartEvent(items, Date.now(), 'groceries'));
   }
 }
 ```
@@ -253,6 +245,7 @@ With above example you can implement other events:
 - `RateEvent`
 - `ReEngageEvent`
 - `ReserveEvent`
+- `SalesEvent`
 - `SearchEvent`
 - `ShareEvent`
 - `SpendCreditsEvent`
@@ -290,28 +283,32 @@ To enrich your event with another dimension, you can use predefined parameters f
 Add it to any event:
 
 ```typescript
-import {Affise, AddToCartEvent, PredefinedParameters} from 'affise-attribution-lib';
+import {
+  Affise,
+  AddToCartEvent,
+  PredefinedParameters,
+} from 'affise-attribution-lib';
 
 class Presenter {
   onUserAddsItemsToCart(item: string) {
     const items = {
-      "items": "cookies, potato, milk",
+      items: 'cookies, potato, milk',
     };
 
-    const event = new AddToCartEvent(
-      items,
-      Date.now(),
-    );
+    const event = new AddToCartEvent(items, Date.now());
 
-    event.addPredefinedParameter(PredefinedParameters.DESCRIPTION, "best before 2029");
+    event.addPredefinedParameter(
+      PredefinedParameters.DESCRIPTION,
+      'best before 2029'
+    );
 
     Affise.sendEvent(event);
   }
 }
 ```
 
-
 In examples above `PredefinedParameters.DESCRIPTION` is used, but many others is available:
+
 - `ADREV_AD_TYPE`
 - `CITY`
 - `COUNTRY`
@@ -385,12 +382,10 @@ In examples above `PredefinedParameters.DESCRIPTION` is used, but many others is
 - `PARAM_08`
 - `PARAM_09`
 
-
 ### Events buffering
 
 Affise library will send any pending events with first opportunity,
 but if there is no network connection or device is disabled, events are kept locally for 7 days before deletion.
-
 
 ### Advertising Identifier (google) tracking
 
@@ -412,20 +407,21 @@ First add firebase integration to your app completing theese steps: https://fire
 After you have done with firebase inegration, add to your cloud messaging service `onNewToken` method `Affise.addPushToken(token)`
 
 ```typescript
-import {Affise} from 'affise-attribution-lib';
+import { Affise } from 'affise-attribution-lib';
 import messaging from '@react-native-firebase/messaging';
 
 const getToken = async () => {
-    const token = await messaging().getToken();
-    if (token) {
-        Affise.addPushToken(token);
-    }
-}
+  const token = await messaging().getToken();
+  if (token) {
+    Affise.addPushToken(token);
+  }
+};
 ```
 
 ### Reinstall Uninstall tracking
 
 Affise automatically track reinstall events by using silent-push technology, to make this feature work, pass push token when it is recreated by user and on you application starts up
+
 ```typescript
 Affise.addPushToken(token);
 ```
@@ -443,7 +439,6 @@ To use this feature, create file with name `partner_key` in your app assets dire
 Affise.registerDeeplinkCallback((uri) => {
 
 });
-
 ```
 
 #### Android
@@ -462,7 +457,6 @@ To integrate applink support in android you need:
 </intent-filter>
 ```
 
-
 ### Offline mode
 
 In some scenarious you would want to limit Affise network usage, to pause that activity call anywhere in your application following code after Affise init:
@@ -472,6 +466,7 @@ Affise.init(..);
 Affise.setOfflineModeEnabled(true); // to enable offline mode
 Affise.setOfflineModeEnabled(false); // to disable offline mode
 ```
+
 While offline mode is enabled, your metrics and other events are kept locally, and will be delivered once offline mode is disabled.
 Offline mode is persistent as Application lifecycle, and will be disabled with process termination automaticly.
 To check current offline mode status call:
@@ -497,8 +492,8 @@ Keep in mind that this flag is persistent until app reinstall, and don't forget 
 To check current status of tracking call:
 
 ```typescript
-Affise.isTrackingEnabled().then(enabled => {
-    // returns true or false describing current tracking state
+Affise.isTrackingEnabled().then((enabled) => {
+  // returns true or false describing current tracking state
 });
 ```
 
@@ -519,8 +514,8 @@ Background tracking mode is persistent as Application lifecycle, and will be re-
 To check current status of background tracking call:
 
 ```typescript
-Affise.isBackgroundTrackingEnabled().then(enabled => {
-    // returns true or false describing current background tracking state
+Affise.isBackgroundTrackingEnabled().then((enabled) => {
+  // returns true or false describing current background tracking state
 });
 ```
 
@@ -533,6 +528,7 @@ To provide this functionality to user, as the app developer, you can call
 Affise.init(..);
 Affise.forget(); // to forget users data
 ```
+
 After processing such request our backend servers will delete all users data.
 To prevent library from generating new events, disable tracking just before calling Affise.forget:
 
@@ -547,7 +543,7 @@ Affise.forget(); // to forget users data
 Use the next public method of SDK
 
 ```typescript
-Affise.getReferrer().then(referrer => {
-    // returns referrer
+Affise.getReferrer().then((referrer) => {
+  // returns referrer
 });
 ```
