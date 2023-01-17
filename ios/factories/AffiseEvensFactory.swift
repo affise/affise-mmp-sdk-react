@@ -569,7 +569,7 @@ internal class AffiseEvensFactory: AffiseBaseEvensFactory, AffiseBaseEvens {
        let salesData = getArrayOfData(map, "affise_event_sales")
 
        var event = SalesEvent(
-           salesData: share,
+           salesData: salesData,
            timeStampMillis: timeStamp,
            userData: userData
        )
