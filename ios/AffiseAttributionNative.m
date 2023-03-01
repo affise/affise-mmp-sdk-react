@@ -87,4 +87,7 @@ RCT_EXTERN_METHOD(
   withRejecter: (RCTPromiseRejectBlock)reject
 )
 
+RCT_EXTERN_METHOD(
+  nativeHandleDeeplink: (NSString)uri
+)
 @end

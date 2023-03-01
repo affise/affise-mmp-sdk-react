@@ -1,4 +1,4 @@
-import {EmitterSubscription, NativeEventEmitter, NativeModules, Platform} from 'react-native';
+import {EmitterSubscription, Linking, NativeEventEmitter, NativeModules, Platform} from 'react-native';
 import type {AffiseInitProperties, AutoCatchingType, AffiseEvent} from "./Export";
 
 export * from "./Export";
@@ -71,6 +71,7 @@ export class Affise {
         });
 
         AffiseNative.nativeRegisterDeeplinkCallback();
+        this.reactHandleDeeplink();
     }
 
     static unregisterDeeplinkCallback() {
@@ -168,5 +169,16 @@ export class Affise {
      */
     static getReferrer(): Promise<string> {
         return AffiseNative.nativeGetReferrer();
+    }
+
+    private static reactHandleDeeplink() {
+        Linking.getInitialURL().then(this.deeplinkCallback);
+        Linking.addEventListener('url', (evt) => this.deeplinkCallback(evt.url))
+    }
+
+    private static deeplinkCallback(url: string | null) {
+        if (url != null && url.trim().length > 0) {
+            AffiseNative.nativeHandleDeeplink(url);
+        }
     }
 }

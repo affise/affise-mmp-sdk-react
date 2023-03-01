@@ -53,5 +53,19 @@
 	<false/>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used for tracking.</string>
+    <!-- Deeplink -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>test.affattr.com</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>react</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>

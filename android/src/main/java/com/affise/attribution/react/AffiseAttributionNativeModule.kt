@@ -22,9 +22,9 @@ class AffiseAttributionNativeModule(
             .emit(eventName, params)
     }
 
-    private fun sendDeeplinkEvent(uri: Uri) {
+    private fun sendDeeplinkEvent(uri: String) {
         sendEvent(reactContext, DEEPLINK_CALLBACK_EVENT, Arguments.createMap().apply {
-            putString(DEEPLINK_CALLBACK_URI_PARAMETER, uri.toString())
+            putString(DEEPLINK_CALLBACK_URI_PARAMETER, uri)
         })
     }
 
@@ -35,7 +35,9 @@ class AffiseAttributionNativeModule(
     @ReactMethod
     fun nativeInit(initProperties: ReadableMap) {
         (reactContext.applicationContext as? Application)?.let { application ->
+            Affise._crossPlatform.react()
             Affise.init(application, initProperties.toHashMap().toAffiseInitProperties())
+            Affise._crossPlatform.start()
         }
     }
 
@@ -59,10 +61,7 @@ class AffiseAttributionNativeModule(
 
     @ReactMethod
     fun nativeRegisterDeeplinkCallback() {
-        Affise.registerDeeplinkCallback {
-            sendDeeplinkEvent(it)
-            true
-        }
+        registerCallback()
     }
 
     @ReactMethod
@@ -136,6 +135,18 @@ class AffiseAttributionNativeModule(
     @ReactMethod
     fun nativeGetReferrer(result: Promise) {
         result.resolve(Affise.getReferrer())
+    }
+
+    @ReactMethod
+    fun nativeHandleDeeplink(uri: String) {
+        Affise._crossPlatform.handleDeeplink(uri)
+        sendDeeplinkEvent(uri)
+    }
+
+    private fun registerCallback() {
+        Affise.registerDeeplinkCallback {
+            true
+        }
     }
 
     companion object {

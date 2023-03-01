@@ -23,6 +23,7 @@
     - [APK preinstall tracking](#apk-preinstall-tracking)
     - [Deeplinks](#deeplinks)
       - [Android](#android-1)
+      - [iOS](#ios-1)
     - [Offline mode](#offline-mode)
     - [Disable tracking](#disable-tracking)
     - [Disable background tracking](#disable-background-tracking)
@@ -433,9 +434,10 @@ To use this feature, create file with name `partner_key` in your app assets dire
 
 ### Deeplinks
 
-- register applink callback right after Affise.init(..)
+Register deeplink callback right after Affise.init(..)
 
 ```typescript
+Affise.init(..);
 Affise.registerDeeplinkCallback((uri) => {
 
 });
@@ -443,18 +445,55 @@ Affise.registerDeeplinkCallback((uri) => {
 
 #### Android
 
-To integrate applink support in android you need:
+To integrate deeplink support in android you need:
 
-- add intent filter to one of your activities, replacing YOUR_AFFISE_APP_ID with id from your affise personal cabinet
+Add intent filter to `AndroidManifest.xml` as in `example/android/app/src/main/AndroidManifest.xml`,
 
 ```xml
 <intent-filter android:autoVerify="true">
-  <action android:name="android.intent.action.VIEW" />
-  <category android:name="android.intent.category.DEFAULT" />
-  <category android:name="android.intent.category.BROWSABLE" />
-  <data android:scheme="https" />
-  <data android:host="YOUR_AFFISE_APP_ID.affattr.com" />
+    <action android:name="android.intent.action.VIEW" />
+
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+
+    <data
+        android:host="YOUR_AFFISE_APP_ID.affattr.com"
+        android:scheme="react" />
 </intent-filter>
+```
+
+#### iOS
+
+To integrate deeplink support in iOS you need:
+
+Add deeplink handler to `AppDelegate.mm` as in `example/ios/AffiseAttributionLibExample/AppDelegate.mm`
+- [React Docs](https://reactnavigation.org/docs/deep-linking/#set-up-with-bare-react-native-projects)
+
+```objective-c
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  return [RCTLinkingManager application:application openURL:url
+                      sourceApplication:sourceApplication annotation:annotation];
+}
+```
+
+Add key `CFBundleURLTypes` to `Info.plist` as in `example/ios/AffiseAttributionLibExample/Info.plist`
+
+```html
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>YOUR_AFFISE_APP_ID.affattr.com</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>react</string>
+        </array>
+    </dict>
+</array>
 ```
 
 ### Offline mode

@@ -17,6 +17,10 @@ export default function App() {
                 'Your secretId' //Change to your secretId
             )
         );
+
+        Affise.registerDeeplinkCallback((url) => {
+            console.log(`Deeplink: ${url}`)
+        })
     });
 
     return (
