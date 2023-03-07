@@ -1,4 +1,5 @@
 import type {AutoCatchingType} from "./events/AutoCatchingType";
+// import type {AffiseFlag} from "./AffiseFlag";
 
 export class AffiseInitProperties {
   affiseAppId?: string | null;
@@ -9,6 +10,7 @@ export class AffiseInitProperties {
   secretId?: string | null;
   enabledMetrics: boolean;
   autoCatchingClickEvents?: AutoCatchingType[];
+  // flags?: AffiseFlag[];
 
   constructor(
     affiseAppId?: string | null,
@@ -18,7 +20,8 @@ export class AffiseInitProperties {
     appToken?: string | null,
     secretId?: string | null,
     enabledMetrics: boolean = false,
-    autoCatchingClickEvents: AutoCatchingType[] = []
+    autoCatchingClickEvents: AutoCatchingType[] = [],
+    // flags: AffiseFlag[] = [],
   ) {
     this.affiseAppId = affiseAppId;
     this.isProduction = isProduction;
@@ -28,5 +31,6 @@ export class AffiseInitProperties {
     this.secretId = secretId;
     this.enabledMetrics = enabledMetrics;
     this.autoCatchingClickEvents = autoCatchingClickEvents;
+    // this.flags = flags;
   }
 }
