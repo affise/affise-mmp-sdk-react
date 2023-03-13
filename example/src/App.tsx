@@ -1,7 +1,12 @@
 import * as React from 'react';
 
 import {Button, SafeAreaView, StyleSheet} from 'react-native';
-import {AddToCartEvent, Affise, AffiseInitProperties, PredefinedParameters} from 'affise-attribution-lib';
+import {
+    Affise,
+    AffiseInitProperties,
+    PredefinedParameters,
+    AddToCartEvent
+} from 'affise-attribution-lib';
 
 
 export default function App() {

@@ -33,4 +33,7 @@ export class SubscriptionParameters {
 
     static AFFISE_SUBSCRIPTION_REACTIVATION = "affise_subscription_reactivation";
     static AFFISE_SUB_REACTIVATED_SUBSCRIPTION = "affise_sub_reactivated_subscription";
+
+    static AFFISE_UNSUBSCRIPTION = "affise_unsubscription";
+    static AFFISE_SUB_UNSUBSCRIPTION = "affise_sub_unsubscription";
 }

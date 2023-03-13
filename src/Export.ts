@@ -72,3 +72,4 @@ export {RenewedSubscriptionEvent} from "./events/subscription/RenewedSubscriptio
 export {ConvertedTrialFromRetryEvent} from "./events/subscription/ConvertedTrialFromRetryEvent";
 export {ConvertedOfferFromRetryEvent} from "./events/subscription/ConvertedOfferFromRetryEvent";
 export {RenewedSubscriptionFromRetryEvent} from "./events/subscription/RenewedSubscriptionFromRetryEvent";
+export {UnsubscriptionEvent} from "./events/subscription/UnsubscriptionEvent";

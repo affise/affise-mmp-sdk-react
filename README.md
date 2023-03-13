@@ -247,6 +247,7 @@ With above example you can implement other events:
 - `TravelBookingEvent`
 - `UnlockAchievementEvent`
 - `UnsubscribeEvent`
+- `UnsubscriptionEvent`
 - `UpdateEvent`
 - `ViewAdvEvent`
 - `ViewCartEvent`
