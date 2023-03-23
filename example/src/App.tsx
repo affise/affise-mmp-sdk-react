@@ -1,15 +1,19 @@
 import * as React from 'react';
 
-import {Button, SafeAreaView, StyleSheet} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, Text} from 'react-native';
 import {
     Affise,
     AffiseInitProperties,
     PredefinedParameters,
-    AddToCartEvent
+    AddToCartEvent,
+    ReferrerKey
 } from 'affise-attribution-lib';
 
 
 export default function App() {
+
+    const [referrerValue, setReferrerValue] = React.useState("");
+    const [referrer, setReferrer] = React.useState("");
 
     React.useEffect(() => {
         Affise.init(
@@ -26,10 +30,25 @@ export default function App() {
         Affise.registerDeeplinkCallback((url) => {
             console.log(`Deeplink: ${url}`)
         })
-    });
+
+        Affise.android.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
+            console.log(`ReferrerValue: ${value}`)
+            setReferrerValue(`ReferrerValue: ${value}`)
+        })
+
+        Affise.getReferrer().then(ref => {
+            setReferrer(ref)
+        })
+    }, []);
 
     return (
         <SafeAreaView style={styles.container}>
+            <Text>
+                {referrer}
+            </Text>
+            <Text>
+                {referrerValue}
+            </Text>
             <Button
                 title='Add To Cart'
                 onPress={() => {

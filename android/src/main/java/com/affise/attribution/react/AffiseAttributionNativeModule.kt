@@ -1,17 +1,17 @@
 package com.affise.attribution.react
 
 import android.app.Application
-import android.net.Uri
 import com.affise.attribution.Affise
 import com.affise.attribution.react.ext.toAffiseInitProperties
 import com.affise.attribution.react.ext.toAutoCatchingType
+import com.affise.attribution.react.ext.toReferrerKey
 import com.affise.attribution.react.factories.AffiseEvensFactory
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
 
 
 class AffiseAttributionNativeModule(
-    val reactContext: ReactApplicationContext
+    private val reactContext: ReactApplicationContext
 ) : ReactContextBaseJavaModule(reactContext) {
 
     private var evensFactory: AffiseEvensFactory = AffiseEvensFactory()
@@ -25,6 +25,13 @@ class AffiseAttributionNativeModule(
     private fun sendDeeplinkEvent(uri: String) {
         sendEvent(reactContext, DEEPLINK_CALLBACK_EVENT, Arguments.createMap().apply {
             putString(DEEPLINK_CALLBACK_URI_PARAMETER, uri)
+        })
+    }
+
+
+    private fun sendGetReferrerValueEvent(key: String?) {
+        sendEvent(reactContext, GET_REFERRER_VALUE_CALLBACK_EVENT, Arguments.createMap().apply {
+            putString(GET_REFERRER_VALUE_PARAMETER, key)
         })
     }
 
@@ -138,6 +145,15 @@ class AffiseAttributionNativeModule(
     }
 
     @ReactMethod
+    fun nativeGetReferrerValue(key: String) {
+        key.toReferrerKey()?.let { refKey ->
+            Affise.getReferrerValue(refKey) { value ->
+                sendGetReferrerValueEvent(value)
+            }
+        }
+    }
+
+    @ReactMethod
     fun nativeHandleDeeplink(uri: String) {
         Affise._crossPlatform.handleDeeplink(uri)
         sendDeeplinkEvent(uri)
@@ -154,5 +170,8 @@ class AffiseAttributionNativeModule(
 
         private const val DEEPLINK_CALLBACK_EVENT = "affiseDeeplinkEvent"
         private const val DEEPLINK_CALLBACK_URI_PARAMETER = "uri"
+
+        private const val  GET_REFERRER_VALUE_CALLBACK_EVENT = "getReferrerValueEvent";
+        private const val  GET_REFERRER_VALUE_PARAMETER = "getReferrerValueParameter";
     }
 }

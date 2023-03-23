@@ -2,6 +2,7 @@ export {AffiseInitProperties} from './AffiseInitProperties';
 export {AffiseFlag} from './AffiseFlag';
 export {AutoCatchingType} from "./events/AutoCatchingType";
 export {TouchType} from "./events/TouchType";
+export {ReferrerKey} from "./referrer/ReferrerKey";
 
 export {PredefinedParameters} from "./events/PredefinedParameters";
 

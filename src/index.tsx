@@ -1,5 +1,5 @@
 import {EmitterSubscription, Linking, NativeEventEmitter, NativeModules, Platform} from 'react-native';
-import type {AffiseInitProperties, AutoCatchingType, AffiseEvent} from "./Export";
+import type {AffiseInitProperties, AutoCatchingType, AffiseEvent, ReferrerKey} from "./Export";
 
 export * from "./Export";
 
@@ -21,6 +21,8 @@ const AffiseNative = NativeModules.AffiseAttributionNative
         }
     );
 
+const GET_REFERRER_VALUE_CALLBACK_EVENT = "getReferrerValueEvent";
+const GET_REFERRER_VALUE_PARAMETER = "getReferrerValueParameter";
 const DEEPLINK_CALLBACK_EVENT = "affiseDeeplinkEvent";
 const DEEPLINK_CALLBACK_URI_PARAMETER = "uri";
 
@@ -28,7 +30,9 @@ const DEEPLINK_CALLBACK_URI_PARAMETER = "uri";
  * Entry point to initialise Affise Attribution library
  */
 export class Affise {
-    private static eventListener?: EmitterSubscription;
+
+    private static deeplinkEmitter?: EmitterSubscription;
+    private static referrerEmitter?: EmitterSubscription;
 
     /**
      * @param initProperties
@@ -64,18 +68,14 @@ export class Affise {
      * Register [callback] for deeplink
      */
     static registerDeeplinkCallback(callback: (uri: string) => void) {
-        this.unregisterDeeplinkCallback();
+        this.deeplinkEmitter?.remove();
         const eventEmitter = new NativeEventEmitter(AffiseNative);
-        this.eventListener = eventEmitter.addListener(DEEPLINK_CALLBACK_EVENT, (event) => {
+        this.deeplinkEmitter = eventEmitter.addListener(DEEPLINK_CALLBACK_EVENT, (event) => {
             callback(event[DEEPLINK_CALLBACK_URI_PARAMETER]);
         });
 
         AffiseNative.nativeRegisterDeeplinkCallback();
         this.reactHandleDeeplink();
-    }
-
-    static unregisterDeeplinkCallback() {
-        this.eventListener?.remove();
     }
 
     /**
@@ -179,6 +179,21 @@ export class Affise {
     private static deeplinkCallback(url: string | null) {
         if (url != null && url.trim().length > 0) {
             AffiseNative.nativeHandleDeeplink(url);
+        }
+    }
+
+    static android = class {
+
+        /**
+         * Get referrer Value
+         */
+        static getReferrerValue(key: ReferrerKey, callback: (value: string) => void) {
+            Affise.referrerEmitter?.remove()
+            const eventEmitter = new NativeEventEmitter(AffiseNative);
+            Affise.referrerEmitter = eventEmitter.addListener(GET_REFERRER_VALUE_CALLBACK_EVENT, (event) => {
+                callback(event[GET_REFERRER_VALUE_PARAMETER]);
+            });
+            AffiseNative.nativeGetReferrerValue(key);
         }
     }
 }
