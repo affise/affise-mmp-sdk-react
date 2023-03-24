@@ -23,13 +23,13 @@
   - [Deeplinks](#deeplinks)
     - [Android](#android-1)
     - [iOS](#ios)
-  - [Platform specific](#platform-specific)
-    - [Get referrer value](#get-referrer-value)
   - [Offline mode](#offline-mode)
   - [Disable tracking](#disable-tracking)
   - [Disable background tracking](#disable-background-tracking)
   - [GDPR right to be forgotten](#gdpr-right-to-be-forgotten)
-  - [Get referrer](#get-referrer)
+  - [Platform specific](#platform-specific)
+    - [Get referrer](#get-referrer)
+    - [Get referrer value](#get-referrer-value)
 
 # Description
 
@@ -489,55 +489,6 @@ Add key `CFBundleURLTypes` to `Info.plist` as in `example/ios/AffiseAttributionL
 </array>
 ```
 
-### Platform specific
-
-#### Get referrer value
-> `Android Only`
-
-Use the next public method of SDK to get referrer value by
-
-```typescript
-Affise.android.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
-
-})
-```
-
-#### Referrer keys
-
-In examples above `ReferrerKey.CLICK_ID` is used, but many others is available:
-
-- `AD_ID`
-- `CAMPAIGN_ID`
-- `CLICK_ID`
-- `AFFISE_AD`
-- `AFFISE_AD_ID`
-- `AFFISE_AD_TYPE`
-- `AFFISE_ADSET`
-- `AFFISE_ADSET_ID`
-- `AFFISE_AFFC_ID`
-- `AFFISE_CHANNEL`
-- `AFFISE_CLICK_LOOK_BACK`
-- `AFFISE_COST_CURRENCY`
-- `AFFISE_COST_MODEL`
-- `AFFISE_COST_VALUE`
-- `AFFISE_DEEPLINK`
-- `AFFISE_KEYWORDS`
-- `AFFISE_MEDIA_TYPE`
-- `AFFISE_MODEL`
-- `AFFISE_OS`
-- `AFFISE_PARTNER`
-- `AFFISE_REF`
-- `AFFISE_SITE_ID`
-- `AFFISE_SUB_SITE_ID`
-- `AFFC`
-- `PID`
-- `SUB_1`
-- `SUB_2`
-- `SUB_3`
-- `SUB_4`
-- `SUB_5`
-
-
 ### Offline mode
 
 In some scenarious you would want to limit Affise network usage, to pause that activity call anywhere in your application following code after Affise init:
@@ -619,7 +570,11 @@ Affise.setTrackingEnabled(false);
 Affise.forget(); // to forget users data
 ```
 
+
+### Platform specific
+
 ### Get referrer
+> `Android Only`
 
 Use the next public method of SDK
 
@@ -628,3 +583,49 @@ Affise.getReferrer().then((referrer) => {
   // returns referrer
 });
 ```
+
+#### Get referrer value
+> `Android Only`
+
+Use the next public method of SDK to get referrer value by
+
+```typescript
+Affise.android.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
+
+})
+```
+
+#### Referrer keys
+
+In examples above `ReferrerKey.CLICK_ID` is used, but many others is available:
+
+- `AD_ID`
+- `CAMPAIGN_ID`
+- `CLICK_ID`
+- `AFFISE_AD`
+- `AFFISE_AD_ID`
+- `AFFISE_AD_TYPE`
+- `AFFISE_ADSET`
+- `AFFISE_ADSET_ID`
+- `AFFISE_AFFC_ID`
+- `AFFISE_CHANNEL`
+- `AFFISE_CLICK_LOOK_BACK`
+- `AFFISE_COST_CURRENCY`
+- `AFFISE_COST_MODEL`
+- `AFFISE_COST_VALUE`
+- `AFFISE_DEEPLINK`
+- `AFFISE_KEYWORDS`
+- `AFFISE_MEDIA_TYPE`
+- `AFFISE_MODEL`
+- `AFFISE_OS`
+- `AFFISE_PARTNER`
+- `AFFISE_REF`
+- `AFFISE_SITE_ID`
+- `AFFISE_SUB_SITE_ID`
+- `AFFC`
+- `PID`
+- `SUB_1`
+- `SUB_2`
+- `SUB_3`
+- `SUB_4`
+- `SUB_5`
