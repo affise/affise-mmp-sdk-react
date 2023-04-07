@@ -251,6 +251,11 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
+    // Affise modules
+    implementation 'com.affise:module-advertising:1.5.4'
+    implementation 'com.affise:module-network:1.5.4'
+    implementation 'com.affise:module-phone:1.5.4'
+
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
