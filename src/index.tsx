@@ -26,6 +26,10 @@ const GET_REFERRER_VALUE_PARAMETER = "getReferrerValueParameter";
 const DEEPLINK_CALLBACK_EVENT = "affiseDeeplinkEvent";
 const DEEPLINK_CALLBACK_URI_PARAMETER = "uri";
 
+const FLUTTER_SKAD_REGISTER_ERROR = "skadRegisterError";
+const FLUTTER_SKAD_POSTBACK_ERROR = "skadPostbackError";
+const FLUTTER_SKAD_ERROR_PARAMETER  = "error";
+
 /**
  * Entry point to initialise Affise Attribution library
  */
@@ -33,6 +37,8 @@ export class Affise {
 
     private static deeplinkEmitter?: EmitterSubscription;
     private static referrerEmitter?: EmitterSubscription;
+    private static skadEmitter?: EmitterSubscription;
+    private static skadPostbackEmitter?: EmitterSubscription;
 
     /**
      * @param initProperties
@@ -188,12 +194,44 @@ export class Affise {
          * Get referrer Value
          */
         static getReferrerValue(key: ReferrerKey, callback: (value: string) => void) {
+            if (Platform.OS !== 'android') return;
+
             Affise.referrerEmitter?.remove()
             const eventEmitter = new NativeEventEmitter(AffiseNative);
             Affise.referrerEmitter = eventEmitter.addListener(GET_REFERRER_VALUE_CALLBACK_EVENT, (event) => {
                 callback(event[GET_REFERRER_VALUE_PARAMETER]);
             });
             AffiseNative.nativeGetReferrerValue(key);
+        }
+    }
+
+    static ios = class {
+        /**
+         * SKAd register app
+         */
+        static registerAppForAdNetworkAttribution(completionHandler: (error: string) => void) {
+            if (Platform.OS !== 'ios') return;
+
+            Affise.skadEmitter?.remove();
+            const eventEmitter = new NativeEventEmitter(AffiseNative);
+            Affise.skadEmitter = eventEmitter.addListener(FLUTTER_SKAD_REGISTER_ERROR, (event) => {
+                completionHandler(event[FLUTTER_SKAD_ERROR_PARAMETER]);
+            });
+            AffiseNative.nativeSkadRegister();
+        }
+
+        /**
+         * SKAd updatePostbackConversionValue
+         */
+        static updatePostbackConversionValue(fineValue: number, coarseValue: string, completionHandler: (error: string) => void) {
+            if (Platform.OS !== 'ios') return;
+
+            Affise.skadPostbackEmitter?.remove();
+            const eventEmitter = new NativeEventEmitter(AffiseNative);
+            Affise.skadPostbackEmitter = eventEmitter.addListener(FLUTTER_SKAD_POSTBACK_ERROR, (event) => {
+                completionHandler(event[FLUTTER_SKAD_ERROR_PARAMETER]);
+            });
+            AffiseNative.nativeSkadPostback(fineValue, coarseValue);
         }
     }
 }

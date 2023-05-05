@@ -1,4 +1,5 @@
 import AffiseAttributionLib
+import AffiseSKAdNetwork
 import React
 
 
@@ -7,6 +8,13 @@ class AffiseAttributionNative: RCTEventEmitter {
 
     static private let DEEPLINK_CALLBACK_EVENT = "affiseDeeplinkEvent"
     static private let DEEPLINK_CALLBACK_URI_PARAMETER = "uri"
+
+    static private let FLUTTER_SKAD_REGISTER_ERROR = "skadRegisterError"
+    static private let FLUTTER_SKAD_POSTBACK_ERROR = "skadPostbackError"
+    static private let FLUTTER_SKAD_ERROR_PARAMETER  = "error"
+
+    // android
+    static private let GET_REFERRER_VALUE_CALLBACK_EVENT = "getReferrerValueEvent";
 
     var app: UIApplication? = nil
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -24,7 +32,12 @@ class AffiseAttributionNative: RCTEventEmitter {
     }
 
     override func supportedEvents() -> [String]! {
-        return [AffiseAttributionNative.DEEPLINK_CALLBACK_EVENT];
+        return [
+            AffiseAttributionNative.DEEPLINK_CALLBACK_EVENT,
+            AffiseAttributionNative.FLUTTER_SKAD_REGISTER_ERROR,
+            AffiseAttributionNative.FLUTTER_SKAD_POSTBACK_ERROR,
+            AffiseAttributionNative.GET_REFERRER_VALUE_CALLBACK_EVENT
+        ];
     }
 
     @objc(nativeInit:)
@@ -70,7 +83,7 @@ class AffiseAttributionNative: RCTEventEmitter {
 
     @objc
     public func nativeUnregisterWebView() -> Void {
-    //    Affise.shared.unregisterWebView()
+        // Affise.shared.unregisterWebView()
         RCTLogInfo("NotImplemented")
     }
 
@@ -147,6 +160,56 @@ class AffiseAttributionNative: RCTEventEmitter {
         }
     }
 
+    @objc
+    public func nativeSkadRegister() -> Void {
+        if #available(iOS 16.1, *) {
+            AffiseSKAdNetwork.shared()?.updatePostbackConversionValue(0, coarseValue: "medium", completionHandler: { error in
+                if let errorMessage = error?.localizedDescription {
+                    self.sendSkadRegisterError(errorMessage)
+                }
+            })
+        } else if #available(iOS 15.4, *) {
+            AffiseSKAdNetwork.shared()?.updatePostbackConversionValue(0, completionHandler: { error in
+                if let errorMessage = error?.localizedDescription {
+                    self.sendSkadRegisterError(errorMessage)
+                }
+            })
+        } else if #available(iOS 14.0, *) {
+            AffiseSKAdNetwork.shared()?.registerAppForAdNetworkAttribution(completionHandler: { error in
+                if let errorMessage = error?.localizedDescription {
+                    self.sendSkadRegisterError(errorMessage)
+                }
+            })
+        } else {
+            RCTLogInfo("NotImplemented")
+        }
+    }
+
+    @objc(nativeSkadPostback:coarseValue:)
+    public func nativeSkadPostback(fineValue:Int, coarseValue:NSString) -> Void {
+        if #available(iOS 16.1, *) {
+            AffiseSKAdNetwork.shared()?.updatePostbackConversionValue(fineValue, coarseValue: coarseValue as String, completionHandler: { error in
+                if let errorMessage = error?.localizedDescription {
+                    self.sendSkadPostbackError(errorMessage)
+                }
+            })
+        } else if #available(iOS 15.4, *) {
+            AffiseSKAdNetwork.shared()?.updatePostbackConversionValue(fineValue, completionHandler: { error in
+                if let errorMessage = error?.localizedDescription {
+                    self.sendSkadPostbackError(errorMessage)
+                }
+            })
+        } else if #available(iOS 14.0, *) {
+            AffiseSKAdNetwork.shared()?.updateConversionValue(fineValue, completionHandler: { error in
+                if let errorMessage = error?.localizedDescription {
+                    self.sendSkadPostbackError(errorMessage)
+                }
+            })
+        } else {
+            RCTLogInfo("NotImplemented")
+        }
+    }
+
     private func registerCallback() {
         Affise.shared.registerDeeplinkCallback {url in
         }
@@ -156,6 +219,20 @@ class AffiseAttributionNative: RCTEventEmitter {
         sendEvent(
             withName: AffiseAttributionNative.DEEPLINK_CALLBACK_EVENT,
             body: [AffiseAttributionNative.DEEPLINK_CALLBACK_URI_PARAMETER: uri]
+        )
+    }
+
+    private func sendSkadRegisterError(_ error: String?) {
+        sendEvent(
+            withName: AffiseAttributionNative.FLUTTER_SKAD_REGISTER_ERROR,
+            body: [AffiseAttributionNative.FLUTTER_SKAD_ERROR_PARAMETER: error]
+        )
+    }
+
+    private func sendSkadPostbackError(_ error: String?) {
+        sendEvent(
+            withName: AffiseAttributionNative.FLUTTER_SKAD_POSTBACK_ERROR,
+            body: [AffiseAttributionNative.FLUTTER_SKAD_ERROR_PARAMETER: error]
         )
     }
 }

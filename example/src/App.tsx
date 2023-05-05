@@ -36,6 +36,14 @@ export default function App() {
             setReferrerValue(`ReferrerValue: ${value}`)
         })
 
+        Affise.ios.registerAppForAdNetworkAttribution((error) => {
+            console.log(`SKAd register app: ${error}`)
+        });
+
+        Affise.ios.updatePostbackConversionValue(1, "medium", (error) => {
+            console.log(`SKAd updatePostbackConversionValue: ${error}`)
+        });
+
         Affise.getReferrer().then(ref => {
             setReferrer(ref)
         })

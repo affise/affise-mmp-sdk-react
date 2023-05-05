@@ -90,4 +90,13 @@ RCT_EXTERN_METHOD(
 RCT_EXTERN_METHOD(
   nativeHandleDeeplink: (NSString)uri
 )
+
+RCT_EXTERN_METHOD(
+  nativeSkadRegister
+)
+
+RCT_EXTERN_METHOD(
+  nativeSkadPostback: (int)fineValue
+  coarseValue: (NSString)coarseValue
+)
 @end
