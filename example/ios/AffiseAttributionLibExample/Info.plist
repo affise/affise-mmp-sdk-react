@@ -68,7 +68,7 @@
         </dict>
     </array>
 
-	<!-- <key>NSAdvertisingAttributionReportEndpoint</key> -->
-	<!-- <string>StoreKit Ad Network Endpoint url</string> -->
+	<key>NSAdvertisingAttributionReportEndpoint</key>
+	<string>https://affise-skadnetwork.com/</string>
 </dict>
 </plist>

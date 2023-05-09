@@ -5,9 +5,11 @@
   - [Quick start](#quick-start)
   - [Integration](#integration)
     - [Integrate npm package](#integrate-npm-package)
+    - [Add platform modules](#add-platform-modules)
+      - [Android](#android)
     - [Initialize](#initialize)
     - [Requirements](#requirements)
-      - [Android](#android)
+      - [Android](#android-1)
 - [Features](#features)
   - [Device identifiers collection](#device-identifiers-collection)
   - [Events tracking](#events-tracking)
@@ -21,7 +23,7 @@
   - [Reinstall Uninstall tracking](#reinstall-uninstall-tracking)
   - [APK preinstall tracking](#apk-preinstall-tracking)
   - [Deeplinks](#deeplinks)
-    - [Android](#android-1)
+    - [Android](#android-2)
     - [iOS](#ios)
   - [Offline mode](#offline-mode)
   - [Disable tracking](#disable-tracking)
@@ -30,7 +32,8 @@
   - [Platform specific](#platform-specific)
     - [Get referrer](#get-referrer)
     - [Get referrer value](#get-referrer-value)
-    - [SKAd](#skad)
+      - [Referrer keys](#referrer-keys)
+    - [StoreKit Ad Network](#storekit-ad-network)
 
 # Description
 
@@ -58,9 +61,9 @@ Installation using yarn
 yarn add affise-attribution-lib
 ```
 
-#### Add platform modules
+### Add platform modules
 
-##### Android
+#### Android
 
 Add modules to android project
 
@@ -108,7 +111,6 @@ export default function App() {
 }
 ```
 
-
 ### Requirements
 
 #### Android
@@ -128,7 +130,7 @@ OAID certificate in your project (Optional)
 
 # Features
 
-### Device identifiers collection
+## Device identifiers collection
 
 To match users with events and data library is sending, these identifiers are collected:
 
@@ -213,7 +215,7 @@ To match users with events and data library is sending, these identifiers are co
 - `EVENTS`
 - `AFFISE_EVENTS_COUNT`
 
-### Events tracking
+## Events tracking
 
 For example, we want to track what items usually user adds to shopping cart. To send event first create it with
 following code
@@ -274,7 +276,7 @@ With above example you can implement other events:
 - `ViewItemEvent`
 - `ViewItemsEvent`
 
-### Custom events tracking
+## Custom events tracking
 
 Use any of custom events if default doesn't fit your scenario:
 
@@ -289,7 +291,7 @@ Use any of custom events if default doesn't fit your scenario:
 - `CustomId09Event`
 - `CustomId10Event`
 
-### Predefined event parameters
+## Predefined event parameters
 
 To enrich your event with another dimension, you can use predefined parameters for most common cases.
 Add it to any event:
@@ -394,27 +396,27 @@ In examples above `PredefinedParameters.DESCRIPTION` is used, but many others is
 - `PARAM_08`
 - `PARAM_09`
 
-### Events buffering
+## Events buffering
 
 Affise library will send any pending events with first opportunity,
 but if there is no network connection or device is disabled, events are kept locally for 7 days before deletion.
 
-### Advertising Identifier (google) tracking
+## Advertising Identifier (google) tracking
 
 Advertising Identifier (google) tracking is supported automatically, no actions needed
 
-### Open Advertising Identifier (huawei) tracking
+## Open Advertising Identifier (huawei) tracking
 
 Open Advertising Identifier is supported automatically, no actions needed
 
-### Install referrer tracking
+## Install referrer tracking
 
 Install referrer tracking is supported automatically, no actions needed
 
-### Push token tracking
+## Push token tracking
 
 To let affise track push token you need to receive it from your push service provider, and pass to Affise library.
-First add firebase integration to your app completing theese steps: https://firebase.google.com/docs/cloud-messaging/android/client
+First add firebase integration to your app completing theese steps: [Firebase Docs](https://firebase.google.com/docs/cloud-messaging/android/client)
 
 After you have done with firebase inegration, add to your cloud messaging service `onNewToken` method `Affise.addPushToken(token)`
 
@@ -430,7 +432,7 @@ const getToken = async () => {
 };
 ```
 
-### Reinstall Uninstall tracking
+## Reinstall Uninstall tracking
 
 Affise automatically track reinstall events by using silent-push technology, to make this feature work, pass push token when it is recreated by user and on you application starts up
 
@@ -438,12 +440,12 @@ Affise automatically track reinstall events by using silent-push technology, to 
 Affise.addPushToken(token);
 ```
 
-### APK preinstall tracking
+## APK preinstall tracking
 
 SDK is also supports scenario when APK is installed not from one of application markets, such as google play, huawei appgallery or amazon appstore
 To use this feature, create file with name `partner_key` in your app assets directory, and write unique identifier inside, this key will be passed to our backend so you can track events by partner later in your Affise console.
 
-### Deeplinks
+## Deeplinks
 
 Register deeplink callback right after Affise.init(..)
 
@@ -454,7 +456,7 @@ Affise.registerDeeplinkCallback((uri) => {
 });
 ```
 
-#### Android
+### Android
 
 To integrate deeplink support in android you need:
 
@@ -473,11 +475,12 @@ Add intent filter to `AndroidManifest.xml` as in `example/android/app/src/main/A
 </intent-filter>
 ```
 
-#### iOS
+### iOS
 
 To integrate deeplink support in iOS you need:
 
 Add deeplink handler to `AppDelegate.mm` as in `example/ios/AffiseAttributionLibExample/AppDelegate.mm`
+
 - [React Docs](https://reactnavigation.org/docs/deep-linking/#set-up-with-bare-react-native-projects)
 
 ```objective-c
@@ -489,9 +492,11 @@ Add deeplink handler to `AppDelegate.mm` as in `example/ios/AffiseAttributionLib
 }
 ```
 
-Add key `CFBundleURLTypes` to `Info.plist` as in `example/ios/AffiseAttributionLibExample/Info.plist`
+Add key `CFBundleURLTypes` to `Info.plist`
 
-```html
+Example: `example/ios/AffiseAttributionLibExample/Info.plist`
+
+```xml
 <key>CFBundleURLTypes</key>
 <array>
     <dict>
@@ -507,7 +512,7 @@ Add key `CFBundleURLTypes` to `Info.plist` as in `example/ios/AffiseAttributionL
 </array>
 ```
 
-### Offline mode
+## Offline mode
 
 In some scenarious you would want to limit Affise network usage, to pause that activity call anywhere in your application following code after Affise init:
 
@@ -525,7 +530,7 @@ To check current offline mode status call:
 Affise.isOfflineModeEnabled(); // returns true or false describing current tracking state
 ```
 
-### Disable tracking
+## Disable tracking
 
 To disable any tracking activity, storing events and gathering device identifiers and metrics call anywhere in your application following code after Affise init:
 
@@ -547,7 +552,7 @@ Affise.isTrackingEnabled().then((enabled) => {
 });
 ```
 
-### Disable background tracking
+## Disable background tracking
 
 To disable any background tracking activity, storing events and gathering device identifiers and metrics call anywhere in your application following code after Affise init:
 
@@ -569,7 +574,7 @@ Affise.isBackgroundTrackingEnabled().then((enabled) => {
 });
 ```
 
-### GDPR right to be forgotten
+## GDPR right to be forgotten
 
 Under the EU's General Data Protection Regulation (GDPR): An individual has the right to have their personal data erased.
 To provide this functionality to user, as the app developer, you can call
@@ -588,10 +593,10 @@ Affise.setTrackingEnabled(false);
 Affise.forget(); // to forget users data
 ```
 
-
-### Platform specific
+## Platform specific
 
 ### Get referrer
+
 > `Android Only`
 
 Use the next public method of SDK
@@ -602,7 +607,8 @@ Affise.getReferrer().then((referrer) => {
 });
 ```
 
-#### Get referrer value
+### Get referrer value
+
 > `Android Only`
 
 Use the next public method of SDK to get referrer value by
@@ -648,21 +654,40 @@ In examples above `ReferrerKey.CLICK_ID` is used, but many others is available:
 - `SUB_4`
 - `SUB_5`
 
+### StoreKit Ad Network
 
-#### SKAd
 > `iOS Only`
 
 For ios prior `16.1` first call
+
 ```typescript
 Affise.ios.registerAppForAdNetworkAttribution((error) => {
-
+  // Handle error
 });
 ```
 
 Updates the fine and coarse conversion values, and calls a completion handler if the update fails.
 Second argument coarseValue is available in iOS 16.1+
+
 ```typescript
 Affise.ios.updatePostbackConversionValue(1, "medium", (error) => {
-
+  // Handle error
 });
+```
+
+Configure your app to send postback copies to Affise:
+
+Add key `NSAdvertisingAttributionReportEndpoint` to `Info.plist`
+Set key value to `https://affise-skadnetwork.com/`
+
+Example: `example/ios/AffiseAttributionLibExample/Info.plist`
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+      <key>NSAdvertisingAttributionReportEndpoint</key>
+      <string>https://affise-skadnetwork.com/</string>
+    </dict>
+</array>
 ```
