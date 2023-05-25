@@ -1,0 +1,73 @@
+name: Publish
+run-name: Publish ${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+*'
+
+jobs:
+  publish:
+    name: Publish Affise Library
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Get npm cache directory
+        id: npm-cache
+        run: |
+          echo "NPM_CACHE=$(npm config get cache)" >> $GITHUB_OUTPUT
+
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.npm-cache.outputs.NPM_CACHE }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: NPM Install
+        run: |
+          npm ci
+
+      - name: NPM Publish Release
+        if: ${{ !contains(github.event.ref, '-') }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm who
+          npm publish
+
+      - name: NPM Publish Beta
+        if: contains(github.event.ref, '-beta')
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm who
+          npm publish --tag beta
+
+      - name: Version Tag
+        id: version_tag
+        run: |
+          echo Version: ${GITHUB_REF_NAME}
+          echo "VERSION=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+
+      - name: Release
+        if: ${{ !contains(github.event.ref, '-') }}
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Affise Attribution React Native Library ${{ github.ref }}
+          draft: false
+          prerelease: false

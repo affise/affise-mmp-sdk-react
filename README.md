@@ -1,5 +1,11 @@
 # Affise Attribution React Native library
 
+<p align="left">
+    <a href="https://www.npmjs.com/package/affise-attribution-lib" alt="npm package">
+        <img src="https://img.shields.io/npm/v/affise-attribution-lib?label=affise-attribution-lib" />
+    </a>
+</p>
+
 - [Affise Attribution React Native library](#affise-attribution-react-native-library)
 - [Description](#description)
   - [Quick start](#quick-start)
@@ -67,14 +73,20 @@ yarn add affise-attribution-lib
 
 Add modules to android project
 
+| Module | Version |
+| ------ | ------- |
+| module-advertising  | <a href="https://mvnrepository.com/artifact/com.affise/module-advertising"><img src="https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest"  alt="version" /></a> |
+| module-network  | <a href="https://mvnrepository.com/artifact/com.affise/module-network"><img src="https://img.shields.io/maven-central/v/com.affise/module-network?label=latest" alt="version" /></a> |
+| module-phone  | <a href="https://mvnrepository.com/artifact/com.affise/module-phone"><img src="https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest" alt="version" /></a> |
+
 Example `example/android/app/build.gradle`
 
 ```gradle
 dependencies {
     // Affise modules
-    implementation 'com.affise:module-advertising:1.5.4'
-    implementation 'com.affise:module-network:1.5.4'
-    implementation 'com.affise:module-phone:1.5.4'
+    implementation 'com.affise:module-advertising:1.5.+'
+    implementation 'com.affise:module-network:1.5.+'
+    implementation 'com.affise:module-phone:1.5.+'
 }
 ```
 

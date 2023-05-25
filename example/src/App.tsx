@@ -28,25 +28,25 @@ export default function App() {
         );
 
         Affise.registerDeeplinkCallback((url) => {
-            console.log(`Deeplink: ${url}`)
-        })
+            console.log(`Deeplink: ${url}`);
+        });
 
         Affise.android.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
-            console.log(`ReferrerValue: ${value}`)
-            setReferrerValue(`ReferrerValue: ${value}`)
-        })
+            console.log(`ReferrerValue: ${value}`);
+            setReferrerValue(`ReferrerValue: ${value}`);
+        });
 
         Affise.ios.registerAppForAdNetworkAttribution((error) => {
-            console.log(`SKAd register app: ${error}`)
+            console.log(`SKAd register app: ${error}`);
         });
 
         Affise.ios.updatePostbackConversionValue(1, "medium", (error) => {
-            console.log(`SKAd updatePostbackConversionValue: ${error}`)
+            console.log(`SKAd updatePostbackConversionValue: ${error}`);
         });
 
         Affise.getReferrer().then(ref => {
-            setReferrer(ref)
-        })
+            setReferrer(ref);
+        });
     }, []);
 
     return (

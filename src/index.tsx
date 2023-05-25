@@ -179,7 +179,7 @@ export class Affise {
 
     private static reactHandleDeeplink() {
         Linking.getInitialURL().then(this.deeplinkCallback);
-        Linking.addEventListener('url', (evt) => this.deeplinkCallback(evt.url))
+        Linking.addEventListener('url', (evt) => this.deeplinkCallback(evt.url));
     }
 
     private static deeplinkCallback(url: string | null) {
@@ -196,14 +196,14 @@ export class Affise {
         static getReferrerValue(key: ReferrerKey, callback: (value: string) => void) {
             if (Platform.OS !== 'android') return;
 
-            Affise.referrerEmitter?.remove()
+            Affise.referrerEmitter?.remove();
             const eventEmitter = new NativeEventEmitter(AffiseNative);
             Affise.referrerEmitter = eventEmitter.addListener(GET_REFERRER_VALUE_CALLBACK_EVENT, (event) => {
                 callback(event[GET_REFERRER_VALUE_PARAMETER]);
             });
             AffiseNative.nativeGetReferrerValue(key);
         }
-    }
+    };
 
     static ios = class {
         /**
@@ -233,5 +233,5 @@ export class Affise {
             });
             AffiseNative.nativeSkadPostback(fineValue, coarseValue);
         }
-    }
+    };
 }
