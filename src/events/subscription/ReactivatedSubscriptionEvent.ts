@@ -1,11 +1,12 @@
 import {BaseSubscriptionEvent} from "./BaseSubscriptionEvent";
-import {SubscriptionParameters} from "./SubscriptionParameters";
+import {SubscriptionEventName} from "./SubscriptionEventName";
+import {SubscriptionSubType} from "./SubscriptionSubType";
 
 export class ReactivatedSubscriptionEvent extends BaseSubscriptionEvent {
-    constructor(data: Record<string, unknown>, userData?: string) {
+    constructor({data, userData}: { data: Record<string, unknown>, userData?: string }) {
         super(
-            SubscriptionParameters.AFFISE_SUBSCRIPTION_REACTIVATION,
-            SubscriptionParameters.AFFISE_SUB_REACTIVATED_SUBSCRIPTION,
+            SubscriptionEventName.AFFISE_SUBSCRIPTION_REACTIVATION,
+            SubscriptionSubType.AFFISE_SUB_REACTIVATED_SUBSCRIPTION,
             data,
             userData,
         );

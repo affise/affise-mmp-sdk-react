@@ -1,17 +1,9 @@
-import { NativeEvent } from '../base/NativeEvent';
+import {NativeEvent} from '../base/NativeEvent';
+import {EventName} from "../EventName";
 
 export class SalesEvent extends NativeEvent {
-  constructor(
-    salesData: Record<string, unknown>,
-    timeStampMillis: number,
-    userData: string
-  ) {
-    super('Sales');
 
-    this.userData = userData;
-    this.serialize = {
-      affise_event_sales: salesData,
-      affise_event_sales_timestamp: timeStampMillis.toString(),
-    };
-  }
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.SALES, userData, timeStampMillis);
+    }
 }

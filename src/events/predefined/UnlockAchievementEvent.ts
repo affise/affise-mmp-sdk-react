@@ -1,14 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class UnlockAchievementEvent extends NativeEvent {
 
-    constructor(achievement: Record<string, unknown>, timeStampMillis: number, userData: string) {
-        super('UnlockAchievement');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_unlock_achievement: achievement,
-            affise_event_unlock_achievement_timestamp: timeStampMillis.toString()
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.UNLOCK_ACHIEVEMENT, userData, timeStampMillis);
     }
 }

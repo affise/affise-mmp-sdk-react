@@ -1,36 +1,53 @@
 import type {AutoCatchingType} from "./events/AutoCatchingType";
-// import type {AffiseFlag} from "./AffiseFlag";
 
-export class AffiseInitProperties {
-  affiseAppId?: string | null;
-  isProduction: boolean;
-  partParamName?: string | null;
-  partParamNameToken?: string | null;
-  appToken?: string | null;
-  secretId?: string | null;
-  enabledMetrics: boolean;
-  autoCatchingClickEvents?: AutoCatchingType[];
-  // flags?: AffiseFlag[];
-
-  constructor(
-    affiseAppId?: string | null,
-    isProduction: boolean = true,
+export type AffiseInitPropertiesType = {
+    affiseAppId: string,
+    secretKey: string,
+    isProduction?: boolean,
     partParamName?: string | null,
     partParamNameToken?: string | null,
     appToken?: string | null,
-    secretId?: string | null,
-    enabledMetrics: boolean = false,
-    autoCatchingClickEvents: AutoCatchingType[] = [],
-    // flags: AffiseFlag[] = [],
-  ) {
-    this.affiseAppId = affiseAppId;
-    this.isProduction = isProduction;
-    this.partParamName = partParamName;
-    this.partParamNameToken = partParamNameToken;
-    this.appToken = appToken;
-    this.secretId = secretId;
-    this.enabledMetrics = enabledMetrics;
-    this.autoCatchingClickEvents = autoCatchingClickEvents;
-    // this.flags = flags;
-  }
+    enabledMetrics?: boolean,
+    autoCatchingClickEvents?: AutoCatchingType[],
+};
+
+export class AffiseInitProperties {
+    affiseAppId: string;
+    secretId: string;
+    isProduction: boolean = true;
+    partParamName?: string | null = null;
+    partParamNameToken?: string | null = null;
+    appToken?: string | null = null;
+    enabledMetrics: boolean = false;
+    autoCatchingClickEvents?: AutoCatchingType[] = [];
+
+    constructor(
+        {
+            affiseAppId,
+            secretKey,
+            isProduction,
+            partParamName,
+            partParamNameToken,
+            appToken,
+            enabledMetrics,
+            autoCatchingClickEvents
+        }: AffiseInitPropertiesType
+    ) {
+        this.affiseAppId = affiseAppId;
+        this.secretId = secretKey;
+
+        this.isProduction = isProduction || true;
+        this.partParamName = partParamName || null;
+        this.partParamNameToken = partParamNameToken || null;
+        this.appToken = appToken || null;
+        this.enabledMetrics = enabledMetrics || false;
+        this.autoCatchingClickEvents = autoCatchingClickEvents || [];
+    }
+}
+
+export function isAffiseInitPropertiesType(obj: any): obj is AffiseInitPropertiesType {
+    if (obj as AffiseInitPropertiesType) {
+        return true
+    }
+    return false;
 }

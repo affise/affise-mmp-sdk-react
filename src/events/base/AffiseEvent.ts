@@ -1,9 +1,19 @@
-import type {PredefinedParameters} from "../PredefinedParameters";
+import {ToValue} from "../parameters/Predefined";
+import type {PredefinedParameter} from "../parameters/PredefinedParameter";
+import type {PredefinedListObject} from "../parameters/PredefinedListObject";
+import type {PredefinedFloat} from "../parameters/PredefinedFloat";
+import type {PredefinedListString} from "../parameters/PredefinedListString";
+import type {PredefinedLong} from "../parameters/PredefinedLong";
+import type {PredefinedObject} from "../parameters/PredefinedObject";
+import type {PredefinedString} from "../parameters/PredefinedString";
+// import {PredefinedGroup} from "../parameters/PredefinedGroup";
+import {Parameters} from "../Parameters";
+import {timestamp} from "../../utils/Timestamp";
 
 /**
  * Base event
  */
-export class AffiseEvent {
+export class AffiseEvent implements PredefinedParameter {
 
     /**
      * Name of event
@@ -33,28 +43,96 @@ export class AffiseEvent {
     /**
      * Event predefined parameters
      */
-    protected predefinedParameters: Record<string, string>;
+    protected predefinedParameters: Record<string, unknown>;
 
-    constructor(name: string) {
+    constructor(name: string, userData?: string) {
         this.name = name;
         this.category = "";
-        this.userData = "";
+        this.userData = userData;
         this.firstForUser = false;
         this.serialize = {};
         this.predefinedParameters = {};
     }
 
     /**
-     * Add predefined [parameter] with [value] to event
+     * Add predefined [parameter] with [value] of number to event
      */
-    addPredefinedParameter(parameter: PredefinedParameters, value: string) {
-        this.predefinedParameters[parameter] = value;
+    addPredefinedFloat(parameter: PredefinedFloat, value: number): PredefinedParameter {
+        this.predefinedParameters[ToValue(parameter)] = value;
+        return this;
     }
+
+    /**
+     * Add predefined [parameter] with [value] of Array<Record<string, unknown>> to event
+     */
+    addPredefinedListObject(parameter: PredefinedListObject, value: Record<string, unknown>[]): PredefinedParameter {
+        this.predefinedParameters[ToValue(parameter)] = value;
+        return this;
+    }
+
+    /**
+     * Add predefined [parameter] with [value] of Array<string> to event
+     */
+    addPredefinedListString(parameter: PredefinedListString, value: string[]): PredefinedParameter {
+        this.predefinedParameters[ToValue(parameter)] = value;
+        return this;
+    }
+
+    /**
+     * Add predefined [parameter] with [value] of BigInteger to event
+     */
+    addPredefinedLong(parameter: PredefinedLong, value: bigint): PredefinedParameter {
+        this.predefinedParameters[ToValue(parameter)] = Number(value);
+        return this;
+    }
+
+    /**
+     * Add predefined [parameter] with [value] of Record<string, unknown> to event
+     */
+    addPredefinedObject(parameter: PredefinedObject, value: Record<string, unknown>): PredefinedParameter {
+        this.predefinedParameters[ToValue(parameter)] = value;
+        return this;
+    }
+
+    /**
+     * Add predefined [parameter] with [value] of string to event
+     */
+    addPredefinedString(parameter: PredefinedString, value: string): PredefinedParameter {
+        this.predefinedParameters[ToValue(parameter)] = value;
+        return this;
+    }
+
+    /**
+     * Add predefined [parameter] with [value] of Array<PredefinedGroup> to event
+     */
+    // TODO PredefinedGroup
+    // addPredefinedListGroup(groups: Array<PredefinedGroup>): PredefinedParameter {
+    //     if (!this.predefinedParameters[PredefinedGroup.NAME]) {
+    //         this.predefinedParameters[PredefinedGroup.NAME] = [];
+    //     }
+    //     const data = this.predefinedParameters[PredefinedGroup.NAME] as Array<Record<string, unknown>>;
+    //     for (const group of groups) {
+    //         data.push(group.getPredefinedParameters());
+    //     }
+    //     return this;
+    // }
 
     /**
      * Get predefined parameter
      */
-    getPredefinedParameter(): Record<string, unknown> {
+    getPredefinedParameters(): Record<string, unknown> {
         return this.predefinedParameters;
+    }
+
+    toRecord(): Record<string, any> {
+        const result :Record<string, any> = {};
+        result[Parameters.AFFISE_EVENT_NAME] = this.name;
+        result[Parameters.AFFISE_EVENT_CATEGORY] = this.category;
+        result[Parameters.AFFISE_EVENT_TIMESTAMP] = timestamp();
+        result[Parameters.AFFISE_EVENT_FIRST_FOR_USER] = this.firstForUser;
+        result[Parameters.AFFISE_EVENT_USER_DATA] = this.userData;
+        result[Parameters.AFFISE_EVENT_DATA] = this.serialize;
+        result[Parameters.AFFISE_PARAMETERS] = this.getPredefinedParameters();
+        return result;
     }
 }

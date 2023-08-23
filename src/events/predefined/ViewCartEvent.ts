@@ -1,13 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class ViewCartEvent extends NativeEvent {
 
-    constructor(objects: Record<string, unknown>, userData: string) {
-        super('ViewCart');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_view_cart: objects,
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.VIEW_CART, userData, timeStampMillis);
     }
 }

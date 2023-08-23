@@ -1,12 +1,10 @@
-# Affise Attribution React Native library
+# Affise Attribution React Native Library
 
-<p align="left">
-    <a href="https://www.npmjs.com/package/affise-attribution-lib" alt="npm package">
-        <img src="https://img.shields.io/npm/v/affise-attribution-lib?label=affise-attribution-lib" />
-    </a>
-</p>
+| Package                |                                                                 Version                                                                  |
+|------------------------|:----------------------------------------------------------------------------------------------------------------------------------------:|
+| affise-attribution-lib | [![attribution](https://img.shields.io/npm/v/affise-attribution-lib?label=latest)](https://www.npmjs.com/package/affise-attribution-lib) |
 
-- [Affise Attribution React Native library](#affise-attribution-react-native-library)
+- [Affise Attribution React Native Library](#affise-attribution-react-native-library)
 - [Description](#description)
   - [Quick start](#quick-start)
   - [Integration](#integration)
@@ -21,6 +19,12 @@
   - [Events tracking](#events-tracking)
   - [Custom events tracking](#custom-events-tracking)
   - [Predefined event parameters](#predefined-event-parameters)
+    - [PredefinedString](#predefinedstring)
+    - [PredefinedLong](#predefinedlong)
+    - [PredefinedFloat](#predefinedfloat)
+    - [PredefinedObject](#predefinedobject)
+    - [PredefinedListObject](#predefinedlistobject)
+    - [PredefinedListString](#predefinedliststring)
   - [Events buffering](#events-buffering)
   - [Advertising Identifier (google) tracking](#advertising-identifier-google-tracking)
   - [Open Advertising Identifier (huawei) tracking](#open-advertising-identifier-huawei-tracking)
@@ -34,8 +38,8 @@
   - [Offline mode](#offline-mode)
   - [Disable tracking](#disable-tracking)
   - [Disable background tracking](#disable-background-tracking)
-  - [GDPR right to be forgotten](#gdpr-right-to-be-forgotten)
   - [Platform specific](#platform-specific)
+    - [GDPR right to be forgotten](#gdpr-right-to-be-forgotten)
     - [Get referrer](#get-referrer)
     - [Get referrer value](#get-referrer-value)
       - [Referrer keys](#referrer-keys)
@@ -52,8 +56,7 @@ referrer.
 
 ### Integrate npm package
 
-This is a [Node.js](https://nodejs.org/en/) module available through the
-[npm registry](https://www.npmjs.com/).
+This is a [Node.js](https://nodejs.org/en/) module available through the [npm registry](https://www.npmjs.com/).
 
 Installation using npm
 
@@ -73,26 +76,30 @@ yarn add affise-attribution-lib
 
 Add modules to android project
 
-| Module | Version |
-| ------ | ------- |
-| module-advertising  | <a href="https://mvnrepository.com/artifact/com.affise/module-advertising"><img src="https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest"  alt="version" /></a> |
-| module-network  | <a href="https://mvnrepository.com/artifact/com.affise/module-network"><img src="https://img.shields.io/maven-central/v/com.affise/module-network?label=latest" alt="version" /></a> |
-| module-phone  | <a href="https://mvnrepository.com/artifact/com.affise/module-phone"><img src="https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest" alt="version" /></a> |
+| Module             | Version                                                                                                                                                                      |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| module-advertising | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) |
+| module-network     | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             |
+| module-phone       | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   |
+| module-status      | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                |
 
-Example `example/android/app/build.gradle`
+Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
 dependencies {
     // Affise modules
-    implementation 'com.affise:module-advertising:1.5.+'
-    implementation 'com.affise:module-network:1.5.+'
-    implementation 'com.affise:module-phone:1.5.+'
+    implementation 'com.affise:module-advertising:1.6.+'
+    implementation 'com.affise:module-network:1.6.+'
+    implementation 'com.affise:module-phone:1.6.+'
+    implementation 'com.affise:module-status:1.6.+'
 }
 ```
 
 ### Initialize
 
 After dependency is added, and project is sync with `npm install` and initialize.
+
+> Demo app [App.tsx](example/src/App.tsx)
 
 ```typescript
 import {
@@ -104,16 +111,10 @@ import {
 export default function App() {
 
     React.useEffect(() => {
-        Affise.init(
-            new AffiseInitProperties(
-                'Your appId', //Change to your app id
-                true, //Add your custom rule to determine if this is a production build
-                null, //Change to your partParamName
-                null, //Change to your partParamNameToken
-                null, //Change to your appToken
-                'Your secretId' //Change to your secretId
-            )
-        );
+        Affise.init({
+            affiseAppId: 'Your appId', //Change to your app id
+            secretKey: 'Your SDK secretKey', //Change to your SDK secretKey
+        });
     });
 
     return (
@@ -121,6 +122,12 @@ export default function App() {
         </SafeAreaView>
     );
 }
+```
+
+Check if library is initialized
+
+```dart
+Affise.isInitialized();
 ```
 
 ### Requirements
@@ -138,7 +145,7 @@ For a minimal working functionality your app needs to declare internet permissio
 ```
 
 OAID certificate in your project (Optional)
-`example/android/app/src/main/assets/oaid.cert.pem`
+[`example/android/app/src/main/assets/oaid.cert.pem`](example/android/app/src/main/assets/oaid.cert.pem)
 
 # Features
 
@@ -229,6 +236,8 @@ To match users with events and data library is sending, these identifiers are co
 
 ## Events tracking
 
+> Demo app [DefaultEventsFactory.ts](example/src/affise/DefaultEventsFactory.ts)
+
 For example, we want to track what items usually user adds to shopping cart. To send event first create it with
 following code
 
@@ -241,67 +250,108 @@ class Presenter {
       items: 'cookies, potato, milk',
     };
 
-    Affise.sendEvent(new AddToCartEvent(items, Date.now(), 'groceries'));
+    const event = new AddToCartEvent({
+        userData: item,
+        timeStampMillis: Date.now()
+    });
+
+    event
+        .addPredefinedString(PredefinedString.DESCRIPTION, 'groceries')
+        .addPredefinedObject(PredefinedObject.CONTENT, items);
+
+    Affise.sendEvent(event);
   }
 }
 ```
 
 With above example you can implement other events:
 
-- `AchieveLevelEvent`
-- `AddPaymentInfoEvent`
-- `AddToCartEvent`
-- `AddToWishlistEvent`
-- `ClickAdvEvent`
-- `CompleteRegistrationEvent`
-- `CompleteStreamEvent`
-- `CompleteTrialEvent`
-- `CompleteTutorialEvent`
-- `ContentItemsViewEvent`
-- `DeepLinkedEvent`
-- `InitiatePurchaseEvent`
-- `InitiateStreamEvent`
-- `InviteEvent`
-- `LastAttributedTouchEvent`
-- `ListViewEvent`
-- `LoginEvent`
-- `OpenedFromPushNotificationEvent`
-- `PurchaseEvent`
-- `RateEvent`
-- `ReEngageEvent`
-- `ReserveEvent`
-- `SalesEvent`
-- `SearchEvent`
-- `ShareEvent`
-- `SpendCreditsEvent`
-- `StartRegistrationEvent`
-- `StartTrialEvent`
-- `StartTutorialEvent`
-- `SubscribeEvent`
-- `TravelBookingEvent`
-- `UnlockAchievementEvent`
-- `UnsubscribeEvent`
-- `UnsubscriptionEvent`
-- `UpdateEvent`
-- `ViewAdvEvent`
-- `ViewCartEvent`
-- `ViewItemEvent`
-- `ViewItemsEvent`
+- `AchieveLevel`
+- `AddPaymentInfo`
+- `AddToCart`
+- `AddToWishlist`
+- `ClickAdv`
+- `CompleteRegistration`
+- `CompleteStream`
+- `CompleteTrial`
+- `CompleteTutorial`
+- `Contact`
+- `ContentItemsView`
+- `CustomizeProduct`
+- `DeepLinked`
+- `Donate`
+- `FindLocation`
+- `InitiateCheckout`
+- `InitiatePurchase`
+- `InitiateStream`
+- `Invite`
+- `LastAttributedTouch`
+- `Lead`
+- `ListView`
+- `Login`
+- `OpenedFromPushNotification`
+- `Order`
+- `OrderCancel`
+- `OrderReturnRequest`
+- `OrderReturnRequestCancel`
+- `Purchase`
+- `Rate`
+- `ReEngage`
+- `Reserve`
+- `Sales`
+- `Schedule`
+- `Search`
+- `Share`
+- `SpendCredits`
+- `StartRegistration`
+- `StartTrial`
+- `StartTutorial`
+- `SubmitApplication`
+- `Subscribe`
+- `TravelBooking`
+- `UnlockAchievement`
+- `Unsubscribe`
+- `Update`
+- `ViewAdv`
+- `ViewCart`
+- `ViewContent`
+- `ViewItem`
+- `ViewItems`
+- `InitialSubscription`
+- `InitialTrial`
+- `InitialOffer`
+- `ConvertedTrial`
+- `ConvertedOffer`
+- `TrialInRetry`
+- `OfferInRetry`
+- `SubscriptionInRetry`
+- `RenewedSubscription`
+- `FailedSubscriptionFromRetry`
+- `FailedOfferFromRetry`
+- `FailedTrialFromRetry`
+- `FailedSubscription`
+- `FailedOfferise`
+- `FailedTrial`
+- `ReactivatedSubscription`
+- `RenewedSubscriptionFromRetry`
+- `ConvertedOfferFromRetry`
+- `ConvertedTrialFromRetry`
+- `Unsubscription`
 
 ## Custom events tracking
 
 Use any of custom events if default doesn't fit your scenario:
 
-- `CustomId01Event`
-- `CustomId02Event`
-- `CustomId03Event`
-- `CustomId04Event`
-- `CustomId05Event`
-- `CustomId06Event`
-- `CustomId07Event`
-- `CustomId08Event`
-- `CustomId09Event`
-- `CustomId10Event`
+- `CustomId01`
+- `CustomId02`
+- `CustomId03`
+- `CustomId04`
+- `CustomId05`
+- `CustomId06`
+- `CustomId07`
+- `CustomId08`
+- `CustomId09`
+- `CustomId10`
 
 ## Predefined event parameters
 
@@ -312,7 +362,8 @@ Add it to any event:
 import {
   Affise,
   AddToCartEvent,
-  PredefinedParameters,
+  PredefinedString,
+  PredefinedObject,
 } from 'affise-attribution-lib';
 
 class Presenter {
@@ -321,83 +372,60 @@ class Presenter {
       items: 'cookies, potato, milk',
     };
 
-    const event = new AddToCartEvent(items, Date.now());
+    const event = new AddToCartEvent({
+        userData: item,
+    });
 
-    event.addPredefinedParameter(
-      PredefinedParameters.DESCRIPTION,
-      'best before 2029'
-    );
+    event
+        .addPredefinedString(PredefinedString.DESCRIPTION, 'best before 2029')
+        .addPredefinedObject(PredefinedObject.CONTENT, items);
 
     Affise.sendEvent(event);
   }
 }
 ```
 
-In examples above `PredefinedParameters.DESCRIPTION` is used, but many others is available:
+In examples above `PredefinedString.DESCRIPTION` and `PredefinedObject.CONTENT` is used, but many others is available:
 
+| PredefinedParameter                           | Type                                       |
+|-----------------------------------------------|--------------------------------------------|
+| [PredefinedString](#predefinedstring)         | string                                     |
+| [PredefinedLong](#predefinedlong)             | bigint                                     |
+| [PredefinedFloat](#predefinedfloat)           | number                                     |
+| [PredefinedObject](#predefinedobject)         | Record&lt;string, unknown&gt;              |
+| [PredefinedListObject](#predefinedlistobject) | Array&lt;Record&lt;string, unknown&gt;&gt; |
+| [PredefinedListString](#predefinedliststring) | Array&lt;string&gt;                        |
+
+### PredefinedString
+
+- `ACHIEVEMENT_ID`
 - `ADREV_AD_TYPE`
+- `BRAND`
+- `BRICK`
+- `CAMPAIGN_ID`
+- `CATALOGUE_ID`
+- `CHANNEL_TYPE`
 - `CITY`
-- `COUNTRY`
-- `REGION`
 - `CLASS`
-- `CONTENT`
+- `CLICK_ID`
 - `CONTENT_ID`
-- `CONTENT_LIST`
 - `CONTENT_TYPE`
+- `CONVERSION_ID`
+- `COUNTRY`
+- `COUPON_CODE`
 - `CURRENCY`
+- `CUSTOMER_SEGMENT`
+- `CUSTOMER_TYPE`
 - `CUSTOMER_USER_ID`
-- `DATE_A`
-- `DATE_B`
-- `DEPARTING_ARRIVAL_DATE`
-- `DEPARTING_DEPARTURE_DATE`
+- `DEEP_LINK`
 - `DESCRIPTION`
 - `DESTINATION_A`
 - `DESTINATION_B`
 - `DESTINATION_LIST`
-- `HOTEL_SCORE`
-- `LEVEL`
-- `MAX_RATING_VALUE`
-- `NUM_ADULTS`
-- `NUM_CHILDREN`
-- `NUM_INFANTS`
-- `ORDER_ID`
-- `PAYMENT_INFO_AVAILABLE`
-- `PREFERRED_NEIGHBORHOODS`
-- `PREFERRED_NUM_STOPS`
-- `PREFERRED_PRICE_RANGE`
-- `PREFERRED_STAR_RATINGS`
-- `PRICE`
-- `PURCHASE_CURRENCY`
-- `QUANTITY`
-- `RATING_VALUE`
-- `RECEIPT_ID`
-- `REGISTRATION_METHOD`
-- `RETURNING_ARRIVAL_DATE`
-- `RETURNING_DEPARTURE_DATE`
-- `REVENUE`
-- `SCORE`
-- `SEARCH_STRING`
-- `SUBSCRIPTION_ID`
-- `SUCCESS`
-- `SUGGESTED_DESTINATIONS`
-- `SUGGESTED_HOTELS`
-- `TRAVEL_START`
-- `TRAVEL_END`
-- `USER_SCORE`
-- `VALIDATED`
-- `ACHIEVEMENT_ID`
-- `COUPON_CODE`
-- `CUSTOMER_SEGMENT`
-- `DEEP_LINK`
-- `EVENT_START`
-- `EVENT_END`
-- `LAT`
-- `LONG`
+- `EVENT_NAME`
 - `NEW_VERSION`
 - `OLD_VERSION`
-- `REVIEW_TEXT`
-- `TUTORIAL_ID`
-- `VIRTUAL_CURRENCY_NAME`
+- `ORDER_ID`
 - `PARAM_01`
 - `PARAM_02`
 - `PARAM_03`
@@ -407,6 +435,77 @@ In examples above `PredefinedParameters.DESCRIPTION` is used, but many others is
 - `PARAM_07`
 - `PARAM_08`
 - `PARAM_09`
+- `PARAM_10`
+- `PAYMENT_INFO_AVAILABLE`
+- `PID`
+- `PREFERRED_NEIGHBORHOODS`
+- `PRODUCT_ID`
+- `PURCHASE_CURRENCY`
+- `RECEIPT_ID`
+- `REGION`
+- `REGISTRATION_METHOD`
+- `REVIEW_TEXT`
+- `SEARCH_STRING`
+- `SEGMENT`
+- `STATUS`
+- `SUBSCRIPTION_ID`
+- `SUCCESS`
+- `SUGGESTED_DESTINATIONS`
+- `SUGGESTED_HOTELS`
+- `TUTORIAL_ID`
+- `UTM_CAMPAIGN`
+- `UTM_MEDIUM`
+- `UTM_SOURCE`
+- `VALIDATED`
+- `VERTICAL`
+- `VIRTUAL_CURRENCY_NAME`
+- `VOUCHER_CODE`
+
+### PredefinedLong
+
+- `AMOUNT`
+- `DATE_A`
+- `DATE_B`
+- `DEPARTING_ARRIVAL_DATE`
+- `DEPARTING_DEPARTURE_DATE`
+- `HOTEL_SCORE`
+- `LEVEL`
+- `MAX_RATING_VALUE`
+- `NUM_ADULTS`
+- `NUM_CHILDREN`
+- `NUM_INFANTS`
+- `PREFERRED_NUM_STOPS`
+- `PREFERRED_STAR_RATINGS`
+- `QUANTITY`
+- `RATING_VALUE`
+- `RETURNING_ARRIVAL_DATE`
+- `RETURNING_DEPARTURE_DATE`
+- `SCORE`
+- `TRAVEL_START`
+- `TRAVEL_END`
+- `USER_SCORE`
+- `EVENT_START`
+- `EVENT_END`
+
+### PredefinedFloat
+
+- `PREFERRED_PRICE_RANGE`
+- `PRICE`
+- `REVENUE`
+- `LAT`
+- `LONG`
+
+### PredefinedObject
+
+- `CONTENT`
+
+### PredefinedListObject
+
+- `CONTENT_LIST`
+
+### PredefinedListString
+
+- `CONTENT_IDS`
 
 ## Events buffering
 
@@ -428,9 +527,9 @@ Install referrer tracking is supported automatically, no actions needed
 ## Push token tracking
 
 To let affise track push token you need to receive it from your push service provider, and pass to Affise library.
-First add firebase integration to your app completing theese steps: [Firebase Docs](https://firebase.google.com/docs/cloud-messaging/android/client)
+First add firebase integration to your app completing these steps: [Firebase Docs](https://firebase.google.com/docs/cloud-messaging/android/client)
 
-After you have done with firebase inegration, add to your cloud messaging service `onNewToken` method `Affise.addPushToken(token)`
+After you have done with firebase integration, add to your cloud messaging service `onNewToken` method `Affise.addPushToken(token)`
 
 ```typescript
 import { Affise } from 'affise-attribution-lib';
@@ -462,9 +561,8 @@ To use this feature, create file with name `partner_key` in your app assets dire
 Register deeplink callback right after Affise.init(..)
 
 ```typescript
-Affise.init(..);
 Affise.registerDeeplinkCallback((uri) => {
-
+    // Handle deeplink
 });
 ```
 
@@ -472,7 +570,7 @@ Affise.registerDeeplinkCallback((uri) => {
 
 To integrate deeplink support in android you need:
 
-Add intent filter to `AndroidManifest.xml` as in `example/android/app/src/main/AndroidManifest.xml`,
+Add intent filter to `AndroidManifest.xml` as in [`example/android/app/src/main/AndroidManifest.xml`](example/android/app/src/main/AndroidManifest.xml),
 
 ```xml
 <intent-filter android:autoVerify="true">
@@ -491,7 +589,7 @@ Add intent filter to `AndroidManifest.xml` as in `example/android/app/src/main/A
 
 To integrate deeplink support in iOS you need:
 
-Add deeplink handler to `AppDelegate.mm` as in `example/ios/AffiseAttributionLibExample/AppDelegate.mm`
+Add deeplink handler to `AppDelegate.mm` as in [`example/ios/AffiseAttributionLibExample/AppDelegate.mm`](example/ios/AffiseAttributionLibExample/AppDelegate.mm)
 
 - [React Docs](https://reactnavigation.org/docs/deep-linking/#set-up-with-bare-react-native-projects)
 
@@ -506,7 +604,7 @@ Add deeplink handler to `AppDelegate.mm` as in `example/ios/AffiseAttributionLib
 
 Add key `CFBundleURLTypes` to `Info.plist`
 
-Example: `example/ios/AffiseAttributionLibExample/Info.plist`
+Example: [`example/ios/AffiseAttributionLibExample/Info.plist`](example/ios/AffiseAttributionLibExample/Info.plist)
 
 ```xml
 <key>CFBundleURLTypes</key>
@@ -526,7 +624,7 @@ Example: `example/ios/AffiseAttributionLibExample/Info.plist`
 
 ## Offline mode
 
-In some scenarious you would want to limit Affise network usage, to pause that activity call anywhere in your application following code after Affise init:
+In some scenarios you would want to limit Affise network usage, to pause that activity call anywhere in your application following code after Affise init:
 
 ```typescript
 Affise.init(..);
@@ -535,11 +633,13 @@ Affise.setOfflineModeEnabled(false); // to disable offline mode
 ```
 
 While offline mode is enabled, your metrics and other events are kept locally, and will be delivered once offline mode is disabled.
-Offline mode is persistent as Application lifecycle, and will be disabled with process termination automaticly.
+Offline mode is persistent as Application lifecycle, and will be disabled with process termination automatically.
 To check current offline mode status call:
 
 ```typescript
-Affise.isOfflineModeEnabled(); // returns true or false describing current tracking state
+Affise.isOfflineModeEnabled().then((enabled) => {
+    // returns true or false describing current offline Mode state
+});
 ```
 
 ## Disable tracking
@@ -552,7 +652,7 @@ Affise.setTrackingEnabled(true); // to enable tracking
 Affise.setTrackingEnabled(false); // to disable tracking
 ```
 
-By default tracking is enabled.
+By default, tracking is enabled.
 
 While tracking mode is disabled, metrics and other identifiers is not generated locally.
 Keep in mind that this flag is persistent until app reinstall, and don't forget to reactivate tracking when needed.
@@ -574,7 +674,7 @@ Affise.setBackgroundTrackingEnabled(true); // to enable background tracking
 Affise.setBackgroundTrackingEnabled(false); // to disable background tracking
 ```
 
-By default background tracking is enabled.
+By default, background tracking is enabled.
 
 While background tracking mode is disabled, metrics and other identifiers is not generated locally.
 Background tracking mode is persistent as Application lifecycle, and will be re-enabled with process termination automatically.
@@ -586,14 +686,18 @@ Affise.isBackgroundTrackingEnabled().then((enabled) => {
 });
 ```
 
-## GDPR right to be forgotten
+## Platform specific
+
+### GDPR right to be forgotten
+
+> `Android Only`
 
 Under the EU's General Data Protection Regulation (GDPR): An individual has the right to have their personal data erased.
 To provide this functionality to user, as the app developer, you can call
 
 ```typescript
 Affise.init(..);
-Affise.forget(); // to forget users data
+Affise.android.forget(); // to forget users data
 ```
 
 After processing such request our backend servers will delete all users data.
@@ -602,10 +706,8 @@ To prevent library from generating new events, disable tracking just before call
 ```typescript
 Affise.init(..);
 Affise.setTrackingEnabled(false);
-Affise.forget(); // to forget users data
+Affise.android.forget(); // to forget users data
 ```
-
-## Platform specific
 
 ### Get referrer
 
@@ -614,8 +716,8 @@ Affise.forget(); // to forget users data
 Use the next public method of SDK
 
 ```typescript
-Affise.getReferrer().then((referrer) => {
-  // returns referrer
+Affise.android.getReferrer().then((referrer) => {
+  // Handle referrer
 });
 ```
 
@@ -627,7 +729,7 @@ Use the next public method of SDK to get referrer value by
 
 ```typescript
 Affise.android.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
-
+  // Handle referrer
 })
 ```
 
@@ -682,7 +784,7 @@ Updates the fine and coarse conversion values, and calls a completion handler if
 Second argument coarseValue is available in iOS 16.1+
 
 ```typescript
-Affise.ios.updatePostbackConversionValue(1, "medium", (error) => {
+Affise.ios.updatePostbackConversionValue(1n, SKAdNetwork.CoarseConversionValue.medium, (error) => {
   // Handle error
 });
 ```
@@ -692,7 +794,7 @@ Configure your app to send postback copies to Affise:
 Add key `NSAdvertisingAttributionReportEndpoint` to `Info.plist`
 Set key value to `https://affise-skadnetwork.com/`
 
-Example: `example/ios/AffiseAttributionLibExample/Info.plist`
+Example: [`example/ios/AffiseAttributionLibExample/Info.plist`](example/ios/AffiseAttributionLibExample/Info.plist)
 
 ```xml
 <key>CFBundleURLTypes</key>

@@ -1,11 +1,12 @@
 import {BaseSubscriptionEvent} from "./BaseSubscriptionEvent";
-import {SubscriptionParameters} from "./SubscriptionParameters";
+import {SubscriptionEventName} from "./SubscriptionEventName";
+import {SubscriptionSubType} from "./SubscriptionSubType";
 
 export class TrialInRetryEvent extends BaseSubscriptionEvent {
-    constructor(data: Record<string, unknown>, userData?: string) {
+    constructor({data, userData}: { data: Record<string, unknown>, userData?: string }) {
         super(
-            SubscriptionParameters.AFFISE_SUBSCRIPTION_ENTERED_BILLING_RETRY,
-            SubscriptionParameters.AFFISE_SUB_TRIAL_IN_RETRY,
+            SubscriptionEventName.AFFISE_SUBSCRIPTION_ENTERED_BILLING_RETRY,
+            SubscriptionSubType.AFFISE_SUB_TRIAL_IN_RETRY,
             data,
             userData,
         );

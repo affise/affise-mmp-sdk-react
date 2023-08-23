@@ -1,4 +1,5 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 /**
  * Event CustomId03
@@ -9,13 +10,7 @@ import {NativeEvent} from "../base/NativeEvent";
  */
 export class CustomId03Event extends NativeEvent {
 
-    constructor(custom: string, timeStampMillis: number, userData: string) {
-        super('CustomId03');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_custom_id_03: custom,
-            affise_event_custom_id_03_timestamp: timeStampMillis.toString()
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number }) {
+        super(EventName.CUSTOM_ID_03, userData, timeStampMillis);
     }
 }

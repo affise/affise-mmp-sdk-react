@@ -1,13 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class OpenedFromPushNotificationEvent extends NativeEvent {
 
-    constructor(details: string, userData: string) {
-        super('OpenedFromPushNotification');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_opened_from_push_notification: details,
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.OPENED_FROM_PUSH_NOTIFICATION, userData, timeStampMillis);
     }
 }

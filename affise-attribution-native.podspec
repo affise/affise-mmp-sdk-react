@@ -17,8 +17,9 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
-  s.dependency 'AffiseAttributionLib', '~> 1.1.5'
-  s.dependency 'AffiseSKAdNetwork', '~> 1.1.5'
+  s.dependency 'AffiseInternal', '~> 1.6.8'
+  s.dependency 'AffiseAttributionLib', '~> 1.6.8'
+  s.dependency 'AffiseSKAdNetwork', '~> 1.6.8'
 
   # Don't install the dependencies when we run `pod install` in the old architecture.
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then

@@ -1,78 +1,44 @@
 import * as React from 'react';
 
-import {Button, SafeAreaView, StyleSheet, Text} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
 import {
     Affise,
-    AffiseInitProperties,
-    PredefinedParameters,
-    AddToCartEvent,
-    ReferrerKey
 } from 'affise-attribution-lib';
+import {AffiseWidget} from "./affise/AffiseWidget";
+import {AffiseApiWidget} from "./affise/AffiseApiWidget";
+import {useEffect} from "react";
 
 
 export default function App() {
 
-    const [referrerValue, setReferrerValue] = React.useState("");
-    const [referrer, setReferrer] = React.useState("");
+    const [deeplink, setDeeplink] = React.useState("");
+    const [hide, setHide] = React.useState(false);
 
-    React.useEffect(() => {
-        Affise.init(
-            new AffiseInitProperties(
-                'Your appId', //Change to your app id
-                true, //Add your custom rule to determine if this is a production build
-                null, //Change to your partParamName
-                null, //Change to your partParamNameToken
-                null, //Change to your appToken
-                'Your secretId' //Change to your secretId
-            )
-        );
+    useEffect(() => {
+        Affise.init({
+            affiseAppId: 'Your appId', //Change to your app id
+            secretKey: 'Your secretId', //Change to your secretId
+        });
 
         Affise.registerDeeplinkCallback((url) => {
             console.log(`Deeplink: ${url}`);
-        });
-
-        Affise.android.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
-            console.log(`ReferrerValue: ${value}`);
-            setReferrerValue(`ReferrerValue: ${value}`);
-        });
-
-        Affise.ios.registerAppForAdNetworkAttribution((error) => {
-            console.log(`SKAd register app: ${error}`);
-        });
-
-        Affise.ios.updatePostbackConversionValue(1, "medium", (error) => {
-            console.log(`SKAd updatePostbackConversionValue: ${error}`);
-        });
-
-        Affise.getReferrer().then(ref => {
-            setReferrer(ref);
+            setDeeplink(`Deeplink: ${url}`);
         });
     }, []);
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>
-                {referrer}
-            </Text>
-            <Text>
-                {referrerValue}
-            </Text>
-            <Button
-                title='Add To Cart'
-                onPress={() => {
-                    const event = new AddToCartEvent(
-                        {items: 'vegetables'},
-                        Date.now(),
-                        "cart"
-                    );
-                    event.addPredefinedParameter(
-                        PredefinedParameters.DESCRIPTION,
-                        "best before 2029",
-                    );
-                    Affise.sendEvent(event);
-                }}
-            >
-            </Button>
+            <View style={{width: '100%', paddingTop: 8, paddingLeft:8, paddingRight: 8}}>
+                <Button
+                    title='API / Events'
+                    onPress={() => {
+                        setHide(!hide);
+                    }}
+                />
+            </View>
+
+
+            {!hide ? <AffiseWidget/> : <AffiseApiWidget value={deeplink}  /> }
         </SafeAreaView>
     );
 }

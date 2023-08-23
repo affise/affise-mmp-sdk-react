@@ -26,8 +26,7 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libAffiseAttributionNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAffiseAttributionNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		843F56A829422CD4000602ED /* extensions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = extensions; sourceTree = "<group>"; };
-		843F56A929422CE1000602ED /* factories */ = {isa = PBXFileReference; lastKnownFileType = folder; path = factories; sourceTree = "<group>"; };
+		2B51DD482A9611520017E810 /* ResultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWrapper.swift; sourceTree = "<group>"; };
 		8461A738294A18EC00144272 /* RCTSwiftLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RCTSwiftLog.m; path = log/RCTSwiftLog.m; sourceTree = "<group>"; };
 		8461A73A294A190400144272 /* RCTSwiftLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RCTSwiftLog.h; path = log/RCTSwiftLog.h; sourceTree = "<group>"; };
 		8461A73B294A191800144272 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Log.swift; path = log/Log.swift; sourceTree = "<group>"; };
@@ -58,8 +57,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				843F56A929422CE1000602ED /* factories */,
-				843F56A829422CD4000602ED /* extensions */,
+				2B51DD482A9611520017E810 /* ResultWrapper.swift */,
 				F4FF95D6245B92E800C19C63 /* AffiseAttributionNative.swift */,
 				B3E7B5891CC2AC0600A0062D /* AffiseAttributionNative.m */,
 				8461A737294A18C400144272 /* log */,

@@ -1,11 +1,12 @@
 import {BaseSubscriptionEvent} from "./BaseSubscriptionEvent";
-import {SubscriptionParameters} from "./SubscriptionParameters";
+import {SubscriptionEventName} from "./SubscriptionEventName";
+import {SubscriptionSubType} from "./SubscriptionSubType";
 
 export class UnsubscriptionEvent extends BaseSubscriptionEvent {
-    constructor(data: Record<string, unknown>, userData?: string) {
+    constructor({data, userData}: { data: Record<string, unknown>, userData?: string }) {
         super(
-            SubscriptionParameters.AFFISE_UNSUBSCRIPTION,
-            SubscriptionParameters.AFFISE_SUB_UNSUBSCRIPTION,
+            SubscriptionEventName.AFFISE_UNSUBSCRIPTION,
+            SubscriptionSubType.AFFISE_SUB_UNSUBSCRIPTION,
             data,
             userData,
         );

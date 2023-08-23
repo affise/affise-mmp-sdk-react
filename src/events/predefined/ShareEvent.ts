@@ -1,14 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class ShareEvent extends NativeEvent {
 
-    constructor(share: Record<string, unknown>, timeStampMillis: number, userData: string) {
-        super('Share');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_share: share,
-            affise_event_share_timestamp: timeStampMillis.toString()
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.SHARE, userData, timeStampMillis);
     }
 }

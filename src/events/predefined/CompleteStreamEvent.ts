@@ -1,14 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class CompleteStreamEvent extends NativeEvent {
 
-    constructor(stream: Record<string, unknown>, timeStampMillis: number, userData: string) {
-        super('CompleteStream');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_complete_stream: stream,
-            affise_event_complete_stream_timestamp: timeStampMillis.toString()
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.COMPLETE_STREAM, userData, timeStampMillis);
     }
 }

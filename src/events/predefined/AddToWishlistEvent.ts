@@ -1,14 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class AddToWishlistEvent extends NativeEvent {
 
-    constructor(wishList: Record<string, unknown>, timeStampMillis: number, userData: string) {
-        super('AddToWishlist');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_add_to_wishlist: wishList,
-            affise_event_add_to_wishlist_timestamp: timeStampMillis.toString()
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.ADD_TO_WISHLIST, userData, timeStampMillis);
     }
 }

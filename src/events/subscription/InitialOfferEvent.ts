@@ -1,11 +1,12 @@
 import {BaseSubscriptionEvent} from "./BaseSubscriptionEvent";
-import {SubscriptionParameters} from "./SubscriptionParameters";
+import {SubscriptionEventName} from "./SubscriptionEventName";
+import {SubscriptionSubType} from "./SubscriptionSubType";
 
 export class InitialOfferEvent extends BaseSubscriptionEvent {
-    constructor(data: Record<string, unknown>, userData?: string) {
+    constructor({data, userData}: { data: Record<string, unknown>, userData?: string }) {
         super(
-            SubscriptionParameters.AFFISE_SUBSCRIPTION_ACTIVATION,
-            SubscriptionParameters.AFFISE_SUB_INITIAL_OFFER,
+            SubscriptionEventName.AFFISE_SUBSCRIPTION_ACTIVATION,
+            SubscriptionSubType.AFFISE_SUB_INITIAL_OFFER,
             data,
             userData,
         );

@@ -1,13 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class ReEngageEvent extends NativeEvent {
 
-    constructor(reEngage: string, userData: string) {
-        super('ReEngage');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_re_engage: reEngage,
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.RE_ENGAGE, userData, timeStampMillis);
     }
 }

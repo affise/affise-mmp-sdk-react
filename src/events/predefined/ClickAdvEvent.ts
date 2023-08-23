@@ -1,14 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class ClickAdvEvent extends NativeEvent {
 
-    constructor(advertisement: string, timeStampMillis: number, userData: string) {
-        super('ClickAdv');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_click_adv: advertisement,
-            affise_event_click_adv_timestamp: timeStampMillis.toString()
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.CLICK_ADV, userData, timeStampMillis);
     }
 }

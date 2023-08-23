@@ -1,14 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class ViewAdvEvent extends NativeEvent {
 
-    constructor(ad: Record<string, unknown>, timeStampMillis: number, userData: string) {
-        super('ViewAdv');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_view_adv: ad,
-            affise_event_view_adv_timestamp: timeStampMillis.toString()
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.VIEW_ADV, userData, timeStampMillis);
     }
 }

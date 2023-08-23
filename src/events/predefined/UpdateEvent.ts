@@ -1,13 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class UpdateEvent extends NativeEvent {
 
-    constructor(details: Array<string>, userData: string) {
-        super('Update');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_update: details,
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.UPDATE, userData, timeStampMillis);
     }
 }

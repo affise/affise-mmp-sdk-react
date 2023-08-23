@@ -1,13 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class DeepLinkedEvent extends NativeEvent {
 
-    constructor(isLinked: boolean, userData: string) {
-        super('DeepLinked');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_deep_linked: isLinked,
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.DEEP_LINKED, userData, timeStampMillis);
     }
 }

@@ -1,12 +1,15 @@
 package com.affise.attribution.react
 
 import android.app.Application
-import com.affise.attribution.Affise
-import com.affise.attribution.react.ext.toAffiseInitProperties
-import com.affise.attribution.react.ext.toAutoCatchingType
-import com.affise.attribution.react.ext.toReferrerKey
-import com.affise.attribution.react.factories.AffiseEvensFactory
-import com.facebook.react.bridge.*
+import com.affise.attribution.internal.AffiseApiMethod
+import com.affise.attribution.internal.AffiseApiWrapper
+import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.Promise
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.bridge.WritableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
 
 
@@ -14,25 +17,26 @@ class AffiseAttributionNativeModule(
     private val reactContext: ReactApplicationContext
 ) : ReactContextBaseJavaModule(reactContext) {
 
-    private var evensFactory: AffiseEvensFactory = AffiseEvensFactory()
+    private var apiWrapper: AffiseApiWrapper? = null
 
-    private fun sendEvent(reactContext: ReactContext, eventName: String, params: WritableMap?) {
+    init {
+        (reactContext.applicationContext as? Application)?.let { app ->
+            apiWrapper = AffiseApiWrapper(app)
+            apiWrapper?.react()
+            apiWrapper?.setCallback { name, map ->
+                val data = Arguments.createMap().apply {
+                    putString(API, name)
+                    putMap(DATA, Arguments.makeNativeMap(map))
+                }
+                sendEvent(data)
+            }
+        }
+    }
+
+    private fun sendEvent(params: WritableMap?) {
         reactContext
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-            .emit(eventName, params)
-    }
-
-    private fun sendDeeplinkEvent(uri: String) {
-        sendEvent(reactContext, DEEPLINK_CALLBACK_EVENT, Arguments.createMap().apply {
-            putString(DEEPLINK_CALLBACK_URI_PARAMETER, uri)
-        })
-    }
-
-
-    private fun sendGetReferrerValueEvent(key: String?) {
-        sendEvent(reactContext, GET_REFERRER_VALUE_CALLBACK_EVENT, Arguments.createMap().apply {
-            putString(GET_REFERRER_VALUE_PARAMETER, key)
-        })
+            .emit(CALLBACK, params)
     }
 
     override fun getName(): String {
@@ -40,35 +44,13 @@ class AffiseAttributionNativeModule(
     }
 
     @ReactMethod
-    fun nativeInit(initProperties: ReadableMap) {
-        (reactContext.applicationContext as? Application)?.let { application ->
-            Affise._crossPlatform.react()
-            Affise.init(application, initProperties.toHashMap().toAffiseInitProperties())
-            Affise._crossPlatform.start()
-        }
+    fun invokeMethod(apiName: String, data: ReadableMap, result: Promise) {
+        apiWrapper?.call(AffiseApiMethod.from(apiName), data.toHashMap(), ResultWrapper(result))
     }
 
     @ReactMethod
-    fun nativeSendEvents() {
-        Affise.sendEvents()
-    }
-
-    @ReactMethod
-    fun nativeSendEvent(event: ReadableMap) {
-        evensFactory.event(event.toHashMap())?.let {
-            Affise.sendEvent(it)
-        }
-    }
-
-    @ReactMethod
-    fun nativeAddPushToken(pushToken: String) {
-        Affise.addPushToken(pushToken)
-    }
-
-
-    @ReactMethod
-    fun nativeRegisterDeeplinkCallback() {
-        registerCallback()
+    fun nativeHandleDeeplink(uri: String) {
+        apiWrapper?.handleDeeplink(uri)
     }
 
     @ReactMethod
@@ -81,97 +63,10 @@ class AffiseAttributionNativeModule(
         // Remove upstream listeners, stop unnecessary background tasks
     }
 
-    @ReactMethod
-    fun nativeSetSecretId(secretId: String) {
-        Affise.setSecretId(secretId)
-    }
-
-    @ReactMethod
-    fun nativeSetAutoCatchingTypes(types: ReadableArray) {
-        val autoCatchingTypes = types.toArrayList().mapNotNull {
-            it.toString().toAutoCatchingType()
-        }
-        Affise.setAutoCatchingTypes(autoCatchingTypes)
-    }
-
-    @ReactMethod
-    fun nativeSetOfflineModeEnabled(enabled: Boolean) {
-        Affise.setOfflineModeEnabled(enabled)
-    }
-
-    @ReactMethod
-    fun nativeIsOfflineModeEnabled(result: Promise) {
-        result.resolve(Affise.isOfflineModeEnabled())
-    }
-
-    @ReactMethod
-    fun nativeSetBackgroundTrackingEnabled(enabled: Boolean) {
-        Affise.setBackgroundTrackingEnabled(enabled)
-    }
-
-    @ReactMethod
-    fun nativeIsBackgroundTrackingEnabled(result: Promise) {
-        result.resolve(Affise.isBackgroundTrackingEnabled())
-    }
-
-    @ReactMethod
-    fun nativeSetTrackingEnabled(enabled: Boolean) {
-        Affise.setTrackingEnabled(enabled)
-    }
-
-    @ReactMethod
-    fun nativeIsTrackingEnabled(result: Promise) {
-        result.resolve(Affise.isTrackingEnabled())
-    }
-
-    @ReactMethod
-    fun nativeForget(userData: String) {
-        Affise.forget(userData)
-    }
-
-    @ReactMethod
-    fun nativeSetEnabledMetrics(enabled: Boolean) {
-        Affise.setEnabledMetrics(enabled)
-    }
-
-    @ReactMethod
-    fun nativeCrashApplication() {
-        Affise.crashApplication()
-    }
-
-    @ReactMethod
-    fun nativeGetReferrer(result: Promise) {
-        result.resolve(Affise.getReferrer())
-    }
-
-    @ReactMethod
-    fun nativeGetReferrerValue(key: String) {
-        key.toReferrerKey()?.let { refKey ->
-            Affise.getReferrerValue(refKey) { value ->
-                sendGetReferrerValueEvent(value)
-            }
-        }
-    }
-
-    @ReactMethod
-    fun nativeHandleDeeplink(uri: String) {
-        Affise._crossPlatform.handleDeeplink(uri)
-        sendDeeplinkEvent(uri)
-    }
-
-    private fun registerCallback() {
-        Affise.registerDeeplinkCallback {
-            true
-        }
-    }
-
     companion object {
         const val NAME = "AffiseAttributionNative"
-
-        private const val DEEPLINK_CALLBACK_EVENT = "affiseDeeplinkEvent"
-        private const val DEEPLINK_CALLBACK_URI_PARAMETER = "uri"
-
-        private const val  GET_REFERRER_VALUE_CALLBACK_EVENT = "getReferrerValueEvent";
-        private const val  GET_REFERRER_VALUE_PARAMETER = "getReferrerValueParameter";
+        private const val CALLBACK = "native_callback"
+        private const val API = "api"
+        private const val DATA = "data"
     }
 }

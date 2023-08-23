@@ -1,13 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class ContentItemsViewEvent extends NativeEvent {
 
-    constructor(objects: Array<Record<string, unknown>>, userData: string) {
-        super('ContentItemsView');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_content_items_view: objects,
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.CONTENT_ITEMS_VIEW, userData, timeStampMillis);
     }
 }

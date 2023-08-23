@@ -1,14 +1,9 @@
 import {NativeEvent} from "../base/NativeEvent";
+import {EventName} from "../EventName";
 
 export class RateEvent extends NativeEvent {
 
-    constructor(rate: Record<string, unknown>, timeStampMillis: number, userData: string) {
-        super('Rate');
-
-        this.userData = userData;
-        this.serialize = {
-            affise_event_rate: rate,
-            affise_event_rate_timestamp: timeStampMillis.toString()
-        };
+    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
+        super(EventName.RATE, userData, timeStampMillis);
     }
 }
