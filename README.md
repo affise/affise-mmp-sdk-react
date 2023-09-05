@@ -2,7 +2,7 @@
 
 | Package                |                                                                 Version                                                                  |
 |------------------------|:----------------------------------------------------------------------------------------------------------------------------------------:|
-| affise-attribution-lib | [![attribution](https://img.shields.io/npm/v/affise-attribution-lib?label=latest)](https://www.npmjs.com/package/affise-attribution-lib) |
+| `affise-attribution-lib` | [![attribution](https://img.shields.io/npm/v/affise-attribution-lib?label=latest)](https://www.npmjs.com/package/affise-attribution-lib) |
 
 - [Affise Attribution React Native Library](#affise-attribution-react-native-library)
 - [Description](#description)
@@ -11,6 +11,7 @@
     - [Integrate npm package](#integrate-npm-package)
     - [Add platform modules](#add-platform-modules)
       - [Android](#android)
+      - [iOS](#ios)
     - [Initialize](#initialize)
     - [Requirements](#requirements)
       - [Android](#android-1)
@@ -34,10 +35,13 @@
   - [APK preinstall tracking](#apk-preinstall-tracking)
   - [Deeplinks](#deeplinks)
     - [Android](#android-2)
-    - [iOS](#ios)
+    - [iOS](#ios-1)
   - [Offline mode](#offline-mode)
   - [Disable tracking](#disable-tracking)
   - [Disable background tracking](#disable-background-tracking)
+  - [Get random user Id](#get-random-user-id)
+  - [Get random device Id](#get-random-device-id)
+  - [Get module state](#get-module-state)
   - [Platform specific](#platform-specific)
     - [GDPR right to be forgotten](#gdpr-right-to-be-forgotten)
     - [Get referrer](#get-referrer)
@@ -74,14 +78,14 @@ yarn add affise-attribution-lib
 
 #### Android
 
-Add modules to android project
+Add modules to Android project
 
-| Module             | Version                                                                                                                                                                      |
+| Module             | Version                                      |
 |--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| module-advertising | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) |
-| module-network     | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             |
-| module-phone       | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   |
-| module-status      | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                |
+| `module-advertising` | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) |
+| `module-network`     | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             |
+| `module-phone`       | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   |
+| `module-status`      | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                |
 
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
@@ -93,6 +97,25 @@ dependencies {
     implementation 'com.affise:module-phone:1.6.+'
     implementation 'com.affise:module-status:1.6.+'
 }
+```
+
+#### iOS
+
+Add modules to iOS project
+
+| Module                | Version |
+|-----------------------|:-------:|
+| `AffiseModule/Status` | `1.6.9` |
+
+Example [example/ios/Podfile](example/ios/Podfile)
+
+```ruby
+target 'YourAppProject' do
+  # ...
+
+  # Affise Modules
+  pod 'AffiseModule/Status', `~> 1.6.9`
+end
 ```
 
 ### Initialize
@@ -409,6 +432,7 @@ In examples above `PredefinedString.DESCRIPTION` and `PredefinedObject.CONTENT` 
 - `CLASS`
 - `CLICK_ID`
 - `CONTENT_ID`
+- `CONTENT_NAME`
 - `CONTENT_TYPE`
 - `CONVERSION_ID`
 - `COUNTRY`
@@ -440,6 +464,7 @@ In examples above `PredefinedString.DESCRIPTION` and `PredefinedObject.CONTENT` 
 - `PID`
 - `PREFERRED_NEIGHBORHOODS`
 - `PRODUCT_ID`
+- `PRODUCT_NAME`
 - `PURCHASE_CURRENCY`
 - `RECEIPT_ID`
 - `REGION`
@@ -683,6 +708,26 @@ To check current status of background tracking call:
 ```typescript
 Affise.isBackgroundTrackingEnabled().then((enabled) => {
   // returns true or false describing current background tracking state
+});
+```
+
+## Get random user Id
+
+```typescript
+Affise.getRandomUserId();
+```
+
+## Get random device Id
+
+```typescript
+Affise.getRandomDeviceId();
+```
+
+## Get module state
+
+```typescript
+Affise.getStatus(AffiseModules.STATUS, (response) => {
+    // handle status response
 });
 ```
 

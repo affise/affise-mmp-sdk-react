@@ -26,6 +26,9 @@ target 'AffiseAttributionLibExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # Affise Modules
+  pod 'AffiseModule', '~> 1.6.9'
+    
   target 'AffiseAttributionLibExampleTests' do
     inherit! :complete
     # Pods for testing
