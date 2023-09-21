@@ -3,6 +3,8 @@ import {
     AddPaymentInfoEvent,
     AddToCartEvent,
     AddToWishlistEvent,
+    AdRevenueEvent,
+    AffiseAdSource,
     AffiseEvent,
     ClickAdvEvent,
     CompleteRegistrationEvent,
@@ -50,6 +52,8 @@ import {
     OpenedFromPushNotificationEvent,
     OrderCancelEvent,
     OrderEvent,
+    OrderItemAddedEvent,
+    OrderItemRemoveEvent,
     OrderReturnRequestCancelEvent,
     OrderReturnRequestEvent,
     PredefinedFloat,
@@ -97,6 +101,7 @@ export class DefaultEventsFactory {
             this.createAddPaymentInfoEvent(),
             this.createAddToCartEvent(),
             this.createAddToWishlistEvent(),
+            this.createAdRevenueEvent(),
             this.createClickAdvEvent(),
             this.createCompleteRegistrationEvent(),
             this.createCompleteStreamEvent(),
@@ -127,8 +132,10 @@ export class DefaultEventsFactory {
             this.createListViewEvent(),
             this.createLoginEvent(),
             this.createOpenedFromPushNotificationEvent(),
-            this.createOrderCancelEvent(),
             this.createOrderEvent(),
+            this.createOrderItemAddedEvent(),
+            this.createOrderItemRemoveEvent(),
+            this.createOrderCancelEvent(),
             this.createOrderReturnRequestCancelEvent(),
             this.createOrderReturnRequestEvent(),
             this.createPurchaseEvent(),
@@ -183,19 +190,15 @@ export class DefaultEventsFactory {
             "new_level": 70,
         };
 
-        const event = new AchieveLevelEvent({
+        return new AchieveLevelEvent({
             userData: "userData"
-        });
-
-        event
+        })
             .addPredefinedString(PredefinedString.DEEP_LINK, "https://new-game.lt")
             .addPredefinedLong(PredefinedLong.SCORE, 25013n)
             .addPredefinedLong(PredefinedLong.LEVEL, 70n)
             .addPredefinedString(PredefinedString.SUCCESS, "true")
             .addPredefinedString(PredefinedString.TUTORIAL_ID, "12")
             .addPredefinedObject(PredefinedObject.CONTENT, level);
-
-        return event;
     }
 
     private createAddPaymentInfoEvent(): AffiseEvent {
@@ -203,13 +206,11 @@ export class DefaultEventsFactory {
             "card": 4138,
             "type": "phone",
         };
-        const event = new AddPaymentInfoEvent({
+        return new AddPaymentInfoEvent({
             userData: "taxi"
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PURCHASE_CURRENCY, "USD")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
 
@@ -218,13 +219,9 @@ export class DefaultEventsFactory {
         const items: Record<string, any> = {
             "items": products,
         };
-        const event = new AddToCartEvent();
-
-        event
+        return new AddToCartEvent()
             .addPredefinedString(PredefinedString.DESCRIPTION, "best before 2029")
             .addPredefinedObject(PredefinedObject.CONTENT, items);
-
-        return event;
     }
 
     private createAddToWishlistEvent(): AffiseEvent {
@@ -232,26 +229,30 @@ export class DefaultEventsFactory {
         const items: Record<string, any> = {
             "items": wishes,
         };
-        const event = new AddToWishlistEvent({
+        return new AddToWishlistEvent({
             userData: "next year"
-        });
-
-        event
+        })
             .addPredefinedString(PredefinedString.COUNTRY, "Russia")
             .addPredefinedString(PredefinedString.CITY, "Voronezh")
             .addPredefinedFloat(PredefinedFloat.LAT, 42.0)
             .addPredefinedFloat(PredefinedFloat.LONG, 24.0)
             .addPredefinedObject(PredefinedObject.CONTENT, items);
+    }
 
-        return event;
+    private createAdRevenueEvent(): AffiseEvent {
+        return new AdRevenueEvent({userData: "next year"})
+            .addPredefinedString(PredefinedString.SOURCE, AffiseAdSource.ADMOB)
+            .addPredefinedFloat(PredefinedFloat.REVENUE, 42.5)
+            .addPredefinedString(PredefinedString.CURRENCY, "USD")
+            .addPredefinedString(PredefinedString.NETWORK, "test")
+            .addPredefinedString(PredefinedString.UNIT, "m")
+            .addPredefinedString(PredefinedString.PLACEMENT, "end");
     }
 
     private createClickAdvEvent(): AffiseEvent {
-        const event = new ClickAdvEvent({
+        return new ClickAdvEvent({
             userData: "header",
-        });
-
-        event
+        })
             .addPredefinedString(PredefinedString.DESCRIPTION, "facebook-meta")
             .addPredefinedString(PredefinedString.PARAM_01, "PARAM_01")
             .addPredefinedString(PredefinedString.PARAM_02, "PARAM_02")
@@ -263,24 +264,19 @@ export class DefaultEventsFactory {
             .addPredefinedString(PredefinedString.PARAM_08, "PARAM_08")
             .addPredefinedString(PredefinedString.PARAM_09, "PARAM_09")
             .addPredefinedString(PredefinedString.PARAM_10, "PARAM_10");
-
-        return event;
     }
 
     private createCompleteRegistrationEvent(): AffiseEvent {
         const data: Record<string, any> = {
             "email": "dog@gmail.com",
         };
-        const event = new CompleteRegistrationEvent({
+        return new CompleteRegistrationEvent({
             userData: "promo",
-        });
-        event
+        })
             .addPredefinedObject(PredefinedObject.CONTENT, data)
             .addPredefinedString(PredefinedString.VALIDATED, "02.11.2021")
             .addPredefinedString(PredefinedString.REVIEW_TEXT, "approve")
             .addPredefinedString(PredefinedString.CUSTOMER_SEGMENT, "DOG");
-
-        return event;
     }
 
     private createCompleteStreamEvent(): AffiseEvent {
@@ -288,56 +284,44 @@ export class DefaultEventsFactory {
             "streamer": "cat",
             "max_viewers": "29",
         };
-        const event = new CompleteStreamEvent({
+        return new CompleteStreamEvent({
             userData: "23 hours",
-        });
-        event
+        })
             .addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0)
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-
-        return event;
     }
 
     private createCompleteTrialEvent(): AffiseEvent {
         const data: Record<string, any> = {
             "player": "ghost",
         };
-        const event = new CompleteTrialEvent({
+        return new CompleteTrialEvent({
             userData: "time",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.REGISTRATION_METHOD, "SMS")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-
-        return event;
     }
 
     private createCompleteTutorialEvent(): AffiseEvent {
         const data: Record<string, any> = {
             "name": "intro",
         };
-        const event = new CompleteTutorialEvent({
+        return new CompleteTutorialEvent({
             userData: "intro",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.REGISTRATION_METHOD, "SMS")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-
-        return event;
     }
 
     private createContactEvent(): AffiseEvent {
         const data: Record<string, any> = {
             "name": "intro",
         };
-        const event = new ContactEvent({
+        return new ContactEvent({
             userData: "contact",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.REGISTRATION_METHOD, "SMS")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-
-        return event;
     }
 
     private createContentItemsViewEvent(): AffiseEvent {
@@ -350,11 +334,9 @@ export class DefaultEventsFactory {
             },
         ];
 
-        const event = new ContentItemsViewEvent({
+        return new ContentItemsViewEvent({
             userData: "personal",
-        });
-
-        event
+        })
             .addPredefinedListObject(PredefinedListObject.CONTENT_LIST, data)
             .addPredefinedObject(PredefinedObject.CONTENT, {
                 name: "Greatest Hits",
@@ -362,151 +344,113 @@ export class DefaultEventsFactory {
             .addPredefinedString(PredefinedString.CONTENT_ID, "2561")
             .addPredefinedString(PredefinedString.CONTENT_TYPE, "MATURE")
             .addPredefinedString(PredefinedString.CURRENCY, "USD");
-
-        return event;
     }
 
     private createCustomId01Event(): AffiseEvent {
-        const event = new CustomId01Event({
+        return new CustomId01Event({
             userData: "custom",
-        });
-
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createCustomId02Event(): AffiseEvent {
-        const event = new CustomId02Event({
+        return new CustomId02Event({
             userData: "custom",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createCustomId03Event(): AffiseEvent {
-        const event = new CustomId03Event({
+        return new CustomId03Event({
             userData: "custom",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createCustomId04Event(): AffiseEvent {
-        const event = new CustomId04Event({
+        return new CustomId04Event({
             userData: "custom",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createCustomId05Event(): AffiseEvent {
-        const event = new CustomId05Event({
+        return new CustomId05Event({
             userData: "custom",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createCustomId06Event(): AffiseEvent {
-        const event = new CustomId06Event({
+        return new CustomId06Event({
             userData: "custom",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createCustomId07Event(): AffiseEvent {
-        const event = new CustomId07Event({
+        return new CustomId07Event({
             userData: "custom",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createCustomId08Event(): AffiseEvent {
-        const event = new CustomId08Event({
+        return new CustomId08Event({
             userData: "custom",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createCustomId09Event(): AffiseEvent {
-        const event = new CustomId09Event({
+        return new CustomId09Event({
             userData: "custom",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createCustomId10Event(): AffiseEvent {
-        const event = new CustomId10Event({
+        return new CustomId10Event({
             userData: "custom",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createCustomizeProductEvent(): AffiseEvent {
-        const event = new CustomizeProductEvent({
+        return new CustomizeProductEvent({
             userData: "customize",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createDeepLinkedEvent(): AffiseEvent {
-        const event = new DeepLinkedEvent({
+        return new DeepLinkedEvent({
             userData: "referrer: google"
-        });
-
-        event
+        })
             .addPredefinedObject(PredefinedObject.CONTENT, {isLinked: true})
             .addPredefinedString(PredefinedString.ADREV_AD_TYPE, "interstitial")
             .addPredefinedString(PredefinedString.REGION, "ASIA")
             .addPredefinedString(PredefinedString.CLASS, "student");
-        return event;
     }
 
     private createDonateEvent(): AffiseEvent {
-        const event = new DonateEvent({
+        return new DonateEvent({
             userData: "donate",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createFindLocationEvent(): AffiseEvent {
-        const event = new FindLocationEvent({
+        return new FindLocationEvent({
             userData: "FindLocation",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createInitiateCheckoutEvent(): AffiseEvent {
-        const event = new InitiateCheckoutEvent({
+        return new InitiateCheckoutEvent({
             userData: "checkout",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createInitiatePurchaseEvent(): AffiseEvent {
         const data: Record<string, any> = {
             payment: "card",
         };
-        const event = new InitiatePurchaseEvent({
+        return new InitiatePurchaseEvent({
             userData: "best price"
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.ORDER_ID, "23123")
             .addPredefinedFloat(PredefinedFloat.PRICE, 2.19)
             .addPredefinedLong(PredefinedLong.QUANTITY, 1n)
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-
-        return event;
     }
 
     private createInitiateStreamEvent(): AffiseEvent {
@@ -514,14 +458,12 @@ export class DefaultEventsFactory {
             streamer: "car",
             date: "02.03.2021",
         };
-        const event = new InitiateStreamEvent({
+        return new InitiateStreamEvent({
             userData: "shooter",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.COUPON_CODE, "25XLKM")
             .addPredefinedString(PredefinedString.VIRTUAL_CURRENCY_NAME, "BTC")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createInviteEvent(): AffiseEvent {
@@ -529,13 +471,11 @@ export class DefaultEventsFactory {
             invitation: "mail",
             date: "02.03.2021",
         };
-        const event = new InviteEvent({
+        return new InviteEvent({
             userData: "dancing",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createLastAttributedTouchEvent(): AffiseEvent {
@@ -545,73 +485,61 @@ export class DefaultEventsFactory {
                 header: 2,
             },
         };
-        const event = new LastAttributedTouchEvent({
+        return new LastAttributedTouchEvent({
             userData: "tablet",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.SUBSCRIPTION_ID, "lasAK22")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createLeadEvent(): AffiseEvent {
-        const event = new LeadEvent({
+        return new LeadEvent({
             userData: "Lead",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createListViewEvent(): AffiseEvent {
         const data: Record<string, any> = {
             clothes: 2,
         };
-        const event = new ListViewEvent({
+        return new ListViewEvent({
             userData: "items",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PAYMENT_INFO_AVAILABLE, "card")
             .addPredefinedString(PredefinedString.SEARCH_STRING, "best car wash")
             .addPredefinedString(PredefinedString.SUGGESTED_DESTINATIONS, "crete, spain")
             .addPredefinedString(PredefinedString.SUGGESTED_HOTELS, "beach resort, marina spa")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createLoginEvent(): AffiseEvent {
         const data: Record<string, any> = {
             email: "cat@gmail.com",
         };
-        const event = new LoginEvent({
+        return new LoginEvent({
             userData: "web",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-
-        return event;
     }
 
     private createOpenedFromPushNotificationEvent(): AffiseEvent {
-        const event = new OpenedFromPushNotificationEvent({
+        return new OpenedFromPushNotificationEvent({
             userData: "active",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedObject(PredefinedObject.CONTENT, {
                 details: "silent",
             });
-        return event;
     }
 
     private createOrderEvent(): AffiseEvent {
-        const event = new OrderEvent({
+        return new OrderEvent({
             userData: "Order",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1");
-
-        // event.addPredefinedListGroup([
+        // TODO PredefinedGroup
+        // .addPredefinedListGroup([
         //     PredefinedGroup()
         //         .addPredefinedString(PredefinedString.CUSTOMER_USER_ID, "KDCJHB10834rJHG")
         //         .addPredefinedString(PredefinedString.CONTENT_ID, "334923062984")
@@ -632,31 +560,38 @@ export class DefaultEventsFactory {
         //         .addPredefinedFloat(PredefinedFloat.REVENUE, 299.0)
         //         .addPredefinedString(PredefinedString.ORDER_ID, "ID_83792")
         // ]);
-        return event;
+    }
+
+    private createOrderItemAddedEvent(): AffiseEvent {
+        return new OrderItemAddedEvent({userData: "apple"})
+            .addPredefinedString(PredefinedString.ORDER_ID, "23123")
+            .addPredefinedFloat(PredefinedFloat.PRICE, 2.19)
+            .addPredefinedLong(PredefinedLong.QUANTITY, 1n);
+    }
+
+    private createOrderItemRemoveEvent(): AffiseEvent {
+        return new OrderItemRemoveEvent({userData: "apple"})
+            .addPredefinedString(PredefinedString.ORDER_ID, "23123")
+            .addPredefinedFloat(PredefinedFloat.PRICE, 2.19)
+            .addPredefinedLong(PredefinedLong.QUANTITY, 1n);
     }
 
     private createOrderCancelEvent(): AffiseEvent {
-        const event = new OrderCancelEvent({
+        return new OrderCancelEvent({
             userData: "OrderCancel",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createOrderReturnRequestCancelEvent(): AffiseEvent {
-        const event = new OrderReturnRequestCancelEvent({
+        return new OrderReturnRequestCancelEvent({
             userData: "OrderReturnRequestCancel",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createOrderReturnRequestEvent(): AffiseEvent {
-        const event = new OrderReturnRequestEvent({
+        return new OrderReturnRequestEvent({
             userData: "OrderReturnRequest",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createPurchaseEvent(): AffiseEvent {
@@ -664,43 +599,37 @@ export class DefaultEventsFactory {
             phone: 1,
             case: 1,
         };
-        const event = new PurchaseEvent({
+        return new PurchaseEvent({
             userData: "apple",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.ORDER_ID, "23123")
             .addPredefinedFloat(PredefinedFloat.PRICE, 2.19)
             .addPredefinedLong(PredefinedLong.QUANTITY, 1n)
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createRateEvent(): AffiseEvent {
         const data: Record<string, any> = {
             rating: 5,
         };
-        const event = new RateEvent({
+        return new RateEvent({
             userData: "no bugs",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PREFERRED_NEIGHBORHOODS, "2")
             .addPredefinedLong(PredefinedLong.PREFERRED_NUM_STOPS, 4n)
             .addPredefinedFloat(PredefinedFloat.PREFERRED_PRICE_RANGE, 10.22)
             .addPredefinedLong(PredefinedLong.PREFERRED_STAR_RATINGS, 6n)
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createReEngageEvent(): AffiseEvent {
-        const event = new ReEngageEvent({
+        return new ReEngageEvent({
             userData: "web",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.CUSTOMER_USER_ID, "4")
             .addPredefinedObject(PredefinedObject.CONTENT, {
                 reEngage: "data",
             });
-        return event;
     }
 
     private createReserveEvent(): AffiseEvent {
@@ -710,31 +639,25 @@ export class DefaultEventsFactory {
         const data2: Record<string, any> = {
             food: "coke",
         };
-        const event = new ReserveEvent({
+        return new ReserveEvent({
             userData: "discount",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.ORDER_ID, "23123")
             .addPredefinedFloat(PredefinedFloat.PRICE, 2.19)
             .addPredefinedLong(PredefinedLong.QUANTITY, 1n)
             .addPredefinedListObject(PredefinedListObject.CONTENT_LIST, [data, data2]);
-        return event;
     }
 
     private createSalesEvent(): AffiseEvent {
-        const event = new SalesEvent({
+        return new SalesEvent({
             userData: "Sales",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createScheduleEvent(): AffiseEvent {
-        const event = new ScheduleEvent({
+        return new ScheduleEvent({
             userData: "Schedule",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createSearchEvent(): AffiseEvent {
@@ -743,13 +666,11 @@ export class DefaultEventsFactory {
             "milk",
             "grass",
         ];
-        const event = new SearchEvent({
+        return new SearchEvent({
             userData: "browser",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedListString(PredefinedListString.CONTENT_IDS, data);
-        return event;
     }
 
     private createShareEvent(): AffiseEvent {
@@ -758,51 +679,43 @@ export class DefaultEventsFactory {
             post_img: "img.webp",
         };
 
-        const event = new ShareEvent({
+        return new ShareEvent({
             userData: "telegram",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.RECEIPT_ID, "22")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createSpendCreditsEvent(): AffiseEvent {
-        const event = new SpendCreditsEvent({
+        return new SpendCreditsEvent({
             userData: "boosters",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedObject(PredefinedObject.CONTENT, {
                 credits: 2142,
             });
-        return event;
     }
 
     private createStartRegistrationEvent(): AffiseEvent {
         const data: Record<string, any> = {
             "time": "19:22:11",
         };
-        const event = new StartRegistrationEvent({
+        return new StartRegistrationEvent({
             userData: "referrer",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createStartTrialEvent(): AffiseEvent {
         const data: Record<string, any> = {
             "time": "19:22:11",
         };
-        const event = new StartTrialEvent({
+        return new StartTrialEvent({
             userData: "30-days"
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createStartTutorialEvent(): AffiseEvent {
@@ -811,41 +724,34 @@ export class DefaultEventsFactory {
             "reward": "22",
         };
 
-        const event = new StartTutorialEvent({
+        return new StartTutorialEvent({
             userData: "video-feature"
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createSubmitApplicationEvent(): AffiseEvent {
-        const event = new SubmitApplicationEvent({
+        return new SubmitApplicationEvent({
             userData: "SubmitApplication",
-        });
-        event.addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
+        }).addPredefinedString(PredefinedString.PARAM_01, "param1");
     }
 
     private createSubscribeEvent(): AffiseEvent {
         const data: Record<string, any> = {
             "streamer": "cat",
         };
-        const event = new SubscribeEvent({
+        return new SubscribeEvent({
             userData: "wire",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createTravelBookingEvent(): AffiseEvent {
-        const event = new TravelBookingEvent({
+        return new TravelBookingEvent({
             userData: "booking",
-        });
-        event
+        })
             .addPredefinedLong(PredefinedLong.NUM_ADULTS, 1n)
             .addPredefinedLong(PredefinedLong.NUM_CHILDREN, 2n)
             .addPredefinedLong(PredefinedLong.NUM_INFANTS, 1n)
@@ -859,64 +765,54 @@ export class DefaultEventsFactory {
             .addPredefinedLong(PredefinedLong.HOTEL_SCORE, 5n)
             .addPredefinedLong(PredefinedLong.TRAVEL_START, "01.12.2020".timestamp())
             .addPredefinedLong(PredefinedLong.TRAVEL_END, "01.12.2021".timestamp());
-        return event;
     }
 
     private createUnlockAchievementEvent(): AffiseEvent {
         const data: Record<string, any> = {
             "achievement": "new level",
         };
-        const event = new UnlockAchievementEvent({
+        return new UnlockAchievementEvent({
             userData: "best damage"
-        });
-        event
+        })
             .addPredefinedLong(PredefinedLong.USER_SCORE, 12552n)
             .addPredefinedString(PredefinedString.ACHIEVEMENT_ID, "1334-1225-ASDZ")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createUnsubscribeEvent(): AffiseEvent {
         const data: Record<string, any> = {
             "reason": "span",
         };
-        const event = new UnsubscribeEvent({
+        return new UnsubscribeEvent({
             userData: "02.01.2021"
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createUpdateEvent(): AffiseEvent {
         const data: string[] = ["com.facebook"];
-        const event = new UpdateEvent({
+        return new UpdateEvent({
             userData: "firmware",
-        });
-        event
+        })
             .addPredefinedLong(PredefinedLong.EVENT_START, "01.02.2021".timestamp())
             .addPredefinedLong(PredefinedLong.EVENT_END, "01.01.2022".timestamp())
             .addPredefinedString(PredefinedString.NEW_VERSION, "8")
             .addPredefinedString(PredefinedString.OLD_VERSION, "1.8")
             .addPredefinedListString(PredefinedListString.CONTENT_IDS, data);
-        return event;
     }
 
     private createViewAdvEvent(): AffiseEvent {
         const data: Record<string, any> = {
             "source": "amazon",
         };
-        const event = new ViewAdvEvent({
+        return new ViewAdvEvent({
             timeStampMillis: Date.now(),
             userData: "skip"
-        });
-        event
+        })
             .addPredefinedLong(PredefinedLong.RETURNING_ARRIVAL_DATE, "01.12.2021".timestamp())
             .addPredefinedLong(PredefinedLong.RETURNING_DEPARTURE_DATE, "01.12.2020".timestamp())
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-
-        return event;
     }
 
     private createViewCartEvent(): AffiseEvent {
@@ -924,36 +820,30 @@ export class DefaultEventsFactory {
             cart_value: "25.22$",
             cart_items: "2",
         };
-        const event = new ViewCartEvent({
+        return new ViewCartEvent({
             userData: "main",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1")
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createViewContentEvent(): AffiseEvent {
-        const event = new ViewContentEvent({
+        return new ViewContentEvent({
             userData: "ViewContent",
-        });
-        event
+        })
             .addPredefinedString(PredefinedString.PARAM_01, "param1");
-        return event;
     }
 
     private createViewItemEvent(): AffiseEvent {
         const data: Record<string, any> = {
             section_name: "header",
         };
-        const event = new ViewItemEvent({
+        return new ViewItemEvent({
             userData: "main",
-        });
-        event
+        })
             .addPredefinedLong(PredefinedLong.MAX_RATING_VALUE, 5n)
             .addPredefinedLong(PredefinedLong.RATING_VALUE, 4n)
             .addPredefinedObject(PredefinedObject.CONTENT, data);
-        return event;
     }
 
     private createViewItemsEvent(): AffiseEvent {
@@ -971,275 +861,233 @@ export class DefaultEventsFactory {
                 section_name: "footer",
             },
         ];
-        const event = new ViewItemsEvent({
+        return new ViewItemsEvent({
             userData: "main",
-        });
-        event
+        })
             .addPredefinedLong(PredefinedLong.MAX_RATING_VALUE, 5n)
             .addPredefinedLong(PredefinedLong.RATING_VALUE, 4n)
             .addPredefinedListObject(PredefinedListObject.CONTENT_LIST, data);
-        return event;
     }
 
     private createInitialSubscriptionEvent(): AffiseEvent {
-        const event = new InitialSubscriptionEvent({
+        return new InitialSubscriptionEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        })
+            .addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createInitialTrialEvent(): AffiseEvent {
-        const event = new InitialTrialEvent({
+        return new InitialTrialEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createInitialOfferEvent(): AffiseEvent {
-        const event = new InitialOfferEvent({
+        return new InitialOfferEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createFailedTrialEvent(): AffiseEvent {
-        const event = new FailedTrialEvent({
+        return new FailedTrialEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createFailedOfferiseEvent(): AffiseEvent {
-        const event = new FailedOfferiseEvent({
+        return new FailedOfferiseEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createFailedSubscriptionEvent(): AffiseEvent {
-        const event = new FailedSubscriptionEvent({
+        return new FailedSubscriptionEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createFailedTrialFromRetryEvent(): AffiseEvent {
-        const event = new FailedTrialFromRetryEvent({
+        return new FailedTrialFromRetryEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createFailedOfferFromRetryEvent(): AffiseEvent {
-        const event = new FailedOfferFromRetryEvent({
+        return new FailedOfferFromRetryEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createFailedSubscriptionFromRetryEvent(): AffiseEvent {
-        const event = new FailedSubscriptionFromRetryEvent({
+        return new FailedSubscriptionFromRetryEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createTrialInRetryEvent(): AffiseEvent {
-        const event = new TrialInRetryEvent({
+        return new TrialInRetryEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createOfferInRetryEvent(): AffiseEvent {
-        const event = new OfferInRetryEvent({
+        return new OfferInRetryEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createSubscriptionInRetryEvent(): AffiseEvent {
-        const event = new SubscriptionInRetryEvent({
+        return new SubscriptionInRetryEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createConvertedTrialEvent(): AffiseEvent {
-        const event = new ConvertedTrialEvent({
+        return new ConvertedTrialEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createConvertedOfferEvent(): AffiseEvent {
-        const event = new ConvertedOfferEvent({
+        return new ConvertedOfferEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createReactivatedSubscriptionEvent(): AffiseEvent {
-        const event = new ReactivatedSubscriptionEvent({
+        return new ReactivatedSubscriptionEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createRenewedSubscriptionEvent(): AffiseEvent {
-        const event = new RenewedSubscriptionEvent({
+        return new RenewedSubscriptionEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createConvertedTrialFromRetryEvent(): AffiseEvent {
-        const event = new ConvertedTrialFromRetryEvent({
+        return new ConvertedTrialFromRetryEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createConvertedOfferFromRetryEvent(): AffiseEvent {
-        const event = new ConvertedOfferFromRetryEvent({
+        return new ConvertedOfferFromRetryEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createRenewedSubscriptionFromRetryEvent(): AffiseEvent {
-        const event = new RenewedSubscriptionFromRetryEvent({
+        return new RenewedSubscriptionFromRetryEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 
     private createUnsubscriptionEvent(): AffiseEvent {
-        const event = new UnsubscriptionEvent({
+        return new UnsubscriptionEvent({
             data: {
                 affise_event_revenue: 2.99,
                 affise_event_currency: "USD",
                 affise_event_product_id: 278459628375,
             },
             userData: "Subscription Plus"
-        });
-        event.addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
-        return event;
+        }).addPredefinedFloat(PredefinedFloat.REVENUE, 225522.0);
     }
 }
 

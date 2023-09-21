@@ -15,6 +15,9 @@ export * from './module/AffiseModules';
 export * from './module/AffiseKeyValue';
 export * from './module/OnKeyValueCallback';
 
+export * from './ad/AffiseAdRevenue';
+export * from './ad/AffiseAdSource';
+
 export * from './events/parameters/PredefinedListObject';
 export * from './events/parameters/PredefinedFloat';
 export * from "./events/parameters/PredefinedListString";
@@ -31,6 +34,7 @@ export * from './events/predefined/AchieveLevelEvent';
 export * from './events/predefined/AddPaymentInfoEvent';
 export * from './events/predefined/AddToCartEvent';
 export * from './events/predefined/AddToWishlistEvent';
+export * from './events/predefined/AdRevenueEvent';
 export * from './events/predefined/CompleteRegistrationEvent';
 export * from './events/predefined/CompleteStreamEvent';
 export * from './events/predefined/CompleteTrialEvent';
@@ -62,6 +66,8 @@ export * from './events/predefined/LoginEvent';
 export * from './events/predefined/OpenedFromPushNotificationEvent';
 export * from './events/predefined/OrderCancelEvent';
 export * from './events/predefined/OrderEvent';
+export * from './events/predefined/OrderItemAddedEvent';
+export * from './events/predefined/OrderItemRemoveEvent';
 export * from './events/predefined/OrderReturnRequestCancelEvent';
 export * from './events/predefined/OrderReturnRequestEvent';
 export * from './events/predefined/PurchaseEvent';

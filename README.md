@@ -1,7 +1,7 @@
 # Affise Attribution React Native Library
 
-| Package                |                                                                 Version                                                                  |
-|------------------------|:----------------------------------------------------------------------------------------------------------------------------------------:|
+| Package                  |                                                                 Version                                                                  |
+|--------------------------|:----------------------------------------------------------------------------------------------------------------------------------------:|
 | `affise-attribution-lib` | [![attribution](https://img.shields.io/npm/v/affise-attribution-lib?label=latest)](https://www.npmjs.com/package/affise-attribution-lib) |
 
 - [Affise Attribution React Native Library](#affise-attribution-react-native-library)
@@ -48,6 +48,7 @@
     - [Get referrer value](#get-referrer-value)
       - [Referrer keys](#referrer-keys)
     - [StoreKit Ad Network](#storekit-ad-network)
+- [SDK to SDK integrations](#sdk-to-sdk-integrations)
 
 # Description
 
@@ -80,8 +81,8 @@ yarn add affise-attribution-lib
 
 Add modules to Android project
 
-| Module             | Version                                      |
-|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Module               | Version                                                                                                                                                                      |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `module-advertising` | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) |
 | `module-network`     | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             |
 | `module-phone`       | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   |
@@ -103,9 +104,9 @@ dependencies {
 
 Add modules to iOS project
 
-| Module                | Version |
-|-----------------------|:-------:|
-| `AffiseModule/Status` | `1.6.9` |
+| Module                | Version  |
+|-----------------------|:--------:|
+| `AffiseModule/Status` | `1.6.11` |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -114,7 +115,7 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Status', `~> 1.6.9`
+  pod 'AffiseModule/Status', `~> 1.6.11`
 end
 ```
 
@@ -273,16 +274,13 @@ class Presenter {
       items: 'cookies, potato, milk',
     };
 
-    const event = new AddToCartEvent({
+    new AddToCartEvent({
         userData: item,
         timeStampMillis: Date.now()
-    });
-
-    event
+    })
         .addPredefinedString(PredefinedString.DESCRIPTION, 'groceries')
-        .addPredefinedObject(PredefinedObject.CONTENT, items);
-
-    Affise.sendEvent(event);
+        .addPredefinedObject(PredefinedObject.CONTENT, items)
+        .send();
   }
 }
 ```
@@ -293,6 +291,7 @@ With above example you can implement other events:
 - `AddPaymentInfo`
 - `AddToCart`
 - `AddToWishlist`
+- `AdRevenue`
 - `ClickAdv`
 - `CompleteRegistration`
 - `CompleteStream`
@@ -314,6 +313,8 @@ With above example you can implement other events:
 - `Login`
 - `OpenedFromPushNotification`
 - `Order`
+- `OrderItemAdded`
+- `OrderItemRemove`
 - `OrderCancel`
 - `OrderReturnRequest`
 - `OrderReturnRequestCancel`
@@ -395,15 +396,12 @@ class Presenter {
       items: 'cookies, potato, milk',
     };
 
-    const event = new AddToCartEvent({
+    new AddToCartEvent({
         userData: item,
-    });
-
-    event
+    })
         .addPredefinedString(PredefinedString.DESCRIPTION, 'best before 2029')
-        .addPredefinedObject(PredefinedObject.CONTENT, items);
-
-    Affise.sendEvent(event);
+        .addPredefinedObject(PredefinedObject.CONTENT, items)
+        .send();
   }
 }
 ```
@@ -448,6 +446,7 @@ In examples above `PredefinedString.DESCRIPTION` and `PredefinedObject.CONTENT` 
 - `DESTINATION_LIST`
 - `EVENT_NAME`
 - `NEW_VERSION`
+- `NETWORK`
 - `OLD_VERSION`
 - `ORDER_ID`
 - `PARAM_01`
@@ -462,6 +461,7 @@ In examples above `PredefinedString.DESCRIPTION` and `PredefinedObject.CONTENT` 
 - `PARAM_10`
 - `PAYMENT_INFO_AVAILABLE`
 - `PID`
+- `PLACEMENT`
 - `PREFERRED_NEIGHBORHOODS`
 - `PRODUCT_ID`
 - `PRODUCT_NAME`
@@ -472,12 +472,14 @@ In examples above `PredefinedString.DESCRIPTION` and `PredefinedObject.CONTENT` 
 - `REVIEW_TEXT`
 - `SEARCH_STRING`
 - `SEGMENT`
+- `SOURCE`
 - `STATUS`
 - `SUBSCRIPTION_ID`
 - `SUCCESS`
 - `SUGGESTED_DESTINATIONS`
 - `SUGGESTED_HOTELS`
 - `TUTORIAL_ID`
+- `UNIT`
 - `UTM_CAMPAIGN`
 - `UTM_MEDIUM`
 - `UTM_SOURCE`
@@ -745,7 +747,7 @@ Affise.init(..);
 Affise.android.forget(); // to forget users data
 ```
 
-After processing such request our backend servers will delete all users data.
+After processing such request our backend servers will delete all user's data.
 To prevent library from generating new events, disable tracking just before calling Affise.forget:
 
 ```typescript
@@ -849,4 +851,16 @@ Example: [`example/ios/AffiseAttributionLibExample/Info.plist`](example/ios/Affi
       <string>https://affise-skadnetwork.com/</string>
     </dict>
 </array>
+```
+
+# SDK to SDK integrations
+
+```typescript
+// Send AdRevenue info
+new AffiseAdRevenue(AffiseAdSource.ADMOB)
+        .setRevenue(2.5, "ImpressionData_Currency")
+        .setNetwork("ImpressionData_Network")
+        .setUnit("ImpressionData_Unit")
+        .setPlacement("ImpressionData_Placement")
+        .send();
 ```
