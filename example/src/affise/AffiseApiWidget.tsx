@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Button, ScrollView, StyleSheet, TextInput, View} from "react-native";
-import {Affise, AffiseModules, ReferrerKey, SKAdNetwork} from 'affise-attribution-lib';
+import {Affise, AffiseModules, ProviderType, ReferrerKey, SKAdNetwork} from 'affise-attribution-lib';
 
 interface Props {
     value?: string;
@@ -113,6 +113,17 @@ export class AffiseApiWidget extends Component<Props, State> {
                         Affise.isOfflineModeEnabled().then( (value) => {
                             Affise.setOfflineModeEnabled(!value);
                             this.setCallback(`setOfflineModeEnabled: ${!value}`);
+                        });
+                    }}
+                />
+                <View style={{margin: 4}}/>
+
+                <Button
+                    title='get Providers'
+                    onPress={() => {
+                        Affise.getProviders().then( (providers) => {
+                            const key = ProviderType.AFFISE_APP_TOKEN;
+                            this.setCallback(`getProviders: ${key} = ${providers[key]}`);
                         });
                     }}
                 />

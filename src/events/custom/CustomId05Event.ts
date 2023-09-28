@@ -4,9 +4,8 @@ import {EventName} from "../EventName";
 /**
  * Event CustomId04
  *
- * @param custom the describing the meaning of the event.
- * @param timeStampMillis the timestamp event in milliseconds.
  * @param userData any custom string data.
+ * @param timeStampMillis the timestamp event in milliseconds.
  */
 export class CustomId05Event extends NativeEvent {
 

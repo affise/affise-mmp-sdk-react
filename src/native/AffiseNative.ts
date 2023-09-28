@@ -112,6 +112,10 @@ export class AffiseNative extends NativeBase {
         return this.nativeResult(AffiseApiMethod.GET_RANDOM_DEVICE_ID);
     }
 
+    getProviders(): Promise<Record<string, any>> {
+        return this.nativeResult(AffiseApiMethod.GET_PROVIDERS);
+    }
+
     registerAppForAdNetworkAttribution(completionHandler: ErrorCallback) {
         this.nativeCallback(AffiseApiMethod.SKAD_REGISTER_ERROR_CALLBACK, completionHandler);
     }

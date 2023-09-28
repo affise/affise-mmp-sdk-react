@@ -19,6 +19,7 @@ export enum AffiseApiMethod {
     CRASH_APPLICATION = "crash_application",
     GET_RANDOM_USER_ID = "get_random_user_id",
     GET_RANDOM_DEVICE_ID = "get_random_device_id",
+    GET_PROVIDERS = "get_providers",
     GET_REFERRER_CALLBACK = "get_referrer_callback",
     GET_REFERRER_VALUE_CALLBACK = "get_referrer_value_callback",
     GET_STATUS_CALLBACK = "get_status_callback",

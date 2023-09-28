@@ -18,6 +18,8 @@ export * from './module/OnKeyValueCallback';
 export * from './ad/AffiseAdRevenue';
 export * from './ad/AffiseAdSource';
 
+export * from './parameters/ProviderType';
+
 export * from './events/parameters/PredefinedListObject';
 export * from './events/parameters/PredefinedFloat';
 export * from "./events/parameters/PredefinedListString";
@@ -28,6 +30,9 @@ export * from './events/parameters/PredefinedGroup';
 
 export * from './events/base/AffiseEvent';
 export * from './events/subscription/BaseSubscriptionEvent';
+
+export * from './events/custom/UserCustomEvent';
+export * from './events/custom/UserCustomSubscriptionEvent';
 
 export * from './events/predefined/ClickAdvEvent';
 export * from './events/predefined/AchieveLevelEvent';

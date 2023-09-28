@@ -152,6 +152,13 @@ export class Affise {
     }
 
     /**
+     * Get providers map
+     */
+    static getProviders(): Promise<Record<string, any>> {
+        return this.native.getProviders();
+    }
+
+    /**
      * Set [enabled] collect metrics
      *
      * When disabled, library should not generate any metrics events,

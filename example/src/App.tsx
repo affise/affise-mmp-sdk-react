@@ -12,7 +12,7 @@ import {useEffect} from "react";
 export default function App() {
 
     const [deeplink, setDeeplink] = React.useState("");
-    const [hide, setHide] = React.useState(false);
+    const [hide, setHide] = React.useState(true);
 
     useEffect(() => {
         Affise.init({
