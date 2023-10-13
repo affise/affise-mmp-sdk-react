@@ -13,11 +13,14 @@ import type {ErrorCallback} from "../callback/ErrorCallback";
 import type {CoarseValue} from "../skad/CoarseValue";
 import {tryCast} from "../utils/TryCast";
 import {toAffiseKeyValueList} from "../module/AffiseKeyValue";
+import type {DebugOnValidateCallback} from "../debug/validate/DebugOnValidateCallback";
+import type {DebugOnNetworkCallback} from "../debug/network/DebugOnNetworkCallback";
+import {DebugUtils} from "./utils/DebugUtils";
 
 export class AffiseNative extends NativeBase {
 
     init(initProperties: AffiseInitProperties | AffiseInitPropertiesType) {
-        let option: any;
+        let option: AffiseInitProperties;
         if (isAffiseInitPropertiesType(initProperties)) {
             option = new AffiseInitProperties(initProperties as AffiseInitPropertiesType);
         } else {
@@ -44,7 +47,7 @@ export class AffiseNative extends NativeBase {
     }
 
     registerDeeplinkCallback(callback: OnDeeplinkCallback) {
-        this.nativeCallback(AffiseApiMethod.REGISTER_DEEPLINK_CALLBACK, callback);
+        this.nativeCallbackOnce(AffiseApiMethod.REGISTER_DEEPLINK_CALLBACK, callback);
         this.reactHandleDeeplink();
     }
 
@@ -93,15 +96,15 @@ export class AffiseNative extends NativeBase {
     }
 
     getReferrer(callback: ReferrerCallback) {
-        this.nativeCallback(AffiseApiMethod.GET_REFERRER_CALLBACK, callback);
+        this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_CALLBACK, callback);
     }
 
     getReferrerValue(key: ReferrerKey, callback: ReferrerCallback) {
-        this.nativeCallback(AffiseApiMethod.GET_REFERRER_VALUE_CALLBACK, callback, key);
+        this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_VALUE_CALLBACK, callback, key);
     }
 
     getStatus(module: AffiseModules, callback: OnKeyValueCallback) {
-        this.nativeCallback(AffiseApiMethod.GET_STATUS_CALLBACK, callback, module);
+        this.nativeCallbackOnce(AffiseApiMethod.GET_STATUS_CALLBACK, callback, module);
     }
 
     getRandomUserId(): Promise<string> {
@@ -117,14 +120,22 @@ export class AffiseNative extends NativeBase {
     }
 
     registerAppForAdNetworkAttribution(completionHandler: ErrorCallback) {
-        this.nativeCallback(AffiseApiMethod.SKAD_REGISTER_ERROR_CALLBACK, completionHandler);
+        this.nativeCallbackOnce(AffiseApiMethod.SKAD_REGISTER_ERROR_CALLBACK, completionHandler);
     }
 
     updatePostbackConversionValue(fineValue: bigint, coarseValue: CoarseValue, completionHandler: ErrorCallback) {
         const value: Record<string, any> = {};
         value['fineValue'] = Number(fineValue);
         value['coarseValue'] = coarseValue.value;
-        this.nativeCallback(AffiseApiMethod.SKAD_POSTBACK_ERROR_CALLBACK, completionHandler, value);
+        this.nativeCallbackOnce(AffiseApiMethod.SKAD_POSTBACK_ERROR_CALLBACK, completionHandler, value);
+    }
+
+    validate(callback: DebugOnValidateCallback) {
+        this.nativeCallbackOnce(AffiseApiMethod.DEBUG_VALIDATE_CALLBACK, callback);
+    }
+
+    network(callback: DebugOnNetworkCallback) {
+        this.nativeCallback(AffiseApiMethod.DEBUG_NETWORK_CALLBACK, callback);
     }
 
     protected handleCallback(api: AffiseApiMethod, callback: unknown, data: any) {
@@ -148,6 +159,16 @@ export class AffiseNative extends NativeBase {
                 break;
             case AffiseApiMethod.SKAD_POSTBACK_ERROR_CALLBACK:
                 tryCast<ErrorCallback>(callback)?.(data as string || "");
+                break;
+            case AffiseApiMethod.DEBUG_VALIDATE_CALLBACK: {
+                const status = DebugUtils.getValidationStatus(data);
+                tryCast<DebugOnValidateCallback>(callback)?.(status);
+            }
+                break;
+            case AffiseApiMethod.DEBUG_NETWORK_CALLBACK: {
+                const [request, response] = DebugUtils.parseRequestResponse(data);
+                tryCast<DebugOnNetworkCallback>(callback)?.(request, response);
+            }
                 break;
             default:
                 break;

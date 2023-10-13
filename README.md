@@ -54,6 +54,8 @@
       - [Referrer keys](#referrer-keys)
     - [StoreKit Ad Network](#storekit-ad-network)
 - [SDK to SDK integrations](#sdk-to-sdk-integrations)
+- [Debug](#debug)
+    - [Validate credentials](#validate-credentials)
 
 # Description
 
@@ -109,9 +111,9 @@ dependencies {
 
 Add modules to iOS project
 
-| Module                | Version  |
-|-----------------------|:--------:|
-| `AffiseModule/Status` | `1.6.12` |
+| Module                |                                       Version                                        |
+|-----------------------|:------------------------------------------------------------------------------------:|
+| `AffiseModule/Status` | [`1.6.13`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -120,7 +122,7 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Status', `~> 1.6.12`
+  pod 'AffiseModule/Status', `1.6.13`
 end
 ```
 
@@ -155,7 +157,7 @@ export default function App() {
 
 Check if library is initialized
 
-```dart
+```typescript
 Affise.isInitialized();
 ```
 
@@ -921,4 +923,33 @@ new AffiseAdRevenue(AffiseAdSource.ADMOB)
         .setUnit("ImpressionData_Unit")
         .setPlacement("ImpressionData_Placement")
         .send();
+```
+
+# Debug
+
+## Validate credentials
+
+> **Warning**
+> Debug methods WON'T work on Production
+
+Validate your credentials by receiving `ValidationStatus` values:
+
+- `VALID` - your credentials are valid
+- `INVALID_APP_ID` - your app id is not valid
+- `INVALID_SECRET_KEY` - your SDK secretKey is not valid
+- `PACKAGE_NAME_NOT_FOUND` - your application package name not found
+- `NOT_WORKING_ON_PRODUCTION` - you using debug method on production
+- `NETWORK_ERROR` - network or server not available (for example `Airoplane mode` is active)
+
+```typescript
+Affise.init({
+    affiseAppId: 'Your appId', //Change to your app id
+    secretKey: 'Your SDK secretKey', //Change to your SDK secretKey
+    isProduction: false, //To enable debug methods set Production to false
+});
+
+Affise.debug.validate((status) =>
+{
+    // Handle validation status
+});
 ```

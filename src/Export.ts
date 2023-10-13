@@ -5,6 +5,14 @@ export * from './events/TouchType';
 export * from './callback/ErrorCallback';
 export * from './callback/OnDeeplinkCallback';
 
+export * from './debug/network/DebugOnNetworkCallback';
+export * from './debug/validate/DebugOnValidateCallback';
+export * from './debug/validate/ValidationStatus';
+
+export * from './network/HttpResponse';
+export * from './network/HttpRequest';
+export * from './network/HttpMethod';
+
 export * from './referrer/ReferrerKey';
 export * from './referrer/ReferrerCallback';
 

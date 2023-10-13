@@ -538,7 +538,7 @@ export class DefaultEventsFactory {
             userData: "Order",
         })
             .addPredefinedString(PredefinedString.PARAM_01, "param1");
-        // TODO PredefinedGroup
+        // PredefinedGroup
         // .addPredefinedListGroup([
         //     PredefinedGroup()
         //         .addPredefinedString(PredefinedString.CUSTOMER_USER_ID, "KDCJHB10834rJHG")

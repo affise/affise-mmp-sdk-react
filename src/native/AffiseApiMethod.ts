@@ -1,3 +1,5 @@
+import {getEnumFromString} from "../utils/EnumUtils";
+
 export enum AffiseApiMethod {
     INIT = "init",
     IS_INITIALIZED = "is_initialized",
@@ -20,16 +22,20 @@ export enum AffiseApiMethod {
     GET_RANDOM_USER_ID = "get_random_user_id",
     GET_RANDOM_DEVICE_ID = "get_random_device_id",
     GET_PROVIDERS = "get_providers",
+
+    // callback methods
     GET_REFERRER_CALLBACK = "get_referrer_callback",
     GET_REFERRER_VALUE_CALLBACK = "get_referrer_value_callback",
     GET_STATUS_CALLBACK = "get_status_callback",
     REGISTER_DEEPLINK_CALLBACK = "register_deeplink_callback",
     SKAD_REGISTER_ERROR_CALLBACK = "skad_register_error_callback",
     SKAD_POSTBACK_ERROR_CALLBACK = "skad_postback_error_callback",
+
+    // debug
+    DEBUG_VALIDATE_CALLBACK = "debug_validate_callback",
+    DEBUG_NETWORK_CALLBACK = "debug_network_callback",
 }
 
-export function apiFromString(name: string): AffiseApiMethod | null {
-    const enumKey = Object.keys(AffiseApiMethod)[Object.values(AffiseApiMethod).indexOf(name as any)];
-    if (enumKey === undefined) return null;
-    return AffiseApiMethod[enumKey as keyof typeof AffiseApiMethod];
+export function apiMethodFrom(name: string): AffiseApiMethod | null {
+    return getEnumFromString(AffiseApiMethod, name);
 }

@@ -106,7 +106,7 @@ export class AffiseEvent implements PredefinedParameter {
     /**
      * Add predefined [parameter] with [value] of Array<PredefinedGroup> to event
      */
-    // TODO PredefinedGroup
+    // PredefinedGroup
     // addPredefinedListGroup(groups: Array<PredefinedGroup>): AffiseEvent {
     //     if (!this.predefinedParameters[PredefinedGroup.NAME]) {
     //         this.predefinedParameters[PredefinedGroup.NAME] = [];

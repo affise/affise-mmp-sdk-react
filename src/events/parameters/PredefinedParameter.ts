@@ -41,6 +41,6 @@ export interface PredefinedParameter {
     /**
      * Add predefined [parameter] with [value] of Array<PredefinedGroup>
      */
-    // TODO PredefinedGroup
+    // PredefinedGroup
     // addPredefinedListGroup(groups: Array<PredefinedGroup>): PredefinedParameter;
 }

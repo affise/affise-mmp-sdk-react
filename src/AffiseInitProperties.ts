@@ -36,18 +36,23 @@ export class AffiseInitProperties {
         this.affiseAppId = affiseAppId;
         this.secretId = secretKey;
 
-        this.isProduction = isProduction || true;
         this.partParamName = partParamName || null;
         this.partParamNameToken = partParamNameToken || null;
         this.appToken = appToken || null;
-        this.enabledMetrics = enabledMetrics || false;
         this.autoCatchingClickEvents = autoCatchingClickEvents || [];
+
+        if (isProduction != null) {
+            this.isProduction = isProduction;
+        }
+        if (enabledMetrics != null) {
+            this.enabledMetrics = enabledMetrics;
+        }
     }
 }
 
 export function isAffiseInitPropertiesType(obj: any): obj is AffiseInitPropertiesType {
     if (obj as AffiseInitPropertiesType) {
-        return true
+        return true;
     }
     return false;
 }

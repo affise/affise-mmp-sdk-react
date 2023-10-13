@@ -23,6 +23,7 @@ export class AffiseWidget extends Component {
                         color={(item instanceof BaseSubscriptionEvent) ? "#F44336" : "#2196F3"}
                         title={toName(item.constructor.name)}
                         onPress={() => {
+                            // Events tracking https://github.com/affise/sdk-react#events-tracking
                             // Send event
                             item.send();
                             // or

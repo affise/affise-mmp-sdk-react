@@ -9,7 +9,9 @@ import type {
     ReferrerCallback,
     OnKeyValueCallback,
     ErrorCallback,
-    OnDeeplinkCallback
+    OnDeeplinkCallback,
+    DebugOnValidateCallback,
+    DebugOnNetworkCallback
 } from "./Export";
 import {AffiseNative} from "./native/AffiseNative";
 import {Platform} from "react-native";
@@ -212,6 +214,26 @@ export class Affise {
         static updatePostbackConversionValue(fineValue: bigint, coarseValue: CoarseValue, completionHandler: ErrorCallback) {
             if (Platform.OS !== 'ios') return;
             Affise.native.updatePostbackConversionValue(fineValue, coarseValue, completionHandler);
+        }
+    };
+
+    static debug = class {
+        /**
+         * Won't work on Production
+         *
+         * Validate credentials
+         */
+        static validate(callback: DebugOnValidateCallback) {
+            Affise.native.validate(callback);
+        }
+
+        /**
+         * Won't work on Production
+         *
+         * Show request/response data
+         */
+        static network(callback: DebugOnNetworkCallback) {
+            Affise.native.network(callback);
         }
     };
 }

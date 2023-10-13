@@ -32,8 +32,21 @@ export class AffiseApiWidget extends Component<Props, State> {
                 </View>
 
                 <Button
+                    title='Debug: Validate credentials'
+                    onPress={() => {
+                        // Debug: Validate credentials https://github.com/affise/sdk-react#validate-credentials
+                        Affise.debug.validate((status) => {
+                            console.log(`Validate: ${status}`);
+                            this.setCallback(`Validate: ${status}`);
+                        });
+                    }}
+                />
+                <View style={{margin: 4}}/>
+
+                <Button
                     title='register Deeplink Callback'
                     onPress={() => {
+                        // Deeplinks https://github.com/affise/sdk-react#deeplinks
                         Affise.registerDeeplinkCallback((url) => {
                             console.log(`Deeplink: ${url}`);
                             this.setCallback(`Deeplink: ${url}`);
@@ -45,6 +58,7 @@ export class AffiseApiWidget extends Component<Props, State> {
                 <Button
                     title='get Referrer Value'
                     onPress={() => {
+                        // Get referrer parameter https://github.com/affise/sdk-react#get-referrer-value
                         Affise.android.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
                             console.log(`ReferrerValue: ${value}`);
                             this.setCallback(`ReferrerValue: ${value}`);
@@ -56,6 +70,7 @@ export class AffiseApiWidget extends Component<Props, State> {
                 <Button
                     title='get Referrer'
                     onPress={() => {
+                        // Get referrer https://github.com/affise/sdk-react#get-referrer
                         Affise.android.getReferrer((ref) => {
                             console.log(`Referrer: ${ref}`);
                             this.setCallback(`Referrer: ${ref}`);
@@ -67,6 +82,7 @@ export class AffiseApiWidget extends Component<Props, State> {
                 <Button
                     title='get Status'
                     onPress={() => {
+                        // Get module state https://github.com/affise/sdk-react#get-module-state
                         Affise.getStatus(AffiseModules.STATUS, (status) => {
                             console.log(`Status: ${JSON.stringify(status)}`);
                             this.setCallback(`Status: ${JSON.stringify(status)}`);
@@ -78,6 +94,7 @@ export class AffiseApiWidget extends Component<Props, State> {
                 <Button
                     title='SKAd register'
                     onPress={() => {
+                        // StoreKit Ad Network https://github.com/affise/sdk-react#storekit-ad-network
                         Affise.ios.registerAppForAdNetworkAttribution((error) => {
                             console.log(`SKAd register app: ${error}`);
                             this.setCallback(`SKAd register app: ${error}`);
@@ -89,6 +106,7 @@ export class AffiseApiWidget extends Component<Props, State> {
                 <Button
                     title='SKAd update'
                     onPress={() => {
+                        // StoreKit Ad Network https://github.com/affise/sdk-react#storekit-ad-network
                         Affise.ios.updatePostbackConversionValue(1n, SKAdNetwork.CoarseConversionValue.medium, (error) => {
                             console.log(`SKAd updatePostbackConversionValue: ${error}`);
                             this.setCallback(`SKAd updatePostbackConversionValue: ${error}`);
@@ -100,6 +118,7 @@ export class AffiseApiWidget extends Component<Props, State> {
                 <Button
                     title='is Offline Mode Enabled'
                     onPress={() => {
+                        // Offline mode https://github.com/affise/sdk-react#offline-mode
                         Affise.isOfflineModeEnabled().then( (value) => {
                             this.setCallback(`isOfflineModeEnabled: ${value}`);
                         });
@@ -111,6 +130,7 @@ export class AffiseApiWidget extends Component<Props, State> {
                     title='set Offline Mode Enabled'
                     onPress={() => {
                         Affise.isOfflineModeEnabled().then( (value) => {
+                            // Offline mode https://github.com/affise/sdk-react#offline-mode
                             Affise.setOfflineModeEnabled(!value);
                             this.setCallback(`setOfflineModeEnabled: ${!value}`);
                         });
@@ -121,6 +141,7 @@ export class AffiseApiWidget extends Component<Props, State> {
                 <Button
                     title='get Providers'
                     onPress={() => {
+                        // Get providers https://github.com/affise/sdk-react#get-providers
                         Affise.getProviders().then( (providers) => {
                             const key = ProviderType.AFFISE_APP_TOKEN;
                             this.setCallback(`getProviders: ${key} = ${providers[key]}`);
