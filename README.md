@@ -113,7 +113,7 @@ Add modules to iOS project
 
 | Module                |                                       Version                                        |
 |-----------------------|:------------------------------------------------------------------------------------:|
-| `AffiseModule/Status` | [`1.6.13`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `AffiseModule/Status` | [`1.6.14`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -122,7 +122,7 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Status', `1.6.13`
+  pod 'AffiseModule/Status', `1.6.14`
 end
 ```
 

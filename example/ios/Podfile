@@ -27,7 +27,7 @@ target 'AffiseAttributionLibExample' do
   )
 
   # Affise Modules
-  pod 'AffiseModule', '1.6.13'
+  pod 'AffiseModule', '1.6.14'
 
   target 'AffiseAttributionLibExampleTests' do
     inherit! :complete

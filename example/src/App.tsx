@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
 import {
-    Affise,
+    Affise
 } from 'affise-attribution-lib';
 import {AffiseWidget} from "./affise/AffiseWidget";
 import {AffiseApiWidget} from "./affise/AffiseApiWidget";
@@ -55,8 +55,9 @@ export default function App() {
                 />
             </View>
 
-
-            {!hide ? <AffiseWidget/> : <AffiseApiWidget value={deeplink}  /> }
+            <View style={{width: '100%', flex: 1}}>
+                {!hide ? <AffiseWidget/> : <AffiseApiWidget value={deeplink}  /> }
+            </View>
         </SafeAreaView>
     );
 }
