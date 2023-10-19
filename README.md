@@ -188,7 +188,7 @@ For working functionality your app needs to declare [`NSUserTrackingUsageDescrip
 
 Open XCode project `info.plist` and add key `NSUserTrackingUsageDescription` with string value
 
-Example [`info.plist`](example\ios\AffiseAttributionLibExample\Info.plist):
+Example [`info.plist`](example/ios/AffiseAttributionLibExample/Info.plist):
 
 ```xml
 <plist version="1.0">
