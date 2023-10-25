@@ -1,25 +1,36 @@
 import type {AutoCatchingType} from "./events/AutoCatchingType";
 
 export type AffiseInitPropertiesType = {
+    /// AffiseAppId
     affiseAppId: string,
+    /// SDK secretKey
     secretKey: string,
+    /// SandBox / Production
     isProduction?: boolean,
+    /// Only for specific use case
     partParamName?: string | null,
+    /// Only for specific use case
     partParamNameToken?: string | null,
+    /// appToken
     appToken?: string | null,
+    /// Metrics enable
     enabledMetrics?: boolean,
+    /// list of AutoCatchingType
     autoCatchingClickEvents?: AutoCatchingType[],
+    /// SDK server domain
+    domain?: string | null,
 };
 
 export class AffiseInitProperties {
     affiseAppId: string;
-    secretId: string;
+    secretKey: string;
     isProduction: boolean = true;
     partParamName?: string | null = null;
     partParamNameToken?: string | null = null;
     appToken?: string | null = null;
     enabledMetrics: boolean = false;
     autoCatchingClickEvents?: AutoCatchingType[] = [];
+    domain?: string | null = null;
 
     constructor(
         {
@@ -30,16 +41,18 @@ export class AffiseInitProperties {
             partParamNameToken,
             appToken,
             enabledMetrics,
-            autoCatchingClickEvents
+            autoCatchingClickEvents,
+            domain
         }: AffiseInitPropertiesType
     ) {
         this.affiseAppId = affiseAppId;
-        this.secretId = secretKey;
+        this.secretKey = secretKey;
 
         this.partParamName = partParamName || null;
         this.partParamNameToken = partParamNameToken || null;
         this.appToken = appToken || null;
         this.autoCatchingClickEvents = autoCatchingClickEvents || [];
+        this.domain = domain || null;
 
         if (isProduction != null) {
             this.isProduction = isProduction;

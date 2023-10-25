@@ -16,6 +16,8 @@ export * from './network/HttpMethod';
 export * from './referrer/ReferrerKey';
 export * from './referrer/ReferrerCallback';
 
+export * from './settings/AffiseSettings';
+
 export * from './skad/SKAdNetwork';
 export * from './skad/CoarseValue';
 

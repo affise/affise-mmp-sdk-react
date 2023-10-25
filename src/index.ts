@@ -15,6 +15,7 @@ import type {
 } from "./Export";
 import {AffiseNative} from "./native/AffiseNative";
 import {Platform} from "react-native";
+import {AffiseSettings} from "./Export";
 
 export * from "./Export";
 
@@ -26,12 +27,34 @@ export class Affise {
     private static native = new AffiseNative();
 
     /**
+     * Affise SDK settings builder.
+     * To start SDK call .start()
+     *
+     * @param affiseAppId - your app id
+     * @param secretKey - your SDK secretKey
+     */
+    static settings({affiseAppId, secretKey}: { affiseAppId: string, secretKey: string }): AffiseSettings {
+        return new AffiseSettings(affiseAppId, secretKey);
+    }
+
+    /**
+     * Use Affise.settings({affiseAppId, secretKey}).start()
+     * @param initProperties
+     */
+    static start(
+        initProperties: AffiseInitProperties | AffiseInitPropertiesType
+    ) {
+        this.native.init(initProperties);
+    }
+
+    /**
+     * @deprecated Use Affise.settings({affiseAppId, secretKey}).start()
      * @param initProperties
      */
     static init(
         initProperties: AffiseInitProperties | AffiseInitPropertiesType
     ) {
-        this.native.init(initProperties);
+        this.start(initProperties);
     }
 
     static isInitialized(): Promise<boolean> {

@@ -13,6 +13,7 @@
       - [Android](#android)
       - [iOS](#ios)
     - [Initialize](#initialize)
+      - [Domain](#domain)
     - [Requirements](#requirements)
       - [Android](#android-1)
       - [iOS](#ios-1)
@@ -116,7 +117,7 @@ Add modules to iOS project
 
 | Module                |                                       Version                                        |
 |-----------------------|:------------------------------------------------------------------------------------:|
-| `AffiseModule/Status` | [`1.6.14`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `AffiseModule/Status` | [`1.6.15`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -125,7 +126,7 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Status', `1.6.14`
+  pod 'AffiseModule/Status', `1.6.15`
 end
 ```
 
@@ -135,7 +136,7 @@ After dependency is added, and project is sync with `npm install` and initialize
 
 > Demo app [App.tsx](example/src/App.tsx)
 
-```typescript
+```typescript jsx
 import {
   Affise,
   AffiseInitProperties
@@ -145,10 +146,12 @@ import {
 export default function App() {
 
     React.useEffect(() => {
-        Affise.init({
-            affiseAppId: 'Your appId', //Change to your app id
-            secretKey: 'Your SDK secretKey', //Change to your SDK secretKey
-        });
+        Affise
+            .settings({
+                affiseAppId: 'Your appId', //Change to your app id
+                secretKey: 'Your SDK secretKey', //Change to your SDK secretKey
+            })
+            .start(); // Start Affise SDK
     });
 
     return (
@@ -162,6 +165,20 @@ Check if library is initialized
 
 ```typescript
 Affise.isInitialized();
+```
+
+#### Domain
+
+Set SDK server domain:
+
+```typescript
+Affise
+    .settings({
+        affiseAppId: 'Your appId',
+        secretKey: 'Your SDK secretKey',
+    })
+    .setDomain("https://YoureCustomDomain/") // Set custom domain
+    .start(); // Start Affise SDK
 ```
 
 ### Requirements
@@ -639,7 +656,7 @@ To use this feature, create file with name `partner_key` in your app assets dire
 
 ## Deeplinks
 
-Register deeplink callback right after Affise.init(..)
+Register deeplink callback right after `Affise.settings({affiseAppId, secretKey}).start()`
 
 ```typescript
 Affise.registerDeeplinkCallback((uri) => {
@@ -708,7 +725,7 @@ Example: [`example/ios/AffiseAttributionLibExample/Info.plist`](example/ios/Affi
 In some scenarios you would want to limit Affise network usage, to pause that activity call anywhere in your application following code after Affise init:
 
 ```typescript
-Affise.init(..);
+Affise.settings({affiseAppId, secretKey}).start(); // Start Affise SDK
 Affise.setOfflineModeEnabled(true); // to enable offline mode
 Affise.setOfflineModeEnabled(false); // to disable offline mode
 ```
@@ -728,7 +745,7 @@ Affise.isOfflineModeEnabled().then((enabled) => {
 To disable any tracking activity, storing events and gathering device identifiers and metrics call anywhere in your application following code after Affise init:
 
 ```typescript
-Affise.init(..);
+Affise.settings({affiseAppId, secretKey}).start(); // Start Affise SDK
 Affise.setTrackingEnabled(true); // to enable tracking
 Affise.setTrackingEnabled(false); // to disable tracking
 ```
@@ -750,7 +767,7 @@ Affise.isTrackingEnabled().then((enabled) => {
 To disable any background tracking activity, storing events and gathering device identifiers and metrics call anywhere in your application following code after Affise init:
 
 ```typescript
-Affise.init(..);
+Affise.settings({affiseAppId, secretKey}).start(); // Start Affise SDK
 Affise.setBackgroundTrackingEnabled(true); // to enable background tracking
 Affise.setBackgroundTrackingEnabled(false); // to disable background tracking
 ```
@@ -824,7 +841,7 @@ Under the EU's General Data Protection Regulation (GDPR): An individual has the 
 To provide this functionality to user, as the app developer, you can call
 
 ```typescript
-Affise.init(..);
+Affise.settings({affiseAppId, secretKey}).start(); // Start Affise SDK
 Affise.android.forget(); // to forget users data
 ```
 
@@ -832,7 +849,7 @@ After processing such request our backend servers will delete all user's data.
 To prevent library from generating new events, disable tracking just before calling Affise.forget:
 
 ```typescript
-Affise.init(..);
+Affise.settings({affiseAppId, secretKey}).start(); // Start Affise SDK
 Affise.setTrackingEnabled(false);
 Affise.android.forget(); // to forget users data
 ```
@@ -963,11 +980,13 @@ Validate your credentials by receiving `ValidationStatus` values:
 - `NETWORK_ERROR` - network or server not available (for example `Airoplane mode` is active)
 
 ```typescript
-Affise.init({
-    affiseAppId: 'Your appId', //Change to your app id
-    secretKey: 'Your SDK secretKey', //Change to your SDK secretKey
-    isProduction: false, //To enable debug methods set Production to false
-});
+Affise
+    .settings({
+        affiseAppId: 'Your appId',
+        secretKey: 'Your SDK secretKey',
+    })
+    .setProduction(false) //To enable debug methods set Production to false
+    .start(); // Start Affise SDK
 
 Affise.debug.validate((status) =>
 {

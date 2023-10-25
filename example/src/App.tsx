@@ -16,11 +16,13 @@ export default function App() {
 
     useEffect(() => {
         // Initialize https://github.com/affise/sdk-react#initialize
-        Affise.init({
-            affiseAppId: '129', //Change to your app id
-            secretKey: '93a40b54-6f12-443f-a250-ebf67c5ee4d2', //Change to your secretId
-            isProduction: false, //To enable debug methods set Production to false
-        });
+        Affise
+            .settings({
+                affiseAppId: '129', //Change to your app id
+                secretKey: '93a40b54-6f12-443f-a250-ebf67c5ee4d2', //Change to your secretId
+            })
+            .setProduction(false) //To enable debug methods set Production to false
+            .start(); // Start Affise SDK
 
         // Deeplinks https://github.com/affise/sdk-react#deeplinks
         Affise.registerDeeplinkCallback((url) => {
