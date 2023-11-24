@@ -678,7 +678,7 @@ Add intent filter to `AndroidManifest.xml` as in [`example/android/app/src/main/
     <category android:name="android.intent.category.BROWSABLE" />
 
     <data
-        android:host="YOUR_AFFISE_APP_ID.affattr.com"
+        android:host="YOUR_DOMAIN"
         android:scheme="react" />
 </intent-filter>
 ```
@@ -711,7 +711,7 @@ Example: [`example/ios/AffiseAttributionLibExample/Info.plist`](example/ios/Affi
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>YOUR_AFFISE_APP_ID.affattr.com</string>
+        <string>YOUR_DOMAIN</string>
         <key>CFBundleURLSchemes</key>
         <array>
             <string>react</string>
