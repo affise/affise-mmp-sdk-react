@@ -117,7 +117,7 @@ Add modules to iOS project
 
 | Module                |                                       Version                                        |
 |-----------------------|:------------------------------------------------------------------------------------:|
-| `AffiseModule/Status` | [`1.6.15`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `AffiseModule/Status` | [`1.6.17`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -126,7 +126,7 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Status', `1.6.15`
+  pod 'AffiseModule/Status', `1.6.17`
 end
 ```
 
@@ -970,7 +970,7 @@ new AffiseAdRevenue(AffiseAdSource.ADMOB)
 > **Warning**
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
-> 
+>
 > Debug methods WON'T work on Production
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
@@ -1006,11 +1006,11 @@ Affise.debug.validate((status) =>
 > **Warning**
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
-> 
+>
 > This app has crashed because it attempted to access privacy-sensitive data without a usage description.
-> 
+>
 > The app's `Info.plist` must contain an `NSUserTrackingUsageDescription` key with a string value explaining
-> 
+>
 > to the user how the app uses this data.
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
