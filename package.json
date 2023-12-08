@@ -1,6 +1,6 @@
 {
   "name": "affise-attribution-lib",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "description": "Affise Attribution Library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

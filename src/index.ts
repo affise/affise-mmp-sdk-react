@@ -163,6 +163,14 @@ export class Affise {
     }
 
     /**
+     * Manual module start
+     * @param module module name
+     */
+    static moduleStart(module: AffiseModules) {
+        this.native.moduleStart(module);
+    }
+
+    /**
      * getRandomUserId
      */
     static getRandomUserId(): Promise<string> {

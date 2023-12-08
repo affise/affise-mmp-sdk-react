@@ -107,6 +107,10 @@ export class AffiseNative extends NativeBase {
         this.nativeCallbackOnce(AffiseApiMethod.GET_STATUS_CALLBACK, callback, module);
     }
 
+    moduleStart(module: AffiseModules) {
+        this.native(AffiseApiMethod.MODULE_START, module);
+    }
+
     getRandomUserId(): Promise<string> {
         return this.nativeResult(AffiseApiMethod.GET_RANDOM_USER_ID);
     }

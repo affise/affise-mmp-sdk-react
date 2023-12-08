@@ -9,7 +9,7 @@
   - [Quick start](#quick-start)
   - [Integration](#integration)
     - [Integrate npm package](#integrate-npm-package)
-    - [Add platform modules](#add-platform-modules)
+    - [Modules](#modules)
       - [Android](#android)
       - [iOS](#ios)
     - [Initialize](#initialize)
@@ -86,18 +86,24 @@ Installation using yarn
 yarn add affise-attribution-lib
 ```
 
-### Add platform modules
+### Modules
+
+If module start type is `manual`, then call
+
+```typescript
+Affise.moduleStart(AffiseModules.ADVERTISING)
+```
 
 #### Android
 
 Add modules to Android project
 
-| Module               | Version                                                                                                                                                                      |
-|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `module-advertising` | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) |
-| `module-network`     | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             |
-| `module-phone`       | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   |
-| `module-status`      | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                |
+| Module        | Version                                                                                                                                                                      | Start  |
+|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| `ADVERTISING` | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) | `Auto` |
+| `NETWORK`     | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             | `Auto` |
+| `PHONE`       | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   | `Auto` |
+| `STATUS`      | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                | `Auto` |
 
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
@@ -115,9 +121,10 @@ dependencies {
 
 Add modules to iOS project
 
-| Module                |                                       Version                                        |
-|-----------------------|:------------------------------------------------------------------------------------:|
-| `AffiseModule/Status` | [`1.6.17`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| Module        |                                       Version                                        | Start    |
+|---------------|:------------------------------------------------------------------------------------:|----------|
+| `ADVERTISING` | [`1.6.18`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `STATUS`      | [`1.6.18`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -126,9 +133,22 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Status', `1.6.17`
+  pod 'AffiseModule/Advertising', `1.6.18`
+  pod 'AffiseModule/Status', `1.6.18`
 end
 ```
+
+> **Warning**
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+>
+> Module Advertising requires `NSUserTrackingUsageDescription` key in `info.plist`
+>
+> Application **will crash** if key not present
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+
+Open `info.plist` and add key `NSUserTrackingUsageDescription` with string value. For more information [read requirements](#requirements)
 
 ### Initialize
 
@@ -200,7 +220,7 @@ OAID certificate in your project (Optional)
 
 #### iOS
 
-Affise SDK uses `AppTrackingTransparency` framework to get `advertisingIdentifier`
+Affise Advertising module uses `AppTrackingTransparency` framework to get `advertisingIdentifier`
 For working functionality your app needs to declare [`NSUserTrackingUsageDescription` permission](https://developer.apple.com/documentation/bundleresources/information_property_list/nsusertrackingusagedescription):
 
 Open XCode project `info.plist` and add key `NSUserTrackingUsageDescription` with string value
@@ -1007,7 +1027,7 @@ Affise.debug.validate((status) =>
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
-> This app has crashed because it attempted to access privacy-sensitive data without a usage description.
+> This app has crashed because Affise Advertising Module is attempted to access privacy-sensitive data without a usage description.
 >
 > The app's `Info.plist` must contain an `NSUserTrackingUsageDescription` key with a string value explaining
 >
