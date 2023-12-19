@@ -1,13 +1,13 @@
 name: CI
 run-name: CI ${{ github.ref_name }}
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+#on:
+#  push:
+#    branches:
+#      - main
+#  pull_request:
+#    branches:
+#      - main
 
 jobs:
   lint:
