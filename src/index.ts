@@ -47,16 +47,6 @@ export class Affise {
         this.native.init(initProperties);
     }
 
-    /**
-     * @deprecated Use Affise.settings({affiseAppId, secretKey}).start()
-     * @param initProperties
-     */
-    static init(
-        initProperties: AffiseInitProperties | AffiseInitPropertiesType
-    ) {
-        this.start(initProperties);
-    }
-
     static isInitialized(): Promise<boolean> {
         return this.native.isInitialized();
     }
@@ -190,6 +180,19 @@ export class Affise {
     static getProviders(): Promise<Record<string, any>> {
         return this.native.getProviders();
     }
+    /**
+     * Get referrer
+     */
+    static getReferrer(callback: ReferrerCallback) {
+        this.native.getReferrer(callback);
+    }
+
+    /**
+     * Get referrer Value
+     */
+    static getReferrerValue(key: ReferrerKey, callback: ReferrerCallback) {
+        this.native.getReferrerValue(key, callback);
+    }
 
     /**
      * Set [enabled] collect metrics
@@ -211,22 +214,6 @@ export class Affise {
 
         static crashApplication() {
             Affise.native.crashApplication();
-        }
-
-        /**
-         * Get referrer
-         */
-        static getReferrer(callback: ReferrerCallback) {
-            if (Platform.OS !== 'android') return;
-            Affise.native.getReferrer(callback);
-        }
-
-        /**
-         * Get referrer Value
-         */
-        static getReferrerValue(key: ReferrerKey, callback: ReferrerCallback) {
-            if (Platform.OS !== 'android') return;
-            Affise.native.getReferrerValue(key, callback);
         }
     };
 

@@ -60,7 +60,7 @@ export class AffiseApiWidget extends Component<Props, State> {
                         title='get Referrer Value'
                         onPress={() => {
                             // Get referrer parameter https://github.com/affise/sdk-react#get-referrer-value
-                            Affise.android.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
+                            Affise.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
                                 console.log(`ReferrerValue: ${value}`);
                                 this.setCallback(`ReferrerValue: ${value}`);
                             });
@@ -72,7 +72,7 @@ export class AffiseApiWidget extends Component<Props, State> {
                         title='get Referrer'
                         onPress={() => {
                             // Get referrer https://github.com/affise/sdk-react#get-referrer
-                            Affise.android.getReferrer((ref) => {
+                            Affise.getReferrer((ref) => {
                                 console.log(`Referrer: ${ref}`);
                                 this.setCallback(`Referrer: ${ref}`);
                             });

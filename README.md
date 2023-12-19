@@ -742,7 +742,7 @@ Example: [`example/ios/AffiseAttributionLibExample/Info.plist`](example/ios/Affi
 
 ## Offline mode
 
-In some scenarios you would want to limit Affise network usage, to pause that activity call anywhere in your application following code after Affise init:
+In some scenarios you would want to limit Affise network usage, to pause that activity call anywhere in your application following code after Affise start:
 
 ```typescript
 Affise.settings({affiseAppId, secretKey}).start(); // Start Affise SDK
@@ -762,7 +762,7 @@ Affise.isOfflineModeEnabled().then((enabled) => {
 
 ## Disable tracking
 
-To disable any tracking activity, storing events and gathering device identifiers and metrics call anywhere in your application following code after Affise init:
+To disable any tracking activity, storing events and gathering device identifiers and metrics call anywhere in your application following code after Affise start:
 
 ```typescript
 Affise.settings({affiseAppId, secretKey}).start(); // Start Affise SDK
@@ -784,7 +784,7 @@ Affise.isTrackingEnabled().then((enabled) => {
 
 ## Disable background tracking
 
-To disable any background tracking activity, storing events and gathering device identifiers and metrics call anywhere in your application following code after Affise init:
+To disable any background tracking activity, storing events and gathering device identifiers and metrics call anywhere in your application following code after Affise start:
 
 ```typescript
 Affise.settings({affiseAppId, secretKey}).start(); // Start Affise SDK
@@ -849,7 +849,7 @@ fetchData()
 Use the next public method of SDK
 
 ```typescript
-Affise.android.getReferrer().then((referrer) => {
+Affise.getReferrer().then((referrer) => {
   // Handle referrer
 });
 ```
@@ -859,7 +859,7 @@ Affise.android.getReferrer().then((referrer) => {
 Use the next public method of SDK to get referrer value by
 
 ```typescript
-Affise.android.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
+Affise.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
   // Handle referrer
 })
 ```
