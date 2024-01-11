@@ -118,10 +118,10 @@ Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 ```gradle
 dependencies {
     // Affise modules
-    implementation 'com.affise:module-advertising:1.6.+'
-    implementation 'com.affise:module-network:1.6.+'
-    implementation 'com.affise:module-phone:1.6.+'
-    implementation 'com.affise:module-status:1.6.+'
+    implementation 'com.affise:module-advertising:1.6.22'
+    implementation 'com.affise:module-network:1.6.22'
+    implementation 'com.affise:module-phone:1.6.22'
+    implementation 'com.affise:module-status:1.6.22'
 }
 ```
 
