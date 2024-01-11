@@ -3,7 +3,7 @@ import {getEnumFromString} from "../utils/EnumUtils";
 export enum AffiseApiMethod {
     INIT = "init",
     IS_INITIALIZED = "is_initialized",
-    SEND_EVENTS = "send_events",
+    // SEND_EVENTS = "send_events", // deprecated
     SEND_EVENT = "send_event",
     ADD_PUSH_TOKEN = "add_push_token",
     REGISTER_WEB_VIEW = "register_web_view",
@@ -23,6 +23,7 @@ export enum AffiseApiMethod {
     GET_RANDOM_DEVICE_ID = "get_random_device_id",
     GET_PROVIDERS = "get_providers",
     MODULE_START = "module_start",
+    GET_MODULES_INSTALLED = "get_modules_installed",
 
     // callback methods
     GET_REFERRER_CALLBACK = "get_referrer_callback",

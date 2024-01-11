@@ -88,10 +88,18 @@ yarn add affise-attribution-lib
 
 ### Modules
 
-If module start type is `manual`, then call
+If module start type is `manual`, then call:
 
 ```typescript
 Affise.moduleStart(AffiseModules.ADVERTISING)
+```
+
+Get list of installed modules:
+
+```typescript
+Affise.getModulesInstalled().then((modules) => {
+    console.log(`Modules: ${modules}`);
+});
 ```
 
 #### Android
@@ -123,8 +131,8 @@ Add modules to iOS project
 
 | Module        |                                       Version                                        | Start    |
 |---------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING` | [`1.6.19`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `STATUS`      | [`1.6.19`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING` | [`1.6.20`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `STATUS`      | [`1.6.20`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -133,8 +141,8 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Advertising', `1.6.19`
-  pod 'AffiseModule/Status', `1.6.19`
+  pod 'AffiseModule/Advertising', `1.6.20`
+  pod 'AffiseModule/Status', `1.6.20`
 end
 ```
 
@@ -891,6 +899,11 @@ In examples above `ReferrerKey.CLICK_ID` is used, but many others is available:
 - `AFFISE_REF`
 - `AFFISE_SITE_ID`
 - `AFFISE_SUB_SITE_ID`
+- `AFFISE_SUB_1`
+- `AFFISE_SUB_2`
+- `AFFISE_SUB_3`
+- `AFFISE_SUB_4`
+- `AFFISE_SUB_5`
 - `AFFC`
 - `PID`
 - `SUB_1`

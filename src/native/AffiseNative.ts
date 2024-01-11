@@ -34,10 +34,6 @@ export class AffiseNative extends NativeBase {
         return this.nativeResult(AffiseApiMethod.IS_INITIALIZED);
     }
 
-    sendEvents() {
-        this.native(AffiseApiMethod.SEND_EVENTS);
-    }
-
     sendEvent(event: AffiseEvent) {
         this.native(AffiseApiMethod.SEND_EVENT, event.toRecord());
     }
@@ -107,8 +103,12 @@ export class AffiseNative extends NativeBase {
         this.nativeCallbackOnce(AffiseApiMethod.GET_STATUS_CALLBACK, callback, module);
     }
 
-    moduleStart(module: AffiseModules) {
-        this.native(AffiseApiMethod.MODULE_START, module);
+    moduleStart(module: AffiseModules): Promise<boolean> {
+        return this.nativeResult(AffiseApiMethod.MODULE_START, module);
+    }
+
+    getModulesInstalled(): Promise<AffiseModules[]> {
+        return this.nativeResult(AffiseApiMethod.GET_MODULES_INSTALLED);
     }
 
     getRandomUserId(): Promise<string> {

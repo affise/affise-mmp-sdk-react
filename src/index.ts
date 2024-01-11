@@ -52,13 +52,6 @@ export class Affise {
     }
 
     /**
-     * Send events
-     */
-    static sendEvents() {
-        this.native.sendEvents();
-    }
-
-    /**
      * Store and send [event]
      */
     static sendEvent(event: AffiseEvent) {
@@ -156,8 +149,15 @@ export class Affise {
      * Manual module start
      * @param module module name
      */
-    static moduleStart(module: AffiseModules) {
-        this.native.moduleStart(module);
+    static moduleStart(module: AffiseModules): Promise<boolean> {
+        return this.native.moduleStart(module);
+    }
+
+    /**
+     * Get installed modules
+     */
+    static getModulesInstalled(): Promise<AffiseModules[]> {
+        return this.native.getModulesInstalled();
     }
 
     /**
