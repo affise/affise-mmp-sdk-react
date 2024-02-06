@@ -118,10 +118,10 @@ Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 ```gradle
 dependencies {
     // Affise modules
-    implementation 'com.affise:module-advertising:1.6.22'
-    implementation 'com.affise:module-network:1.6.22'
-    implementation 'com.affise:module-phone:1.6.22'
-    implementation 'com.affise:module-status:1.6.22'
+    implementation 'com.affise:module-advertising:1.6.23'
+    implementation 'com.affise:module-network:1.6.23'
+    implementation 'com.affise:module-phone:1.6.23'
+    implementation 'com.affise:module-status:1.6.23'
 }
 ```
 
@@ -131,8 +131,8 @@ Add modules to iOS project
 
 | Module        |                                       Version                                        | Start    |
 |---------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING` | [`1.6.20`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `STATUS`      | [`1.6.20`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING` | [`1.6.25`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `STATUS`      | [`1.6.25`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -141,8 +141,8 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Advertising', `1.6.20`
-  pod 'AffiseModule/Status', `1.6.20`
+  pod 'AffiseModule/Advertising', `1.6.25`
+  pod 'AffiseModule/Status', `1.6.25`
 end
 ```
 
@@ -475,6 +475,13 @@ Use any of custom events if default doesn't fit your scenario:
 - `CustomId08`
 - `CustomId09`
 - `CustomId10`
+
+If above event functionality still limits your usecase, you can use `UserCustomEvent`
+
+```typescript
+new UserCustomEvent({eventName: "MyCustomEvent"})
+    .send();
+```
 
 ## Predefined event parameters
 
