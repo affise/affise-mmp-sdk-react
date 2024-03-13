@@ -111,6 +111,10 @@ export class AffiseNative extends NativeBase {
         return this.nativeResult(AffiseApiMethod.GET_MODULES_INSTALLED);
     }
 
+    isFirstRun(): Promise<boolean> {
+        return this.nativeResult(AffiseApiMethod.IS_FIRST_RUN);
+    }
+
     getRandomUserId(): Promise<string> {
         return this.nativeResult(AffiseApiMethod.GET_RANDOM_USER_ID);
     }

@@ -48,6 +48,7 @@
   - [Get random user Id](#get-random-user-id)
   - [Get random device Id](#get-random-device-id)
   - [Get providers](#get-providers)
+  - [Is first run](#is-first-run)
   - [Get referrer](#get-referrer)
   - [Get referrer value](#get-referrer-value)
     - [Referrer keys](#referrer-keys)
@@ -118,10 +119,10 @@ Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 ```gradle
 dependencies {
     // Affise modules
-    implementation 'com.affise:module-advertising:1.6.23'
-    implementation 'com.affise:module-network:1.6.23'
-    implementation 'com.affise:module-phone:1.6.23'
-    implementation 'com.affise:module-status:1.6.23'
+    implementation 'com.affise:module-advertising:1.6.26'
+    implementation 'com.affise:module-network:1.6.26'
+    implementation 'com.affise:module-phone:1.6.26'
+    implementation 'com.affise:module-status:1.6.26'
 }
 ```
 
@@ -131,8 +132,8 @@ Add modules to iOS project
 
 | Module        |                                       Version                                        | Start    |
 |---------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING` | [`1.6.25`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `STATUS`      | [`1.6.25`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING` | [`1.6.27`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `STATUS`      | [`1.6.27`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -141,8 +142,8 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Advertising', `1.6.25`
-  pod 'AffiseModule/Status', `1.6.25`
+  pod 'AffiseModule/Advertising', `1.6.27`
+  pod 'AffiseModule/Status', `1.6.27`
 end
 ```
 
@@ -859,13 +860,21 @@ fetchData()
     .catch(console.error);
 ```
 
+## Is first run
+
+```typescript
+Affise.isFirstRun().then((isFirstRun) => {
+  // handle
+});
+```
+
 ## Get referrer
 
 Use the next public method of SDK
 
 ```typescript
 Affise.getReferrer().then((referrer) => {
-  // Handle referrer
+  // handle referrer
 });
 ```
 
@@ -875,7 +884,7 @@ Use the next public method of SDK to get referrer value by
 
 ```typescript
 Affise.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
-  // Handle referrer
+  // handle referrer
 })
 ```
 

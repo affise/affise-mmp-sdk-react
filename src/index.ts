@@ -180,6 +180,14 @@ export class Affise {
     static getProviders(): Promise<Record<string, any>> {
         return this.native.getProviders();
     }
+
+    /**
+     * Is it first run
+     */
+    static isFirstRun(): Promise<boolean> {
+        return this.native.isFirstRun();
+    }
+
     /**
      * Get referrer
      */

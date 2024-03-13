@@ -24,6 +24,7 @@ export enum AffiseApiMethod {
     GET_PROVIDERS = "get_providers",
     MODULE_START = "module_start",
     GET_MODULES_INSTALLED = "get_modules_installed",
+    IS_FIRST_RUN = "is_first_run",
 
     // callback methods
     GET_REFERRER_CALLBACK = "get_referrer_callback",
