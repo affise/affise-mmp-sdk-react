@@ -28,6 +28,12 @@ export class AffiseWidget extends Component {
                             item.send();
                             // or
                             // Affise.sendEvent(item);
+                            // or
+                            // item.sendNow(() => {
+                            //     console.log(`success: ${item.constructor.name}`);
+                            // }, (status) => {
+                            //     console.log(`failed: ${item.constructor.name} status: ${status}`);
+                            // });
                         }}
                     ></Button>
                 )}

@@ -10,6 +10,8 @@ import type {PredefinedString} from "../parameters/PredefinedString";
 import {Parameters} from "../Parameters";
 import {timestamp} from "../../utils/Timestamp";
 import { Affise } from "../../index";
+import type {OnSendSuccessCallback} from "../OnSendSuccessCallback";
+import type {OnSendFailedCallback} from "../OnSendFailedCallback";
 
 /**
  * Base event
@@ -123,6 +125,13 @@ export class AffiseEvent implements PredefinedParameter {
      */
     send() {
         Affise.sendEvent(this);
+    }
+
+    /**
+     * Send this event now
+     */
+    sendNow(success: OnSendSuccessCallback, failed: OnSendFailedCallback) {
+        Affise.sendEventNow(this, success, failed);
     }
 
     /**

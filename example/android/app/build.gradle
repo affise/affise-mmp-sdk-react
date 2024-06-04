@@ -248,14 +248,16 @@ android {
     }
 }
 
+def affise_version = '1.6.34'
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     // Affise modules
-    implementation 'com.affise:module-advertising:1.6.26'
-    implementation 'com.affise:module-network:1.6.26'
-    implementation 'com.affise:module-phone:1.6.26'
-    implementation "com.affise:module-status:1.6.26"
+    implementation "com.affise:module-advertising:$affise_version"
+    implementation "com.affise:module-network:$affise_version"
+    implementation "com.affise:module-phone:$affise_version"
+    implementation "com.affise:module-status:$affise_version"
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules

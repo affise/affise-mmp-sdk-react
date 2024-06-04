@@ -16,8 +16,13 @@ import {toAffiseKeyValueList} from "../module/AffiseKeyValue";
 import type {DebugOnValidateCallback} from "../debug/validate/DebugOnValidateCallback";
 import type {DebugOnNetworkCallback} from "../debug/network/DebugOnNetworkCallback";
 import {DebugUtils} from "./utils/DebugUtils";
+import type {OnSendSuccessCallback} from "../events/OnSendSuccessCallback";
+import type {OnSendFailedCallback} from "../events/OnSendFailedCallback";
 
 export class AffiseNative extends NativeBase {
+
+    protected SUCCESS: string = "success";
+    protected FAILED: string = "failed";
 
     init(initProperties: AffiseInitProperties | AffiseInitPropertiesType) {
         let option: AffiseInitProperties;
@@ -36,6 +41,17 @@ export class AffiseNative extends NativeBase {
 
     sendEvent(event: AffiseEvent) {
         this.native(AffiseApiMethod.SEND_EVENT, event.toRecord());
+    }
+
+    sendEventNow(event: AffiseEvent, success: OnSendSuccessCallback, failed: OnSendFailedCallback) {
+        this.nativeCallbackGroup(
+            AffiseApiMethod.SEND_EVENT_NOW,
+            new Map([
+                [this.SUCCESS, success],
+                [this.FAILED, failed],
+            ]),
+            event.toRecord()
+        );
     }
 
     addPushToken(pushToken: string) {
@@ -146,8 +162,22 @@ export class AffiseNative extends NativeBase {
         this.nativeCallback(AffiseApiMethod.DEBUG_NETWORK_CALLBACK, callback);
     }
 
-    protected handleCallback(api: AffiseApiMethod, callback: unknown, data: any) {
+    protected handleCallback(api: AffiseApiMethod, callback: unknown, data: any, tag: string | null) {
         switch (api) {
+            case AffiseApiMethod.SEND_EVENT_NOW:
+                switch (tag) {
+                    case this.SUCCESS:
+                        tryCast<OnSendSuccessCallback>(callback)?.();
+                        break;
+                    case this.FAILED: {
+                        const response = DebugUtils.parseResponse(data);
+                        tryCast<OnSendFailedCallback>(callback)?.(response);
+                    }
+                        break;
+                    default:
+                        break;
+                }
+                break;
             case AffiseApiMethod.GET_REFERRER_CALLBACK:
                 tryCast<ReferrerCallback>(callback)?.(data as string || "");
                 break;

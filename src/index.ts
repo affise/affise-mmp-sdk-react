@@ -16,6 +16,8 @@ import type {
 import {AffiseNative} from "./native/AffiseNative";
 import {Platform} from "react-native";
 import {AffiseSettings} from "./Export";
+import type {OnSendSuccessCallback} from "./events/OnSendSuccessCallback";
+import type {OnSendFailedCallback} from "./events/OnSendFailedCallback";
 
 export * from "./Export";
 
@@ -56,6 +58,13 @@ export class Affise {
      */
     static sendEvent(event: AffiseEvent) {
         this.native.sendEvent(event);
+    }
+
+    /**
+     * Send [event] now
+     */
+    static sendEventNow(event: AffiseEvent, success: OnSendSuccessCallback, failed: OnSendFailedCallback) {
+        this.native.sendEventNow(event, success, failed);
     }
 
     /**

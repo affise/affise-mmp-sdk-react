@@ -1,6 +1,10 @@
 buildscript {
   // Buildscript is evaluated before everything else so we can't use getExtOrDefault
   def kotlin_version = rootProject.ext.has("kotlinVersion") ? rootProject.ext.get("kotlinVersion") : project.properties["AffiseAttributionNative_kotlinVersion"]
+  ext {
+      affise_version = '1.6.34'
+      agp_version = '7.2.2'
+  }
 
   repositories {
     google()
@@ -8,7 +12,7 @@ buildscript {
   }
 
   dependencies {
-    classpath "com.android.tools.build:gradle:7.2.1"
+    classpath "com.android.tools.build:gradle:$agp_version"
     // noinspection DifferentKotlinGradleVersion
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
   }
@@ -73,7 +77,7 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
   implementation "com.android.installreferrer:installreferrer:2.2"
-  implementation "com.affise:internal:1.6.26"
+  implementation "com.affise:internal:$affise_version"
 }
 
 if (isNewArchitectureEnabled()) {

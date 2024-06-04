@@ -3,8 +3,8 @@ import {getEnumFromString} from "../utils/EnumUtils";
 export enum AffiseApiMethod {
     INIT = "init",
     IS_INITIALIZED = "is_initialized",
-    // SEND_EVENTS = "send_events", // deprecated
     SEND_EVENT = "send_event",
+    SEND_EVENT_NOW = "send_event_now",
     ADD_PUSH_TOKEN = "add_push_token",
     REGISTER_WEB_VIEW = "register_web_view",
     UNREGISTER_WEB_VIEW = "unregister_web_view",

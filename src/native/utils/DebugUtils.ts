@@ -9,29 +9,43 @@ export class DebugUtils {
         return validationStatusFrom(data as string || "") || ValidationStatus.UNKNOWN_ERROR;
     }
 
-    static parseRequestResponse(data: any): [HttpRequest, HttpResponse] {
+    static parseResponse(data: any): HttpResponse {
         const json = tryCast<Record<string, any>>(data) || {};
+        const resCode = json["code"] as number || 0;
+        const resMessage = json["message"] || "";
+        const resBody = json["body"];
 
-        const req = json["request"];
-        const reqUrl = req["url"] || "";
-        const reqMethod = req["method"] || "";
-        const reqBody = req["body"];
-        const reqHeaders = tryCast<Record<string, string>>(req["headers"]) || {};
+        return new HttpResponse({
+            code: resCode,
+            message: resMessage,
+            body: resBody
+        });
+    }
 
-        const res = json["response"];
-        const resCode = res["code"] as number || 0;
-        const resMessage = res["message"] || "";
-        const resBody = res["body"];
+    static parseRequest(data: any): HttpRequest {
+        const json = tryCast<Record<string, any>>(data) || {};
+        const reqUrl = json["url"] || "";
+        const reqMethod = json["method"] || "";
+        const reqBody = json["body"];
+        const reqHeaders = tryCast<Record<string, string>>(json["headers"]) || {};
 
-        return [new HttpRequest({
+        return new HttpRequest({
             url: reqUrl,
             method: httpMethodFrom(reqMethod) || HttpMethod.POST,
             headers: reqHeaders,
             body: reqBody
-        }), new HttpResponse({
-            code: resCode,
-            message: resMessage,
-            body: resBody
-        })];
+        });
+    }
+
+    static parseRequestResponse(data: any): [HttpRequest, HttpResponse] {
+        const json = tryCast<Record<string, any>>(data) || {};
+
+        const req = json["request"];
+        const request = this.parseRequest(req);
+
+        const res = json["response"];
+        const response = this.parseResponse(res);
+
+        return [request, response];
     }
 }

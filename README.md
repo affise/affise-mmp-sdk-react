@@ -1,5 +1,7 @@
 # Affise Attribution React Native Library
 
+[Change Log](CHANGELOG.md)
+
 | Package                  |                                                                 Version                                                                  |
 |--------------------------|:----------------------------------------------------------------------------------------------------------------------------------------:|
 | `affise-attribution-lib` | [![attribution](https://img.shields.io/npm/v/affise-attribution-lib?label=latest)](https://www.npmjs.com/package/affise-attribution-lib) |
@@ -23,6 +25,7 @@
     - [Advertising](#advertising)
     - [Network](#network)
     - [Phone](#phone)
+  - [Event send control](#event-send-control)
   - [Events tracking](#events-tracking)
   - [Custom events tracking](#custom-events-tracking)
   - [Predefined event parameters](#predefined-event-parameters)
@@ -119,10 +122,10 @@ Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 ```gradle
 dependencies {
     // Affise modules
-    implementation 'com.affise:module-advertising:1.6.26'
-    implementation 'com.affise:module-network:1.6.26'
-    implementation 'com.affise:module-phone:1.6.26'
-    implementation 'com.affise:module-status:1.6.26'
+    implementation 'com.affise:module-advertising:1.6.34'
+    implementation 'com.affise:module-network:1.6.34'
+    implementation 'com.affise:module-phone:1.6.34'
+    implementation 'com.affise:module-status:1.6.34'
 }
 ```
 
@@ -132,8 +135,8 @@ Add modules to iOS project
 
 | Module        |                                       Version                                        | Start    |
 |---------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING` | [`1.6.27`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `STATUS`      | [`1.6.27`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING` | [`1.6.32`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `STATUS`      | [`1.6.32`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -142,8 +145,8 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Advertising', `1.6.27`
-  pod 'AffiseModule/Status', `1.6.27`
+  pod 'AffiseModule/Advertising', `1.6.32`
+  pod 'AffiseModule/Status', `1.6.32`
 end
 ```
 
@@ -357,6 +360,29 @@ To match users with events and data library is sending, these `ProviderType` ide
 
 - `NETWORK_TYPE`
 - `ISP`
+
+## Event send control
+
+There are two ways to send events
+
+1. Cache event to later scheduled send in batch
+
+```typescript
+AddToCartEvent()
+    .send();
+```
+
+2. Send event right now
+
+```typescript
+AddToCartEvent()
+    .sendNow(() => {
+        // handle event send success
+    }, (status) => {
+        // handle event send failed
+        // 🟥Warning🟥: event is NOT cached for later send
+    });
+```
 
 ## Events tracking
 
