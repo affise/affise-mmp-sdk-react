@@ -248,13 +248,14 @@ android {
     }
 }
 
-def affise_version = '1.6.34'
+final affise_version = '1.6.38'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     // Affise modules
     implementation "com.affise:module-advertising:$affise_version"
+    implementation "com.affise:module-androidid:$affise_version"
     implementation "com.affise:module-network:$affise_version"
     implementation "com.affise:module-phone:$affise_version"
     implementation "com.affise:module-status:$affise_version"

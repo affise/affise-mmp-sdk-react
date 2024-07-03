@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.16] - 2024-07-03
+
+### Fixed
+
+- AGP error for `crossplatform`.
+- Event timestamp field for `crossplatform`.
+
+### Changed
+
+- Update native iOS to [`1.6.33`](https://github.com/affise/sdk-ios/blob/1.6.33/CHANGELOG.md).
+- Update native Android to [`1.6.38`](https://github.com/affise/sdk-android/blob/v1.6.38/CHANGELOG.md).
+
 ## [1.6.15] - 2024-06-04
 
 ### Added
@@ -57,6 +69,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.16]: https://github.com/affise/sdk-react/compare/1.6.15...1.6.16
 [1.6.15]: https://github.com/affise/sdk-react/compare/1.6.14...1.6.15
 [1.6.14]: https://github.com/affise/sdk-react/compare/1.6.13...1.6.14
 [1.6.13]: https://github.com/affise/sdk-react/compare/1.6.12...1.6.13

@@ -113,6 +113,7 @@ Add modules to Android project
 | Module        | Version                                                                                                                                                                      | Start  |
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
 | `ADVERTISING` | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) | `Auto` |
+| `ANDROIDID`   | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://mvnrepository.com/artifact/com.affise/module-androidid)       | `Auto` |
 | `NETWORK`     | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             | `Auto` |
 | `PHONE`       | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   | `Auto` |
 | `STATUS`      | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                | `Auto` |
@@ -120,12 +121,15 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
+final affise_version = '1.6.38'
+
 dependencies {
     // Affise modules
-    implementation 'com.affise:module-advertising:1.6.34'
-    implementation 'com.affise:module-network:1.6.34'
-    implementation 'com.affise:module-phone:1.6.34'
-    implementation 'com.affise:module-status:1.6.34'
+    implementation "com.affise:module-advertising:$affise_version"
+    implementation "com.affise:module-androidid:$affise_version"
+    implementation "com.affise:module-network:$affise_version"
+    implementation "com.affise:module-phone:$affise_version"
+    implementation "com.affise:module-status:$affise_version"
 }
 ```
 
@@ -135,8 +139,8 @@ Add modules to iOS project
 
 | Module        |                                       Version                                        | Start    |
 |---------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING` | [`1.6.32`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `STATUS`      | [`1.6.32`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING` | [`1.6.33`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `STATUS`      | [`1.6.33`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -145,8 +149,8 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Advertising', `1.6.32`
-  pod 'AffiseModule/Status', `1.6.32`
+  pod 'AffiseModule/Advertising', `1.6.33`
+  pod 'AffiseModule/Status', `1.6.33`
 end
 ```
 

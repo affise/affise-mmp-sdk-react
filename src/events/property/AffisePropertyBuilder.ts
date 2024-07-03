@@ -23,7 +23,7 @@ export class AffisePropertyBuilder {
     }
 
     addRaw(key: string, value: unknown): AffisePropertyBuilder {
-        this.data[key] = value;
+        this.data[key.toLowerCase()] = value;
         return this;
     }
 
