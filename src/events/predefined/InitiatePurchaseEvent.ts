@@ -1,9 +1,10 @@
 import {NativeEvent} from "../base/NativeEvent";
 import {EventName} from "../EventName";
+import type {AffiseEventProps} from "../base/AffiseEventProps";
 
 export class InitiatePurchaseEvent extends NativeEvent {
 
-    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
-        super(EventName.INITIATE_PURCHASE, userData, timeStampMillis);
+    constructor(props?: AffiseEventProps) {
+        super({...props, eventName: EventName.INITIATE_PURCHASE});
     }
 }

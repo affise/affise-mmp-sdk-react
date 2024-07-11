@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import {Button, FlatList, View} from "react-native";
+import {FlatList, View} from "react-native";
 import {AffiseEvent, BaseSubscriptionEvent} from 'affise-attribution-lib';
-import {DefaultEventsFactory} from "./DefaultEventsFactory";
+import {DefaultEventsFactory} from "./factories/DefaultEventsFactory";
+import {AffiseButton} from "./components/AffiseButton";
 
 
 export class AffiseWidget extends Component {
@@ -19,7 +20,7 @@ export class AffiseWidget extends Component {
                 ItemSeparatorComponent={() => <View style={{height: 8}}/>}
                 data={this.events}
                 renderItem={({item}) => (
-                    <Button
+                    <AffiseButton
                         color={(item instanceof BaseSubscriptionEvent) ? "#F44336" : "#2196F3"}
                         title={toName(item.constructor.name)}
                         onPress={() => {
@@ -35,7 +36,7 @@ export class AffiseWidget extends Component {
                             //     console.log(`failed: ${item.constructor.name} status: ${status}`);
                             // });
                         }}
-                    ></Button>
+                    />
                 )}
             />
         );

@@ -256,6 +256,7 @@ dependencies {
     // Affise modules
     implementation "com.affise:module-advertising:$affise_version"
     implementation "com.affise:module-androidid:$affise_version"
+    implementation "com.affise:module-link:$affise_version"
     implementation "com.affise:module-network:$affise_version"
     implementation "com.affise:module-phone:$affise_version"
     implementation "com.affise:module-status:$affise_version"

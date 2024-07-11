@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
+import {Alert, Button, SafeAreaView, StyleSheet, View} from 'react-native';
 import {
     Affise
 } from 'affise-attribution-lib';
@@ -25,15 +25,23 @@ export default function App() {
             .start(); // Start Affise SDK
 
         // Deeplinks https://github.com/affise/sdk-react#deeplinks
-        Affise.registerDeeplinkCallback((url) => {
-            console.log(`Deeplink: ${url}`);
-            setDeeplink(`Deeplink: ${url}`);
+        Affise.registerDeeplinkCallback((value) => {
+            console.log(`Deeplink: ${value}`);
+            setDeeplink(`Deeplink: ${value}`);
+            const parameters = Object.entries(value.parameters).map(([k, v]) => `${k}=[${v.join(", ")}]`).join("; ");
+            Alert.alert("Deeplink", `${value.deeplink}\n\n` +
+                `scheme: "${value.scheme}"\n` +
+                `host: "${value.host}"\n` +
+                `path: "${value.path}"\n` +
+                `parameters: [${parameters}]`, [
+                {text: 'OK', onPress: () => {}},
+            ]);
         });
 
         // Debug: network request/response
-        Affise.debug.network((request, response) =>
+        Affise.debug.network((_request, response) =>
         {
-            console.log(`Affise: ${request}`);
+            // console.log(`Affise: ${request}`);
             console.log(`Affise: ${response}`);
         });
 

@@ -1,9 +1,10 @@
 import {NativeEvent} from "../base/NativeEvent";
 import {EventName} from "../EventName";
+import type {AffiseEventProps} from "../base/AffiseEventProps";
 
 export class RateEvent extends NativeEvent {
 
-    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
-        super(EventName.RATE, userData, timeStampMillis);
+    constructor(props?: AffiseEventProps) {
+        super({...props, eventName: EventName.RATE});
     }
 }

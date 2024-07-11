@@ -1,11 +1,25 @@
 # Changelog
 
+## [1.6.17] - 2024-07-11
+
+### Added
+
+- New module `Link` support.
+- New module `AndroidId` support.
+
+### Changed
+
+- Update `registerDeeplinkCallback` change uri to convenient values.
+- Update api `Affise.getStatus` moved to `Affise.module.getStatus`.
+- Update api `Affise.moduleStart` moved to `Affise.module.moduleStart`.
+- Update api `Affise.getModulesInstalled` moved to `Affise.module.getModulesInstalled`.
+
 ## [1.6.16] - 2024-07-03
 
 ### Fixed
 
-- AGP error for `crossplatform`.
-- Event timestamp field for `crossplatform`.
+- AGP error.
+- Event timestamp field.
 
 ### Changed
 

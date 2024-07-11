@@ -1,5 +1,6 @@
 import {NativeEvent} from "../base/NativeEvent";
 import {EventName} from "../EventName";
+import type {AffiseEventProps} from "../base/AffiseEventProps";
 
 /**
  * Event CustomId02
@@ -9,7 +10,7 @@ import {EventName} from "../EventName";
  */
 export class CustomId02Event extends NativeEvent {
 
-    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number }) {
-        super(EventName.CUSTOM_ID_02, userData, timeStampMillis);
+    constructor(props?: AffiseEventProps) {
+        super({...props, eventName: EventName.CUSTOM_ID_02});
     }
 }

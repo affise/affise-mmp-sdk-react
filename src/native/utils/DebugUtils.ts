@@ -5,12 +5,13 @@ import {tryCast} from "../../utils/TryCast";
 import {HttpMethod, httpMethodFrom} from "../../network/HttpMethod";
 
 export class DebugUtils {
+
     static getValidationStatus(data: any): ValidationStatus {
         return validationStatusFrom(data as string || "") || ValidationStatus.UNKNOWN_ERROR;
     }
 
-    static parseResponse(data: any): HttpResponse {
-        const json = tryCast<Record<string, any>>(data) || {};
+    static toResponse(from: any): HttpResponse {
+        const json = tryCast<Record<string, any>>(from) || {};
         const resCode = json["code"] as number || 0;
         const resMessage = json["message"] || "";
         const resBody = json["body"];
@@ -22,8 +23,8 @@ export class DebugUtils {
         });
     }
 
-    static parseRequest(data: any): HttpRequest {
-        const json = tryCast<Record<string, any>>(data) || {};
+    static toRequest(from: any): HttpRequest {
+        const json = tryCast<Record<string, any>>(from) || {};
         const reqUrl = json["url"] || "";
         const reqMethod = json["method"] || "";
         const reqBody = json["body"];
@@ -37,15 +38,15 @@ export class DebugUtils {
         });
     }
 
-    static parseRequestResponse(data: any): [HttpRequest, HttpResponse] {
-        const json = tryCast<Record<string, any>>(data) || {};
+    static toResponseWithKey(from: any, key: string): HttpResponse {
+        const json = tryCast<Record<string, any>>(from) || {};
+        const response = json[key];
+        return this.toResponse(response);
+    }
 
-        const req = json["request"];
-        const request = this.parseRequest(req);
-
-        const res = json["response"];
-        const response = this.parseResponse(res);
-
-        return [request, response];
+    static toRequestWithKey(from: any, key: string): HttpRequest {
+        const json = tryCast<Record<string, any>>(from) || {};
+        const request = json[key];
+        return this.toRequest(request);
     }
 }

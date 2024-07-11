@@ -1,9 +1,10 @@
 import {NativeEvent} from "../base/NativeEvent";
 import {EventName} from "../EventName";
+import type {AffiseEventProps} from "../base/AffiseEventProps";
 
 export class ContactEvent extends NativeEvent {
 
-    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
-        super(EventName.CONTACT, userData, timeStampMillis);
+    constructor(props?: AffiseEventProps) {
+        super({...props, eventName: EventName.CONTACT});
     }
 }

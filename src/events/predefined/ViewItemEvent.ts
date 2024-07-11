@@ -1,9 +1,10 @@
 import {NativeEvent} from "../base/NativeEvent";
 import {EventName} from "../EventName";
+import type {AffiseEventProps} from "../base/AffiseEventProps";
 
 export class ViewItemEvent extends NativeEvent {
 
-    constructor({userData, timeStampMillis}: { userData?: string, timeStampMillis?: number } = {}) {
-        super(EventName.VIEW_ITEM, userData, timeStampMillis);
+    constructor(props?: AffiseEventProps) {
+        super({...props, eventName: EventName.VIEW_ITEM});
     }
 }

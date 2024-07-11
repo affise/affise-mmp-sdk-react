@@ -11,13 +11,14 @@ import type {
     ErrorCallback,
     OnDeeplinkCallback,
     DebugOnValidateCallback,
-    DebugOnNetworkCallback
+    DebugOnNetworkCallback,
+    OnSendSuccessCallback,
+    OnSendFailedCallback,
+    AffiseLinkCallback,
 } from "./Export";
 import {AffiseNative} from "./native/AffiseNative";
 import {Platform} from "react-native";
 import {AffiseSettings} from "./Export";
-import type {OnSendSuccessCallback} from "./events/OnSendSuccessCallback";
-import type {OnSendFailedCallback} from "./events/OnSendFailedCallback";
 
 export * from "./Export";
 
@@ -146,27 +147,30 @@ export class Affise {
     }
 
     /**
+     * @deprecated use Affise.module.getStatus
      * Get module status
      * @param module module name
      * @param callback status response
      */
     static getStatus(module: AffiseModules, callback: OnKeyValueCallback) {
-        this.native.getStatus(module, callback);
+        Affise.module.getStatus(module, callback);
     }
 
     /**
+     * @deprecated use Affise.module.moduleStart
      * Manual module start
      * @param module module name
      */
     static moduleStart(module: AffiseModules): Promise<boolean> {
-        return this.native.moduleStart(module);
+        return Affise.module.moduleStart(module);
     }
 
     /**
+     * @deprecated use Affise.module.getModulesInstalled
      * Get installed modules
      */
     static getModulesInstalled(): Promise<AffiseModules[]> {
-        return this.native.getModulesInstalled();
+        return Affise.module.getModulesInstalled();
     }
 
     /**
@@ -249,6 +253,42 @@ export class Affise {
         static updatePostbackConversionValue(fineValue: bigint, coarseValue: CoarseValue, completionHandler: ErrorCallback) {
             if (Platform.OS !== 'ios') return;
             Affise.native.updatePostbackConversionValue(fineValue, coarseValue, completionHandler);
+        }
+    };
+
+    static  module = class {
+
+        /**
+         * Get module status
+         * @param module module name
+         * @param callback status response
+         */
+        static getStatus(module: AffiseModules, callback: OnKeyValueCallback) {
+            Affise.native.getStatus(module, callback);
+        }
+
+        /**
+         * Manual module start
+         * @param module module name
+         */
+        static moduleStart(module: AffiseModules): Promise<boolean> {
+            return Affise.native.moduleStart(module);
+        }
+
+        /**
+         * Get installed modules
+         */
+        static getModulesInstalled(): Promise<AffiseModules[]> {
+            return Affise.native.getModulesInstalled();
+        }
+
+        /**
+         * Module Link url Resolve
+         * @param url url
+         * @param callback redirected url
+         */
+        static linkResolve(url: string, callback: AffiseLinkCallback) {
+            Affise.native.linkResolve(url, callback);
         }
     };
 

@@ -1,11 +1,12 @@
 import {AffiseEvent} from "./AffiseEvent";
 import {AffisePropertyBuilder} from "../property/AffisePropertyBuilder";
 import {AffiseProperty} from "../property/AffiseProperty";
+import type {AffiseCustomEventProps} from "./AffiseCustomEventProps";
 
 export class NativeEvent extends AffiseEvent {
 
-    constructor(name: string, userData?: string, timeStampMillis?: number) {
-        super(name, userData);
+    constructor({eventName, userData, timeStampMillis}: AffiseCustomEventProps) {
+        super(eventName, userData);
         this.category = 'react';
 
         this.serialize = this.serializeBuilder()

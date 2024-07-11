@@ -1,12 +1,16 @@
 import {BaseSubscriptionEvent} from "../subscription/BaseSubscriptionEvent";
+import type {AffiseCustomSubscriptionEventProps} from "../subscription/AffiseCustomSubscriptionEventProps";
 
+/**
+ * UserCustomSubscriptionEvent
+ *
+ * @param type custom event type.
+ * @param subtype custom event sub type.
+ * @param data any custom object data.
+ * @param userData any custom string data.
+ */
 export class UserCustomSubscriptionEvent extends BaseSubscriptionEvent {
-    constructor({type, subtype, data, userData}: { type: string, subtype: string, data: Record<string, unknown>, userData?: string }) {
-        super(
-            type,
-            subtype,
-            data,
-            userData,
-        );
+    constructor(props: AffiseCustomSubscriptionEventProps) {
+        super(props);
     }
 }

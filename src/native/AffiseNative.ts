@@ -7,22 +7,27 @@ import type {AutoCatchingType} from "../events/AutoCatchingType";
 import type {ReferrerKey} from "../referrer/ReferrerKey";
 import type {AffiseModules} from "../module/AffiseModules";
 import type {ReferrerCallback} from "../referrer/ReferrerCallback";
-import type {OnDeeplinkCallback} from "../callback/OnDeeplinkCallback";
+import type {OnDeeplinkCallback} from "../deeplink/OnDeeplinkCallback";
 import type {OnKeyValueCallback} from "../module/OnKeyValueCallback";
 import type {ErrorCallback} from "../callback/ErrorCallback";
 import type {CoarseValue} from "../skad/CoarseValue";
 import {tryCast} from "../utils/TryCast";
-import {toAffiseKeyValueList} from "../module/AffiseKeyValue";
 import type {DebugOnValidateCallback} from "../debug/validate/DebugOnValidateCallback";
 import type {DebugOnNetworkCallback} from "../debug/network/DebugOnNetworkCallback";
 import {DebugUtils} from "./utils/DebugUtils";
 import type {OnSendSuccessCallback} from "../events/OnSendSuccessCallback";
 import type {OnSendFailedCallback} from "../events/OnSendFailedCallback";
+import type {AffiseLinkCallback} from "../module/link/AffiseLinkCallback";
+import {DataMapper} from "./utils/DataMapper";
 
 export class AffiseNative extends NativeBase {
 
+    protected FINE_VALUE = "fineValue";
+    protected COARSE_VALUE = "coarseValue";
     protected SUCCESS: string = "success";
     protected FAILED: string = "failed";
+    protected REQUEST: string = "request";
+    protected RESPONSE: string = "response";
 
     init(initProperties: AffiseInitProperties | AffiseInitPropertiesType) {
         let option: AffiseInitProperties;
@@ -59,7 +64,7 @@ export class AffiseNative extends NativeBase {
     }
 
     registerDeeplinkCallback(callback: OnDeeplinkCallback) {
-        this.nativeCallbackOnce(AffiseApiMethod.REGISTER_DEEPLINK_CALLBACK, callback);
+        this.nativeCallback(AffiseApiMethod.REGISTER_DEEPLINK_CALLBACK, callback);
         this.reactHandleDeeplink();
     }
 
@@ -115,18 +120,6 @@ export class AffiseNative extends NativeBase {
         this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_VALUE_CALLBACK, callback, key);
     }
 
-    getStatus(module: AffiseModules, callback: OnKeyValueCallback) {
-        this.nativeCallbackOnce(AffiseApiMethod.GET_STATUS_CALLBACK, callback, module);
-    }
-
-    moduleStart(module: AffiseModules): Promise<boolean> {
-        return this.nativeResult(AffiseApiMethod.MODULE_START, module);
-    }
-
-    getModulesInstalled(): Promise<AffiseModules[]> {
-        return this.nativeResult(AffiseApiMethod.GET_MODULES_INSTALLED);
-    }
-
     isFirstRun(): Promise<boolean> {
         return this.nativeResult(AffiseApiMethod.IS_FIRST_RUN);
     }
@@ -149,8 +142,8 @@ export class AffiseNative extends NativeBase {
 
     updatePostbackConversionValue(fineValue: bigint, coarseValue: CoarseValue, completionHandler: ErrorCallback) {
         const value: Record<string, any> = {};
-        value['fineValue'] = Number(fineValue);
-        value['coarseValue'] = coarseValue.value;
+        value[this.FINE_VALUE] = Number(fineValue);
+        value[this.COARSE_VALUE] = coarseValue.value;
         this.nativeCallbackOnce(AffiseApiMethod.SKAD_POSTBACK_ERROR_CALLBACK, completionHandler, value);
     }
 
@@ -162,6 +155,32 @@ export class AffiseNative extends NativeBase {
         this.nativeCallback(AffiseApiMethod.DEBUG_NETWORK_CALLBACK, callback);
     }
 
+    ////////////////////////////////////////
+    // modules
+    ////////////////////////////////////////
+    getStatus(module: AffiseModules, callback: OnKeyValueCallback) {
+        this.nativeCallbackOnce(AffiseApiMethod.GET_STATUS_CALLBACK, callback, module);
+    }
+
+    moduleStart(module: AffiseModules): Promise<boolean> {
+        return this.nativeResult(AffiseApiMethod.MODULE_START, module);
+    }
+
+    getModulesInstalled(): Promise<AffiseModules[]> {
+        return this.nativeResult(AffiseApiMethod.GET_MODULES_INSTALLED);
+    }
+
+    linkResolve(url: string, callback: AffiseLinkCallback) {
+        this.nativeCallbackOnce(
+            AffiseApiMethod.MODULE_LINK_LINK_RESOLVE_CALLBACK,
+            callback,
+            url
+        );
+    }
+    ////////////////////////////////////////
+    // modules
+    ////////////////////////////////////////
+
     protected handleCallback(api: AffiseApiMethod, callback: unknown, data: any, tag: string | null) {
         switch (api) {
             case AffiseApiMethod.SEND_EVENT_NOW:
@@ -169,45 +188,49 @@ export class AffiseNative extends NativeBase {
                     case this.SUCCESS:
                         tryCast<OnSendSuccessCallback>(callback)?.();
                         break;
-                    case this.FAILED: {
-                        const response = DebugUtils.parseResponse(data);
-                        tryCast<OnSendFailedCallback>(callback)?.(response);
-                    }
+                    case this.FAILED:
+                        tryCast<OnSendFailedCallback>(callback)?.(DebugUtils.toResponse(data));
                         break;
                     default:
                         break;
                 }
                 break;
             case AffiseApiMethod.GET_REFERRER_CALLBACK:
-                tryCast<ReferrerCallback>(callback)?.(data as string || "");
+                tryCast<ReferrerCallback>(callback)?.(DataMapper.toNonNullString(data));
                 break;
             case AffiseApiMethod.GET_REFERRER_VALUE_CALLBACK:
-                tryCast<ReferrerCallback>(callback)?.(data as string || "");
+                tryCast<ReferrerCallback>(callback)?.(DataMapper.toNonNullString(data));
                 break;
-            case AffiseApiMethod.GET_STATUS_CALLBACK: {
-                const list = toAffiseKeyValueList(tryCast<Array<any>>(data) || []);
-                tryCast<OnKeyValueCallback>(callback)?.(list);
-                break;
-            }
             case AffiseApiMethod.REGISTER_DEEPLINK_CALLBACK:
-                tryCast<OnDeeplinkCallback>(callback)?.(data as string || "");
+                tryCast<OnDeeplinkCallback>(callback)?.(DataMapper.toDeeplinkValue(data));
                 break;
             case AffiseApiMethod.SKAD_REGISTER_ERROR_CALLBACK:
-                tryCast<ErrorCallback>(callback)?.(data as string || "");
+                tryCast<ErrorCallback>(callback)?.(DataMapper.toNonNullString(data));
                 break;
             case AffiseApiMethod.SKAD_POSTBACK_ERROR_CALLBACK:
-                tryCast<ErrorCallback>(callback)?.(data as string || "");
+                tryCast<ErrorCallback>(callback)?.(DataMapper.toNonNullString(data));
                 break;
-            case AffiseApiMethod.DEBUG_VALIDATE_CALLBACK: {
-                const status = DebugUtils.getValidationStatus(data);
-                tryCast<DebugOnValidateCallback>(callback)?.(status);
-            }
+            case AffiseApiMethod.DEBUG_VALIDATE_CALLBACK:
+                tryCast<DebugOnValidateCallback>(callback)?.(DebugUtils.getValidationStatus(data));
                 break;
-            case AffiseApiMethod.DEBUG_NETWORK_CALLBACK: {
-                const [request, response] = DebugUtils.parseRequestResponse(data);
-                tryCast<DebugOnNetworkCallback>(callback)?.(request, response);
-            }
+            case AffiseApiMethod.DEBUG_NETWORK_CALLBACK:
+                tryCast<DebugOnNetworkCallback>(callback)?.(
+                    DebugUtils.toRequestWithKey(data, this.REQUEST),
+                    DebugUtils.toResponseWithKey(data, this.RESPONSE)
+                );
                 break;
+            ////////////////////////////////////////
+            // modules
+            ////////////////////////////////////////
+            case AffiseApiMethod.GET_STATUS_CALLBACK:
+                tryCast<OnKeyValueCallback>(callback)?.(DataMapper.toAffiseKeyValueList(data));
+                break;
+            case AffiseApiMethod.MODULE_LINK_LINK_RESOLVE_CALLBACK:
+                tryCast<AffiseLinkCallback>(callback)?.(DataMapper.toNonNullString(data));
+                break;
+            ////////////////////////////////////////
+            // modules
+            ////////////////////////////////////////
             default:
                 break;
         }

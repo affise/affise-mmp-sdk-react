@@ -48,10 +48,10 @@ export class AffiseEvent implements PredefinedParameter {
      */
     protected predefinedParameters: Record<string, unknown>;
 
-    constructor(name: string, userData?: string) {
+    constructor(name: string, userData?: string | null) {
         this.name = name;
         this.category = "";
-        this.userData = userData;
+        this.userData = userData || undefined;
         this.firstForUser = false;
         this.serialize = {};
         this.predefinedParameters = {};

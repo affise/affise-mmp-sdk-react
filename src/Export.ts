@@ -3,7 +3,9 @@ export * from './events/AutoCatchingType';
 export * from './events/TouchType';
 
 export * from './callback/ErrorCallback';
-export * from './callback/OnDeeplinkCallback';
+
+export * from './deeplink/OnDeeplinkCallback';
+export * from './deeplink/DeeplinkValue';
 
 export * from './debug/network/DebugOnNetworkCallback';
 export * from './debug/validate/DebugOnValidateCallback';
@@ -24,11 +26,15 @@ export * from './skad/CoarseValue';
 export * from './module/AffiseModules';
 export * from './module/AffiseKeyValue';
 export * from './module/OnKeyValueCallback';
+export * from './module/link/AffiseLinkCallback';
 
 export * from './ad/AffiseAdRevenue';
 export * from './ad/AffiseAdSource';
 
 export * from './parameters/ProviderType';
+
+export * from './events/OnSendSuccessCallback';
+export * from './events/OnSendFailedCallback';
 
 export * from './events/parameters/PredefinedListObject';
 export * from './events/parameters/PredefinedFloat';
@@ -39,7 +45,11 @@ export * from './events/parameters/PredefinedString';
 export * from './events/parameters/PredefinedGroup';
 
 export * from './events/base/AffiseEvent';
+export * from './events/base/AffiseEventProps';
+export * from './events/base/AffiseCustomEventProps';
 export * from './events/subscription/BaseSubscriptionEvent';
+export * from './events/subscription/AffiseSubscriptionEventProps';
+export * from './events/subscription/AffiseCustomSubscriptionEventProps';
 
 export * from './events/custom/UserCustomEvent';
 export * from './events/custom/UserCustomSubscriptionEvent';

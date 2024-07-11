@@ -1,4 +1,5 @@
 import {NativeEvent} from "../base/NativeEvent";
+import type {AffiseCustomEventProps} from "../base/AffiseCustomEventProps";
 
 /**
  * UserCustomEvent
@@ -8,8 +9,7 @@ import {NativeEvent} from "../base/NativeEvent";
  * @param timeStampMillis the timestamp event in milliseconds.
  */
 export class UserCustomEvent extends NativeEvent {
-
-    constructor({eventName, userData, timeStampMillis}: { eventName: string, userData?: string, timeStampMillis?: number }) {
-        super(eventName, userData, timeStampMillis);
+    constructor(props: AffiseCustomEventProps) {
+        super(props);
     }
 }

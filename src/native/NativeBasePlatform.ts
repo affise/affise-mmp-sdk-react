@@ -54,7 +54,9 @@ export abstract class NativeBasePlatform {
     }
 
     protected reactHandleDeeplink() {
-        Linking.getInitialURL().then(this.reactDeeplinkCallback);
+        Linking.getInitialURL().then((url) => {
+            this.reactDeeplinkCallback(url);
+        });
         Linking.addEventListener('url', (evt) => this.reactDeeplinkCallback(evt.url));
     }
 

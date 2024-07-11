@@ -22,14 +22,11 @@ export enum AffiseApiMethod {
     GET_RANDOM_USER_ID = "get_random_user_id",
     GET_RANDOM_DEVICE_ID = "get_random_device_id",
     GET_PROVIDERS = "get_providers",
-    MODULE_START = "module_start",
-    GET_MODULES_INSTALLED = "get_modules_installed",
     IS_FIRST_RUN = "is_first_run",
 
     // callback methods
     GET_REFERRER_CALLBACK = "get_referrer_callback",
     GET_REFERRER_VALUE_CALLBACK = "get_referrer_value_callback",
-    GET_STATUS_CALLBACK = "get_status_callback",
     REGISTER_DEEPLINK_CALLBACK = "register_deeplink_callback",
     SKAD_REGISTER_ERROR_CALLBACK = "skad_register_error_callback",
     SKAD_POSTBACK_ERROR_CALLBACK = "skad_postback_error_callback",
@@ -37,6 +34,18 @@ export enum AffiseApiMethod {
     // debug
     DEBUG_VALIDATE_CALLBACK = "debug_validate_callback",
     DEBUG_NETWORK_CALLBACK = "debug_network_callback",
+
+    ////////////////////////////////////////
+    // modules
+    ////////////////////////////////////////
+    MODULE_START = "module_start",
+    GET_MODULES_INSTALLED = "get_modules_installed",
+    GET_STATUS_CALLBACK = "get_status_callback",
+    // Link Module
+    MODULE_LINK_LINK_RESOLVE_CALLBACK = "module_link_link_resolve_callback",
+    ////////////////////////////////////////
+    // modules
+    ////////////////////////////////////////
 }
 
 export function apiMethodFrom(name: string): AffiseApiMethod | null {
