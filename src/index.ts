@@ -202,17 +202,33 @@ export class Affise {
     }
 
     /**
+     * @deprecated use Affise.getReferrerUrl(callback)
      * Get referrer
      */
     static getReferrer(callback: ReferrerCallback) {
-        this.native.getReferrer(callback);
+        this.getReferrerUrl(callback);
+    }
+
+    /**
+     * @deprecated use Affise.getReferrerUrlValue(key, callback)
+     * Get referrer Value
+     */
+    static getReferrerValue(key: ReferrerKey, callback: ReferrerCallback) {
+        this.getReferrerUrlValue(key, callback);
+    }
+
+    /**
+     * Get referrer
+     */
+    static getReferrerUrl(callback: ReferrerCallback) {
+        this.native.getReferrerUrl(callback);
     }
 
     /**
      * Get referrer Value
      */
-    static getReferrerValue(key: ReferrerKey, callback: ReferrerCallback) {
-        this.native.getReferrerValue(key, callback);
+    static getReferrerUrlValue(key: ReferrerKey, callback: ReferrerCallback) {
+        this.native.getReferrerUrlValue(key, callback);
     }
 
     /**
@@ -253,6 +269,20 @@ export class Affise {
         static updatePostbackConversionValue(fineValue: bigint, coarseValue: CoarseValue, completionHandler: ErrorCallback) {
             if (Platform.OS !== 'ios') return;
             Affise.native.updatePostbackConversionValue(fineValue, coarseValue, completionHandler);
+        }
+
+        /**
+         * Get referrer on server
+         */
+        static getReferrerOnServer(callback: ReferrerCallback) {
+            Affise.native.getReferrerOnServer(callback);
+        }
+
+        /**
+         * Get referrer on server value
+         */
+        static getReferrerOnServerValue(key: ReferrerKey, callback: ReferrerCallback) {
+            Affise.native.getReferrerOnServerValue(key, callback);
         }
     };
 

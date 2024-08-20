@@ -59,7 +59,9 @@
   - [Is first run](#is-first-run)
   - [Get referrer](#get-referrer)
   - [Get referrer value](#get-referrer-value)
-    - [Referrer keys](#referrer-keys)
+  - [Get referrer on server](#get-referrer-on-server)
+  - [Get referrer on server parameter](#get-referrer-on-server-parameter)
+  - [Referrer keys](#referrer-keys)
   - [Get module state](#get-module-state)
   - [Platform specific](#platform-specific)
     - [GDPR right to be forgotten](#gdpr-right-to-be-forgotten)
@@ -127,7 +129,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.40'
+final affise_version = '1.6.42'
 
 dependencies {
     // Affise modules
@@ -146,9 +148,9 @@ Add modules to iOS project
 
 | Module        |                                       Version                                        | Start    |
 |---------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING` | [`1.6.36`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `LINK`        | [`1.6.36`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `STATUS`      | [`1.6.36`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING` | [`1.6.39`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `LINK`        | [`1.6.39`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `STATUS`      | [`1.6.39`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -157,9 +159,9 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Advertising', `1.6.36`
-  pod 'AffiseModule/Link', `1.6.36`
-  pod 'AffiseModule/Status', `1.6.36`
+  pod 'AffiseModule/Advertising', `1.6.39`
+  pod 'AffiseModule/Link', `1.6.39`
+  pod 'AffiseModule/Status', `1.6.39`
 end
 ```
 
@@ -1089,7 +1091,7 @@ Affise.isFirstRun().then((isFirstRun) => {
 Use the next public method of SDK
 
 ```typescript
-Affise.getReferrer().then((referrer) => {
+Affise.getReferrerUrl().then((referrer) => {
   // handle referrer
 });
 ```
@@ -1099,12 +1101,44 @@ Affise.getReferrer().then((referrer) => {
 Use the next public method of SDK to get referrer value by
 
 ```typescript
-Affise.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
+Affise.getReferrerUrlValue(ReferrerKey.CLICK_ID, (value) => {
   // handle referrer
 })
 ```
 
-### Referrer keys
+## Get referrer on server
+
+> `iOS Only`
+
+> **Note**
+>
+> Requires [Affise Status Module](#modules) for [ios](#ios)
+
+Use the next public method of SDK
+
+```typescript
+Affise.ios.getReferrerOnServer().then((referrer) => {
+    // handle referrer
+});
+```
+
+## Get referrer on server parameter
+
+> `iOS Only`
+
+> **Note**
+>
+> Requires [Affise Status Module](#modules) for [ios](#ios)
+
+Use the next public method of SDK to get referrer parameter by
+
+```typescript
+Affise.ios.getReferrerOnServerValue(ReferrerKey.CLICK_ID, (value) => {
+    // handle referrer
+})
+```
+
+## Referrer keys
 
 In examples above `ReferrerKey.CLICK_ID` is used, but many others is available:
 

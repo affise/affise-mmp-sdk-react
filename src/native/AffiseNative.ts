@@ -112,12 +112,20 @@ export class AffiseNative extends NativeBase {
         this.native(AffiseApiMethod.CRASH_APPLICATION);
     }
 
-    getReferrer(callback: ReferrerCallback) {
-        this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_CALLBACK, callback);
+    getReferrerUrl(callback: ReferrerCallback) {
+        this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_URL_CALLBACK, callback);
     }
 
-    getReferrerValue(key: ReferrerKey, callback: ReferrerCallback) {
-        this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_VALUE_CALLBACK, callback, key);
+    getReferrerUrlValue(key: ReferrerKey, callback: ReferrerCallback) {
+        this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_URL_VALUE_CALLBACK, callback, key);
+    }
+
+    getReferrerOnServer(callback: ReferrerCallback) {
+        this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_ON_SERVER_CALLBACK, callback);
+    }
+
+    getReferrerOnServerValue(key: ReferrerKey, callback: ReferrerCallback) {
+        this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_ON_SERVER_VALUE_CALLBACK, callback, key);
     }
 
     isFirstRun(): Promise<boolean> {
@@ -195,10 +203,16 @@ export class AffiseNative extends NativeBase {
                         break;
                 }
                 break;
-            case AffiseApiMethod.GET_REFERRER_CALLBACK:
+            case AffiseApiMethod.GET_REFERRER_URL_CALLBACK:
                 tryCast<ReferrerCallback>(callback)?.(DataMapper.toNonNullString(data));
                 break;
-            case AffiseApiMethod.GET_REFERRER_VALUE_CALLBACK:
+            case AffiseApiMethod.GET_REFERRER_URL_VALUE_CALLBACK:
+                tryCast<ReferrerCallback>(callback)?.(DataMapper.toNonNullString(data));
+                break;
+            case AffiseApiMethod.GET_REFERRER_ON_SERVER_CALLBACK:
+                tryCast<ReferrerCallback>(callback)?.(DataMapper.toNonNullString(data));
+                break;
+            case AffiseApiMethod.GET_REFERRER_ON_SERVER_VALUE_CALLBACK:
                 tryCast<ReferrerCallback>(callback)?.(DataMapper.toNonNullString(data));
                 break;
             case AffiseApiMethod.REGISTER_DEEPLINK_CALLBACK:

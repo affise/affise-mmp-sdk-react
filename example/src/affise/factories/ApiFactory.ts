@@ -53,19 +53,19 @@ export class ApiFactory {
                 }
             },
             {
-                title: "get Referrer Value",
+                title: "get Referrer Url Value",
                 call: () => {
                     // Get referrer parameter https://github.com/affise/sdk-react#get-referrer-value
-                    Affise.getReferrerValue(ReferrerKey.CLICK_ID, (value) => {
+                    Affise.getReferrerUrlValue(ReferrerKey.CLICK_ID, (value) => {
                         this.callOutput(`ReferrerValue: ${value}`);
                     });
                 }
             },
             {
-                title: "get Referrer",
+                title: "get Referrer Url",
                 call: () => {
                     // Get referrer https://github.com/affise/sdk-react#get-referrer
-                    Affise.getReferrer((ref) => {
+                    Affise.getReferrerUrl((ref) => {
                         this.callOutput(`Referrer: ${ref}`);
                     });
                 }
@@ -89,7 +89,25 @@ export class ApiFactory {
                 }
             },
             {
-                title: "SKAd register",
+                title: "iOS get Referrer On Server Value",
+                call: () => {
+                    // Get referrer parameter https://github.com/affise/sdk-react#get-referrer-on-server-parameter
+                    Affise.ios.getReferrerOnServerValue(ReferrerKey.CLICK_ID, (value) => {
+                        this.callOutput(`ReferrerOnServerValue: ${value}`);
+                    });
+                }
+            },
+            {
+                title: "iOS get Referrer On Server",
+                call: () => {
+                    // Get referrer https://github.com/affise/sdk-react#get-referrer-on-server
+                    Affise.ios.getReferrerOnServer((ref) => {
+                        this.callOutput(`ReferrerOnServer: ${ref}`);
+                    });
+                }
+            },
+            {
+                title: "iOS SKAd register",
                 call: () => {
                     // StoreKit Ad Network https://github.com/affise/sdk-react#storekit-ad-network
                     Affise.ios.registerAppForAdNetworkAttribution((error) => {
@@ -98,7 +116,7 @@ export class ApiFactory {
                 }
             },
             {
-                title: "SKAd update",
+                title: "iOS SKAd update",
                 call: () => {
                     // StoreKit Ad Network https://github.com/affise/sdk-react#storekit-ad-network
                     Affise.ios.updatePostbackConversionValue(1n, SKAdNetwork.CoarseConversionValue.medium, (error) => {
