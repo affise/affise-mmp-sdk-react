@@ -1,7 +1,7 @@
 import React
 import AffiseInternal
 
-class ResultWrapper : AffiseResult {
+class ResultWrapper : InternalResult {
 
     private var resolve: RCTPromiseResolveBlock
     private var reject: RCTPromiseRejectBlock

@@ -5,4 +5,5 @@ export enum AffiseModules {
     NETWORK = "Network",
     PHONE = "Phone",
     STATUS = "Status",
+    SUBSCRIPTION = "Subscription",
 }

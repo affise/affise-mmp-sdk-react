@@ -5,7 +5,8 @@ export enum HttpMethod {
     POST = "POST",
 }
 
-export function httpMethodFrom(name: string): HttpMethod | null {
+export function httpMethodFrom(name: string | null): HttpMethod | null {
+    if (name == null) return null;
     return getEnumFromString(HttpMethod, name);
 }
 

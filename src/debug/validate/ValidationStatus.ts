@@ -10,6 +10,7 @@ export enum ValidationStatus {
     UNKNOWN_ERROR = "unknown_error",
 }
 
-export function validationStatusFrom(name: string): ValidationStatus | null {
+export function validationStatusFrom(name: string | null): ValidationStatus | null {
+    if (name == null) return null;
     return getEnumFromString(ValidationStatus, name);
 }

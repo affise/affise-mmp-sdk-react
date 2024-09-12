@@ -1,10 +1,10 @@
 package com.affise.attribution.react
 
-import com.affise.attribution.internal.callback.AffiseResult
+import com.affise.attribution.internal.callback.InternalResult
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 
-class ResultWrapper(private val promise: Promise) : AffiseResult {
+class ResultWrapper(private val promise: Promise) : InternalResult {
     override fun success(data: Any?) {
         promise.resolve(data?.asNativeData())
     }

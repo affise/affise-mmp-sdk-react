@@ -16,7 +16,7 @@ export class AffiseWidget extends Component {
     render() {
         return (
             <FlatList
-                style={{width: '100%', padding: 8}}
+                style={{width: '100%', paddingStart: 8, paddingEnd: 8, paddingBottom: 8}}
                 ItemSeparatorComponent={() => <View style={{height: 8}}/>}
                 data={this.events}
                 renderItem={({item}) => (

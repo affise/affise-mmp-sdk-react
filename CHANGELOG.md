@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.6.20] - 2024-09-11
+
+### Added
+
+- Module `Subscription` support.
+
+### Changed
+
+- Update native iOS to [`1.6.40`](https://github.com/affise/sdk-ios/blob/1.6.40/CHANGELOG.md).
+- Update native Android to [`1.6.44`](https://github.com/affise/sdk-android/blob/v1.6.44/CHANGELOG.md).
+
 ## [1.6.19] - 2024-08-19
 
 ### Added
@@ -112,6 +123,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.20]: https://github.com/affise/sdk-react/compare/1.6.19...1.6.20
 [1.6.19]: https://github.com/affise/sdk-react/compare/1.6.18...1.6.19
 [1.6.18]: https://github.com/affise/sdk-react/compare/1.6.17...1.6.18
 [1.6.17]: https://github.com/affise/sdk-react/compare/1.6.16...1.6.17

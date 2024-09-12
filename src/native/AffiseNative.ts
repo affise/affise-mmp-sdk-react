@@ -18,16 +18,15 @@ import {DebugUtils} from "./utils/DebugUtils";
 import type {OnSendSuccessCallback} from "../events/OnSendSuccessCallback";
 import type {OnSendFailedCallback} from "../events/OnSendFailedCallback";
 import type {AffiseLinkCallback} from "../module/link/AffiseLinkCallback";
-import {DataMapper} from "./utils/DataMapper";
+import {DataMapper} from "./data/DataMapper";
+import type {AffiseResultCallback} from "../module/subscription/AffiseResultCallback";
+import type {AffiseProductsResult} from "../module/subscription/AffiseProductsResult";
+import type {AffiseProduct} from "../module/subscription/AffiseProduct";
+import type {AffiseProductType} from "../module/subscription/AffiseProductType";
+import type {AffisePurchasedInfo} from "../module/subscription/AffisePurchasedInfo";
+import {DataName} from "./data/DataName";
 
 export class AffiseNative extends NativeBase {
-
-    protected FINE_VALUE = "fineValue";
-    protected COARSE_VALUE = "coarseValue";
-    protected SUCCESS: string = "success";
-    protected FAILED: string = "failed";
-    protected REQUEST: string = "request";
-    protected RESPONSE: string = "response";
 
     init(initProperties: AffiseInitProperties | AffiseInitPropertiesType) {
         let option: AffiseInitProperties;
@@ -52,8 +51,8 @@ export class AffiseNative extends NativeBase {
         this.nativeCallbackGroup(
             AffiseApiMethod.SEND_EVENT_NOW,
             new Map([
-                [this.SUCCESS, success],
-                [this.FAILED, failed],
+                [DataName.SUCCESS, success],
+                [DataName.FAILED, failed],
             ]),
             event.toRecord()
         );
@@ -150,8 +149,8 @@ export class AffiseNative extends NativeBase {
 
     updatePostbackConversionValue(fineValue: bigint, coarseValue: CoarseValue, completionHandler: ErrorCallback) {
         const value: Record<string, any> = {};
-        value[this.FINE_VALUE] = Number(fineValue);
-        value[this.COARSE_VALUE] = coarseValue.value;
+        value[DataName.FINE_VALUE] = Number(fineValue);
+        value[DataName.COARSE_VALUE] = coarseValue.value;
         this.nativeCallbackOnce(AffiseApiMethod.SKAD_POSTBACK_ERROR_CALLBACK, completionHandler, value);
     }
 
@@ -178,11 +177,34 @@ export class AffiseNative extends NativeBase {
         return this.nativeResult(AffiseApiMethod.GET_MODULES_INSTALLED);
     }
 
+    // Link Module
     linkResolve(url: string, callback: AffiseLinkCallback) {
         this.nativeCallbackOnce(
             AffiseApiMethod.MODULE_LINK_LINK_RESOLVE_CALLBACK,
             callback,
             url
+        );
+    }
+
+    // Subscription Module
+    fetchProducts(ids: string[], callback: AffiseResultCallback<AffiseProductsResult>) {
+        this.nativeCallbackOnce(
+            AffiseApiMethod.MODULE_SUBS_FETCH_PRODUCTS_CALLBACK,
+            callback,
+            ids,
+        );
+    }
+
+    // Subscription Module
+    purchase(product: AffiseProduct, type: AffiseProductType, callback: AffiseResultCallback<AffisePurchasedInfo>) {
+        const data: Record<string, any> = {};
+        data[DataName.PRODUCT] = DataMapper.fromProduct(product);
+        data[DataName.TYPE] = type;
+
+        this.nativeCallbackOnce(
+            AffiseApiMethod.MODULE_SUBS_PURCHASE_CALLBACK,
+            callback,
+            data,
         );
     }
     ////////////////////////////////////////
@@ -193,10 +215,10 @@ export class AffiseNative extends NativeBase {
         switch (api) {
             case AffiseApiMethod.SEND_EVENT_NOW:
                 switch (tag) {
-                    case this.SUCCESS:
+                    case DataName.SUCCESS:
                         tryCast<OnSendSuccessCallback>(callback)?.();
                         break;
-                    case this.FAILED:
+                    case DataName.FAILED:
                         tryCast<OnSendFailedCallback>(callback)?.(DebugUtils.toResponse(data));
                         break;
                     default:
@@ -229,8 +251,8 @@ export class AffiseNative extends NativeBase {
                 break;
             case AffiseApiMethod.DEBUG_NETWORK_CALLBACK:
                 tryCast<DebugOnNetworkCallback>(callback)?.(
-                    DebugUtils.toRequestWithKey(data, this.REQUEST),
-                    DebugUtils.toResponseWithKey(data, this.RESPONSE)
+                    DebugUtils.toRequestWithKey(data, DataName.REQUEST),
+                    DebugUtils.toResponseWithKey(data, DataName.RESPONSE)
                 );
                 break;
             ////////////////////////////////////////
@@ -241,6 +263,15 @@ export class AffiseNative extends NativeBase {
                 break;
             case AffiseApiMethod.MODULE_LINK_LINK_RESOLVE_CALLBACK:
                 tryCast<AffiseLinkCallback>(callback)?.(DataMapper.toNonNullString(data));
+                break;
+            // Subscription Module
+            case AffiseApiMethod.MODULE_SUBS_FETCH_PRODUCTS_CALLBACK:
+                tryCast<AffiseResultCallback<AffiseProductsResult>>(callback)
+                    ?.(DataMapper.toResultAffiseProductsResult(data));
+                break;
+            case AffiseApiMethod.MODULE_SUBS_PURCHASE_CALLBACK:
+                tryCast<AffiseResultCallback<AffisePurchasedInfo>>(callback)
+                    ?.(DataMapper.toResultAffisePurchasedInfo(data));
                 break;
             ////////////////////////////////////////
             // modules

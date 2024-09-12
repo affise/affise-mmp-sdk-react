@@ -25,8 +25,17 @@ export * from './skad/CoarseValue';
 
 export * from './module/AffiseModules';
 export * from './module/AffiseKeyValue';
+export * from './module/AffiseResult';
 export * from './module/OnKeyValueCallback';
 export * from './module/link/AffiseLinkCallback';
+export * from './module/subscription/AffiseProduct';
+export * from './module/subscription/AffiseProductPrice';
+export * from './module/subscription/AffiseProductsResult';
+export * from './module/subscription/AffiseProductSubscriptionDetail';
+export * from './module/subscription/AffiseProductType';
+export * from './module/subscription/AffisePurchasedInfo';
+export * from './module/subscription/AffiseResultCallback';
+export * from './module/subscription/TimeUnitType';
 
 export * from './ad/AffiseAdRevenue';
 export * from './ad/AffiseAdSource';

@@ -15,10 +15,11 @@ import type {
     OnSendSuccessCallback,
     OnSendFailedCallback,
     AffiseLinkCallback,
+    AffiseResultCallback,
 } from "./Export";
 import {AffiseNative} from "./native/AffiseNative";
 import {Platform} from "react-native";
-import {AffiseSettings} from "./Export";
+import {AffiseProduct, AffiseProductsResult, AffiseProductType, AffisePurchasedInfo, AffiseSettings} from "./Export";
 
 export * from "./Export";
 
@@ -319,6 +320,25 @@ export class Affise {
          */
         static linkResolve(url: string, callback: AffiseLinkCallback) {
             Affise.native.linkResolve(url, callback);
+        }
+
+        /**
+         * Module subscription fetchProducts
+         * @param ids list of product ids
+         * @param callback result callback
+         */
+        static fetchProducts(ids: string[], callback: AffiseResultCallback<AffiseProductsResult>) {
+            Affise.native.fetchProducts(ids, callback);
+        }
+
+        /**
+         * Module subscription purchase
+         * @param product product
+         * @param type product type
+         * @param callback result callback
+         */
+        static purchase(product: AffiseProduct, type: AffiseProductType, callback: AffiseResultCallback<AffisePurchasedInfo>) {
+            Affise.native.purchase(product, type, callback);
         }
     };
 

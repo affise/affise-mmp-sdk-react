@@ -45,11 +45,15 @@ export enum AffiseApiMethod {
     GET_STATUS_CALLBACK = "get_status_callback",
     // Link Module
     MODULE_LINK_LINK_RESOLVE_CALLBACK = "module_link_link_resolve_callback",
+    // Subscription Module
+    MODULE_SUBS_FETCH_PRODUCTS_CALLBACK = "module_subs_fetch_products_callback",
+    MODULE_SUBS_PURCHASE_CALLBACK = "module_subs_purchase_callback",
     ////////////////////////////////////////
     // modules
     ////////////////////////////////////////
 }
 
-export function apiMethodFrom(name: string): AffiseApiMethod | null {
+export function apiMethodFrom(name: string | null): AffiseApiMethod | null {
+    if (name == null) return null;
     return getEnumFromString(AffiseApiMethod, name);
 }

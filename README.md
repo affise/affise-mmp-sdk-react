@@ -16,7 +16,11 @@
       - [iOS](#ios)
       - [Module Advertising](#module-advertising)
       - [Module Link](#module-link)
+      - [Module Status](#module-status)
+      - [Module Subscription](#module-subscription)
+          - [AffiseProductType](#affiseproducttype)
     - [Initialize](#initialize)
+      - [Before application is published](#before-application-is-published)
       - [Domain](#domain)
     - [Requirements](#requirements)
       - [Android](#android-1)
@@ -117,19 +121,20 @@ Affise.module.getModulesInstalled().then((modules) => {
 
 Add modules to Android project
 
-| Module        | Version                                                                                                                                                                      | Start  |
-|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| `ADVERTISING` | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) | `Auto` |
-| `ANDROIDID`   | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://mvnrepository.com/artifact/com.affise/module-androidid)       | `Auto` |
-| `LINK`        | [![module-link](https://img.shields.io/maven-central/v/com.affise/module-link?label=latest)](https://mvnrepository.com/artifact/com.affise/module-link)                      | `Auto` |
-| `NETWORK`     | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             | `Auto` |
-| `PHONE`       | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   | `Auto` |
-| `STATUS`      | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                | `Auto` |
+| Module         | Version                                                                                                                                                                      | Start  |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| `ADVERTISING`  | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) | `Auto` |
+| `ANDROIDID`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://mvnrepository.com/artifact/com.affise/module-androidid)       | `Auto` |
+| `LINK`         | [![module-link](https://img.shields.io/maven-central/v/com.affise/module-link?label=latest)](https://mvnrepository.com/artifact/com.affise/module-link)                      | `Auto` |
+| `NETWORK`      | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             | `Auto` |
+| `PHONE`        | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   | `Auto` |
+| `STATUS`       | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                | `Auto` |
+| `SUBSCRIPTION` | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-subscription?label=latest)](https://mvnrepository.com/artifact/com.affise/module-subscription)    | `Auto` |
 
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.42'
+final affise_version = '1.6.44'
 
 dependencies {
     // Affise modules
@@ -139,6 +144,7 @@ dependencies {
     implementation "com.affise:module-network:$affise_version"
     implementation "com.affise:module-phone:$affise_version"
     implementation "com.affise:module-status:$affise_version"
+    implementation 'com.affise:module-subscription:1.6.44'
 }
 ```
 
@@ -146,11 +152,12 @@ dependencies {
 
 Add modules to iOS project
 
-| Module        |                                       Version                                        | Start    |
-|---------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING` | [`1.6.39`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `LINK`        | [`1.6.39`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `STATUS`      | [`1.6.39`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| Module         |                                       Version                                        | Start    |
+|----------------|:------------------------------------------------------------------------------------:|----------|
+| `ADVERTISING`  | [`1.6.40`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `LINK`         | [`1.6.40`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `STATUS`       | [`1.6.40`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `SUBSCRIPTION` | [`1.6.40`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -159,9 +166,10 @@ target 'YourAppProject' do
   # ...
 
   # Affise Modules
-  pod 'AffiseModule/Advertising', `1.6.39`
-  pod 'AffiseModule/Link', `1.6.39`
-  pod 'AffiseModule/Status', `1.6.39`
+  pod 'AffiseModule/Advertising', `1.6.40`
+  pod 'AffiseModule/Link', `1.6.40`
+  pod 'AffiseModule/Status', `1.6.40`
+  pod 'AffiseModule/Subscription', `1.6.40`
 end
 ```
 
@@ -207,6 +215,62 @@ Affise.module.linkResolve("SITE_WITH_REDIRECTION", (redirectUrl) => {
 });
 ```
 
+#### Module Status
+
+> **Warning**
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+>
+> If `getStatus` return an error or working more than 2 minutes
+>
+> Please see section [validation credentials](#validate-credentials)
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+
+```typescript
+Affise.module.getStatus(AffiseModules.STATUS, (response) => {
+    // handle status response
+});
+```
+
+#### Module Subscription
+
+Get products by ids:
+
+```typescript
+const ids = ["exampple.product.id_1", "exampple.product.id_2"];
+
+Affise.module.fetchProducts(ids, (result) => {
+    if (result.isSuccess) {
+        const value = result.asSuccess;
+        const products: AffiseProduct[] = value.products;
+        const invalidIds: string[] = value.invalidIds;
+    } else {
+        const error: string = result.asFailure;
+    }
+});
+```
+
+Purchase product:
+
+```typescript
+// Specify product type for correct affise event
+Affise.module.purchase(product, AffiseProductType.CONSUMABLE, (result) => {
+    if (result.isSuccess) {
+        const purchasedInfo: AffisePurchasedInfo = result.asSuccess;
+    } else {
+        const error: string = result.asFailure;
+    }
+});
+```
+
+##### AffiseProductType
+
+- `CONSUMABLE`
+- `NON_CONSUMABLE`
+- `RENEWABLE_SUBSCRIPTION`
+- `NON_RENEWABLE_SUBSCRIPTION`
+
 ### Initialize
 
 After dependency is added, and project is sync with `npm install` and initialize.
@@ -243,6 +307,18 @@ Check if library is initialized
 ```typescript
 Affise.isInitialized();
 ```
+
+#### Before application is published
+
+> **Warning**
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+>
+> Please make sure your credentials are valid
+>
+> Visit section [validation credentials](#validate-credentials)
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
 #### Domain
 
@@ -1179,6 +1255,16 @@ In examples above `ReferrerKey.CLICK_ID` is used, but many others is available:
 - `SUB_5`
 
 ## Get module state
+
+> **Warning**
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+>
+> If `getStatus` return an error or working more than 2 minutes
+>
+> Please see section [validation credentials](#validate-credentials)
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
 ```typescript
 Affise.module.getStatus(AffiseModules.STATUS, (response) => {

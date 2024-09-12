@@ -34,8 +34,8 @@ export class AffiseApiWidget extends Component<Props, State> {
 
     render() {
         return (
-            <View  style={{width: '100%'}}>
-                <View style={{marginTop: 8, marginLeft: 8, marginRight: 8}}>
+            <View style={{width: '100%'}}>
+                <View style={{marginLeft: 8, marginRight: 8}}>
                     <TextInput value={this.state.value} style={styles.input} />
                 </View>
 

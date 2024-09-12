@@ -1,18 +1,21 @@
 import * as React from 'react';
 
-import {Alert, Button, SafeAreaView, StyleSheet, View} from 'react-native';
+import {Alert, Button, SafeAreaView, StyleSheet} from 'react-native';
 import {
     Affise
 } from 'affise-attribution-lib';
 import {AffiseWidget} from "./affise/AffiseWidget";
 import {AffiseApiWidget} from "./affise/AffiseApiWidget";
 import {useEffect} from "react";
+import {AffiseStore} from "./affise/store/AffiseStore";
+import {AffiseIndexContainer} from "./affise/components/AffiseIndexContainer";
+import {AffiseButtonGroup} from "./affise/components/AffiseButtonGroup";
 
 
 export default function App() {
 
     const [deeplink, setDeeplink] = React.useState("");
-    const [hide, setHide] = React.useState(true);
+    const [tabIndex, setTabIndex] = React.useState(0);
 
     useEffect(() => {
         // Initialize https://github.com/affise/sdk-react#initialize
@@ -56,18 +59,27 @@ export default function App() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{width: '100%', paddingTop: 8, paddingLeft:8, paddingRight: 8}}>
+            <AffiseButtonGroup style={styles.buttonGroup}>
                 <Button
-                    title='API / Events'
-                    onPress={() => {
-                        setHide(!hide);
-                    }}
+                    title='API'
+                    onPress={() => setTabIndex(0) }
                 />
-            </View>
+                <Button
+                    title='Events'
+                    onPress={() => setTabIndex(1) }
+                />
+                <Button
+                    title='Store'
+                    onPress={() => setTabIndex(2) }
+                />
+            </AffiseButtonGroup>
 
-            <View style={{width: '100%', flex: 1}}>
-                {!hide ? <AffiseWidget/> : <AffiseApiWidget value={deeplink}  /> }
-            </View>
+            <AffiseIndexContainer index={tabIndex} style={styles.flexWidth}>
+                <AffiseApiWidget value={deeplink}/>
+                <AffiseWidget/>
+                <AffiseStore/>
+            </AffiseIndexContainer>
+
         </SafeAreaView>
     );
 }
@@ -78,4 +90,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    buttonGroup: {
+        justifyContent: "space-between",
+        flexDirection: "row",
+        alignContent: "stretch",
+        width: '100%',
+        paddingTop: 8,
+        paddingBottom: 8,
+        paddingLeft: 4,
+        paddingRight: 4
+    },
+    flexWidth: {
+        width: '100%',
+        flex: 1
+    }
 });

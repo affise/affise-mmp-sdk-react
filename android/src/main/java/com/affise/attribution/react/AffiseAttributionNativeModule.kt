@@ -22,6 +22,7 @@ class AffiseAttributionNativeModule(
     init {
         (reactContext.applicationContext as? Application)?.let { app ->
             apiWrapper = AffiseApiWrapper(app)
+            updateActivity()
             apiWrapper?.react()
             apiWrapper?.setCallback { name, map ->
                 val data = Arguments.createMap().apply {
@@ -43,8 +44,17 @@ class AffiseAttributionNativeModule(
         return NAME
     }
 
+    private fun updateActivity() {
+        apiWrapper?.let {
+            if (it.activity == null) {
+                it.activity = currentActivity
+            }
+        }
+    }
+
     @ReactMethod
     fun invokeMethod(apiName: String, data: ReadableMap, result: Promise) {
+        updateActivity()
         apiWrapper?.call(AffiseApiMethod.from(apiName), data.toHashMap(), ResultWrapper(result))
     }
 
