@@ -1,4 +1,8 @@
-import {Affise, AffiseInitProperties, AutoCatchingType} from "../index";
+import {
+    Affise,
+    AffiseInitProperties,
+    // AutoCatchingType
+} from "../index";
 
 export class AffiseSettings {
     private readonly affiseAppId: string;

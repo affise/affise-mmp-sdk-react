@@ -2,7 +2,7 @@ import type {
     AffiseEvent,
     AffiseInitPropertiesType,
     AffiseInitProperties,
-    AutoCatchingType,
+    // AutoCatchingType,
     ReferrerKey,
     CoarseValue,
     AffiseModules,
