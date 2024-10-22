@@ -93,9 +93,9 @@ export class Affise {
     /**
      * Send enabled autoCatching types
      */
-    static setAutoCatchingTypes(types: AutoCatchingType[]) {
-        this.native.setAutoCatchingTypes(types);
-    }
+    // static setAutoCatchingTypes(types: AutoCatchingType[]) {
+    //     this.native.setAutoCatchingTypes(types);
+    // }
 
     /**
      * Sets offline mode to [enabled] state
@@ -238,9 +238,9 @@ export class Affise {
      * When disabled, library should not generate any metrics events,
      * but will send the saved metrics events
      */
-    static setEnabledMetrics(enabled: boolean) {
-        this.native.setEnabledMetrics(enabled);
-    }
+    // static setEnabledMetrics(enabled: boolean) {
+    //     this.native.setEnabledMetrics(enabled);
+    // }
 
     static android = class {
         /**

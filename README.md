@@ -18,7 +18,7 @@
       - [Module Link](#module-link)
       - [Module Status](#module-status)
       - [Module Subscription](#module-subscription)
-          - [AffiseProductType](#affiseproducttype)
+        - [AffiseProductType](#affiseproducttype)
     - [Initialize](#initialize)
       - [Before application is published](#before-application-is-published)
       - [Domain](#domain)
@@ -134,7 +134,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.45'
+final affise_version = '1.6.47'
 
 dependencies {
     // Affise modules
@@ -144,7 +144,7 @@ dependencies {
     implementation "com.affise:module-network:$affise_version"
     implementation "com.affise:module-phone:$affise_version"
     implementation "com.affise:module-status:$affise_version"
-    implementation 'com.affise:module-subscription:1.6.45'
+    implementation "com.affise:module-subscription:$affise_version"
 }
 ```
 

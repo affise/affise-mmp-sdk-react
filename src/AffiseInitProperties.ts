@@ -40,8 +40,8 @@ export class AffiseInitProperties {
             partParamName,
             partParamNameToken,
             appToken,
-            enabledMetrics,
-            autoCatchingClickEvents,
+            // enabledMetrics,
+            // autoCatchingClickEvents,
             domain
         }: AffiseInitPropertiesType
     ) {
@@ -51,15 +51,15 @@ export class AffiseInitProperties {
         this.partParamName = partParamName || null;
         this.partParamNameToken = partParamNameToken || null;
         this.appToken = appToken || null;
-        this.autoCatchingClickEvents = autoCatchingClickEvents || [];
+        // this.autoCatchingClickEvents = autoCatchingClickEvents || [];
         this.domain = domain || null;
 
         if (isProduction != null) {
             this.isProduction = isProduction;
         }
-        if (enabledMetrics != null) {
-            this.enabledMetrics = enabledMetrics;
-        }
+        // if (enabledMetrics != null) {
+        //     this.enabledMetrics = enabledMetrics;
+        // }
     }
 }
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.6.23] - 2024-10-22
+
+### Changed
+
+- Update native Android to [`1.6.47`](https://github.com/affise/sdk-android/blob/v1.6.47/CHANGELOG.md).
+
+### Removed
+
+- Api `setEnabledMetrics`.
+- Api `setAutoCatchingTypes`.
+
 ## [1.6.22] - 2024-10-08
 
 ### Fixed
@@ -144,6 +155,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.23]: https://github.com/affise/sdk-react/compare/1.6.22...1.6.23
 [1.6.22]: https://github.com/affise/sdk-react/compare/1.6.21...1.6.22
 [1.6.21]: https://github.com/affise/sdk-react/compare/1.6.20...1.6.21
 [1.6.20]: https://github.com/affise/sdk-react/compare/1.6.19...1.6.20

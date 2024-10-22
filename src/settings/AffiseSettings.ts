@@ -7,8 +7,8 @@ export class AffiseSettings {
     private partParamName?: string | null = null;
     private partParamNameToken?: string | null = null;
     private appToken?: string | null = null;
-    private enabledMetrics: boolean = false;
-    private autoCatchingClickEvents?: AutoCatchingType[] = [];
+    // private enabledMetrics: boolean = false;
+    // private autoCatchingClickEvents?: AutoCatchingType[] = [];
     private domain?: string | null = null;
 
     /**
@@ -78,20 +78,20 @@ export class AffiseSettings {
      *
      * @param autoCatchingClickEvents
      */
-    setAutoCatchingClickEvents(autoCatchingClickEvents: AutoCatchingType[]): AffiseSettings {
-        this.autoCatchingClickEvents = autoCatchingClickEvents;
-        return this;
-    }
+    // setAutoCatchingClickEvents(autoCatchingClickEvents: AutoCatchingType[]): AffiseSettings {
+    //     this.autoCatchingClickEvents = autoCatchingClickEvents;
+    //     return this;
+    // }
 
     /**
      * Set Metrics enable
      *
      * @param enable
      */
-    setEnabledMetrics(enable: boolean): AffiseSettings {
-        this.enabledMetrics = enable;
-        return this;
-    }
+    // setEnabledMetrics(enable: boolean): AffiseSettings {
+    //     this.enabledMetrics = enable;
+    //     return this;
+    // }
 
     private getInitProperties(): AffiseInitProperties {
         return new AffiseInitProperties({
@@ -101,8 +101,8 @@ export class AffiseSettings {
             partParamName: this.partParamName,
             partParamNameToken: this.partParamNameToken,
             appToken: this.appToken,
-            enabledMetrics: this.enabledMetrics,
-            autoCatchingClickEvents: this.autoCatchingClickEvents,
+            // enabledMetrics: this.enabledMetrics,
+            // autoCatchingClickEvents: this.autoCatchingClickEvents,
             domain: this.domain,
         });
     }
