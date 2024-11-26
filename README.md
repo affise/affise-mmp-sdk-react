@@ -130,11 +130,12 @@ Add modules to Android project
 | `PHONE`        | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   | `Auto` |
 | `STATUS`       | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                | `Auto` |
 | `SUBSCRIPTION` | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-subscription?label=latest)](https://mvnrepository.com/artifact/com.affise/module-subscription)    | `Auto` |
+| `RUSTORE`      | [![module-rustore](https://img.shields.io/maven-central/v/com.affise/module-rustore?label=latest)](https://mvnrepository.com/artifact/com.affise/module-rustore)                | `Auto` |
 
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.47'
+final affise_version = '1.6.49'
 
 dependencies {
     // Affise modules
@@ -145,6 +146,7 @@ dependencies {
     implementation "com.affise:module-phone:$affise_version"
     implementation "com.affise:module-status:$affise_version"
     implementation "com.affise:module-subscription:$affise_version"
+    // implementation "com.affise:module-rustore:$affise_version"
 }
 ```
 
@@ -1166,6 +1168,8 @@ Affise.isFirstRun().then((isFirstRun) => {
 
 Use the next public method of SDK
 
+> To get Install referrer by installing from `Android` `RuStore` include module [`RuStore`](#modules)
+
 ```typescript
 Affise.getReferrerUrl().then((referrer) => {
   // handle referrer
@@ -1175,6 +1179,8 @@ Affise.getReferrerUrl().then((referrer) => {
 ## Get referrer value
 
 Use the next public method of SDK to get referrer value by
+
+> To get Install referrer by installing from `Android` `RuStore` include module [`RuStore`](#modules)
 
 ```typescript
 Affise.getReferrerUrlValue(ReferrerKey.CLICK_ID, (value) => {
