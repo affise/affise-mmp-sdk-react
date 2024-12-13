@@ -7,4 +7,5 @@ export enum AffiseModules {
     STATUS = "Status",
     SUBSCRIPTION = "Subscription",
     RUSTORE = "RuStore",
+    HUAWEI = "Huawei",
 }

@@ -248,7 +248,7 @@ android {
     }
 }
 
-final affise_version = '1.6.49'
+final affise_version = '1.6.50'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -262,6 +262,7 @@ dependencies {
     implementation "com.affise:module-status:$affise_version"
     implementation "com.affise:module-subscription:$affise_version"
     // implementation "com.affise:module-rustore:$affise_version"
+    // implementation "com.affise:module-huawei:$affise_version"
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
