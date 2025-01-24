@@ -136,7 +136,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.50'
+final affise_version = '1.6.51'
 
 dependencies {
     // Affise modules
@@ -1196,32 +1196,28 @@ Affise.getReferrerUrlValue(ReferrerKey.CLICK_ID, (value) => {
 
 ## Get referrer on server
 
-> `iOS Only`
-
 > **Note**
 >
-> Requires [Affise Status Module](#modules) for [ios](#ios)
+> Requires [Affise Status Module](#modules)
 
 Use the next public method of SDK
 
 ```typescript
-Affise.ios.getReferrerOnServer().then((referrer) => {
+Affise.getReferrerOnServer().then((referrer) => {
     // handle referrer
 });
 ```
 
 ## Get referrer on server parameter
 
-> `iOS Only`
-
 > **Note**
 >
-> Requires [Affise Status Module](#modules) for [ios](#ios)
+> Requires [Affise Status Module](#modules)
 
 Use the next public method of SDK to get referrer parameter by
 
 ```typescript
-Affise.ios.getReferrerOnServerValue(ReferrerKey.CLICK_ID, (value) => {
+Affise.getReferrerOnServerValue(ReferrerKey.CLICK_ID, (value) => {
     // handle referrer
 })
 ```

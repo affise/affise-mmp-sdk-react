@@ -89,19 +89,19 @@ export class ApiFactory {
                 }
             },
             {
-                title: "iOS get Referrer On Server Value",
+                title: "get Referrer On Server Value",
                 call: () => {
                     // Get referrer parameter https://github.com/affise/sdk-react#get-referrer-on-server-parameter
-                    Affise.ios.getReferrerOnServerValue(ReferrerKey.CLICK_ID, (value) => {
+                    Affise.getReferrerOnServerValue(ReferrerKey.CLICK_ID, (value) => {
                         this.callOutput(`ReferrerOnServerValue: ${value}`);
                     });
                 }
             },
             {
-                title: "iOS get Referrer On Server",
+                title: "get Referrer On Server",
                 call: () => {
                     // Get referrer https://github.com/affise/sdk-react#get-referrer-on-server
-                    Affise.ios.getReferrerOnServer((ref) => {
+                    Affise.getReferrerOnServer((ref) => {
                         this.callOutput(`ReferrerOnServer: ${ref}`);
                     });
                 }

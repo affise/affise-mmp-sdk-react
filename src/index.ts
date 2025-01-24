@@ -233,6 +233,20 @@ export class Affise {
     }
 
     /**
+     * Get referrer on server
+     */
+    static getReferrerOnServer(callback: ReferrerCallback) {
+        this.native.getReferrerOnServer(callback);
+    }
+
+    /**
+     * Get referrer on server value
+     */
+    static getReferrerOnServerValue(key: ReferrerKey, callback: ReferrerCallback) {
+        this.native.getReferrerOnServerValue(key, callback);
+    }
+
+    /**
      * Set [enabled] collect metrics
      *
      * When disabled, library should not generate any metrics events,
@@ -273,6 +287,7 @@ export class Affise {
         }
 
         /**
+         * @deprecated use Affise.getReferrerOnServer(callback)
          * Get referrer on server
          */
         static getReferrerOnServer(callback: ReferrerCallback) {
@@ -280,6 +295,7 @@ export class Affise {
         }
 
         /**
+         * @deprecated use Affise.getReferrerOnServerValue(key, callback)
          * Get referrer on server value
          */
         static getReferrerOnServerValue(key: ReferrerKey, callback: ReferrerCallback) {
