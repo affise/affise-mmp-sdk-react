@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.6.28] - 2025-02-10
+
+### Added
+
+- New event index `affise_event_id_index`.
+- New postback index `uuid_index`.
+
+### Fixed
+
+- Fix `ProviderType.INSTALL_FIRST_EVENT`
+
+### Changed
+
+- Update native iOS to [`1.6.43`](https://github.com/affise/sdk-ios/blob/1.6.43/CHANGELOG.md).
+- Update native Android to [`1.6.52`](https://github.com/affise/sdk-android/blob/v1.6.52/CHANGELOG.md).
+
 ## [1.6.27] - 2025-01-24
 
 ### Added
@@ -196,6 +212,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.28]: https://github.com/affise/sdk-react/compare/1.6.27...1.6.28
 [1.6.27]: https://github.com/affise/sdk-react/compare/1.6.26...1.6.27
 [1.6.26]: https://github.com/affise/sdk-react/compare/1.6.25...1.6.26
 [1.6.25]: https://github.com/affise/sdk-react/compare/1.6.24...1.6.25
