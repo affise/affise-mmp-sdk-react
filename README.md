@@ -9,6 +9,7 @@
 - [Affise Attribution React Native Library](#affise-attribution-react-native-library)
 - [Description](#description)
   - [Quick start](#quick-start)
+    - [SDK compatibility](#sdk-compatibility)
   - [Integration](#integration)
     - [Integrate npm package](#integrate-npm-package)
     - [Modules](#modules)
@@ -83,6 +84,12 @@ referrer.
 
 ## Quick start
 
+### SDK compatibility
+
+- `Xcode`   `14.2+`  
+- `iOS`     `12+`
+- `Android` `21+`
+
 ## Integration
 
 ### Integrate npm package
@@ -136,7 +143,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.52'
+final affise_version = '1.6.53'
 
 dependencies {
     // Affise modules
@@ -158,10 +165,11 @@ Add modules to iOS project
 
 | Module         |                                       Version                                        | Start    |
 |----------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING`  | [`1.6.43`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `LINK`         | [`1.6.43`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `STATUS`       | [`1.6.43`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `SUBSCRIPTION` | [`1.6.43`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING`  | [`1.6.45`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `LINK`         | [`1.6.45`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `PERSISTENT`   | [`1.6.45`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `STATUS`       | [`1.6.45`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `SUBSCRIPTION` | [`1.6.45`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -169,11 +177,13 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
+  affise_version = '1.6.45'
   # Affise Modules
-  pod 'AffiseModule/Advertising', `1.6.43`
-  pod 'AffiseModule/Link', `1.6.43`
-  pod 'AffiseModule/Status', `1.6.43`
-  pod 'AffiseModule/Subscription', `1.6.43`
+  pod 'AffiseModule/Advertising', affise_version
+  pod 'AffiseModule/Link', affise_version
+  pod 'AffiseModule/Persistent', affise_version
+  pod 'AffiseModule/Status', affise_version
+  pod 'AffiseModule/Subscription', affise_version
 end
 ```
 
@@ -1125,6 +1135,14 @@ Affise.getRandomUserId();
 ```
 
 ## Get random device Id
+
+> **Note**
+>
+> To make `device id` more persistent on application reinstall
+>
+> use [Affise `Persistent` Module](#modules) for `iOS`
+>
+> use [Affise `AndroidId` Module](#modules) for `Android`
 
 ```typescript
 Affise.getRandomDeviceId();

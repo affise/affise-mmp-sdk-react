@@ -26,11 +26,13 @@ target 'AffiseAttributionLibExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  affise_version = '1.6.45'
   # Affise Modules
-  pod 'AffiseModule/Advertising', '1.6.43'
-  pod 'AffiseModule/Status', '1.6.43'
-  pod 'AffiseModule/Link', '1.6.43'
-  pod 'AffiseModule/Subscription', '1.6.43'
+  pod 'AffiseModule/Advertising', affise_version
+  pod 'AffiseModule/Status', affise_version
+  pod 'AffiseModule/Persistent', affise_version
+  pod 'AffiseModule/Link', affise_version
+  pod 'AffiseModule/Subscription', affise_version
 
   target 'AffiseAttributionLibExampleTests' do
     inherit! :complete

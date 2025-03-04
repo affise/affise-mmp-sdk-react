@@ -3,6 +3,7 @@ export enum AffiseModules {
     ANDROIDID = "AndroidId",
     LINK = "Link",
     NETWORK = "Network",
+    PERSISTENT = "Persistent",
     PHONE = "Phone",
     STATUS = "Status",
     SUBSCRIPTION = "Subscription",
