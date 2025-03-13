@@ -89,20 +89,20 @@ export class ApiFactory {
                 }
             },
             {
-                title: "get Referrer On Server Value",
+                title: "get Deferred Deeplink Value On Server",
                 call: () => {
-                    // Get referrer parameter https://github.com/affise/sdk-react#get-referrer-on-server-parameter
-                    Affise.getReferrerOnServerValue(ReferrerKey.CLICK_ID, (value) => {
-                        this.callOutput(`ReferrerOnServerValue: ${value}`);
+                    // Get deferred deeplink value https://github.com/affise/sdk-react#get-deferred-deeplink-value
+                    Affise.getDeferredDeeplinkValue(ReferrerKey.CLICK_ID, (value) => {
+                        this.callOutput(`DeferredDeeplinkValue: ${value}`);
                     });
                 }
             },
             {
-                title: "get Referrer On Server",
+                title: "get Deferred Deeplink On Server",
                 call: () => {
-                    // Get referrer https://github.com/affise/sdk-react#get-referrer-on-server
-                    Affise.getReferrerOnServer((ref) => {
-                        this.callOutput(`ReferrerOnServer: ${ref}`);
+                    // Get deferred deeplink  https://github.com/affise/sdk-react#get-deferred-deeplink
+                    Affise.getDeferredDeeplink((value) => {
+                        this.callOutput(`DeferredDeeplink: ${value}`);
                     });
                 }
             },

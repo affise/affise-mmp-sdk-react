@@ -119,12 +119,12 @@ export class AffiseNative extends NativeBase {
         this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_URL_VALUE_CALLBACK, callback, key);
     }
 
-    getReferrerOnServer(callback: ReferrerCallback) {
-        this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_ON_SERVER_CALLBACK, callback);
+    getDeferredDeeplink(callback: ReferrerCallback) {
+        this.nativeCallbackOnce(AffiseApiMethod.GET_DEFERRED_DEEPLINK_CALLBACK, callback);
     }
 
-    getReferrerOnServerValue(key: ReferrerKey, callback: ReferrerCallback) {
-        this.nativeCallbackOnce(AffiseApiMethod.GET_REFERRER_ON_SERVER_VALUE_CALLBACK, callback, key);
+    getDeferredDeeplinkValue(key: ReferrerKey, callback: ReferrerCallback) {
+        this.nativeCallbackOnce(AffiseApiMethod.GET_DEFERRED_DEEPLINK_VALUE_CALLBACK, callback, key);
     }
 
     isFirstRun(): Promise<boolean> {
@@ -231,10 +231,10 @@ export class AffiseNative extends NativeBase {
             case AffiseApiMethod.GET_REFERRER_URL_VALUE_CALLBACK:
                 tryCast<ReferrerCallback>(callback)?.(DataMapper.toNonNullString(data));
                 break;
-            case AffiseApiMethod.GET_REFERRER_ON_SERVER_CALLBACK:
+            case AffiseApiMethod.GET_DEFERRED_DEEPLINK_CALLBACK:
                 tryCast<ReferrerCallback>(callback)?.(DataMapper.toNonNullString(data));
                 break;
-            case AffiseApiMethod.GET_REFERRER_ON_SERVER_VALUE_CALLBACK:
+            case AffiseApiMethod.GET_DEFERRED_DEEPLINK_VALUE_CALLBACK:
                 tryCast<ReferrerCallback>(callback)?.(DataMapper.toNonNullString(data));
                 break;
             case AffiseApiMethod.REGISTER_DEEPLINK_CALLBACK:

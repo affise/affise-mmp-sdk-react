@@ -233,17 +233,33 @@ export class Affise {
     }
 
     /**
+     * @deprecated use Affise.getDeferredDeeplink(callback)
      * Get referrer on server
      */
     static getReferrerOnServer(callback: ReferrerCallback) {
-        this.native.getReferrerOnServer(callback);
+        Affise.getDeferredDeeplink(callback);
     }
 
     /**
+     * @deprecated use Affise.getDeferredDeeplinkValue(key, callback)
      * Get referrer on server value
      */
     static getReferrerOnServerValue(key: ReferrerKey, callback: ReferrerCallback) {
-        this.native.getReferrerOnServerValue(key, callback);
+        Affise.getDeferredDeeplinkValue(key, callback);
+    }
+
+    /**
+     * Get deferred deeplink on server 
+     */
+    static getDeferredDeeplink(callback: ReferrerCallback) {
+        this.native.getDeferredDeeplink(callback);
+    }
+
+    /**
+     * Get deferred deeplink value on server 
+     */
+    static getDeferredDeeplinkValue(key: ReferrerKey, callback: ReferrerCallback) {
+        this.native.getDeferredDeeplinkValue(key, callback);
     }
 
     /**
@@ -287,19 +303,19 @@ export class Affise {
         }
 
         /**
-         * @deprecated use Affise.getReferrerOnServer(callback)
+         * @deprecated use Affise.getDeferredDeeplink(callback)
          * Get referrer on server
          */
         static getReferrerOnServer(callback: ReferrerCallback) {
-            Affise.native.getReferrerOnServer(callback);
+            Affise.native.getDeferredDeeplink(callback);
         }
 
         /**
-         * @deprecated use Affise.getReferrerOnServerValue(key, callback)
+         * @deprecated use Affise.getDeferredDeeplinkValue(key, callback)
          * Get referrer on server value
          */
         static getReferrerOnServerValue(key: ReferrerKey, callback: ReferrerCallback) {
-            Affise.native.getReferrerOnServerValue(key, callback);
+            Affise.native.getDeferredDeeplinkValue(key, callback);
         }
     };
 
