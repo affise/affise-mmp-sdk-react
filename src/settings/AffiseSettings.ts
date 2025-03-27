@@ -4,8 +4,8 @@ import {
     // AutoCatchingType
 } from "../index";
 
-import { OnInitErrorHandler } from "./OnInitErrorHandler";
-import { OnInitSuccessHandler } from "./OnInitSuccessHandler";
+import type { OnInitErrorHandler } from "./OnInitErrorHandler";
+import type { OnInitSuccessHandler } from "./OnInitSuccessHandler";
 
 export class AffiseSettings {
     private readonly affiseAppId: string;

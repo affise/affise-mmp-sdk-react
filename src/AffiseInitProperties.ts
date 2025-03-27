@@ -1,6 +1,6 @@
 import type {AutoCatchingType} from "./events/AutoCatchingType";
-import { OnInitErrorHandler } from "./settings/OnInitErrorHandler";
-import { OnInitSuccessHandler } from "./settings/OnInitSuccessHandler";
+import type { OnInitErrorHandler } from "./settings/OnInitErrorHandler";
+import type { OnInitSuccessHandler } from "./settings/OnInitSuccessHandler";
 
 export type AffiseInitPropertiesType = {
     /// AffiseAppId

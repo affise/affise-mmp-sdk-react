@@ -25,8 +25,8 @@ import type {AffiseProduct} from "../module/subscription/AffiseProduct";
 import type {AffiseProductType} from "../module/subscription/AffiseProductType";
 import type {AffisePurchasedInfo} from "../module/subscription/AffisePurchasedInfo";
 import {DataName} from "./data/DataName";
-import { OnInitSuccessHandler } from "../settings/OnInitSuccessHandler";
-import { OnInitErrorHandler } from "../settings/OnInitErrorHandler";
+import type { OnInitSuccessHandler } from "../settings/OnInitSuccessHandler";
+import type { OnInitErrorHandler } from "../settings/OnInitErrorHandler";
 
 
 export class AffiseNative extends NativeBase {
