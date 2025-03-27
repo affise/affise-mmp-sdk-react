@@ -25,6 +25,9 @@ import type {AffiseProduct} from "../module/subscription/AffiseProduct";
 import type {AffiseProductType} from "../module/subscription/AffiseProductType";
 import type {AffisePurchasedInfo} from "../module/subscription/AffisePurchasedInfo";
 import {DataName} from "./data/DataName";
+import { OnInitSuccessHandler } from "../settings/OnInitSuccessHandler";
+import { OnInitErrorHandler } from "../settings/OnInitErrorHandler";
+
 
 export class AffiseNative extends NativeBase {
 
@@ -35,6 +38,16 @@ export class AffiseNative extends NativeBase {
         } else {
             option = initProperties;
         }
+
+        this.nativeCallback(
+            AffiseApiMethod.ON_INIT_SUCCESS_HANDLER,
+            initProperties.onInitSuccessHandler
+        );
+
+        this.nativeCallback(
+            AffiseApiMethod.ON_INIT_ERROR_HANDLER,
+            initProperties.onInitErrorHandler
+        );
 
         this.native(AffiseApiMethod.INIT, option);
     }
@@ -154,12 +167,19 @@ export class AffiseNative extends NativeBase {
         this.nativeCallbackOnce(AffiseApiMethod.SKAD_POSTBACK_ERROR_CALLBACK, completionHandler, value);
     }
 
+    ////////////////////////////////////////
+    // debug
+    ////////////////////////////////////////
     validate(callback: DebugOnValidateCallback) {
         this.nativeCallbackOnce(AffiseApiMethod.DEBUG_VALIDATE_CALLBACK, callback);
     }
 
     network(callback: DebugOnNetworkCallback) {
         this.nativeCallback(AffiseApiMethod.DEBUG_NETWORK_CALLBACK, callback);
+    }
+
+    versionNative(): Promise<string> {
+        return this.nativeResult(AffiseApiMethod.DEBUG_VERSION_NATIVE);
     }
 
     ////////////////////////////////////////
@@ -224,6 +244,14 @@ export class AffiseNative extends NativeBase {
                     default:
                         break;
                 }
+                break;
+            case AffiseApiMethod.ON_INIT_SUCCESS_HANDLER:
+                tryCast<OnInitSuccessHandler>(callback)?.();
+                this.removeApiCallback(api);
+                break;
+            case AffiseApiMethod.ON_INIT_ERROR_HANDLER:
+                tryCast<OnInitErrorHandler>(callback)?.(DataMapper.toNonNullString(data));
+                this.removeApiCallback(api);
                 break;
             case AffiseApiMethod.GET_REFERRER_URL_CALLBACK:
                 tryCast<ReferrerCallback>(callback)?.(DataMapper.toNonNullString(data));

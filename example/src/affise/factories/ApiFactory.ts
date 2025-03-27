@@ -1,5 +1,5 @@
 import {Affise, AffiseModules, ProviderType, ReferrerKey, SKAdNetwork} from "affise-attribution-lib";
-import {Alert} from "react-native";
+import {Alert, Platform} from "react-native";
 
 export interface api {
     title: string,
@@ -34,6 +34,22 @@ export class ApiFactory {
                     // Debug: Validate credentials https://github.com/affise/sdk-react#validate-credentials
                     Affise.debug.validate((status) => {
                         this.callOutput(`Validate: ${status}`);
+                    });
+                }
+            },
+            {
+                title: "Debug: Version",
+                call: () => {
+                    // Debug: Version https://github.com/affise/sdk-react#version
+                    this.callOutput(`Version: ${Affise.debug.version()}`);
+                }
+            },
+            {
+                title: "Debug: Version Native",
+                call: () => {
+                    // Debug: Version Native https://github.com/affise/sdk-react#version-native
+                    Affise.debug.versionNative().then((version) => {
+                        this.callOutput(`Version ${Platform.OS} Native: ${version}`);
                     });
                 }
             },

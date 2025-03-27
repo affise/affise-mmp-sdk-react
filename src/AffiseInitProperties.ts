@@ -1,4 +1,6 @@
 import type {AutoCatchingType} from "./events/AutoCatchingType";
+import { OnInitErrorHandler } from "./settings/OnInitErrorHandler";
+import { OnInitSuccessHandler } from "./settings/OnInitSuccessHandler";
 
 export type AffiseInitPropertiesType = {
     /// AffiseAppId
@@ -19,6 +21,8 @@ export type AffiseInitPropertiesType = {
     autoCatchingClickEvents?: AutoCatchingType[],
     /// SDK server domain
     domain?: string | null,
+    onInitSuccessHandler?: OnInitSuccessHandler | null,
+    onInitErrorHandler?: OnInitErrorHandler | null,
 };
 
 export class AffiseInitProperties {
@@ -31,6 +35,8 @@ export class AffiseInitProperties {
     enabledMetrics: boolean = false;
     autoCatchingClickEvents?: AutoCatchingType[] = [];
     domain?: string | null = null;
+    onInitSuccessHandler?: OnInitSuccessHandler | null = null;
+    onInitErrorHandler?: OnInitErrorHandler | null = null;
 
     constructor(
         {
@@ -42,7 +48,9 @@ export class AffiseInitProperties {
             appToken,
             // enabledMetrics,
             // autoCatchingClickEvents,
-            domain
+            domain,
+            onInitSuccessHandler,
+            onInitErrorHandler
         }: AffiseInitPropertiesType
     ) {
         this.affiseAppId = affiseAppId;
@@ -53,6 +61,8 @@ export class AffiseInitProperties {
         this.appToken = appToken || null;
         // this.autoCatchingClickEvents = autoCatchingClickEvents || [];
         this.domain = domain || null;
+        this.onInitSuccessHandler = onInitSuccessHandler || null;
+        this.onInitErrorHandler = onInitErrorHandler || null;
 
         if (isProduction != null) {
             this.isProduction = isProduction;

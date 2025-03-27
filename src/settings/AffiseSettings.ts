@@ -4,6 +4,9 @@ import {
     // AutoCatchingType
 } from "../index";
 
+import { OnInitErrorHandler } from "./OnInitErrorHandler";
+import { OnInitSuccessHandler } from "./OnInitSuccessHandler";
+
 export class AffiseSettings {
     private readonly affiseAppId: string;
     private readonly secretKey: string;
@@ -14,6 +17,8 @@ export class AffiseSettings {
     // private enabledMetrics: boolean = false;
     // private autoCatchingClickEvents?: AutoCatchingType[] = [];
     private domain?: string | null = null;
+    private onInitSuccessHandler?: OnInitSuccessHandler | null = null;
+    private onInitErrorHandler?: OnInitErrorHandler | null = null;
 
     /**
      * Affise SDK settings
@@ -97,6 +102,22 @@ export class AffiseSettings {
     //     return this;
     // }
 
+    /**
+     * Set OnInitSuccessHandler
+     */
+    setOnInitSuccess(onInitSuccessHandler: OnInitSuccessHandler): AffiseSettings {
+        this.onInitSuccessHandler = onInitSuccessHandler;
+        return this;
+    }
+
+    /**
+     * Set OnInitErrorHandler
+     */
+    setOnInitError(onInitErrorHandler: OnInitErrorHandler): AffiseSettings {
+        this.onInitErrorHandler = onInitErrorHandler;
+        return this;
+    }
+
     private getInitProperties(): AffiseInitProperties {
         return new AffiseInitProperties({
             affiseAppId: this.affiseAppId,
@@ -108,6 +129,8 @@ export class AffiseSettings {
             // enabledMetrics: this.enabledMetrics,
             // autoCatchingClickEvents: this.autoCatchingClickEvents,
             domain: this.domain,
+            onInitSuccessHandler: this.onInitSuccessHandler,
+            onInitErrorHandler: this.onInitErrorHandler,
         });
     }
 

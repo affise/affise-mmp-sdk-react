@@ -85,6 +85,11 @@ export class NativeBase extends NativeBasePlatform {
         }
     }
 
+    protected removeApiCallback(api: AffiseApiMethod) { 
+        if(!this.callbacksOnce.has(api)) return;
+        this.callbacksOnce.delete(api);
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected handleCallback(_api: AffiseApiMethod, _callback: unknown, _data: any, _tag: string | null) {
 

@@ -51,6 +51,10 @@ export class Affise {
         this.native.init(initProperties);
     }
 
+    /**
+     * @deprecated use `Affise.settings.setOnInitSuccess` instead
+     * @returns 
+     */
     static isInitialized(): Promise<boolean> {
         return this.native.isInitialized();
     }
@@ -391,6 +395,20 @@ export class Affise {
          */
         static network(callback: DebugOnNetworkCallback) {
             Affise.native.network(callback);
+        }
+        
+        /**
+         * Debug get version of flutter library
+         */
+        static version(): string {
+            return "1.6.31";
+        }
+
+        /**
+         * Debug get version of native library Android/iOS
+         */
+        static versionNative(): Promise<string> {
+            return Affise.native.versionNative();
         }
     };
 }

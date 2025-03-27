@@ -1,0 +1,1 @@
+export type OnInitErrorHandler = (e: string) => void;

@@ -75,6 +75,8 @@
 - [SDK to SDK integrations](#sdk-to-sdk-integrations)
 - [Debug](#debug)
   - [Validate credentials](#validate-credentials)
+  - [Version](#version)
+  - [Version native](#version-native)
 - [Troubleshoots](#troubleshoots)
   - [iOS](#ios-4)
 
@@ -144,7 +146,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.54'
+final affise_version = '1.6.55'
 
 dependencies {
     // Affise modules
@@ -166,11 +168,11 @@ Add modules to iOS project
 
 | Module         |                                       Version                                        | Start    |
 |----------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING`  | [`1.6.47`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `LINK`         | [`1.6.47`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `PERSISTENT`   | [`1.6.47`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `STATUS`       | [`1.6.47`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `SUBSCRIPTION` | [`1.6.47`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING`  | [`1.6.48`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `LINK`         | [`1.6.48`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `PERSISTENT`   | [`1.6.48`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `STATUS`       | [`1.6.48`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `SUBSCRIPTION` | [`1.6.48`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -178,7 +180,7 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.6.47'
+  affise_version = '1.6.48'
   # Affise Modules
   pod 'AffiseModule/Advertising', affise_version
   pod 'AffiseModule/Link', affise_version
@@ -320,7 +322,15 @@ export default function App() {
 Check if library is initialized
 
 ```typescript
-Affise.isInitialized();
+Affise
+  .settings({
+    affiseAppId: "Your appId",
+    secretKey: "Your SDK secretKey",
+  })
+  .setOnInitSuccess(() => {
+    // Called then library is initialized
+  })
+  .start();
 ```
 
 #### Before application is published
@@ -1407,6 +1417,24 @@ Affise
 Affise.debug.validate((status) =>
 {
     // Handle validation status
+});
+```
+
+## Version
+
+Get Affise flutter library version
+
+```typescript
+Affise.debug.version()
+```
+
+## Version native
+
+Get Affise native `Android`/`iOS` library version
+
+```typescript
+Affise.debug.versionNative().then((version) => {
+  // Native version
 });
 ```
 
