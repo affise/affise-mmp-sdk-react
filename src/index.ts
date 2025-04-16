@@ -401,7 +401,7 @@ export class Affise {
          * Debug get version of flutter library
          */
         static version(): string {
-            return "1.6.31";
+            return "1.6.32";
         }
 
         /**
