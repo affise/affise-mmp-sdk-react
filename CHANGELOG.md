@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.33] - 2025-04-24
+
+### Fixed
+
+- Fix `Affise.settings.setOnInitSuccess` false positive error.
+- Fix `Affise.settings.setOnInitError` false positive error.
+
 ## [1.6.32] - 2025-04-16
 
 ### Removed
@@ -262,6 +269,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.33]: https://github.com/affise/sdk-react/compare/1.6.32...1.6.33
 [1.6.32]: https://github.com/affise/sdk-react/compare/1.6.31...1.6.32
 [1.6.31]: https://github.com/affise/sdk-react/compare/1.6.30...1.6.31
 [1.6.30]: https://github.com/affise/sdk-react/compare/1.6.29...1.6.30

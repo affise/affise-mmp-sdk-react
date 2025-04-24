@@ -54,6 +54,10 @@ export class NativeBase extends NativeBasePlatform {
         this.apiCall(api.toString(), apiData);
     }
 
+    protected nativeCallbackOnly(api: AffiseApiMethod, callback: unknown) {
+        this.callbacks.set(api, callback);
+    }
+
     protected apiCallback(apiName: string, apiData: any) {
         const api: AffiseApiMethod | null = apiMethodFrom(apiName);
         if (api == null) return;

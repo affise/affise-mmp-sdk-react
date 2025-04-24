@@ -39,12 +39,12 @@ export class AffiseNative extends NativeBase {
             option = initProperties;
         }
 
-        this.nativeCallback(
+        this.nativeCallbackOnly(
             AffiseApiMethod.ON_INIT_SUCCESS_HANDLER,
             initProperties.onInitSuccessHandler
         );
 
-        this.nativeCallback(
+        this.nativeCallbackOnly(
             AffiseApiMethod.ON_INIT_ERROR_HANDLER,
             initProperties.onInitErrorHandler
         );
