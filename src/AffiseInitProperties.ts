@@ -1,4 +1,5 @@
 import type {AutoCatchingType} from "./events/AutoCatchingType";
+import type { AffiseConfig } from "./settings/AffiseConfig";
 import type { OnInitErrorHandler } from "./settings/OnInitErrorHandler";
 import type { OnInitSuccessHandler } from "./settings/OnInitSuccessHandler";
 
@@ -23,6 +24,7 @@ export type AffiseInitPropertiesType = {
     domain?: string | null,
     onInitSuccessHandler?: OnInitSuccessHandler | null,
     onInitErrorHandler?: OnInitErrorHandler | null,
+    configStrings: Record<AffiseConfig[keyof AffiseConfig & number], any> | null,
 };
 
 export class AffiseInitProperties {
@@ -37,6 +39,7 @@ export class AffiseInitProperties {
     domain?: string | null = null;
     onInitSuccessHandler?: OnInitSuccessHandler | null = null;
     onInitErrorHandler?: OnInitErrorHandler | null = null;
+    configStrings: Record<string, any> = {};
 
     constructor(
         {
@@ -50,7 +53,8 @@ export class AffiseInitProperties {
             // autoCatchingClickEvents,
             domain,
             onInitSuccessHandler,
-            onInitErrorHandler
+            onInitErrorHandler,
+            configStrings: configValues
         }: AffiseInitPropertiesType
     ) {
         this.affiseAppId = affiseAppId;
@@ -63,6 +67,7 @@ export class AffiseInitProperties {
         this.domain = domain || null;
         this.onInitSuccessHandler = onInitSuccessHandler || null;
         this.onInitErrorHandler = onInitErrorHandler || null;
+        this.configStrings = configValues || {};
 
         if (isProduction != null) {
             this.isProduction = isProduction;

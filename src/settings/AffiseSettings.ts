@@ -1,6 +1,7 @@
 import {
     Affise,
     AffiseInitProperties,
+    AffiseConfig
     // AutoCatchingType
 } from "../index";
 
@@ -19,6 +20,7 @@ export class AffiseSettings {
     private domain?: string | null = null;
     private onInitSuccessHandler?: OnInitSuccessHandler | null = null;
     private onInitErrorHandler?: OnInitErrorHandler | null = null;
+    private configValues: Record<string, any> = {};
 
     /**
      * Affise SDK settings
@@ -117,6 +119,23 @@ export class AffiseSettings {
         this.onInitErrorHandler = onInitErrorHandler;
         return this;
     }
+    /**
+     * Set configValue
+     */
+    setConfigValue(key: AffiseConfig, value: any): AffiseSettings {
+        this.configValues[key] = value;
+        return this;
+    }
+
+    /**
+     * Set configValue
+     */
+    setConfigValues(values: Record<AffiseConfig, any>): AffiseSettings {
+        Object.entries(values).forEach(([key, value]) => { 
+            this.configValues[key] = value;
+        })
+        return this;
+    }
 
     private getInitProperties(): AffiseInitProperties {
         return new AffiseInitProperties({
@@ -131,6 +150,7 @@ export class AffiseSettings {
             domain: this.domain,
             onInitSuccessHandler: this.onInitSuccessHandler,
             onInitErrorHandler: this.onInitErrorHandler,
+            configStrings: this.configValues,
         });
     }
 
