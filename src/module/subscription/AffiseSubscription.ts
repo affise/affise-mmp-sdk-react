@@ -1,10 +1,10 @@
-import { AffiseNative } from "../../native/AffiseNative";
-import { AffiseModuleSubscriptionApi } from "./AffiseModuleSubscriptionApi";
-import { AffiseProduct } from "./AffiseProduct";
-import { AffiseProductType } from "./AffiseProductType";
-import { AffisePurchasedInfo } from "./AffisePurchasedInfo";
-import { AffiseProductsResult } from "./AffiseProductsResult";
-import { AffiseResultCallback } from "./AffiseResultCallback";
+import type { AffiseNative } from "../../native/AffiseNative";
+import type { AffiseModuleSubscriptionApi } from "./AffiseModuleSubscriptionApi";
+import type { AffiseProduct } from "./AffiseProduct";
+import type { AffiseProductType } from "./AffiseProductType";
+import type { AffisePurchasedInfo } from "./AffisePurchasedInfo";
+import type { AffiseProductsResult } from "./AffiseProductsResult";
+import type { AffiseResultCallback } from "./AffiseResultCallback";
 
 export class AffiseSubscription implements AffiseModuleSubscriptionApi { 
     private native: AffiseNative

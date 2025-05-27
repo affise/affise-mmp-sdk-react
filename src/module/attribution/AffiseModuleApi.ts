@@ -1,14 +1,14 @@
 import { AffiseModules } from "../AffiseModules";
-import { OnKeyValueCallback } from "../OnKeyValueCallback";
-import { AffiseModuleLinkApi} from "../link/AffiseModuleLinkApi"
-import { AffiseLinkCallback} from "../link/AffiseLinkCallback"
-import { AffiseProduct } from "../subscription/AffiseProduct";
-import { AffiseModuleSubscriptionApi } from "../subscription/AffiseModuleSubscriptionApi";
-import { AffiseProductType } from "../subscription/AffiseProductType";
-import { AffisePurchasedInfo } from "../subscription/AffisePurchasedInfo";
-import { AffiseProductsResult } from "../subscription/AffiseProductsResult";
-import { AffiseResultCallback } from "../subscription/AffiseResultCallback";
-import { AffiseModuleAppsFlyerApi } from "../appsflyer/AffiseModuleAppsFlyerApi";
+import type { OnKeyValueCallback } from "../OnKeyValueCallback";
+import type { AffiseModuleLinkApi} from "../link/AffiseModuleLinkApi"
+import type { AffiseLinkCallback} from "../link/AffiseLinkCallback"
+import type { AffiseProduct } from "../subscription/AffiseProduct";
+import type { AffiseModuleSubscriptionApi } from "../subscription/AffiseModuleSubscriptionApi";
+import type { AffiseProductType } from "../subscription/AffiseProductType";
+import type { AffisePurchasedInfo } from "../subscription/AffisePurchasedInfo";
+import type { AffiseProductsResult } from "../subscription/AffiseProductsResult";
+import type { AffiseResultCallback } from "../subscription/AffiseResultCallback";
+import type { AffiseModuleAppsFlyerApi } from "../appsflyer/AffiseModuleAppsFlyerApi";
 
 export interface AffiseModuleApi { 
 

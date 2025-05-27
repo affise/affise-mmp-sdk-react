@@ -1,6 +1,6 @@
-import { AffiseNative } from "../../native/AffiseNative";
-import { AffiseLinkCallback } from "./AffiseLinkCallback";
-import { AffiseModuleLinkApi } from "./AffiseModuleLinkApi";
+import type { AffiseNative } from "../../native/AffiseNative";
+import type { AffiseLinkCallback } from "./AffiseLinkCallback";
+import type { AffiseModuleLinkApi } from "./AffiseModuleLinkApi";
 
 export class AffiseLink implements AffiseModuleLinkApi {
     private native: AffiseNative

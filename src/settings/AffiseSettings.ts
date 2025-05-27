@@ -1,4 +1,4 @@
-import { AffiseNative } from "../native/AffiseNative";
+import type { AffiseNative } from "../native/AffiseNative";
 import {
     AffiseInitProperties,
     AffiseConfig
@@ -7,7 +7,7 @@ import {
 
 import type { OnInitErrorHandler } from "./OnInitErrorHandler";
 import type { OnInitSuccessHandler } from "./OnInitSuccessHandler";
-import { AffiseSettingsApi } from "./AffiseSettingsApi";
+import type { AffiseSettingsApi } from "./AffiseSettingsApi";
 
 export class AffiseSettings implements AffiseSettingsApi {
     private native: AffiseNative

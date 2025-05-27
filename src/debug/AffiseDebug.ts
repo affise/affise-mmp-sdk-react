@@ -1,7 +1,7 @@
-import { AffiseNative } from "../native/AffiseNative";
-import { DebugOnValidateCallback } from "./validate/DebugOnValidateCallback";
-import { DebugOnNetworkCallback } from "./network/DebugOnNetworkCallback";
-import { AffiseDebugApi } from "./AffiseDebugApi";
+import type { AffiseNative } from "../native/AffiseNative";
+import type { DebugOnValidateCallback } from "./validate/DebugOnValidateCallback";
+import type { DebugOnNetworkCallback } from "./network/DebugOnNetworkCallback";
+import type { AffiseDebugApi } from "./AffiseDebugApi";
 
 
 export class AffiseDebug implements AffiseDebugApi {

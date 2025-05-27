@@ -1,19 +1,19 @@
-import { AffiseNative } from "../../native/AffiseNative";
-import { AffiseModuleApi } from "./AffiseModuleApi";
-import { AffiseModules } from "../AffiseModules";
-import { OnKeyValueCallback } from "../OnKeyValueCallback";
-import { AffiseProduct } from "../subscription/AffiseProduct";
-import { AffiseProductType } from "../subscription/AffiseProductType";
-import { AffisePurchasedInfo } from "../subscription/AffisePurchasedInfo";
-import { AffiseProductsResult } from "../subscription/AffiseProductsResult";
-import { AffiseResultCallback } from "../subscription/AffiseResultCallback";
+import type { AffiseNative } from "../../native/AffiseNative";
+import type { AffiseModuleApi } from "./AffiseModuleApi";
+import type { AffiseModules } from "../AffiseModules";
+import type { OnKeyValueCallback } from "../OnKeyValueCallback";
+import type { AffiseProduct } from "../subscription/AffiseProduct";
+import type { AffiseProductType } from "../subscription/AffiseProductType";
+import type { AffisePurchasedInfo } from "../subscription/AffisePurchasedInfo";
+import type { AffiseProductsResult } from "../subscription/AffiseProductsResult";
+import type { AffiseResultCallback } from "../subscription/AffiseResultCallback";
 import { AffiseLink} from "../link/AffiseLink"
-import { AffiseModuleLinkApi} from "../link/AffiseModuleLinkApi"
-import { AffiseLinkCallback} from "../link/AffiseLinkCallback"
+import type { AffiseModuleLinkApi} from "../link/AffiseModuleLinkApi"
+import type { AffiseLinkCallback} from "../link/AffiseLinkCallback"
 import { AffiseSubscription } from "../subscription/AffiseSubscription";
 import { AffiseModuleSubscriptionApi } from "../subscription/AffiseModuleSubscriptionApi";
 import { AffiseAppsFlyer } from "../appsflyer/AffiseAppsFlyer";
-import { AffiseModuleAppsFlyerApi } from "../appsflyer/AffiseModuleAppsFlyerApi";
+import type { AffiseModuleAppsFlyerApi } from "../appsflyer/AffiseModuleAppsFlyerApi";
 
 export class AffiseModule implements AffiseModuleApi { 
     private native: AffiseNative

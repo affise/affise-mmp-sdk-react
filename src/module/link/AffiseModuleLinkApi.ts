@@ -1,4 +1,4 @@
-import { AffiseLinkCallback } from "./AffiseLinkCallback";
+import type { AffiseLinkCallback } from "./AffiseLinkCallback";
 
 export interface AffiseModuleLinkApi {
     /**

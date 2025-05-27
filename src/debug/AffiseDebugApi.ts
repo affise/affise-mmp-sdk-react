@@ -1,5 +1,5 @@
-import { DebugOnValidateCallback } from "./validate/DebugOnValidateCallback";
-import { DebugOnNetworkCallback } from "./network/DebugOnNetworkCallback";
+import type { DebugOnValidateCallback } from "./validate/DebugOnValidateCallback";
+import type { DebugOnNetworkCallback } from "./network/DebugOnNetworkCallback";
 
 
 export interface AffiseDebugApi {

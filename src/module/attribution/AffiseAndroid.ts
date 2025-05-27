@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
-import { AffiseNative } from "../../native/AffiseNative";
-import { AffiseAndroidApi } from "./AffiseAndroidApi";
+import type { AffiseNative } from "../../native/AffiseNative";
+import type { AffiseAndroidApi } from "./AffiseAndroidApi";
 
 export class AffiseAndroid implements AffiseAndroidApi { 
 

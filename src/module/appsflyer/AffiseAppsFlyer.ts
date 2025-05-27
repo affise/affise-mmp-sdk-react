@@ -1,5 +1,5 @@
-import { AffiseNative } from "../../native/AffiseNative";
-import { AffiseModuleAppsFlyerApi } from "./AffiseModuleAppsFlyerApi";
+import type { AffiseNative } from "../../native/AffiseNative";
+import type { AffiseModuleAppsFlyerApi } from "./AffiseModuleAppsFlyerApi";
 
 export class AffiseAppsFlyer implements AffiseModuleAppsFlyerApi { 
     private native: AffiseNative

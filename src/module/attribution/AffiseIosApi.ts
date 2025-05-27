@@ -1,7 +1,7 @@
-import { ErrorCallback } from "../../callback/ErrorCallback";
-import { CoarseValue } from "../../skad/CoarseValue";
-import { ReferrerKey } from "../../referrer/ReferrerKey";
-import { ReferrerCallback } from "../../referrer/ReferrerCallback";
+import type { ErrorCallback } from "../../callback/ErrorCallback";
+import type { CoarseValue } from "../../skad/CoarseValue";
+import type { ReferrerKey } from "../../referrer/ReferrerKey";
+import type { ReferrerCallback } from "../../referrer/ReferrerCallback";
 
 export interface AffiseIosApi { 
         /**

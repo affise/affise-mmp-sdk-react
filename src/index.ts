@@ -13,7 +13,7 @@ import type {
 } from "./Export";
 import { AffiseNative } from "./native/AffiseNative";
 import { AffiseSettings } from "./settings/AffiseSettings";
-import { AffiseSettingsApi } from "./Export";
+import type { AffiseSettingsApi } from "./Export";
 import {
     AffiseDebug,
     AffiseDebugApi,
