@@ -91,6 +91,9 @@ export enum ProviderType {
     FIREOS_ADID = "fireos_adid",
     COLOROS_ADID = "coloros_adid",
 
+    // meta
+    META = "meta",
+
     // network
     MAC_SHA1 = "mac_sha1",
     MAC_MD5 = "mac_md5",

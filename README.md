@@ -16,6 +16,7 @@
       - [Android](#android)
       - [iOS](#ios)
       - [Module Advertising](#module-advertising)
+      - [Module AppsFlyer](#module-appsflyer)
       - [Module Huawei](#module-huawei)
       - [Module Link](#module-link)
       - [Module Meta](#module-meta)
@@ -140,6 +141,7 @@ Add modules to Android project
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
 | `ADVERTISING`  | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) | `Auto` |
 | `ANDROIDID`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://mvnrepository.com/artifact/com.affise/module-androidid)       | `Auto` |
+| `APPSFLYER`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-appsflyer?label=latest)](https://mvnrepository.com/artifact/com.affise/module-appsflyer)       | `Auto` |
 | `LINK`         | [![module-link](https://img.shields.io/maven-central/v/com.affise/module-link?label=latest)](https://mvnrepository.com/artifact/com.affise/module-link)                      | `Auto` |
 | `NETWORK`      | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             | `Auto` |
 | `PHONE`        | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   | `Auto` |
@@ -152,7 +154,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.57'
+final affise_version = '1.6.58'
 
 dependencies {
     // Affise modules
@@ -163,9 +165,10 @@ dependencies {
     implementation "com.affise:module-phone:$affise_version"
     implementation "com.affise:module-status:$affise_version"
     implementation "com.affise:module-subscription:$affise_version"
-    // implementation "com.affise:module-meta:$affise_version"
-    // implementation "com.affise:module-rustore:$affise_version"
-    // implementation "com.affise:module-huawei:$affise_version"
+    implementation "com.affise:module-meta:$affise_version"
+    implementation "com.affise:module-rustore:$affise_version"
+    implementation "com.affise:module-huawei:$affise_version"
+    implementation "com.affise:module-appsflyer:$affise_version"
 }
 ```
 
@@ -175,11 +178,12 @@ Add modules to iOS project
 
 | Module         |                                       Version                                        | Start    |
 |----------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING`  | [`1.6.49`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `LINK`         | [`1.6.49`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `PERSISTENT`   | [`1.6.49`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `STATUS`       | [`1.6.49`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `SUBSCRIPTION` | [`1.6.49`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING`  | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `APPSFLYER`    | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto` |
+| `LINK`         | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `PERSISTENT`   | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `STATUS`       | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `SUBSCRIPTION` | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -187,9 +191,10 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.6.49'
+  affise_version = '1.6.50'
   # Affise Modules
   pod 'AffiseModule/Advertising', affise_version
+  pod 'AffiseModule/AppsFlyer', affise_version
   pod 'AffiseModule/Link', affise_version
   pod 'AffiseModule/Persistent', affise_version
   pod 'AffiseModule/Status', affise_version
@@ -227,6 +232,30 @@ This module required to Use [`IDFA`](https://developer.apple.com/documentation/a
 
 Open `info.plist` and add key `NSUserTrackingUsageDescription` with string value. For more information [read requirements](#requirements)
 
+#### Module AppsFlyer
+
+Send AppsFlyer event data to Affise
+
+[AppsFlyer In-App Events Docs](https://dev.appsflyer.com/hc/docs/rn_inappevents#send-event)
+
+```typescript
+//AppsFlyer event data
+const eventName = "af_add_to_wishlist"
+const eventValues = {
+  af_price: 1234.56,
+  af_content_id: "1234567",
+};
+// Send AppsFlyer event
+appsFlyer.logEvent(
+  eventName, 
+  eventValues,
+  (res) => console.log(res),
+  (err) => console.error(err)
+);
+// Send AppsFlyer data to Affise
+Affise.module.appsflyer.logEvent(eventName, eventValues);
+```
+
 #### Module Huawei
 
 > **Warning**
@@ -250,7 +279,7 @@ Return last url in chan of redirection
 🟥Support MAX 10 redirections🟥
 
 ```typescript
-Affise.module.linkResolve("SITE_WITH_REDIRECTION", (redirectUrl) => {
+Affise.module.link.resolve("SITE_WITH_REDIRECTION", (redirectUrl) => {
     // handle redirect url
 });
 ```
@@ -314,7 +343,7 @@ Get products by ids:
 ```typescript
 const ids = ["exampple.product.id_1", "exampple.product.id_2"];
 
-Affise.module.fetchProducts(ids, (result) => {
+Affise.module.subscription.fetchProducts(ids, (result) => {
     if (result.isSuccess) {
         const value = result.asSuccess;
         const products: AffiseProduct[] = value.products;
@@ -329,7 +358,7 @@ Purchase product:
 
 ```typescript
 // Specify product type for correct affise event
-Affise.module.purchase(product, AffiseProductType.CONSUMABLE, (result) => {
+Affise.module.subscription.purchase(product, AffiseProductType.CONSUMABLE, (result) => {
     if (result.isSuccess) {
         const purchasedInfo: AffisePurchasedInfo = result.asSuccess;
     } else {

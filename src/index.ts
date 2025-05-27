@@ -4,22 +4,28 @@ import type {
     AffiseInitProperties,
     // AutoCatchingType,
     ReferrerKey,
-    CoarseValue,
     AffiseModules,
     ReferrerCallback,
     OnKeyValueCallback,
-    ErrorCallback,
     OnDeeplinkCallback,
-    DebugOnValidateCallback,
-    DebugOnNetworkCallback,
     OnSendSuccessCallback,
     OnSendFailedCallback,
-    AffiseLinkCallback,
-    AffiseResultCallback,
 } from "./Export";
-import {AffiseNative} from "./native/AffiseNative";
-import {Platform} from "react-native";
-import {AffiseProduct, AffiseProductsResult, AffiseProductType, AffisePurchasedInfo, AffiseSettings} from "./Export";
+import { AffiseNative } from "./native/AffiseNative";
+import { AffiseSettings } from "./settings/AffiseSettings";
+import { AffiseSettingsApi } from "./Export";
+import {
+    AffiseDebug,
+    AffiseDebugApi,
+} from "./debug/internal";
+import {
+    AffiseModuleApi,
+    AffiseModule,
+    AffiseIos,
+    AffiseIosApi,
+    AffiseAndroid,
+    AffiseAndroidApi
+} from "./module/internal";
 
 export * from "./Export";
 
@@ -37,12 +43,12 @@ export class Affise {
      * @param affiseAppId - your app id
      * @param secretKey - your SDK secretKey
      */
-    static settings({affiseAppId, secretKey}: { affiseAppId: string, secretKey: string }): AffiseSettings {
-        return new AffiseSettings(affiseAppId, secretKey);
+    static settings({affiseAppId, secretKey}: { affiseAppId: string, secretKey: string }): AffiseSettingsApi {
+        return new AffiseSettings(this.native, affiseAppId, secretKey);
     }
 
     /**
-     * Use Affise.settings({affiseAppId, secretKey}).start()
+     * @deprecated Use Affise.settings({affiseAppId, secretKey}).start()
      * @param initProperties
      */
     static start(
@@ -158,7 +164,7 @@ export class Affise {
      * @param callback status response
      */
     static getStatus(module: AffiseModules, callback: OnKeyValueCallback) {
-        Affise.module.getStatus(module, callback);
+        this.module.getStatus(module, callback);
     }
 
     /**
@@ -167,7 +173,7 @@ export class Affise {
      * @param module module name
      */
     static moduleStart(module: AffiseModules): Promise<boolean> {
-        return Affise.module.moduleStart(module);
+        return this.module.moduleStart(module);
     }
 
     /**
@@ -175,7 +181,7 @@ export class Affise {
      * Get installed modules
      */
     static getModulesInstalled(): Promise<AffiseModules[]> {
-        return Affise.module.getModulesInstalled();
+        return this.module.getModulesInstalled();
     }
 
     /**
@@ -241,7 +247,7 @@ export class Affise {
      * Get referrer on server
      */
     static getReferrerOnServer(callback: ReferrerCallback) {
-        Affise.getDeferredDeeplink(callback);
+        this.getDeferredDeeplink(callback);
     }
 
     /**
@@ -249,7 +255,7 @@ export class Affise {
      * Get referrer on server value
      */
     static getReferrerOnServerValue(key: ReferrerKey, callback: ReferrerCallback) {
-        Affise.getDeferredDeeplinkValue(key, callback);
+        this.getDeferredDeeplinkValue(key, callback);
     }
 
     /**
@@ -276,139 +282,10 @@ export class Affise {
     //     this.native.setEnabledMetrics(enabled);
     // }
 
-    static android = class {
-        /**
-         * Erases all user data from mobile and sends [GDPREvent]
-         */
-        static forget(userData: string) {
-            Affise.native.forget(userData);
-        }
+    static android: AffiseAndroidApi = new AffiseAndroid(this.native);
+    static ios: AffiseIosApi = new AffiseIos(this.native);
 
-        static crashApplication() {
-            Affise.native.crashApplication();
-        }
-    };
+    static module: AffiseModuleApi = new AffiseModule(this.native);
 
-    static ios = class {
-        /**
-         * SKAd register app
-         */
-        static registerAppForAdNetworkAttribution(completionHandler: ErrorCallback) {
-            if (Platform.OS !== 'ios') return;
-            Affise.native.registerAppForAdNetworkAttribution(completionHandler);
-        }
-
-        /**
-         * SKAd updatePostbackConversionValue
-         */
-        static updatePostbackConversionValue(fineValue: bigint, coarseValue: CoarseValue, completionHandler: ErrorCallback) {
-            if (Platform.OS !== 'ios') return;
-            Affise.native.updatePostbackConversionValue(fineValue, coarseValue, completionHandler);
-        }
-
-        /**
-         * @deprecated use Affise.getDeferredDeeplink(callback)
-         * Get referrer on server
-         */
-        static getReferrerOnServer(callback: ReferrerCallback) {
-            Affise.native.getDeferredDeeplink(callback);
-        }
-
-        /**
-         * @deprecated use Affise.getDeferredDeeplinkValue(key, callback)
-         * Get referrer on server value
-         */
-        static getReferrerOnServerValue(key: ReferrerKey, callback: ReferrerCallback) {
-            Affise.native.getDeferredDeeplinkValue(key, callback);
-        }
-    };
-
-    static  module = class {
-
-        /**
-         * Get module status
-         * @param module module name
-         * @param callback status response
-         */
-        static getStatus(module: AffiseModules, callback: OnKeyValueCallback) {
-            Affise.native.getStatus(module, callback);
-        }
-
-        /**
-         * Manual module start
-         * @param module module name
-         */
-        static moduleStart(module: AffiseModules): Promise<boolean> {
-            return Affise.native.moduleStart(module);
-        }
-
-        /**
-         * Get installed modules
-         */
-        static getModulesInstalled(): Promise<AffiseModules[]> {
-            return Affise.native.getModulesInstalled();
-        }
-
-        /**
-         * Module Link url Resolve
-         * @param url url
-         * @param callback redirected url
-         */
-        static linkResolve(url: string, callback: AffiseLinkCallback) {
-            Affise.native.linkResolve(url, callback);
-        }
-
-        /**
-         * Module subscription fetchProducts
-         * @param ids list of product ids
-         * @param callback result callback
-         */
-        static fetchProducts(ids: string[], callback: AffiseResultCallback<AffiseProductsResult>) {
-            Affise.native.fetchProducts(ids, callback);
-        }
-
-        /**
-         * Module subscription purchase
-         * @param product product
-         * @param type product type
-         * @param callback result callback
-         */
-        static purchase(product: AffiseProduct, type: AffiseProductType, callback: AffiseResultCallback<AffisePurchasedInfo>) {
-            Affise.native.purchase(product, type, callback);
-        }
-    };
-
-    static debug = class {
-        /**
-         * Won't work on Production
-         *
-         * Validate credentials
-         */
-        static validate(callback: DebugOnValidateCallback) {
-            Affise.native.validate(callback);
-        }
-
-        /**
-         * Won't work on Production
-         *
-         * Show request/response data
-         */
-        static network(callback: DebugOnNetworkCallback) {
-            Affise.native.network(callback);
-        }
-        
-        /**
-         * Debug get version of flutter library
-         */
-        static version(): string {
-            return "1.6.34";
-        }
-
-        /**
-         * Debug get version of native library Android/iOS
-         */
-        static versionNative(): Promise<string> {
-            return Affise.native.versionNative();
-        }
-    };
+    static debug: AffiseDebugApi = new AffiseDebug(this.native);
 }

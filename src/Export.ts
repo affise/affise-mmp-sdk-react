@@ -18,10 +18,10 @@ export * from './network/HttpMethod';
 export * from './referrer/ReferrerKey';
 export * from './referrer/ReferrerCallback';
 
-export * from './settings/AffiseSettings';
+export * from './settings/AffiseSettingsApi';
 export * from './settings/AffiseConfig';
-export *  from './settings/OnInitErrorHandler';
-export *  from './settings/OnInitSuccessHandler';
+export * from './settings/OnInitErrorHandler';
+export * from './settings/OnInitSuccessHandler';
 
 export * from './skad/SKAdNetwork';
 export * from './skad/CoarseValue';

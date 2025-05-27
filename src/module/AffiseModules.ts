@@ -1,7 +1,9 @@
 export enum AffiseModules {
     ADVERTISING = "Advertising",
     ANDROIDID = "AndroidId",
+    APPSFLYER = "AppsFlyer",
     LINK = "Link",
+    META = "Meta",
     NETWORK = "Network",
     PERSISTENT = "Persistent",
     PHONE = "Phone",

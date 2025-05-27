@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.6.35] - 2025-05-27
+
+### Added
+
+- New module `AppsFlyer`.
+- Api `Affise.module.appsFlyer.logEvent`.
+
+### Changed
+
+- Update api `Affise.module.linkResolve` moved to `Affise.module.link.resolve`.
+- Update api `Affise.module.fetchProducts` moved to `Affise.module.subscription.fetchProducts`.
+- Update api `Affise.module.purchase` moved to `Affise.module.subscription.purchase`.
+- Update native iOS to [`1.6.50`](https://github.com/affise/sdk-ios/blob/1.6.50/CHANGELOG.md).
+- Update native Android to [`1.6.58`](https://github.com/affise/sdk-android/blob/v1.6.58/CHANGELOG.md).
+
 ## [1.6.34] - 2025-05-06
 
 ### Added
@@ -280,6 +295,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.35]: https://github.com/affise/sdk-react/compare/1.6.34...1.6.35
 [1.6.34]: https://github.com/affise/sdk-react/compare/1.6.33...1.6.34
 [1.6.33]: https://github.com/affise/sdk-react/compare/1.6.32...1.6.33
 [1.6.32]: https://github.com/affise/sdk-react/compare/1.6.31...1.6.32

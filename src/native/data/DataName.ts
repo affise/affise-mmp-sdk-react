@@ -43,4 +43,7 @@ export class DataName {
     static TIME_UNIT = "timeUnit";
     static NUMBER_OF_UNITS = "numberOfUnits";
     static PRODUCT_DETAILS = "productDetails";
+    
+    static EVENT_NAME = "eventName";
+    static EVENT_VALUES = "eventValues";
 }

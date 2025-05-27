@@ -227,6 +227,15 @@ export class AffiseNative extends NativeBase {
             data,
         );
     }
+
+    // AppsFlyer
+    logEvent(eventName: string, eventValues: Record<string, any>) {
+        const data: Record<string, any> = {
+            [DataName.EVENT_NAME]: eventName,
+            [DataName.EVENT_VALUES]: eventValues,
+        };
+        this.native(AffiseApiMethod.MODULE_APPSFLYER_LOG_EVENT, data);
+    }
     ////////////////////////////////////////
     // modules
     ////////////////////////////////////////

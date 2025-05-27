@@ -1,5 +1,5 @@
+import { AffiseNative } from "../native/AffiseNative";
 import {
-    Affise,
     AffiseInitProperties,
     AffiseConfig
     // AutoCatchingType
@@ -7,8 +7,10 @@ import {
 
 import type { OnInitErrorHandler } from "./OnInitErrorHandler";
 import type { OnInitSuccessHandler } from "./OnInitSuccessHandler";
+import { AffiseSettingsApi } from "./AffiseSettingsApi";
 
-export class AffiseSettings {
+export class AffiseSettings implements AffiseSettingsApi {
+    private native: AffiseNative
     private readonly affiseAppId: string;
     private readonly secretKey: string;
     private isProduction: boolean = true;
@@ -28,7 +30,8 @@ export class AffiseSettings {
      * @param affiseAppId - your app id
      * @param secretKey - your SDK secretKey
      */
-    constructor(affiseAppId: string, secretKey: string) {
+    constructor(native: AffiseNative, affiseAppId: string, secretKey: string) {
+        this.native = native;
         this.affiseAppId = affiseAppId;
         this.secretKey = secretKey;
     }
@@ -38,7 +41,7 @@ export class AffiseSettings {
      *
      * @param production
      */
-    setProduction(production: boolean): AffiseSettings {
+    setProduction(production: boolean): AffiseSettingsApi {
         this.isProduction = production;
         return this;
     }
@@ -49,7 +52,7 @@ export class AffiseSettings {
      *
      * @param domain - server domain
      */
-    setDomain(domain: string): AffiseSettings {
+    setDomain(domain: string): AffiseSettingsApi {
         this.domain = domain;
         return this;
     }
@@ -59,7 +62,7 @@ export class AffiseSettings {
      *
      * @param partParamName
      */
-    setPartParamName(partParamName: string): AffiseSettings {
+    setPartParamName(partParamName: string): AffiseSettingsApi {
         this.partParamName = partParamName;
         return this;
     }
@@ -69,7 +72,7 @@ export class AffiseSettings {
      *
      * @param partParamNameToken
      */
-    setPartParamNameToken(partParamNameToken: string): AffiseSettings {
+    setPartParamNameToken(partParamNameToken: string): AffiseSettingsApi {
         this.partParamNameToken = partParamNameToken;
         return this;
     }
@@ -79,7 +82,7 @@ export class AffiseSettings {
      *
      * @param appToken
      */
-    setAppToken(appToken: string): AffiseSettings {
+    setAppToken(appToken: string): AffiseSettingsApi {
         this.appToken = appToken;
         return this;
     }
@@ -89,7 +92,7 @@ export class AffiseSettings {
      *
      * @param autoCatchingClickEvents
      */
-    // setAutoCatchingClickEvents(autoCatchingClickEvents: AutoCatchingType[]): AffiseSettings {
+    // setAutoCatchingClickEvents(autoCatchingClickEvents: AutoCatchingType[]): AffiseSettingsApi {
     //     this.autoCatchingClickEvents = autoCatchingClickEvents;
     //     return this;
     // }
@@ -99,7 +102,7 @@ export class AffiseSettings {
      *
      * @param enable
      */
-    // setEnabledMetrics(enable: boolean): AffiseSettings {
+    // setEnabledMetrics(enable: boolean): AffiseSettingsApi {
     //     this.enabledMetrics = enable;
     //     return this;
     // }
@@ -107,7 +110,7 @@ export class AffiseSettings {
     /**
      * Set OnInitSuccessHandler
      */
-    setOnInitSuccess(onInitSuccessHandler: OnInitSuccessHandler): AffiseSettings {
+    setOnInitSuccess(onInitSuccessHandler: OnInitSuccessHandler): AffiseSettingsApi {
         this.onInitSuccessHandler = onInitSuccessHandler;
         return this;
     }
@@ -115,14 +118,14 @@ export class AffiseSettings {
     /**
      * Set OnInitErrorHandler
      */
-    setOnInitError(onInitErrorHandler: OnInitErrorHandler): AffiseSettings {
+    setOnInitError(onInitErrorHandler: OnInitErrorHandler): AffiseSettingsApi {
         this.onInitErrorHandler = onInitErrorHandler;
         return this;
     }
     /**
      * Set configValue
      */
-    setConfigValue(key: AffiseConfig, value: any): AffiseSettings {
+    setConfigValue(key: AffiseConfig, value: any): AffiseSettingsApi {
         this.configValues[key] = value;
         return this;
     }
@@ -130,7 +133,7 @@ export class AffiseSettings {
     /**
      * Set configValue
      */
-    setConfigValues(values: Record<AffiseConfig, any>): AffiseSettings {
+    setConfigValues(values: Record<AffiseConfig, any>): AffiseSettingsApi {
         Object.entries(values).forEach(([key, value]) => { 
             this.configValues[key] = value;
         })
@@ -158,6 +161,6 @@ export class AffiseSettings {
      * Starts Affise SDK
      */
     start() {
-        Affise.start(this.getInitProperties());
+        this.native.init(this.getInitProperties());
     }
 }

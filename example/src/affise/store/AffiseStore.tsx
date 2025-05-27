@@ -63,7 +63,7 @@ export class AffiseStore extends Component<Props, State> {
     }
 
     fetchProducts( skipCheck:boolean = true) {
-        Affise.module.fetchProducts(Object.keys(storeData), (result) => {
+        Affise.module.subscription.fetchProducts(Object.keys(storeData), (result) => {
             if (result.isSuccess) {
                 const value = result.asSuccess;
                 this.updateProducts(value.products);
@@ -80,7 +80,7 @@ export class AffiseStore extends Component<Props, State> {
 
 
     purchase( product: AffiseProduct, type: AffiseProductType) {
-        Affise.module.purchase(product, type, (result) => {
+        Affise.module.subscription.purchase(product, type, (result) => {
             if (result.isSuccess) {
                 const purchasedInfo: AffisePurchasedInfo = result.asSuccess;
                 this.callAlert("Purchased", purchasedInfo.product?.title || purchasedInfo.purchase || `${product}`);
