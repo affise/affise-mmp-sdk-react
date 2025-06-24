@@ -154,7 +154,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.58'
+final affise_version = '1.6.59'
 
 dependencies {
     // Affise modules
@@ -178,12 +178,12 @@ Add modules to iOS project
 
 | Module         |                                       Version                                        | Start    |
 |----------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING`  | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `APPSFLYER`    | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto` |
-| `LINK`         | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `PERSISTENT`   | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `STATUS`       | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `SUBSCRIPTION` | [`1.6.50`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING`  | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `APPSFLYER`    | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto` |
+| `LINK`         | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `PERSISTENT`   | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `STATUS`       | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `SUBSCRIPTION` | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -191,7 +191,7 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.6.50'
+  affise_version = '1.6.51'
   # Affise Modules
   pod 'AffiseModule/Advertising', affise_version
   pod 'AffiseModule/AppsFlyer', affise_version
@@ -256,6 +256,14 @@ appsFlyer.logEvent(
 Affise.module.appsflyer.logEvent(eventName, eventValues);
 ```
 
+Is Module present:
+
+```typescript
+Affise.module.appsflyer.hasModule().then((hasModule) => { 
+    // Check is module present
+})
+```
+
 #### Module Huawei
 
 > **Warning**
@@ -282,6 +290,14 @@ Return last url in chan of redirection
 Affise.module.link.resolve("SITE_WITH_REDIRECTION", (redirectUrl) => {
     // handle redirect url
 });
+```
+
+Is Module present:
+
+```typescript
+Affise.module.link.hasModule().then((hasModule) => { 
+    // Check is module present
+})
 ```
 
 #### Module Meta
@@ -365,6 +381,14 @@ Affise.module.subscription.purchase(product, AffiseProductType.CONSUMABLE, (resu
         const error: string = result.asFailure;
     }
 });
+```
+
+Is Module present:
+
+```typescript
+Affise.module.subscription.hasModule().then((hasModule) => { 
+    // Check is module present
+})
 ```
 
 ##### AffiseProductType

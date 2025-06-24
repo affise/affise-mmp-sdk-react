@@ -3,8 +3,9 @@ import type { AffiseProductType } from "./AffiseProductType";
 import type { AffisePurchasedInfo } from "./AffisePurchasedInfo";
 import type { AffiseProductsResult } from "./AffiseProductsResult";
 import type { AffiseResultCallback } from "./AffiseResultCallback";
+import type { AffiseHasModule } from "../AffiseHasModule";
 
-export interface AffiseModuleSubscriptionApi { 
+export interface AffiseModuleSubscriptionApi extends AffiseHasModule {
     /**
      * Module subscription fetchProducts
      * @param ids list of product ids

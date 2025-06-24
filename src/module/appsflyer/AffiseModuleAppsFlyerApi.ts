@@ -1,4 +1,6 @@
-export interface AffiseModuleAppsFlyerApi { 
+import type { AffiseHasModule } from "../AffiseHasModule";
+
+export interface AffiseModuleAppsFlyerApi extends AffiseHasModule { 
     /**
      * Send Appflyer event data to affise
      * @param eventName event name

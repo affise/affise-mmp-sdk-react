@@ -5,6 +5,8 @@ import type { AffiseProductType } from "./AffiseProductType";
 import type { AffisePurchasedInfo } from "./AffisePurchasedInfo";
 import type { AffiseProductsResult } from "./AffiseProductsResult";
 import type { AffiseResultCallback } from "./AffiseResultCallback";
+import { isModuleInit } from "../AffiseHasModule";
+import { AffiseModules } from "../AffiseModules";
 
 export class AffiseSubscription implements AffiseModuleSubscriptionApi { 
     private native: AffiseNative
@@ -30,5 +32,9 @@ export class AffiseSubscription implements AffiseModuleSubscriptionApi {
      */
     purchase(product: AffiseProduct, type: AffiseProductType, callback: AffiseResultCallback<AffisePurchasedInfo>) {
         this.native.purchase(product, type, callback);
+    }
+
+    hasModule(): Promise<boolean> {
+        return isModuleInit(this.native, AffiseModules.SUBSCRIPTION)
     }
 }

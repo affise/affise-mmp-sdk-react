@@ -2,7 +2,7 @@ buildscript {
   // Buildscript is evaluated before everything else so we can't use getExtOrDefault
   def kotlin_version = rootProject.ext.has("kotlinVersion") ? rootProject.ext.get("kotlinVersion") : project.properties["AffiseAttributionNative_kotlinVersion"]
   ext {
-      affise_version = '1.6.58'
+      affise_version = '1.6.59'
       agp_version = '7.2.2'
   }
 

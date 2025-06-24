@@ -1,4 +1,6 @@
 import type { AffiseNative } from "../../native/AffiseNative";
+import { isModuleInit } from "../AffiseHasModule";
+import { AffiseModules } from "../AffiseModules";
 import type { AffiseModuleAppsFlyerApi } from "./AffiseModuleAppsFlyerApi";
 
 export class AffiseAppsFlyer implements AffiseModuleAppsFlyerApi { 
@@ -14,6 +16,10 @@ export class AffiseAppsFlyer implements AffiseModuleAppsFlyerApi {
      * @param eventValues event data
      */
     logEvent(eventName: string, eventValues: Record<string, any>) {
-        this.native.logEvent(eventName, eventValues);
+        this.native.logEvent(eventName, eventValues)
+    }
+
+    hasModule(): Promise<boolean> {
+        return isModuleInit(this.native, AffiseModules.APPSFLYER)
     }
 }

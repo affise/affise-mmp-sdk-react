@@ -1,6 +1,7 @@
 import type { AffiseLinkCallback } from "./AffiseLinkCallback";
+import type { AffiseHasModule } from "../AffiseHasModule";
 
-export interface AffiseModuleLinkApi {
+export interface AffiseModuleLinkApi extends AffiseHasModule {
     /**
      * Module Link url Resolve
      * @param url url
