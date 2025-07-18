@@ -22,6 +22,7 @@ export * from './settings/AffiseSettingsApi';
 export * from './settings/AffiseConfig';
 export * from './settings/OnInitErrorHandler';
 export * from './settings/OnInitSuccessHandler';
+export * from './settings/PushTokenService';
 
 export * from './skad/SKAdNetwork';
 export * from './skad/CoarseValue';

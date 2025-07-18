@@ -142,14 +142,14 @@ export class AffiseEvent implements PredefinedParameter {
     }
 
     toRecord(): Record<string, any> {
-        const result :Record<string, any> = {};
-        result[Parameters.AFFISE_EVENT_NAME] = this.name;
-        result[Parameters.AFFISE_EVENT_CATEGORY] = this.category;
-        result[Parameters.AFFISE_EVENT_TIMESTAMP] = timestamp();
-        result[Parameters.AFFISE_EVENT_FIRST_FOR_USER] = this.firstForUser;
-        result[Parameters.AFFISE_EVENT_USER_DATA] = this.userData;
-        result[Parameters.AFFISE_EVENT_DATA] = this.serialize;
-        result[Parameters.AFFISE_PARAMETERS] = this.getPredefinedParameters();
-        return result;
+        return {
+            [Parameters.AFFISE_EVENT_NAME]: this.name,
+            [Parameters.AFFISE_EVENT_CATEGORY]: this.category,
+            [Parameters.AFFISE_EVENT_TIMESTAMP]: timestamp(),
+            [Parameters.AFFISE_EVENT_FIRST_FOR_USER]: this.firstForUser,
+            [Parameters.AFFISE_EVENT_USER_DATA]: this.userData,
+            [Parameters.AFFISE_EVENT_DATA]: this.serialize,
+            [Parameters.AFFISE_PARAMETERS]: this.getPredefinedParameters(),
+        };
     }
 }

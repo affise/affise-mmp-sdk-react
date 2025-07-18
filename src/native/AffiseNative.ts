@@ -27,6 +27,7 @@ import type {AffisePurchasedInfo} from "../module/subscription/AffisePurchasedIn
 import {DataName} from "./data/DataName";
 import type { OnInitSuccessHandler } from "../settings/OnInitSuccessHandler";
 import type { OnInitErrorHandler } from "../settings/OnInitErrorHandler";
+import type { PushTokenService } from "../settings/PushTokenService";
 
 
 export class AffiseNative extends NativeBase {
@@ -71,8 +72,12 @@ export class AffiseNative extends NativeBase {
         );
     }
 
-    addPushToken(pushToken: string) {
-        this.native(AffiseApiMethod.ADD_PUSH_TOKEN, pushToken);
+    addPushToken(pushToken: string, service: PushTokenService) {
+        const data: Record<string, any> = {
+            [DataName.PUSH_TOKEN]: pushToken,
+            [DataName.PUSH_TOKEN_SERVICE]: service,
+        };
+        this.native(AffiseApiMethod.ADD_PUSH_TOKEN, data);
     }
 
     registerDeeplinkCallback(callback: OnDeeplinkCallback) {
@@ -161,10 +166,11 @@ export class AffiseNative extends NativeBase {
     }
 
     updatePostbackConversionValue(fineValue: bigint, coarseValue: CoarseValue, completionHandler: ErrorCallback) {
-        const value: Record<string, any> = {};
-        value[DataName.FINE_VALUE] = Number(fineValue);
-        value[DataName.COARSE_VALUE] = coarseValue.value;
-        this.nativeCallbackOnce(AffiseApiMethod.SKAD_POSTBACK_ERROR_CALLBACK, completionHandler, value);
+        const data: Record<string, any> = {
+            [DataName.FINE_VALUE]: Number(fineValue),
+            [DataName.COARSE_VALUE]: coarseValue.value,
+        };
+        this.nativeCallbackOnce(AffiseApiMethod.SKAD_POSTBACK_ERROR_CALLBACK, completionHandler, data);
     }
 
     ////////////////////////////////////////
@@ -217,9 +223,10 @@ export class AffiseNative extends NativeBase {
 
     // Subscription Module
     purchase(product: AffiseProduct, type: AffiseProductType, callback: AffiseResultCallback<AffisePurchasedInfo>) {
-        const data: Record<string, any> = {};
-        data[DataName.PRODUCT] = DataMapper.fromProduct(product);
-        data[DataName.TYPE] = type;
+        const data: Record<string, any> = {
+            [DataName.PRODUCT]: DataMapper.fromProduct(product),
+            [DataName.TYPE]: type,
+        };
 
         this.nativeCallbackOnce(
             AffiseApiMethod.MODULE_SUBS_PURCHASE_CALLBACK,

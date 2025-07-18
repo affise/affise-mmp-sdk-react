@@ -53,6 +53,10 @@
   - [Open Advertising Identifier (huawei) tracking](#open-advertising-identifier-huawei-tracking)
   - [Install referrer tracking](#install-referrer-tracking)
   - [Push token tracking](#push-token-tracking)
+    - [Native](#native)
+      - [iOS APNs](#ios-apns)
+    - [Firebase NPM package](#firebase-npm-package)
+      - [iOS APNs](#ios-apns-1)
   - [Reinstall Uninstall tracking](#reinstall-uninstall-tracking)
   - [APK preinstall tracking](#apk-preinstall-tracking)
   - [Links](#links)
@@ -154,7 +158,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.59'
+final affise_version = '1.6.60'
 
 dependencies {
     // Affise modules
@@ -178,12 +182,12 @@ Add modules to iOS project
 
 | Module         |                                       Version                                        | Start    |
 |----------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING`  | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `APPSFLYER`    | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto` |
-| `LINK`         | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `PERSISTENT`   | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `STATUS`       | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `SUBSCRIPTION` | [`1.6.51`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADVERTISING`  | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `APPSFLYER`    | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto` |
+| `LINK`         | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `PERSISTENT`   | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `STATUS`       | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `SUBSCRIPTION` | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -191,7 +195,7 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.6.51'
+  affise_version = '1.6.52'
   # Affise Modules
   pod 'AffiseModule/Advertising', affise_version
   pod 'AffiseModule/AppsFlyer', affise_version
@@ -585,6 +589,7 @@ To match users with events and data library is sending, these `ProviderType` ide
 - `UUID`
 - `AFFISE_APP_OPENED`
 - `PUSHTOKEN`
+- `PUSHTOKEN_SERVICE`
 - `AFFISE_EVENTS_COUNT`
 - `AFFISE_SDK_EVENTS_COUNT`
 - `AFFISE_METRICS_EVENTS_COUNT`
@@ -961,20 +966,101 @@ Install referrer tracking is supported automatically, no actions needed
 ## Push token tracking
 
 To let affise track push token you need to receive it from your push service provider, and pass to Affise library.
-First add firebase integration to your app completing these steps: [Firebase Docs](https://firebase.google.com/docs/cloud-messaging/android/client)
 
-After you have done with firebase integration, add to your cloud messaging service `onNewToken` method `Affise.addPushToken(token)`
+Supported service providers:
+
+- `APPLE` - **iOS only**
+- `FIREBASE`
+
+### Native
+
+#### iOS APNs
+
+For `swift` edit `AppDelegate.swift`
+```swift
+import AffiseAttributionLib
+class AppDelegate ... {
+
+  ...
+
+  override func application(
+    _ application: UIApplication,
+    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+  ) {
+    let pushToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+
+    // Pass APNs token to Affise
+    Affise.addPushToken(pushToken, .APPLE)
+  }
+}
+```
+
+For `Objective-C` edit [`AppDelegate.mm`](example/ios/AffiseAttributionLibExample/AppDelegate.mm)
+
+```objective-c
+#import <AffiseAttributionLib/AffiseAttributionLib-Swift.h>
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)devToken
+{
+	// parse token bytes to string
+	const char *data = (char *)[devToken bytes];
+	NSMutableString *token = [NSMutableString string];
+	for (NSUInteger i = 0; i < [devToken length]; i++)
+	{
+		[token appendFormat:@"%02.2hhX", data[i]];
+	}
+	
+  [Affise addPushTokenWithPushToken:[token copy] service:APPLE];
+}
+```
+
+### Firebase NPM package
+
+[`@react-native-firebase/app`](https://www.npmjs.com/package/@react-native-firebase/app)
+[`@react-native-firebase/messaging`](https://www.npmjs.com/package/@react-native-firebase/messaging)
+
+Add Firebase integration by completing steps in [React Native Firebase Docs](https://rnfirebase.io/)
+
+After you have done with firebase integration, setup [Messaging](https://rnfirebase.io/messaging/usage)
 
 ```typescript
-import { Affise } from 'affise-attribution-lib';
+import { Affise, PushTokenService } from 'affise-attribution-lib';
+import firebase from '@react-native-firebase/app';
 import messaging from '@react-native-firebase/messaging';
 
-const getToken = async () => {
-  const token = await messaging().getToken();
-  if (token) {
-    Affise.addPushToken(token);
-  }
-};
+async function firebaseSetup() {
+    const credentials = {
+        appId: '',
+        projectId: '',
+        // ...
+    };
+    await firebase.initializeApp(credentials);
+}
+
+function getToken() {
+    messaging().getToken().then((fcmToken) => { 
+        Affise.addPushToken(fcmToken, PushTokenService.FIREBASE);
+    });
+}
+```
+
+#### iOS APNs
+
+After you have done with firebase integration, get APNs token from firebase
+
+```typescript
+import { Affise, PushTokenService } from 'affise-attribution-lib';
+import { Platform } from 'react-native';
+import messaging from '@react-native-firebase/messaging';
+
+function getToken() {
+    if (Platform.OS == 'ios') { 
+        messaging().getAPNSToken().then((apnsToken) => { 
+            if (!apnsToken) return
+            Affise.addPushToken(apnsToken, PushTokenService.APPLE);
+        });
+    }
+}
 ```
 
 ## Reinstall Uninstall tracking

@@ -1,4 +1,10 @@
-import {Affise, AffiseModules, ProviderType, ReferrerKey, SKAdNetwork} from "affise-attribution-lib";
+import {
+    Affise,
+    AffiseModules,
+    ProviderType,
+    ReferrerKey,
+    SKAdNetwork,
+} from "affise-attribution-lib";
 import {Alert, Platform} from "react-native";
 
 export interface api {

@@ -10,6 +10,7 @@ import type {
     OnDeeplinkCallback,
     OnSendSuccessCallback,
     OnSendFailedCallback,
+    PushTokenService,
 } from "./Export";
 import { AffiseNative } from "./native/AffiseNative";
 import { AffiseSettings } from "./settings/AffiseSettings";
@@ -80,10 +81,10 @@ export class Affise {
     }
 
     /**
-     * Add [pushToken]
+     * Add [pushToken] from [service]
      */
-    static addPushToken(pushToken: string) {
-        this.native.addPushToken(pushToken);
+    static addPushToken(pushToken: string, service: PushTokenService) {
+        this.native.addPushToken(pushToken, service);
     }
 
     /**
