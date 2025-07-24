@@ -15,6 +15,7 @@
     - [Modules](#modules)
       - [Android](#android)
       - [iOS](#ios)
+      - [Module AdService](#module-adservice)
       - [Module Advertising](#module-advertising)
       - [Module AppsFlyer](#module-appsflyer)
       - [Module Huawei](#module-huawei)
@@ -32,6 +33,7 @@
 - [Features](#features)
   - [ProviderType identifiers collection](#providertype-identifiers-collection)
     - [Attribution](#attribution)
+    - [AdService](#adservice)
     - [Advertising](#advertising)
     - [AndroidId](#androidid)
     - [Huawei](#huawei)
@@ -182,12 +184,13 @@ Add modules to iOS project
 
 | Module         |                                       Version                                        | Start    |
 |----------------|:------------------------------------------------------------------------------------:|----------|
-| `ADVERTISING`  | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
-| `APPSFLYER`    | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto` |
-| `LINK`         | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `PERSISTENT`   | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `STATUS`       | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
-| `SUBSCRIPTION` | [`1.6.52`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `ADSERVICE`    | [`1.6.53`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto` |
+| `ADVERTISING`  | [`1.6.53`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Manual` |
+| `APPSFLYER`    | [`1.6.53`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto` |
+| `LINK`         | [`1.6.53`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `PERSISTENT`   | [`1.6.53`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `STATUS`       | [`1.6.53`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
+| `SUBSCRIPTION` | [`1.6.53`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) | `Auto`   |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -195,8 +198,9 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.6.52'
+  affise_version = '1.6.53'
   # Affise Modules
+  pod 'AffiseModule/AdService', affise_version
   pod 'AffiseModule/Advertising', affise_version
   pod 'AffiseModule/AppsFlyer', affise_version
   pod 'AffiseModule/Link', affise_version
@@ -217,6 +221,12 @@ end
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
 Open `info.plist` and add key `NSUserTrackingUsageDescription` with string value. For more information [read requirements](#requirements)
+
+#### Module AdService
+
+`iOS 14.3+`
+
+Sends `attributionToken` from `AdServices` framework `AAAttribution.attributionToken()` to Affise server
 
 #### Module Advertising
 
@@ -596,6 +606,10 @@ To match users with events and data library is sending, these `ProviderType` ide
 - `AFFISE_INTERNAL_EVENTS_COUNT`
 - `IS_ROOTED`
 - `IS_EMULATOR`
+
+### AdService
+
+- `AD_SERVICE_ATTRIBUTION`
 
 ### Advertising
 

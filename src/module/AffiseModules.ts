@@ -1,4 +1,5 @@
 export enum AffiseModules {
+    ADSERVICE = "AdService",
     ADVERTISING = "Advertising",
     ANDROIDID = "AndroidId",
     APPSFLYER = "AppsFlyer",
