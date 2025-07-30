@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.6.39] - 2025-07-30
+
+### Fixed
+
+- Fix crash for android API < 24 
+
+### Changed
+
+- Update native Android to [`1.6.61`](https://github.com/affise/sdk-android/blob/v1.6.61/CHANGELOG.md)
+  
 ## [1.6.38] - 2025-07-24
 
 ### Added
@@ -9,7 +19,7 @@
 
 ### Changed
 
-- Update native iOS to [`1.6.53`](https://github.com/affise/sdk-ios/blob/1.6.51/CHANGELOG.md)
+- Update native iOS to [`1.6.53`](https://github.com/affise/sdk-ios/blob/1.6.53/CHANGELOG.md)
 
 ## [1.6.37] - 2025-07-18
 
@@ -19,8 +29,8 @@
 
 ### Changed
 
-- Update native iOS to [`1.6.52`](https://github.com/affise/sdk-ios/blob/1.6.51/CHANGELOG.md)
-- Update native Android to [`1.6.60`](https://github.com/affise/sdk-android/blob/v1.6.59/CHANGELOG.md)
+- Update native iOS to [`1.6.52`](https://github.com/affise/sdk-ios/blob/1.6.52/CHANGELOG.md)
+- Update native Android to [`1.6.60`](https://github.com/affise/sdk-android/blob/v1.6.60/CHANGELOG.md)
 
 ## [1.6.36] - 2025-06-24
 
@@ -330,6 +340,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.39]: https://github.com/affise/sdk-react/compare/1.6.38...1.6.39
 [1.6.38]: https://github.com/affise/sdk-react/compare/1.6.37...1.6.38
 [1.6.37]: https://github.com/affise/sdk-react/compare/1.6.36...1.6.37
 [1.6.36]: https://github.com/affise/sdk-react/compare/1.6.35...1.6.36
