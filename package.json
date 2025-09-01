@@ -1,6 +1,6 @@
 {
   "name": "affise-attribution-lib",
-  "version": "1.6.39",
+  "version": "1.6.40",
   "description": "Affise Attribution Library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -42,11 +42,11 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/affise/sdk-react",
+  "repository": "https://github.com/affise/affise-mmp-sdk-react",
   "author": "affise <support@affise.com> (https://affise.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/affise/sdk-react/issues"
+    "url": "https://github.com/affise/affise-mmp-sdk-react/issues"
   },
   "homepage": "https://affise.com",
   "publishConfig": {

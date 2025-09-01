@@ -44,6 +44,7 @@ export class DataName {
     static NUMBER_OF_UNITS = "numberOfUnits";
     static PRODUCT_DETAILS = "productDetails";
     
+    static EVENT_ID = "eventId";
     static EVENT_NAME = "eventName";
     static EVENT_VALUES = "eventValues";
     static PUSH_TOKEN = "push_token";

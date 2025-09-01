@@ -19,7 +19,7 @@ export default function App() {
     const [tabIndex, setTabIndex] = React.useState(0);
 
     useEffect(() => {
-        // Initialize https://github.com/affise/sdk-react#initialize
+        // Initialize https://github.com/affise/affise-mmp-sdk-react#initialize
         Affise
             .settings({
                 affiseAppId: '129', //Change to your app id
@@ -29,7 +29,7 @@ export default function App() {
             .setProduction(false) //To enable debug methods set Production to false
             .start(); // Start Affise SDK
 
-        // Deeplinks https://github.com/affise/sdk-react#deeplinks
+        // Deeplinks https://github.com/affise/affise-mmp-sdk-react#deeplinks
         Affise.registerDeeplinkCallback((value) => {
             console.log(`Deeplink: ${value}`);
             setDeeplink(`Deeplink: ${value}`);
@@ -50,7 +50,7 @@ export default function App() {
             console.log(`Affise: ${response}`);
         });
 
-        // SDK to SDK integrations https://github.com/affise/sdk-react#sdk-to-sdk-integrations
+        // SDK to SDK integrations https://github.com/affise/affise-mmp-sdk-react#sdk-to-sdk-integrations
         // new AffiseAdRevenue(AffiseAdSource.ADMOB)
         //     .setRevenue(2.5, "USD")
         //     .setNetwork("network")

@@ -235,13 +235,23 @@ export class AffiseNative extends NativeBase {
         );
     }
 
-    // AppsFlyer
-    logEvent(eventName: string, eventValues: Record<string, any>) {
+    // AppsFlyer Module
+    appsFlyerLogEvent(eventName: string, eventValues: Record<string, any>) {
         const data: Record<string, any> = {
             [DataName.EVENT_NAME]: eventName,
             [DataName.EVENT_VALUES]: eventValues,
         };
         this.native(AffiseApiMethod.MODULE_APPSFLYER_LOG_EVENT, data);
+    }
+
+    // TikTok Module
+    tikTokSendEvent(eventName: string, properties: Record<string, any>, eventId: string) {
+        const data: Record<string, any> = {
+            [DataName.EVENT_NAME]: eventName,
+            [DataName.EVENT_VALUES]: properties,
+            [DataName.EVENT_ID]: eventId,
+        };
+        this.native(AffiseApiMethod.MODULE_TIKTOK_EVENT, data);
     }
     ////////////////////////////////////////
     // modules

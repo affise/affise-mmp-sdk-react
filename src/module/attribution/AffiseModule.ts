@@ -14,6 +14,8 @@ import { AffiseSubscription } from "../subscription/AffiseSubscription";
 import { AffiseModuleSubscriptionApi } from "../subscription/AffiseModuleSubscriptionApi";
 import { AffiseAppsFlyer } from "../appsflyer/AffiseAppsFlyer";
 import type { AffiseModuleAppsFlyerApi } from "../appsflyer/AffiseModuleAppsFlyerApi";
+import { AffiseTikTok } from "../tiktok/AffiseTiktok";
+import type { AffiseModuleTikTokApi } from "../tiktok/AffiseModuleTikTokApi";
 
 export class AffiseModule implements AffiseModuleApi { 
     private native: AffiseNative
@@ -21,12 +23,14 @@ export class AffiseModule implements AffiseModuleApi {
     appsFlyer: AffiseModuleAppsFlyerApi
     link: AffiseModuleLinkApi
     subscription: AffiseModuleSubscriptionApi
+    tikTok: AffiseModuleTikTokApi
 
     constructor(native: AffiseNative) { 
         this.native = native
         this.appsFlyer = new AffiseAppsFlyer(native)
        	this.link = new AffiseLink(native)
         this.subscription = new AffiseSubscription(native)
+        this.tikTok = new AffiseTikTok(native)
     }
 
     /**

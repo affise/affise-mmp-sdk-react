@@ -9,12 +9,14 @@ import type { AffisePurchasedInfo } from "../subscription/AffisePurchasedInfo";
 import type { AffiseProductsResult } from "../subscription/AffiseProductsResult";
 import type { AffiseResultCallback } from "../subscription/AffiseResultCallback";
 import type { AffiseModuleAppsFlyerApi } from "../appsflyer/AffiseModuleAppsFlyerApi";
+import type { AffiseModuleTikTokApi } from "../tiktok/AffiseModuleTikTokApi";
 
 export interface AffiseModuleApi { 
 
     appsFlyer: AffiseModuleAppsFlyerApi;
     link: AffiseModuleLinkApi;
     subscription: AffiseModuleSubscriptionApi;
+    tikTok: AffiseModuleTikTokApi;
 
     /**
      * Get module status

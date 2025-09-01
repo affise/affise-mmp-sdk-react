@@ -16,7 +16,7 @@ export class AffiseAppsFlyer implements AffiseModuleAppsFlyerApi {
      * @param eventValues event data
      */
     logEvent(eventName: string, eventValues: Record<string, any>) {
-        this.native.logEvent(eventName, eventValues)
+        this.native.appsFlyerLogEvent(eventName, eventValues)
     }
 
     hasModule(): Promise<boolean> {
