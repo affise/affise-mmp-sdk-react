@@ -1,6 +1,7 @@
 import type {
-    AffiseConfig
+    AffiseConfig,
     // AutoCatchingType
+    AffiseModules,
 } from "../index";
 
 import type { OnInitErrorHandler } from "./OnInitErrorHandler";
@@ -76,6 +77,11 @@ export interface AffiseSettingsApi {
      * Set configValue
      */
     setConfigValues(values: Record<AffiseConfig, any>): AffiseSettingsApi
+
+    /**
+     * Set disableModules
+     */
+    setDisableModules(disableModules: AffiseModules[]): AffiseSettingsApi
 
     /**
      * Starts Affise SDK

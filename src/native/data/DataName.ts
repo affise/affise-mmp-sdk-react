@@ -47,6 +47,6 @@ export class DataName {
     static EVENT_ID = "eventId";
     static EVENT_NAME = "eventName";
     static EVENT_VALUES = "eventValues";
-    static PUSH_TOKEN = "push_token";
-    static PUSH_TOKEN_SERVICE = "push_token_service";
+    static PUSH_TOKEN = "pushToken";
+    static PUSH_TOKEN_SERVICE = "pushTokenService";
 }

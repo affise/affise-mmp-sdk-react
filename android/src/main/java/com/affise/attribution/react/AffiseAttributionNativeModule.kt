@@ -47,7 +47,7 @@ class AffiseAttributionNativeModule(
     private fun updateActivity() {
         apiWrapper?.let {
             if (it.activity == null) {
-                it.activity = currentActivity
+                it.activity = reactContext.currentActivity
             }
         }
     }

@@ -26,7 +26,7 @@ target 'AffiseAttributionLibExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  affise_version = '1.6.54'
+  affise_version = '1.6.55'
   # Affise Modules
   pod 'AffiseModule/Advertising', affise_version
   pod 'AffiseModule/AppsFlyer', affise_version

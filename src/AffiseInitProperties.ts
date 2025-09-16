@@ -1,4 +1,5 @@
 import type {AutoCatchingType} from "./events/AutoCatchingType";
+import { AffiseModules } from "./module/AffiseModules";
 import type { AffiseConfig } from "./settings/AffiseConfig";
 import type { OnInitErrorHandler } from "./settings/OnInitErrorHandler";
 import type { OnInitSuccessHandler } from "./settings/OnInitSuccessHandler";
@@ -25,6 +26,7 @@ export type AffiseInitPropertiesType = {
     onInitSuccessHandler?: OnInitSuccessHandler | null,
     onInitErrorHandler?: OnInitErrorHandler | null,
     configStrings: Record<AffiseConfig[keyof AffiseConfig & number], any> | null,
+    disableModules: AffiseModules[] | null
 };
 
 export class AffiseInitProperties {
@@ -40,6 +42,7 @@ export class AffiseInitProperties {
     onInitSuccessHandler?: OnInitSuccessHandler | null = null;
     onInitErrorHandler?: OnInitErrorHandler | null = null;
     configStrings: Record<string, any> = {};
+    disableModules: AffiseModules[] = [];
 
     constructor(
         {
@@ -54,7 +57,8 @@ export class AffiseInitProperties {
             domain,
             onInitSuccessHandler,
             onInitErrorHandler,
-            configStrings: configValues
+            configStrings: configValues,
+            disableModules: disableModules,
         }: AffiseInitPropertiesType
     ) {
         this.affiseAppId = affiseAppId;
@@ -68,6 +72,7 @@ export class AffiseInitProperties {
         this.onInitSuccessHandler = onInitSuccessHandler || null;
         this.onInitErrorHandler = onInitErrorHandler || null;
         this.configStrings = configValues || {};
+        this.disableModules = disableModules || [];
 
         if (isProduction != null) {
             this.isProduction = isProduction;

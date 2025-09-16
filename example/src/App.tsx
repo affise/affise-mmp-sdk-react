@@ -3,7 +3,8 @@ import * as React from 'react';
 import {Alert, Button, SafeAreaView, StyleSheet} from 'react-native';
 import {
     Affise,
-    AffiseConfig
+    AffiseConfig,
+    AffiseModules
 } from 'affise-attribution-lib';
 import {AffiseWidget} from "./affise/AffiseWidget";
 import {AffiseApiWidget} from "./affise/AffiseApiWidget";
@@ -27,6 +28,9 @@ export default function App() {
             })
             .setConfigValue(AffiseConfig.FB_APP_ID, "1111111111111111")
             .setProduction(false) //To enable debug methods set Production to false
+            .setDisableModules([
+                AffiseModules.ADVERTISING,
+            ])
             .start(); // Start Affise SDK
 
         // Deeplinks https://github.com/affise/affise-mmp-sdk-react#deeplinks

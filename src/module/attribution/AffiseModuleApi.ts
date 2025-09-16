@@ -10,9 +10,11 @@ import type { AffiseProductsResult } from "../subscription/AffiseProductsResult"
 import type { AffiseResultCallback } from "../subscription/AffiseResultCallback";
 import type { AffiseModuleAppsFlyerApi } from "../appsflyer/AffiseModuleAppsFlyerApi";
 import type { AffiseModuleTikTokApi } from "../tiktok/AffiseModuleTikTokApi";
+import type { AffiseModuleAdvertisingApi } from "../advertising/AffiseModuleAdvertisingApi";
 
-export interface AffiseModuleApi { 
+export interface AffiseModuleApi {
 
+    advertising: AffiseModuleAdvertisingApi;
     appsFlyer: AffiseModuleAppsFlyerApi;
     link: AffiseModuleLinkApi;
     subscription: AffiseModuleSubscriptionApi;
@@ -24,12 +26,6 @@ export interface AffiseModuleApi {
      * @param callback status response
      */
     getStatus(module: AffiseModules, callback: OnKeyValueCallback): void;
-
-    /**
-     * Manual module start
-     * @param module module name
-     */
-    moduleStart(module: AffiseModules): Promise<boolean>
 
     /**
      * Get installed modules

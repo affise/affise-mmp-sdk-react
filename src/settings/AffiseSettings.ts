@@ -1,7 +1,8 @@
 import type { AffiseNative } from "../native/AffiseNative";
 import {
     AffiseInitProperties,
-    AffiseConfig
+    AffiseConfig,
+    AffiseModules,
     // AutoCatchingType
 } from "../index";
 
@@ -23,6 +24,7 @@ export class AffiseSettings implements AffiseSettingsApi {
     private onInitSuccessHandler?: OnInitSuccessHandler | null = null;
     private onInitErrorHandler?: OnInitErrorHandler | null = null;
     private configValues: Record<string, any> = {};
+    private disableModules: AffiseModules[] = [];
 
     /**
      * Affise SDK settings
@@ -140,6 +142,14 @@ export class AffiseSettings implements AffiseSettingsApi {
         return this;
     }
 
+    /**
+     * Set disableModules
+     */
+    setDisableModules(disableModules: AffiseModules[]): AffiseSettingsApi {
+        this.disableModules = disableModules;
+        return this;
+    }
+
     private getInitProperties(): AffiseInitProperties {
         return new AffiseInitProperties({
             affiseAppId: this.affiseAppId,
@@ -154,6 +164,7 @@ export class AffiseSettings implements AffiseSettingsApi {
             onInitSuccessHandler: this.onInitSuccessHandler,
             onInitErrorHandler: this.onInitErrorHandler,
             configStrings: this.configValues,
+            disableModules: this.disableModules,
         });
     }
 

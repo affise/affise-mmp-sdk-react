@@ -16,17 +16,21 @@ import { AffiseAppsFlyer } from "../appsflyer/AffiseAppsFlyer";
 import type { AffiseModuleAppsFlyerApi } from "../appsflyer/AffiseModuleAppsFlyerApi";
 import { AffiseTikTok } from "../tiktok/AffiseTiktok";
 import type { AffiseModuleTikTokApi } from "../tiktok/AffiseModuleTikTokApi";
+import { AffiseAdvertising } from "../advertising/AffiseAdvertising";
+import type { AffiseModuleAdvertisingApi } from "../advertising/AffiseModuleAdvertisingApi";
 
-export class AffiseModule implements AffiseModuleApi { 
+export class AffiseModule implements AffiseModuleApi {
     private native: AffiseNative
 
+    advertising: AffiseModuleAdvertisingApi
     appsFlyer: AffiseModuleAppsFlyerApi
     link: AffiseModuleLinkApi
     subscription: AffiseModuleSubscriptionApi
     tikTok: AffiseModuleTikTokApi
 
-    constructor(native: AffiseNative) { 
+    constructor(native: AffiseNative) {
         this.native = native
+        this.advertising = new AffiseAdvertising(native)
         this.appsFlyer = new AffiseAppsFlyer(native)
        	this.link = new AffiseLink(native)
         this.subscription = new AffiseSubscription(native)
@@ -40,14 +44,6 @@ export class AffiseModule implements AffiseModuleApi {
      */
     getStatus(module: AffiseModules, callback: OnKeyValueCallback) {
         this.native.getStatus(module, callback);
-    }
-
-    /**
-     * Manual module start
-     * @param module module name
-     */
-    moduleStart(module: AffiseModules): Promise<boolean> {
-        return this.native.moduleStart(module);
     }
 
     /**

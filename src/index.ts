@@ -169,15 +169,6 @@ export class Affise {
     }
 
     /**
-     * @deprecated use Affise.module.moduleStart
-     * Manual module start
-     * @param module module name
-     */
-    static moduleStart(module: AffiseModules): Promise<boolean> {
-        return this.module.moduleStart(module);
-    }
-
-    /**
      * @deprecated use Affise.module.getModulesInstalled
      * Get installed modules
      */

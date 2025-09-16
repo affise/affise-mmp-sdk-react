@@ -43,7 +43,6 @@ export enum AffiseApiMethod {
     ////////////////////////////////////////
     // modules
     ////////////////////////////////////////
-    MODULE_START = "module_start",
     GET_MODULES_INSTALLED = "get_modules_installed",
     GET_STATUS_CALLBACK = "get_status_callback",
     // AppsFlyer Module
@@ -55,6 +54,8 @@ export enum AffiseApiMethod {
     MODULE_SUBS_PURCHASE_CALLBACK = "module_subs_purchase_callback",
     // TikTok Module
     MODULE_TIKTOK_EVENT = "module_tiktok_event",
+    // Advertising Module
+    MODULE_ADVERTISING_START = "module_advertising_start",
     ////////////////////////////////////////
     // modules
     ////////////////////////////////////////

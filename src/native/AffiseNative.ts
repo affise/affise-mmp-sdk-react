@@ -195,10 +195,6 @@ export class AffiseNative extends NativeBase {
         this.nativeCallbackOnce(AffiseApiMethod.GET_STATUS_CALLBACK, callback, module);
     }
 
-    moduleStart(module: AffiseModules): Promise<boolean> {
-        return this.nativeResult(AffiseApiMethod.MODULE_START, module);
-    }
-
     getModulesInstalled(): Promise<AffiseModules[]> {
         return this.nativeResult(AffiseApiMethod.GET_MODULES_INSTALLED);
     }
@@ -252,6 +248,11 @@ export class AffiseNative extends NativeBase {
             [DataName.EVENT_ID]: eventId,
         };
         this.native(AffiseApiMethod.MODULE_TIKTOK_EVENT, data);
+    }
+
+    // Advertising Module
+    advertisingStartModule() { 
+        this.native(AffiseApiMethod.MODULE_ADVERTISING_START);
     }
     ////////////////////////////////////////
     // modules
