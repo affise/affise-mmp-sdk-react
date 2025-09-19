@@ -1338,7 +1338,7 @@ Example: `https://mydomain.com`
     5. Once Android Studio generates the file, click **Save file** to download it.
     6. Upload the `assetlinks.json` file to your site, with read access for everyone, at `https://yoursite/.well-known/assetlinks.json`.
 
-  > [!IMPORTANT]
+  > [!CAUTION]
   >
   > The system verifies the Digital Asset Links file via the encrypted HTTPS protocol. Make sure that the **assetlinks.json** file is accessible over an HTTPS connection, regardless of whether your app's intent filter includes **https**.
 
@@ -1735,6 +1735,22 @@ Affise.debug.versionNative().then((version) => {
 ```
 
 # Troubleshoots
+
+> [!CAUTION]
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+> 
+> If Affise settings doesn't change after version update or api is working incorrectly.
+>
+> **First**: try **reset cache** for `React Native` 
+>
+> **Second**: completely stop android application on device **and** stop `React Native` `Metro server`
+>
+> React Native relaunch `JavaScript`/`TypeScript` on live code change, 
+> but native code (such as Affise native library) won't restart 
+> unless Android application is **manually restarted** or **completely rebuild**
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
 ## iOS
 
