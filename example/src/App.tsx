@@ -4,7 +4,7 @@ import {Alert, Button, SafeAreaView, StyleSheet} from 'react-native';
 import {
     Affise,
     AffiseConfig,
-    AffiseModules
+    AffiseModules,
 } from 'affise-attribution-lib';
 import {AffiseWidget} from "./affise/AffiseWidget";
 import {AffiseApiWidget} from "./affise/AffiseApiWidget";
@@ -30,7 +30,16 @@ export default function App() {
             .setProduction(false) //To enable debug methods set Production to false
             .setDisableModules([
                 AffiseModules.ADVERTISING,
+                AffiseModules.PERSISTENT,
             ])
+            .setOnInitSuccess(() => { 
+                // Called if library initialization succeeded
+                console.log(`Affise: init success`);
+            })
+            .setOnInitError((error) => { 
+                // Called if library initialization failed
+                console.log(`Affise: init error ${error}`);
+            })
             .start(); // Start Affise SDK
 
         // Deeplinks https://github.com/affise/affise-mmp-sdk-react#deeplinks

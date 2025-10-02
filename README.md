@@ -22,12 +22,14 @@
       - [Module AppsFlyer](#module-appsflyer)
       - [Module Huawei](#module-huawei)
       - [Module Link](#module-link)
+      - [Module Persistent](#module-persistent)
       - [Module Meta](#module-meta)
       - [Module Status](#module-status)
       - [Module Subscription](#module-subscription)
         - [AffiseProductType](#affiseproducttype)
       - [Module TikTok](#module-tiktok)
     - [Initialize](#initialize)
+      - [Initialization callbacks](#initialization-callbacks)
       - [Before application is published](#before-application-is-published)
       - [Domain](#domain)
     - [Requirements](#requirements)
@@ -150,7 +152,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.65'
+final affise_version = '1.6.66'
 
 dependencies {
     // Affise modules
@@ -175,14 +177,14 @@ Add modules to iOS project
 
 | Module         |                                       Version                                        |
 |----------------|:------------------------------------------------------------------------------------:|
-| `ADSERVICE`    | [`1.6.55`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `ADVERTISING`  | [`1.6.55`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `APPSFLYER`    | [`1.6.55`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `LINK`         | [`1.6.55`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `PERSISTENT`   | [`1.6.55`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `STATUS`       | [`1.6.55`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `SUBSCRIPTION` | [`1.6.55`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `TIKTOK`       | [`1.6.55`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `ADSERVICE`    | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `ADVERTISING`  | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `APPSFLYER`    | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `LINK`         | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `PERSISTENT`   | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `STATUS`       | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `SUBSCRIPTION` | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `TIKTOK`       | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -190,7 +192,7 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.6.55'
+  affise_version = '1.6.56'
   # Affise Modules
   pod 'AffiseModule/AdService', affise_version
   pod 'AffiseModule/Advertising', affise_version
@@ -335,6 +337,18 @@ Affise.module.link.hasModule().then((hasModule) => {
     // Check is module present
 })
 ```
+
+#### Module Persistent
+
+`iOS Only`
+
+> [!NOTE]
+> 
+> Module requires user phone to be authenticated by Apple ID
+>
+> It uses Apple `Security` framework to store protected information in user account
+
+Persist `device id` value for [Get random device Id](#get-random-device-id) on application reinstall
 
 #### Module Meta
 
@@ -511,7 +525,9 @@ export default function App() {
 }
 ```
 
-Check if library is initialized
+#### Initialization callbacks
+
+Check Affise library initialization
 
 ```typescript
 Affise
@@ -520,9 +536,14 @@ Affise
     secretKey: "Your SDK secretKey",
   })
   .setOnInitSuccess(() => {
-    // Called then library is initialized
+    // Called if library initialization succeeded
+    console.log(`Affise: init success`);
   })
-  .start();
+  .setOnInitError((error) => {
+    // Called if library initialization failed
+    console.log(`Affise: init error ${error}`);
+  })
+  .start(); // Start Affise SDK
 ```
 
 #### Before application is published
@@ -1477,7 +1498,7 @@ Affise.getRandomUserId();
 >
 > To make `device id` more persistent on application reinstall
 >
-> use [Affise `Persistent` Module](#modules) for `iOS`
+> use [Affise `Persistent` Module](#module-persistent) for `iOS`
 >
 > use [Affise `AndroidId` Module](#modules) for `Android`
 

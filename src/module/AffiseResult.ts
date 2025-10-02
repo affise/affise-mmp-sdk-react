@@ -17,7 +17,7 @@ export class AffiseResult<T> {
     }
 
     public get isSuccess(): boolean {
-        return this instanceof AffiseSuccess<T>;
+        return this instanceof AffiseSuccess;
     }
 
     public get isFailure(): boolean {
