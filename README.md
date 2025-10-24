@@ -22,8 +22,8 @@
       - [Module AppsFlyer](#module-appsflyer)
       - [Module Huawei](#module-huawei)
       - [Module Link](#module-link)
-      - [Module Persistent](#module-persistent)
       - [Module Meta](#module-meta)
+      - [Module Persistent](#module-persistent)
       - [Module Status](#module-status)
       - [Module Subscription](#module-subscription)
         - [AffiseProductType](#affiseproducttype)
@@ -177,14 +177,14 @@ Add modules to iOS project
 
 | Module         |                                       Version                                        |
 |----------------|:------------------------------------------------------------------------------------:|
-| `ADSERVICE`    | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `ADVERTISING`  | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `APPSFLYER`    | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `LINK`         | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `PERSISTENT`   | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `STATUS`       | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `SUBSCRIPTION` | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `TIKTOK`       | [`1.6.56`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `ADSERVICE`    | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `ADVERTISING`  | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `APPSFLYER`    | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `LINK`         | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `PERSISTENT`   | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `STATUS`       | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `SUBSCRIPTION` | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `TIKTOK`       | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -192,7 +192,7 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.6.56'
+  affise_version = '1.6.57'
   # Affise Modules
   pod 'AffiseModule/AdService', affise_version
   pod 'AffiseModule/Advertising', affise_version
@@ -338,18 +338,6 @@ Affise.module.link.hasModule().then((hasModule) => {
 })
 ```
 
-#### Module Persistent
-
-`iOS Only`
-
-> [!NOTE]
-> 
-> Module requires user phone to be authenticated by Apple ID
->
-> It uses Apple `Security` framework to store protected information in user account
-
-Persist `device id` value for [Get random device Id](#get-random-device-id) on application reinstall
-
 #### Module Meta
 
 - [Meta Install Referrer Docs](https://developers.facebook.com/docs/app-ads/meta-install-referrer)
@@ -383,6 +371,18 @@ Affise
   .setConfigValue(AffiseConfig.FB_APP_ID, "Your Facebook App Id")
   .start(); // Start Affise SDK
 ```
+
+#### Module Persistent
+
+`iOS Only`
+
+> [!NOTE]
+> 
+> Module requires user phone to be authenticated by Apple ID
+>
+> It uses Apple `Security` framework to store protected information in user account
+
+Persist `device id` value for [Get random device Id](#get-random-device-id) on application reinstall
 
 #### Module Status
 
@@ -1763,13 +1763,35 @@ Affise.debug.versionNative().then((version) => {
 > 
 > If Affise settings doesn't change after version update or api is working incorrectly.
 >
-> **First**: try **reset cache** for `React Native` 
+> **First**: try **reset cache** for `React Native`. `npm start -- --reset-cache` or `npm cache clean --force`
 >
-> **Second**: completely stop android application on device **and** stop `React Native` `Metro server`
+> **Second**: completely stop application on device **and** stop `React Native` `Metro server`
 >
 > React Native relaunch `JavaScript`/`TypeScript` on live code change, 
 > but native code (such as Affise native library) won't restart 
 > unless Android application is **manually restarted** or **completely rebuild**
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+
+> [!NOTE]
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+> 
+> Then reporting a **BUG**
+>
+> **Please** provide information:
+>
+> 1. From command `npx react-native doctor`
+> 
+> 2. From command `npx react-native info`
+>
+> 3. On which platform bug occurred `iOS` or `Android`
+>
+> 4. Detailed log of a bug
+>
+> 5. Steps to reproduse a bug
+>
+> 6. Code which cause a bug
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 

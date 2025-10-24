@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.6.43] - 2025-10-24
+
+### Fixed
+
+- Fix iOS `Affise.getDeferredDeeplinkValue`
+
+### Changed
+
+- Update native iOS to [`1.6.57`](https://github.com/affise/affise-mmp-sdk-ios/blob/1.6.57/CHANGELOG.md)
+
 ## [1.6.42] - 2025-10-02
 
 ### Added
@@ -383,6 +393,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.43]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.42...1.6.43
 [1.6.42]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.41...1.6.42
 [1.6.41]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.40...1.6.41
 [1.6.40]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.39...1.6.40
