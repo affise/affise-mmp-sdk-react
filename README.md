@@ -35,6 +35,8 @@
     - [Requirements](#requirements)
       - [Android](#android-1)
       - [iOS](#ios-1)
+    - [Persistent data](#persistent-data)
+    - [Reinstall tracking](#reinstall-tracking)
 - [Features](#features)
   - [ProviderType identifiers collection](#providertype-identifiers-collection)
     - [Attribution](#attribution)
@@ -64,7 +66,7 @@
       - [iOS APNs](#ios-apns)
     - [Firebase NPM package](#firebase-npm-package)
       - [iOS APNs](#ios-apns-1)
-  - [Reinstall Uninstall tracking](#reinstall-uninstall-tracking)
+  - [Uninstall tracking](#uninstall-tracking)
   - [APK preinstall tracking](#apk-preinstall-tracking)
   - [Links](#links)
     - [Deeplinks](#deeplinks)
@@ -79,13 +81,13 @@
   - [Disable tracking](#disable-tracking)
   - [Disable background tracking](#disable-background-tracking)
   - [Get random user Id](#get-random-user-id)
-  - [Get random device Id](#get-random-device-id)
+  - [Get Affice device Id](#get-affice-device-id)
   - [Get providers](#get-providers)
   - [Is first run](#is-first-run)
   - [Get referrer](#get-referrer)
   - [Get referrer value](#get-referrer-value)
   - [Referrer keys](#referrer-keys)
-  - [Get module state](#get-module-state)
+  - [Get module status](#get-module-status)
   - [Platform specific](#platform-specific)
     - [GDPR right to be forgotten](#gdpr-right-to-be-forgotten)
     - [StoreKit Ad Network](#storekit-ad-network)
@@ -606,6 +608,81 @@ Example [`info.plist`](example/ios/AffiseAttributionLibExample/Info.plist):
 	<string>Youre permission text</string>
 </dict>
 ```
+
+### Persistent data
+
+Some methods require to return **same data** on application reinstall
+
+It is achieved by using [Affise Persistent Module](#module-persistent) for `iOS` and [Affise AndroidId Module](#modules) for `Android`
+
+Such SDK methods are:
+
+- [Get Affice device Id](#get-affice-device-id)
+
+To simulate multiple device install for testing purpose you can use one of two options:
+
+1. Disable module dependencies:
+
+`iOS`
+
+```ruby
+# Disable module dependency
+# pod 'AffiseModule/Persistent', affise_version
+```
+
+`Android`
+
+```groovy
+// Disable module dependency
+// implementation("com.affise:module-androidid:$affise_version")
+```
+
+2. Disable module programmatically:
+
+```typescript
+Affise
+    .settings({
+        affiseAppId: 'Your appId',
+        secretKey: 'Your SDK secretKey',
+    })
+    .setDisableModules([  
+        AffiseModules.PERSISTENT, // Disable module programmatically for iOS
+        AffiseModules.ANDROIDID, // Disable module programmatically for Android
+    ])
+    .start();
+```
+
+### Reinstall tracking
+
+> [!NOTE]
+>
+> Read more about [Persistent data](#persistent-data)
+
+There are two working mode for [Affice device Id](#get-affice-device-id):
+
+1. Return persistent value on each reinstall
+2. Return new value on each reinstall
+
+First mode require:
+
+- Enabling [Affise Persistent Module](#module-persistent) for `iOS`
+
+```ruby
+# Enable module dependency
+pod 'AffiseModule/Persistent', affise_version
+```
+
+- Enabling [Affise AndroidId Module](#modules) for `Android`
+
+```groovy
+// Enable module dependency
+implementation("com.affise:module-androidid:$affise_version")
+```
+
+Even after deleting application [Affice device Id](#get-affice-device-id) will be preserved and will restore on next installation
+
+Second mode is convenient for testing.
+By removing dependency or [disabling module programmatically](#manual-exclude-modules), a new [Affice device Id](#get-affice-device-id) will be generated for each **new** installation.
 
 # Features
 
@@ -1166,7 +1243,7 @@ function getToken() {
 }
 ```
 
-## Reinstall Uninstall tracking
+## Uninstall tracking
 
 Affise automatically track reinstall events by using silent-push technology, to make this feature work, pass push token when it is recreated by user and on you application starts up
 
@@ -1492,7 +1569,7 @@ Affise.isBackgroundTrackingEnabled().then((enabled) => {
 Affise.getRandomUserId();
 ```
 
-## Get random device Id
+## Get Affice device Id
 
 > [!NOTE]
 >
@@ -1501,6 +1578,10 @@ Affise.getRandomUserId();
 > use [Affise `Persistent` Module](#module-persistent) for `iOS`
 >
 > use [Affise `AndroidId` Module](#modules) for `Android`
+
+> [!NOTE]
+>
+> Read more about [Persistent data](#persistent-data) and [Reinstall tracking](#reinstall-tracking)
 
 ```typescript
 Affise.getRandomDeviceId();
@@ -1610,7 +1691,7 @@ In examples above `ReferrerKey.CLICK_ID` is used, but many others is available:
 - `SUB_4`
 - `SUB_5`
 
-## Get module state
+## Get module status
 
 > [!CAUTION]
 >
