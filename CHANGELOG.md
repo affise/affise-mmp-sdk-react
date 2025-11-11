@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.44] - 2025-11-11
+
+### Changed
+
+- Update React native version 0.82
+- Update android targetSdkVersion 35
+
 ## [1.6.43] - 2025-10-24
 
 ### Fixed
@@ -393,6 +400,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.44]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.43...1.6.44
 [1.6.43]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.42...1.6.43
 [1.6.42]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.41...1.6.42
 [1.6.41]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.40...1.6.41
