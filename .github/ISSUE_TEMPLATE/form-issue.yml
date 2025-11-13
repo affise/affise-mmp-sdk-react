@@ -79,9 +79,9 @@ body:
     attributes:
       label: I have
       options:
-        - label: Read [documentation](https://github.com/affise/affise-mmp-sdk-react/README.md)
+        - label: Read [documentation](https://github.com/affise/affise-mmp-sdk-react/blob/main/README.md)
           required: true
-        - label: Tried [Troubleshoots](https://github.com/affise/affise-mmp-sdk-react/README.md#Troubleshoots)
+        - label: Tried [Troubleshoots](https://github.com/affise/affise-mmp-sdk-react/blob/main/README.md#Troubleshoots)
           required: true
     validations:
       required: true
