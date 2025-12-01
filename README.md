@@ -154,7 +154,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.66'
+final affise_version = '1.6.67'
 
 dependencies {
     // Affise modules
@@ -179,14 +179,14 @@ Add modules to iOS project
 
 | Module         |                                       Version                                        |
 |----------------|:------------------------------------------------------------------------------------:|
-| `ADSERVICE`    | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `ADVERTISING`  | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `APPSFLYER`    | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `LINK`         | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `PERSISTENT`   | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `STATUS`       | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `SUBSCRIPTION` | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `TIKTOK`       | [`1.6.57`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `ADSERVICE`    | [`1.6.58`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `ADVERTISING`  | [`1.6.58`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `APPSFLYER`    | [`1.6.58`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `LINK`         | [`1.6.58`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `PERSISTENT`   | [`1.6.58`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `STATUS`       | [`1.6.58`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `SUBSCRIPTION` | [`1.6.58`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `TIKTOK`       | [`1.6.58`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 
@@ -194,7 +194,7 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.6.57'
+  affise_version = '1.6.58'
   # Affise Modules
   pod 'AffiseModule/AdService', affise_version
   pod 'AffiseModule/Advertising', affise_version

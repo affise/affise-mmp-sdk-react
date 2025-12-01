@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.6.45] - 2025-11-26
+
+### Fixed
+
+- Fix `AffiseError` parsing
+
+### Changed
+
+- Update native iOS to [`1.6.58`](https://github.com/affise/affise-mmp-sdk-ios/blob/1.6.58/CHANGELOG.md)
+- Update native Android to [`1.6.67`](https://github.com/affise/affise-mmp-sdk-android/blob/v1.6.67/CHANGELOG.md)
+
 ## [1.6.44] - 2025-11-11
 
 ### Changed
@@ -400,6 +411,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.45]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.44...1.6.45
 [1.6.44]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.43...1.6.44
 [1.6.43]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.42...1.6.43
 [1.6.42]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.41...1.6.42
