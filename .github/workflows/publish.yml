@@ -44,16 +44,16 @@ jobs:
 
       - name: NPM Publish Release
         if: ${{ !contains(github.event.ref, '-') }}
-        # env:
-        #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: |
           npm who
           npm publish 
 
       - name: NPM Publish Beta
         if: contains(github.event.ref, '-beta')
-        # env:
-        #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: |
           npm who
           npm publish --tag beta
