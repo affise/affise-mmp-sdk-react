@@ -11,6 +11,8 @@ export * from './debug/network/DebugOnNetworkCallback';
 export * from './debug/validate/DebugOnValidateCallback';
 export * from './debug/validate/ValidationStatus';
 
+export * from './errors/AffiseError';
+
 export * from './network/HttpResponse';
 export * from './network/HttpRequest';
 export * from './network/HttpMethod';
