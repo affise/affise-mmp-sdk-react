@@ -154,7 +154,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.6.73'
+final affise_version = '1.6.74'
 
 dependencies {
     // Affise modules
