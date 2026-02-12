@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.6.50] - 2026-02-12
+
+### Fixed
+
+- Fix `Affise.module.link.resolve` content downloading will be skipped
+
+### Changed
+
+- Update native iOS to [`1.6.60`](https://github.com/affise/affise-mmp-sdk-ios/blob/1.6.60/CHANGELOG.md)
+- Update native Android to [`1.6.75`](https://github.com/affise/affise-mmp-sdk-android/blob/v1.6.75/CHANGELOG.md)
+
 ## [1.6.49] - 2026-02-04
 
 ### Added
