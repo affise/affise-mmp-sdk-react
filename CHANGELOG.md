@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.51] - 2026-02-19
+
+### Changed
+
+- Provider `REFERRER_UPDATED` for modules `Huawei`, `RuStore`
+- Update native Android to [`1.6.76`](https://github.com/affise/affise-mmp-sdk-android/blob/v1.6.76/CHANGELOG.md)
+
 ## [1.6.50] - 2026-02-12
 
 ### Fixed
@@ -475,6 +482,8 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.6.51]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.50...1.6.51
+[1.6.50]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.49...1.6.50
 [1.6.49]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.48...1.6.49
 [1.6.48]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.47...1.6.48
 [1.6.47]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.46...1.6.47
