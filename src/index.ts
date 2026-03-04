@@ -1,12 +1,7 @@
 import type {
     AffiseEvent,
-    AffiseInitPropertiesType,
-    AffiseInitProperties,
-    // AutoCatchingType,
     ReferrerKey,
-    AffiseModules,
     ReferrerCallback,
-    OnKeyValueCallback,
     OnDeeplinkCallback,
     OnSendSuccessCallback,
     OnSendFailedCallback,
@@ -46,24 +41,6 @@ export class Affise {
      */
     static settings({affiseAppId, secretKey}: { affiseAppId: string, secretKey: string }): AffiseSettingsApi {
         return new AffiseSettings(this.native, affiseAppId, secretKey);
-    }
-
-    /**
-     * @deprecated Use Affise.settings({affiseAppId, secretKey}).start()
-     * @param initProperties
-     */
-    static start(
-        initProperties: AffiseInitProperties | AffiseInitPropertiesType
-    ) {
-        this.native.init(initProperties);
-    }
-
-    /**
-     * @deprecated use `Affise.settings.setOnInitSuccess` instead
-     * @returns 
-     */
-    static isInitialized(): Promise<boolean> {
-        return this.native.isInitialized();
     }
 
     /**
@@ -159,24 +136,6 @@ export class Affise {
     }
 
     /**
-     * @deprecated use Affise.module.getStatus
-     * Get module status
-     * @param module module name
-     * @param callback status response
-     */
-    static getStatus(module: AffiseModules, callback: OnKeyValueCallback) {
-        this.module.getStatus(module, callback);
-    }
-
-    /**
-     * @deprecated use Affise.module.getModulesInstalled
-     * Get installed modules
-     */
-    static getModulesInstalled(): Promise<AffiseModules[]> {
-        return this.module.getModulesInstalled();
-    }
-
-    /**
      * getRandomUserId
      */
     static getRandomUserId(): Promise<string> {
@@ -205,22 +164,6 @@ export class Affise {
     }
 
     /**
-     * @deprecated use Affise.getReferrerUrl(callback)
-     * Get referrer
-     */
-    static getReferrer(callback: ReferrerCallback) {
-        this.getReferrerUrl(callback);
-    }
-
-    /**
-     * @deprecated use Affise.getReferrerUrlValue(key, callback)
-     * Get referrer Value
-     */
-    static getReferrerValue(key: ReferrerKey, callback: ReferrerCallback) {
-        this.getReferrerUrlValue(key, callback);
-    }
-
-    /**
      * Get referrer
      */
     static getReferrerUrl(callback: ReferrerCallback) {
@@ -232,22 +175,6 @@ export class Affise {
      */
     static getReferrerUrlValue(key: ReferrerKey, callback: ReferrerCallback) {
         this.native.getReferrerUrlValue(key, callback);
-    }
-
-    /**
-     * @deprecated use Affise.getDeferredDeeplink(callback)
-     * Get referrer on server
-     */
-    static getReferrerOnServer(callback: ReferrerCallback) {
-        this.getDeferredDeeplink(callback);
-    }
-
-    /**
-     * @deprecated use Affise.getDeferredDeeplinkValue(key, callback)
-     * Get referrer on server value
-     */
-    static getReferrerOnServerValue(key: ReferrerKey, callback: ReferrerCallback) {
-        this.getDeferredDeeplinkValue(key, callback);
     }
 
     /**

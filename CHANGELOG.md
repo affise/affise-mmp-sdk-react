@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.7.1] - 2026-03-04
+
+### Changed
+
+- Sync versions
+
+### Removed
+
+- Deprecated Api `Affise.start`
+- Deprecated Api `Affise.isInitialized`
+- Deprecated Api `Affise.getStatus`
+- Deprecated Api `Affise.getModulesInstalled`
+- Deprecated Api `Affise.getReferrer`
+- Deprecated Api `Affise.getReferrerValue`
+- Deprecated Api `Affise.getReferrerOnServer`
+- Deprecated Api `Affise.getReferrerOnServerValue`
+- Deprecated Api `Affise.ios.getReferrerOnServer`
+- Deprecated Api `Affise.ios.getReferrerOnServerValue`
+- Deprecated Api `Affise.module.linkResolve`
+- Deprecated Api `Affise.module.fetchProducts`
+- Deprecated Api `Affise.module.purchase`
+
+### Changed
+
+- Update native iOS to [`1.7.1`](https://github.com/affise/affise-mmp-sdk-ios/blob/1.7.1/CHANGELOG.md)
+- Update native Android to [`1.7.1`](https://github.com/affise/affise-mmp-sdk-android/blob/v1.7.1/CHANGELOG.md)
+
 ## [1.6.51] - 2026-02-19
 
 ### Changed
@@ -482,6 +509,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.7.1]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.51...1.7.1
 [1.6.51]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.50...1.6.51
 [1.6.50]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.49...1.6.50
 [1.6.49]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.48...1.6.49

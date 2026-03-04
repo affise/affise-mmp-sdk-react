@@ -2,7 +2,6 @@ import {getEnumFromString} from "../utils/EnumUtils";
 
 export enum AffiseApiMethod {
     INIT = "init",
-    IS_INITIALIZED = "is_initialized",
     SEND_EVENT = "send_event",
     SEND_EVENT_NOW = "send_event_now",
     ADD_PUSH_TOKEN = "add_push_token",

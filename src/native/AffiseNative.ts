@@ -53,10 +53,6 @@ export class AffiseNative extends NativeBase {
         this.native(AffiseApiMethod.INIT, option);
     }
 
-    isInitialized(): Promise<boolean> {
-        return this.nativeResult(AffiseApiMethod.IS_INITIALIZED);
-    }
-
     sendEvent(event: AffiseEvent) {
         this.native(AffiseApiMethod.SEND_EVENT, event.toRecord());
     }
