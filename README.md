@@ -1,10 +1,17 @@
 # Affise Attribution React Native Library
 
-[Change Log](CHANGELOG.md)
+[![telegram](https://badges.ws/badge/Affise%20channel-08c?icon=telegram)](https://t.me/AffiseChangelog)
+[![latest release](https://badges.ws/github/release/affise/affise-mmp-sdk-flutter)]((https://github.com/affise/affise-mmp-sdk-flutter/releases/latest))
+[![npm](https://badges.ws/npm/v/affise-attribution-lib)](https://www.npmjs.com/package/affise-attribution-lib)
+![license](https://badges.ws/github/l/affise/affise-mmp-sdk-flutter)
+![repo size](https://badges.ws/github/repo-size/affise/affise-mmp-sdk-flutter)
+![last commit](https://badges.ws/github/last-commit/affise/affise-mmp-sdk-flutter)
+
+[![Change Log](https://badges.ws/badge/Change%20Log?icon=react)](CHANGELOG.md)
 
 | Package                  |                                                                 Version                                                                  |
 |--------------------------|:----------------------------------------------------------------------------------------------------------------------------------------:|
-| `affise-attribution-lib` | [![attribution](https://img.shields.io/npm/v/affise-attribution-lib?label=latest)](https://www.npmjs.com/package/affise-attribution-lib) |
+| `affise-attribution-lib` | [![npm](https://badges.ws/npm/v/affise-attribution-lib)](https://www.npmjs.com/package/affise-attribution-lib) |
 
 - [Affise Attribution React Native Library](#affise-attribution-react-native-library)
 - [Description](#description)
@@ -179,14 +186,14 @@ Add modules to iOS project
 
 | Module         |                                       Version                                        |
 |----------------|:------------------------------------------------------------------------------------:|
-| `ADSERVICE`    | [`1.7.1`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `ADVERTISING`  | [`1.7.1`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `APPSFLYER`    | [`1.7.1`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `LINK`         | [`1.7.1`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `PERSISTENT`   | [`1.7.1`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `STATUS`       | [`1.7.1`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `SUBSCRIPTION` | [`1.7.1`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
-| `TIKTOK`       | [`1.7.1`](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `ADSERVICE`    | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `ADVERTISING`  | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `APPSFLYER`    | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `LINK`         | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `PERSISTENT`   | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `STATUS`       | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `SUBSCRIPTION` | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `TIKTOK`       | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 
 Example [example/ios/Podfile](example/ios/Podfile)
 

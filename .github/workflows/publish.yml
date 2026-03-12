@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: "24"
           registry-url: 'https://registry.npmjs.org'
@@ -31,7 +31,7 @@ jobs:
           echo "NPM_CACHE=$(npm config get cache)" >> $GITHUB_OUTPUT
 
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: ${{ steps.npm-cache.outputs.NPM_CACHE }}
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
@@ -63,6 +63,34 @@ jobs:
         run: |
           echo Version: ${GITHUB_REF_NAME}
           echo "VERSION=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+
+      - name: Tg Release failed
+        id: tg_failed
+        if: ${{ failure() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          disable_web_page_preview: true
+          message: |
+            🔴 React Native ${{ steps.version_tag.outputs.VERSION }} release failed
+
+            [Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+      - name: Tg Release
+        id: tg_success
+        if: ${{ success() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          disable_web_page_preview: true
+          message: |
+            🟢 React Native ${{ steps.version_tag.outputs.VERSION }} release
+
+            [Changelog](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md)
 
       - name: Release
         if: ${{ !contains(github.event.ref, '-') }}
