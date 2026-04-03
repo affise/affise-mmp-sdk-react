@@ -1,0 +1,31 @@
+name: NPM Token Check
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  token:
+    name: NPM Token Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: NPM Token Check
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm whoami
+
+      - name: Tg Token Invalid
+        continue-on-error: true
+        id: tg_failed
+        if: ${{ failure() }}
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          parse-mode: markdown
+          disable-web-page-preview: true
+          message: |
+            ‼️ NPM token is invalid ‼️
+
+            [Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})

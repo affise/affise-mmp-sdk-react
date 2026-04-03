@@ -31,6 +31,32 @@ jobs:
           node-version: "24"
           registry-url: 'https://registry.npmjs.org'
 
+      - name: NPM Token Check
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm whoami
+
+      - name: Invalid Token
+        id: token_invalid
+        if: ${{ failure() }}
+        run: echo "Invalid NPM Token"
+
+      - name: Tg Token Invalid
+        continue-on-error: true
+        id: tg_npm_failed
+        if: ${{ failure() }}
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          parse-mode: markdown
+          disable-web-page-preview: true
+          message: |
+            ‼️ NPM token is invalid ‼️
+
+            [Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
       - name: Get npm cache directory
         id: npm-cache
         run: |
@@ -53,7 +79,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: |
-          npm who
           npm publish 
 
       - name: NPM Publish Beta
@@ -61,13 +86,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: |
-          npm who
           npm publish --tag beta
 
       - name: Tg Release failed
         continue-on-error: true
         id: tg_failed
-        if: ${{ failure() }}
+        if: ${{ steps.token_invalid.outcome == 'skipped' && failure() }}
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
