@@ -32,11 +32,11 @@ export default function App() {
                 AffiseModules.ADVERTISING,
                 AffiseModules.PERSISTENT,
             ])
-            .setOnInitSuccess(() => { 
+            .setOnInitSuccess(() => {
                 // Called if library initialization succeeded
                 console.log(`Affise: init success`);
             })
-            .setOnInitError((error) => { 
+            .setOnInitError((error) => {
                 // Called if library initialization failed
                 console.log(`Affise: init error ${error}`);
             })

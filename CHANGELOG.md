@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.7.3] - 2026-04-03
+
+### Fixed
+
+- Fix iOS `json` unescape for addPredefined user data
+- Fix Android response body is skipped
+
+### Changed
+
+- Sync versions
+- Update Android `kotlin` version `1.9.24`
+- Update native iOS to [`1.7.3`](https://github.com/affise/affise-mmp-sdk-ios/blob/1.7.3/CHANGELOG.md)
+- Update native Android to [`1.7.3`](https://github.com/affise/affise-mmp-sdk-android/blob/v1.7.3/CHANGELOG.md)
+
 ## [1.7.1] - 2026-03-04
 
 ### Changed
@@ -173,12 +187,12 @@
 
 ### Fixed
 
-- Fix crash for android API < 24 
+- Fix crash for android API < 24
 
 ### Changed
 
 - Update native Android to [`1.6.61`](https://github.com/affise/affise-mmp-sdk-android/blob/v1.6.61/CHANGELOG.md)
-  
+
 ## [1.6.38] - 2025-07-24
 
 ### Added
@@ -275,7 +289,7 @@
 
 - Update native iOS to [`1.6.48`](https://github.com/affise/affise-mmp-sdk-ios/blob/1.6.48/CHANGELOG.md)
 - Update native Android to [`1.6.55`](https://github.com/affise/affise-mmp-sdk-android/blob/v1.6.55/CHANGELOG.md)
-  
+
 ## [1.6.30] - 2025-03-13
 
 ### Changed
@@ -284,7 +298,7 @@
 - Api `Affise.getReferrerOnServerValue` moved to `Affise.getDeferredDeeplinkValue`
 - Update native iOS to [`1.6.47`](https://github.com/affise/affise-mmp-sdk-ios/blob/1.6.47/CHANGELOG.md)
 - Update native Android to [`1.6.54`](https://github.com/affise/affise-mmp-sdk-android/blob/v1.6.54/CHANGELOG.md)
-  
+
 ## [1.6.29] - 2025-03-04
 
 ### Added
@@ -509,6 +523,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.7.3]: https://github.com/affise/affise-mmp-sdk-react/compare/1.7.1...1.7.3
 [1.7.1]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.51...1.7.1
 [1.6.51]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.50...1.6.51
 [1.6.50]: https://github.com/affise/affise-mmp-sdk-react/compare/1.6.49...1.6.50

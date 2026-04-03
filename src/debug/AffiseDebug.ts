@@ -7,7 +7,7 @@ import type { AffiseDebugApi } from "./AffiseDebugApi";
 export class AffiseDebug implements AffiseDebugApi {
     private native: AffiseNative
 
-    constructor(native: AffiseNative) { 
+    constructor(native: AffiseNative) {
         this.native = native
     }
 
@@ -28,12 +28,12 @@ export class AffiseDebug implements AffiseDebugApi {
     network(callback: DebugOnNetworkCallback) {
         this.native.network(callback);
     }
-    
+
     /**
      * Debug get version of flutter library
      */
     version(): string {
-        return "1.7.1";
+        return "1.7.3";
     }
 
     /**

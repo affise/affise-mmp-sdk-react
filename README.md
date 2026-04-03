@@ -115,7 +115,7 @@ referrer.
 
 ### SDK compatibility
 
-- `Xcode`   `14.2+`  
+- `Xcode`   `14.2+`
 - `iOS`     `12+`
 - `Android` `24+`
 
@@ -161,7 +161,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.7.1'
+final affise_version = '1.7.3'
 
 dependencies {
     // Affise modules
@@ -201,7 +201,7 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.7.1'
+  affise_version = '1.7.3'
   # Affise Modules
   pod 'AffiseModule/AdService', affise_version
   pod 'AffiseModule/Advertising', affise_version
@@ -233,7 +233,7 @@ Affise
         affiseAppId: 'Your appId',
         secretKey: 'Your SDK secretKey',
     })
-    .setDisableModules([  
+    .setDisableModules([
         // Exclude modules from start
         AffiseModules.ADVERTISING,
         AffiseModules.SUBSCRIPTION,
@@ -254,7 +254,7 @@ Sends `attributionToken` from `AdServices` framework `AAAttribution.attributionT
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
 > `iOS` only
-> 
+>
 > Advertising Module starting **Manually**
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
@@ -268,7 +268,7 @@ Affise.module.advertising.startModule()
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
 > `iOS` only
-> 
+>
 > Module Advertising requires `NSUserTrackingUsageDescription` key in `info.plist`
 >
 > Application **will crash** if key not present
@@ -294,7 +294,7 @@ const eventValues = {
 };
 // Send AppsFlyer event
 appsFlyer.logEvent(
-  eventName, 
+  eventName,
   eventValues,
   (res) => console.log(res),
   (err) => console.error(err)
@@ -306,7 +306,7 @@ Affise.module.appsflyer.logEvent(eventName, eventValues);
 Is Module present:
 
 ```typescript
-Affise.module.appsflyer.hasModule().then((hasModule) => { 
+Affise.module.appsflyer.hasModule().then((hasModule) => {
     // Check is module present
 })
 ```
@@ -342,7 +342,7 @@ Affise.module.link.resolve("SITE_WITH_REDIRECTION", (redirectUrl) => {
 Is Module present:
 
 ```typescript
-Affise.module.link.hasModule().then((hasModule) => { 
+Affise.module.link.hasModule().then((hasModule) => {
     // Check is module present
 })
 ```
@@ -386,7 +386,7 @@ Affise
 `iOS Only`
 
 > [!NOTE]
-> 
+>
 > Module requires user phone to be authenticated by Apple ID
 >
 > It uses Apple `Security` framework to store protected information in user account
@@ -445,7 +445,7 @@ Affise.module.subscription.purchase(product, AffiseProductType.CONSUMABLE, (resu
 Is Module present:
 
 ```typescript
-Affise.module.subscription.hasModule().then((hasModule) => { 
+Affise.module.subscription.hasModule().then((hasModule) => {
     // Check is module present
 })
 ```
@@ -464,9 +464,9 @@ Affise.module.subscription.hasModule().then((hasModule) => {
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
 > There are no official React Native TikTok package.
-> 
+>
 > You have to add native dependency manually.
-> 
+>
 > Add the Android TikTok SDK dependency [TikTok Docs](https://business-api.tiktok.com/gateway/docs/index?identify_key=c0138ffadd90a955c1f0670a56fe348d1d40680b3c89461e09f78ed26785164b&language=ENGLISH&doc_id=1739585434183746#item-link-1.%20Add%20the%20SDK%20as%20a%20build%20dependency)
 >
 > Add the iOS TikTok SDK dependency [TikTok Docs](https://business-api.tiktok.com/gateway/docs/index?identify_key=c0138ffadd90a955c1f0670a56fe348d1d40680b3c89461e09f78ed26785164b&language=ENGLISH&doc_id=1739585432134657#item-link-1.%20Add%20the%20SDK%20as%20a%20build%20dependency)
@@ -498,7 +498,7 @@ Affise.module.tikTok.sendEvent(eventName, properties, eventId);
 Is Module present:
 
 ```typescript
-Affise.module.tikTok.hasModule().then((hasModule) => { 
+Affise.module.tikTok.hasModule().then((hasModule) => {
     // Check is module present
 })
 ```
@@ -652,7 +652,7 @@ Affise
         affiseAppId: 'Your appId',
         secretKey: 'Your SDK secretKey',
     })
-    .setDisableModules([  
+    .setDisableModules([
         AffiseModules.PERSISTENT, // Disable module programmatically for iOS
         AffiseModules.ANDROIDID, // Disable module programmatically for Android
     ])
@@ -1197,7 +1197,7 @@ For `Objective-C` edit [`AppDelegate.mm`](example/ios/AffiseAttributionLibExampl
 	{
 		[token appendFormat:@"%02.2hhX", data[i]];
 	}
-	
+
   [Affise addPushTokenWithPushToken:[token copy] service:APPLE];
 }
 ```
@@ -1226,7 +1226,7 @@ async function firebaseSetup() {
 }
 
 function getToken() {
-    messaging().getToken().then((fcmToken) => { 
+    messaging().getToken().then((fcmToken) => {
         Affise.addPushToken(fcmToken, PushTokenService.FIREBASE);
     });
 }
@@ -1242,8 +1242,8 @@ import { Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 
 function getToken() {
-    if (Platform.OS == 'ios') { 
-        messaging().getAPNSToken().then((apnsToken) => { 
+    if (Platform.OS == 'ios') {
+        messaging().getAPNSToken().then((apnsToken) => {
             if (!apnsToken) return
             Affise.addPushToken(apnsToken, PushTokenService.APPLE);
         });
@@ -1582,7 +1582,7 @@ Affise.getRandomUserId();
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
 > Return `11111111-1111-1111-1111-111111111111` if **Affise SDK not initialized**
-> 
+>
 > Return `22222222-2222-2222-2222-222222222222` if **no valid methods** to retrieve id **for current device**
 >
 > `AffiseError.UUID_NOT_INITIALIZED` == `11111111-1111-1111-1111-111111111111`
@@ -1614,11 +1614,11 @@ Affise.getRandomDeviceId();
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
 > Return `11111111-1111-1111-1111-111111111111` if **Affise SDK not initialized**
-> 
+>
 > Return `22222222-2222-2222-2222-222222222222` if **no valid methods** to retrieve id **for current device**
-> 
+>
 > `AffiseError.UUID_NOT_INITIALIZED` == `11111111-1111-1111-1111-111111111111`
-> 
+>
 > `AffiseError.UUID_NO_VALID_METHOD` == `22222222-2222-2222-2222-222222222222`
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
@@ -1885,15 +1885,15 @@ Affise.debug.versionNative().then((version) => {
 > [!CAUTION]
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
-> 
+>
 > If Affise settings doesn't change after version update or api is working incorrectly.
 >
 > **First**: try **reset cache** for `React Native`. `npm start -- --reset-cache` or `npm cache clean --force`
 >
 > **Second**: completely stop application on device **and** stop `React Native` `Metro server`
 >
-> React Native relaunch `JavaScript`/`TypeScript` on live code change, 
-> but native code (such as Affise native library) won't restart 
+> React Native relaunch `JavaScript`/`TypeScript` on live code change,
+> but native code (such as Affise native library) won't restart
 > unless Android application is **manually restarted** or **completely rebuild**
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
@@ -1901,13 +1901,13 @@ Affise.debug.versionNative().then((version) => {
 > [!NOTE]
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
-> 
+>
 > Then reporting a **BUG**
 >
 > **Please** provide information:
 >
 > 1. From command `npx react-native doctor`
-> 
+>
 > 2. From command `npx react-native info`
 >
 > 3. On which platform bug occurred `iOS` or `Android`
