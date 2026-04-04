@@ -31,9 +31,11 @@ jobs:
           node-version: "24"
           registry-url: 'https://registry.npmjs.org'
 
+      - name: NPM Token
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+
       - name: NPM Token Check
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm whoami
 
