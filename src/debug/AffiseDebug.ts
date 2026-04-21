@@ -33,7 +33,7 @@ export class AffiseDebug implements AffiseDebugApi {
      * Debug get version of flutter library
      */
     version(): string {
-        return "1.7.3";
+        return "1.7.4";
     }
 
     /**
