@@ -248,7 +248,7 @@ android {
     }
 }
 
-final affise_version = '1.7.4'
+final affise_version = '1.7.5'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
