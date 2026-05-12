@@ -10,7 +10,7 @@ interface State {
     index?: number;
 }
 
-export class AffiseIndexContainer extends Component<Props, State> {
+export class TabsViewPager extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props);

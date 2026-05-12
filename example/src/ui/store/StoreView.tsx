@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import {Alert, FlatList, View} from "react-native";
+import {Alert, FlatList, View, StyleSheet} from "react-native";
 import type {AffiseProduct} from 'affise-attribution-lib';
 import {Affise, AffiseProductType, AffisePurchasedInfo} from "affise-attribution-lib";
-import {AffiseButton} from "../components/AffiseButton";
-import {AffiseProductView} from "../components/AffiseProductView";
+import {AffiseButton} from "../../components/AffiseButton";
+import {AffiseProductView} from "../../components/AffiseProductView";
 
 
 const storeData: Record<string, AffiseProductType> = {
@@ -24,7 +24,7 @@ interface State {
     products?: AffiseProduct[];
 }
 
-export class AffiseStore extends Component<Props, State> {
+export class StoreView extends Component<Props, State> {
 
     constructor(props: Props = {products: []}) {
         super(props);
@@ -40,7 +40,7 @@ export class AffiseStore extends Component<Props, State> {
 
     render() {
         return (
-            <View  style={{paddingStart: 8, paddingEnd: 8, paddingBottom: 8}}>
+            <View  style={styles.defaultView}>
                 <AffiseButton
                     color="#2196F3"
                     title="Fetch"
@@ -49,8 +49,8 @@ export class AffiseStore extends Component<Props, State> {
                     }}
                 />
                 <FlatList
-                    style={{marginTop: 8}}
-                    ItemSeparatorComponent={() => <View style={{height: 8}}/>}
+                    style={styles.defaultList}
+                    ItemSeparatorComponent={() => <View style={styles.defaultListSeparator}/>}
                     data={this.state.products}
                     renderItem={({item}) => (
                         <AffiseProductView product={item} onBuy={(product) => {
@@ -97,3 +97,20 @@ export class AffiseStore extends Component<Props, State> {
         ]);
     }
 }
+
+const styles = StyleSheet.create({
+    defaultView: {
+        width: '100%',
+        flex: 1,
+        padding: 8,
+    },
+    defaultList: {
+        marginTop: 8,
+    },
+    defaultListContent: {
+        padding: 8,
+    },
+    defaultListSeparator: {
+        height: 8
+    },
+});

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Button, StyleSheet, Text, View, ViewProps} from "react-native";
-import type {AffiseProduct} from "../../../../src/module/subscription/AffiseProduct";
+import type {AffiseProduct} from "../../../src/module/subscription/AffiseProduct";
 
 
 interface Props extends ViewProps {
