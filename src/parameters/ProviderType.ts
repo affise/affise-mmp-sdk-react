@@ -81,6 +81,7 @@ export enum ProviderType {
     AFFISE_INTERNAL_EVENTS_COUNT = "affise_internal_events_count",
     IS_ROOTED = "is_rooted",
     IS_EMULATOR = "is_emulator",
+    IDFV = "idfv",
 
     // advertising
     GAID_ADID = "gaid_adid",
