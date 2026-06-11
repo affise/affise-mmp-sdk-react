@@ -83,6 +83,9 @@ export enum ProviderType {
     IS_EMULATOR = "is_emulator",
     IDFV = "idfv",
 
+    //google
+    ODM_INFO = "odm_info",
+
     // advertising
     GAID_ADID = "gaid_adid",
     GAID_ADID_MD5 = "gaid_adid_md5",
