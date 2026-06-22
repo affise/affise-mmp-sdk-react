@@ -161,7 +161,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.7.8'
+final affise_version = '1.7.9'
 
 dependencies {
     // Affise modules
@@ -201,7 +201,7 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.7.8'
+  affise_version = '1.7.9'
   # Affise Modules
   pod 'AffiseModule/AdService', affise_version
   pod 'AffiseModule/Advertising', affise_version
@@ -749,6 +749,12 @@ To match users with events and data library is sending, these `ProviderType` ide
 - `LANGUAGE`
 - `DEVICE_NAME`
 - `DEVICE_TYPE`
+- `SCREEN_WIDTH`
+- `SCREEN_HEIGHT`
+- `DENSITY`
+- `CPU_CORES`
+- `TOTAL_DISK`
+- `FREE_DISK`
 - `OS_NAME`
 - `PLATFORM`
 - `SDK_PLATFORM`
@@ -794,6 +800,9 @@ To match users with events and data library is sending, these `ProviderType` ide
 - `ALTSTR_ADID`
 - `FIREOS_ADID`
 - `COLOROS_ADID`
+- `AD_PERSONALIZATION`
+- `ADVERTISER_TRACKING_ENABLED`
+- `APPLICATION_TRACKING_ENABLED`
 
 ### AndroidId
 
