@@ -5,6 +5,12 @@ module.exports = {
   dependencies: {
     [pak.name]: {
       root: path.join(__dirname, '..'),
+      platforms: {
+        android: {
+          cmakeListsPath: null,
+          libraryName: null,
+        },
+      },
     },
   },
 };

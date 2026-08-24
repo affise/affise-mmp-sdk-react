@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { FlatList, Modal, Pressable, StyleSheet, Text } from 'react-native';
 
-type SelectDialogueProps<T extends string> = {
+type SelectDialogueProps = {
   visible: boolean;
   uppercase?: boolean;
-  items: T[];
+  items: string[];
   onClose: () => void;
-  onSelect: (item: T) => void;
+  onSelect: (item: string) => void;
 };
 
-export class SelectDialogue<T extends string> extends Component<
-  SelectDialogueProps<T>
-> {
-  private renderItem = ({ item }: { item: T }) => (
+export class SelectDialogue extends Component<SelectDialogueProps> {
+  private renderItem = ({ item }: { item: string }) => (
     <Pressable
       accessibilityRole="button"
       android_ripple={styles.ripple}

@@ -1,7 +1,6 @@
 package com.affise.attribution.react
 
 import com.affise.attribution.internal.callback.InternalResult
-import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 
 class ResultWrapper(private val promise: Promise) : InternalResult {
@@ -17,11 +16,10 @@ class ResultWrapper(private val promise: Promise) : InternalResult {
         promise.reject("affise", "notImplemented")
     }
 
-    @Suppress("UNCHECKED_CAST")
     private fun Any.asNativeData() : Any? = when (this) {
-        is Map<*, *> -> Arguments.makeNativeMap(this as? Map<String, *>)
+        is Map<*, *> -> this.toWritableNativeMap()
 
-        is List<*> -> Arguments.makeNativeArray(this as? List<*>)
-        else -> this
+        is List<*> -> this.toWritableNativeArray()
+        else -> this.toNativeBridgeData()
     }
 }

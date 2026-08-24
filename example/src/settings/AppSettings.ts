@@ -71,8 +71,13 @@ export class AppSettings {
   }
 
   async load() {
-    const values = new Map(
-      await AsyncStorage.multiGet(Object.values(storageKeys))
+    const values = new Map<string, string | null>(
+      await Promise.all(
+        Object.values(storageKeys).map(async (key) => [
+          key,
+          await AsyncStorage.getItem(key),
+        ] as const)
+      )
     );
 
     const isProduction = values.get(storageKeys.isProduction);

@@ -27,7 +27,7 @@ class AffiseAttributionNativeModule(
             apiWrapper?.setCallback { name, map ->
                 val data = Arguments.createMap().apply {
                     putString(API, name)
-                    putMap(DATA, Arguments.makeNativeMap(map))
+                    putMap(DATA, map.toWritableNativeMap())
                 }
                 sendEvent(data)
             }

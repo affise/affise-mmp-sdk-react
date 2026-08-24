@@ -40,9 +40,7 @@ const tabs = [
 export function MainView({ deeplink }: MainViewProps) {
   const [tabIndex, setTabIndex] = React.useState(0);
   const [lastTabIndex, setLastTabIndex] = React.useState(0);
-  const [useCustomPredefined, setUseCustomPredefined] = React.useState(
-    appSettings.toState().useCustomPredefined
-  );
+  const [useCustomPredefined, setUseCustomPredefined] = React.useState(false);
 
   React.useEffect(() => {
     const loadSettings = async () => {

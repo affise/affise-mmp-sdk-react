@@ -26,7 +26,7 @@ export class AffiseModule implements AffiseModuleApi {
         this.native = native
         this.advertising = new AffiseAdvertising(native)
         this.appsFlyer = new AffiseAppsFlyer(native)
-       	this.link = new AffiseLink(native)
+        this.link = new AffiseLink(native)
         this.subscription = new AffiseSubscription(native)
         this.tikTok = new AffiseTikTok(native)
     }
