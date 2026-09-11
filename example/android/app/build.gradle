@@ -141,7 +141,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.7.14"
+        versionName "1.7.15"
     }
 
     buildFeatures {
@@ -203,7 +203,7 @@ android {
     }
 }
 
-final affise_version = '1.7.14'
+final affise_version = '1.7.15'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
