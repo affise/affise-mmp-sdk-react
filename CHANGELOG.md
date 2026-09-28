@@ -1,5 +1,46 @@
 # Changelog
 
+## [1.7.16] - 2026-09-28
+
+### Added
+
+- React Native package for native Affise module `affise-attribution-module-adservice`
+- AdService module wrapper `AffiseModule/AdService` for iOS.
+- React Native package for native Affise module `affise-attribution-module-appsflyer`
+- AppsFlyer module wrapper `com.affise:module-appsflyer` for Android.
+- AppsFlyer module wrapper `AffiseModule/AppsFlyer` for iOS.
+- React Native package for native Affise module `affise-attribution-module-google`
+- Google module wrapper `AffiseModule/Google` for iOS.
+- React Native package for native Affise module `affise-attribution-module-huawei`
+- Huawei module wrapper `com.affise:module-huawei` for Android.
+- React Native package for native Affise module `affise-attribution-module-link`
+- Link module wrapper `com.affise:module-link` for Android.
+- Link module wrapper `AffiseModule/Link` for iOS.
+- React Native package for native Affise module `affise-attribution-module-meta`
+- Meta module wrapper `com.affise:module-meta` for Android.
+- React Native package for native Affise module `affise-attribution-module-network`
+- Network module wrapper `com.affise:module-network` for Android.
+- React Native package for native Affise module `affise-attribution-module-persistent`
+- Persistent module wrapper `AffiseModule/Persistent` for iOS.
+- React Native package for native Affise module `affise-attribution-module-phone`
+- Phone module wrapper `com.affise:module-phone` for Android.
+- React Native package for native Affise module `affise-attribution-module-rustore`
+- RuStore module wrapper `com.affise:module-rustore` for Android.
+- React Native package for native Affise module `affise-attribution-module-status`
+- Status module wrapper `com.affise:module-status` for Android.
+- Status module wrapper `AffiseModule/Status` for iOS.
+- React Native package for native Affise module `affise-attribution-module-subscription`
+- Subscription module wrapper `com.affise:module-subscription` for Android.
+- Subscription module wrapper `AffiseModule/Subscription` for iOS.
+- React Native package for native Affise module `affise-attribution-module-tiktok`
+- TikTok module wrapper `com.affise:module-tiktok` for Android.
+- TikTok module wrapper `AffiseModule/TikTok` for iOS.
+
+### Changed
+
+- Update native iOS to [`1.7.16`](https://github.com/affise/affise-mmp-sdk-ios/blob/1.7.16/CHANGELOG.md)
+- Update native Android to [`1.7.16`](https://github.com/affise/affise-mmp-sdk-android/blob/v1.7.16/CHANGELOG.md)
+
 ## [1.7.15] - 2026-09-11
 
 ### Changed
@@ -647,6 +688,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.7.16]: https://github.com/affise/affise-mmp-sdk-react/compare/1.7.15...1.7.16
 [1.7.15]: https://github.com/affise/affise-mmp-sdk-react/compare/1.7.14...1.7.15
 [1.7.14]: https://github.com/affise/affise-mmp-sdk-react/compare/1.7.13...1.7.14
 [1.7.13]: https://github.com/affise/affise-mmp-sdk-react/compare/1.7.12...1.7.13

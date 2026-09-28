@@ -1,0 +1,41 @@
+{
+    "name": "AffiseAttributionLibExample",
+    "version": "1.7.16",
+    "private": true,
+    "scripts": {
+        "android": "react-native run-android",
+        "ios": "react-native run-ios",
+        "start": "react-native start",
+        "pods": "pod-install --quiet"
+    },
+    "dependencies": {
+        "@react-native-async-storage/async-storage": "2.2.0",
+        "react": "19.1.1",
+        "react-native": "0.82.0",
+        "uuid-random": "^1.3.2",
+        "affise-attribution-module-adservice": "file:../../affise-attribution-module-adservice",
+        "affise-attribution-module-advertising": "file:../../affise-attribution-module-advertising",
+        "affise-attribution-module-androidid": "file:../../affise-attribution-module-androidid",
+        "affise-attribution-module-appsflyer": "file:../../affise-attribution-module-appsflyer",
+        "affise-attribution-module-google": "file:../../affise-attribution-module-google",
+        "affise-attribution-module-huawei": "file:../../affise-attribution-module-huawei",
+        "affise-attribution-module-link": "file:../../affise-attribution-module-link",
+        "affise-attribution-module-meta": "file:../../affise-attribution-module-meta",
+        "affise-attribution-module-network": "file:../../affise-attribution-module-network",
+        "affise-attribution-module-persistent": "file:../../affise-attribution-module-persistent",
+        "affise-attribution-module-phone": "file:../../affise-attribution-module-phone",
+        "affise-attribution-module-rustore": "file:../../affise-attribution-module-rustore",
+        "affise-attribution-module-status": "file:../../affise-attribution-module-status",
+        "affise-attribution-module-subscription": "file:../../affise-attribution-module-subscription",
+        "affise-attribution-module-tiktok": "file:../../affise-attribution-module-tiktok"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.25.2",
+        "@babel/runtime": "^7.25.0",
+        "@react-native-community/cli": "^20.0.0",
+        "@react-native/babel-preset": "0.82.0",
+        "@react-native/metro-config": "0.82.0",
+        "babel-plugin-module-resolver": "^4.1.0",
+        "metro-config": "^0.83.1"
+    }
+}
