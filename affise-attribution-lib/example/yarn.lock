@@ -1313,63 +1313,63 @@ acorn@^8.15.0:
   integrity sha512-lGq+9yr1/GuAWaVYIHRjvvySG5/4VfKIvC8EWxStPdcDh/Ka7FG3twP6v4d5BkravUilhIAsG4Qj83t02LWUPQ==
 
 "affise-attribution-module-adservice@file:../../affise-attribution-module-adservice":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-adservice"
 
 "affise-attribution-module-advertising@file:../../affise-attribution-module-advertising":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-advertising"
 
 "affise-attribution-module-androidid@file:../../affise-attribution-module-androidid":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-androidid"
 
 "affise-attribution-module-appsflyer@file:../../affise-attribution-module-appsflyer":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-appsflyer"
 
 "affise-attribution-module-google@file:../../affise-attribution-module-google":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-google"
 
 "affise-attribution-module-huawei@file:../../affise-attribution-module-huawei":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-huawei"
 
 "affise-attribution-module-link@file:../../affise-attribution-module-link":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-link"
 
 "affise-attribution-module-meta@file:../../affise-attribution-module-meta":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-meta"
 
 "affise-attribution-module-network@file:../../affise-attribution-module-network":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-network"
 
 "affise-attribution-module-persistent@file:../../affise-attribution-module-persistent":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-persistent"
 
 "affise-attribution-module-phone@file:../../affise-attribution-module-phone":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-phone"
 
 "affise-attribution-module-rustore@file:../../affise-attribution-module-rustore":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-rustore"
 
 "affise-attribution-module-status@file:../../affise-attribution-module-status":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-status"
 
 "affise-attribution-module-subscription@file:../../affise-attribution-module-subscription":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-subscription"
 
 "affise-attribution-module-tiktok@file:../../affise-attribution-module-tiktok":
-  version "0.1.0"
+  version "1.7.16"
   resolved "file:../../affise-attribution-module-tiktok"
 
 agent-base@^7.1.2:
