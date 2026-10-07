@@ -158,6 +158,8 @@ yarn add affise-attribution-lib
 
 #### React
 
+`Recommended installation option`
+
 | Package                                      | Version | Android | iOS |
 |----------------------------------------------|:-------:|:-------:|:---:|
 | `affise-attribution-module-adservice`        | [![latest release](https://badges.ws/npm/v/affise-attribution-module-adservice)](https://www.npmjs.com/package/affise-attribution-module-adservice) | ❌ | ✅ |
@@ -200,6 +202,8 @@ npm install affise-attribution-module-tiktok
 ```
 
 #### Manual Native
+
+It is better to use the [recommended dependency installation](#react) method
 
 ##### Android
 
@@ -646,8 +650,6 @@ Affise
 ### Requirements
 
 #### Android
-
-Minimal Android SDK version is 21
 
 For a minimal working functionality your app needs to declare internet permission:
 
