@@ -73,23 +73,23 @@ jobs:
             ${{ runner.os }}-npm-
 
       # Package affise-attribution-lib
-      - name: NPM Install
-        working-directory: affise-attribution-lib
-        run: npm ci
+      # - name: NPM Install
+      #   working-directory: affise-attribution-lib
+      #   run: npm ci
 
-      - name: Publish attribution-lib
-        if: ${{ !contains(github.event.ref, '-') }}
-        working-directory: affise-attribution-lib
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
-        run: npm publish
+      # - name: Publish attribution-lib
+      #   if: ${{ !contains(github.event.ref, '-') }}
+      #   working-directory: affise-attribution-lib
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
+      #   run: npm publish
 
-      - name: Publish Beta attribution-lib
-        if: contains(github.event.ref, '-beta')
-        working-directory: affise-attribution-lib
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
-        run: npm publish --tag beta
+      # - name: Publish Beta attribution-lib
+      #   if: contains(github.event.ref, '-beta')
+      #   working-directory: affise-attribution-lib
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
+      #   run: npm publish --tag beta
 
       # Package affise-attribution-module-adservice
       - name: NPM Install
