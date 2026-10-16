@@ -1,6 +1,6 @@
 {
   "name": "affise-attribution-module-persistent",
-  "version": "1.7.16",
+  "version": "1.7.17",
   "description": "Affise Attribution Module Persistent",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",

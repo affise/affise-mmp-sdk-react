@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.17] - 2026-10-16
+
+### Changed
+
+- Sync versions
+- Update native iOS to [`1.7.17`](https://github.com/affise/affise-mmp-sdk-ios/blob/1.7.17/CHANGELOG.md)
+- Update native Android to [`1.7.17`](https://github.com/affise/affise-mmp-sdk-android/blob/v1.7.17/CHANGELOG.md)
+
 ## [1.7.16] - 2026-09-28
 
 ### Added
@@ -688,6 +696,7 @@
 - Api `Affise.android.getReferrer` to `Affise.getReferrer`
 - Api `Affise.android.getReferrerValue` to  `Affise.getReferrerValue`
 
+[1.7.17]: https://github.com/affise/affise-mmp-sdk-react/compare/1.7.16...1.7.17
 [1.7.16]: https://github.com/affise/affise-mmp-sdk-react/compare/1.7.15...1.7.16
 [1.7.15]: https://github.com/affise/affise-mmp-sdk-react/compare/1.7.14...1.7.15
 [1.7.14]: https://github.com/affise/affise-mmp-sdk-react/compare/1.7.13...1.7.14

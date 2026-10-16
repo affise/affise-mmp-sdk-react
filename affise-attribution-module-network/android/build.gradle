@@ -53,6 +53,6 @@ android {
 dependencies {
   implementation "com.facebook.react:react-android"
 
-  implementation "com.affise:module-network:1.7.16"
+  implementation "com.affise:module-network:1.7.17"
 }
 

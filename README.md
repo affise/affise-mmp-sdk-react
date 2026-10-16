@@ -227,7 +227,7 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.7.16'
+final affise_version = '1.7.17'
 
 dependencies {
     // Affise modules
@@ -267,7 +267,7 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.7.16'
+  affise_version = '1.7.17'
   # Affise Modules
   pod 'AffiseModule/AdService', affise_version
   pod 'AffiseModule/Advertising', affise_version
