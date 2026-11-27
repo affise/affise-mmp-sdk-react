@@ -78,6 +78,7 @@ jobs:
         run: npm ci
 
       - name: Publish attribution-lib
+        id: publish_release_attribution_lib
         if: ${{ !contains(github.event.ref, '-') }}
         working-directory: affise-attribution-lib
         env:
@@ -85,6 +86,7 @@ jobs:
         run: npm publish
 
       - name: Publish Beta attribution-lib
+        id: publish_beta_attribution_lib
         if: contains(github.event.ref, '-beta')
         working-directory: affise-attribution-lib
         env:
@@ -93,18 +95,24 @@ jobs:
 
       # Package affise-attribution-module-adservice
       - name: NPM Install
+        id: install_module_adservice
+        continue-on-error: true
         working-directory: affise-attribution-module-adservice
         run: npm install
 
       - name: Publish module-adservice
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_adservice
+        if: ${{ steps.install_module_adservice.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-adservice
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-adservice
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_adservice
+        if: ${{ steps.install_module_adservice.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-adservice
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -112,18 +120,24 @@ jobs:
 
       # Package affise-attribution-module-advertising
       - name: NPM Install
+        id: install_module_advertising
+        continue-on-error: true
         working-directory: affise-attribution-module-advertising
         run: npm install
 
       - name: Publish module-advertising
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_advertising
+        if: ${{ steps.install_module_advertising.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-advertising
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-advertising
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_advertising
+        if: ${{ steps.install_module_advertising.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-advertising
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -131,18 +145,24 @@ jobs:
 
       # Package affise-attribution-module-androidid
       - name: NPM Install
+        id: install_module_androidid
+        continue-on-error: true
         working-directory: affise-attribution-module-androidid
         run: npm install
 
       - name: Publish module-androidid
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_androidid
+        if: ${{ steps.install_module_androidid.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-androidid
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-androidid
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_androidid
+        if: ${{ steps.install_module_androidid.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-androidid
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -150,18 +170,24 @@ jobs:
 
       # Package affise-attribution-module-appsflyer
       - name: NPM Install
+        id: install_module_appsflyer
+        continue-on-error: true
         working-directory: affise-attribution-module-appsflyer
         run: npm install
 
       - name: Publish module-appsflyer
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_appsflyer
+        if: ${{ steps.install_module_appsflyer.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-appsflyer
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-appsflyer
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_appsflyer
+        if: ${{ steps.install_module_appsflyer.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-appsflyer
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -169,37 +195,74 @@ jobs:
 
       # Package affise-attribution-module-google
       - name: NPM Install
+        id: install_module_google
+        continue-on-error: true
         working-directory: affise-attribution-module-google
         run: npm install
 
       - name: Publish module-google
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_google
+        if: ${{ steps.install_module_google.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-google
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-google
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_google
+        if: ${{ steps.install_module_google.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-google
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
+        run: npm publish --tag beta
+
+      # Package affise-attribution-module-hardware
+      - name: NPM Install
+        id: install_module_hardware
+        continue-on-error: true
+        working-directory: affise-attribution-module-hardware
+        run: npm install
+
+      - name: Publish module-hardware
+        id: publish_release_module_hardware
+        if: ${{ steps.install_module_hardware.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
+        working-directory: affise-attribution-module-hardware
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
+        run: npm publish
+
+      - name: Publish Beta module-hardware
+        id: publish_beta_module_hardware
+        if: ${{ steps.install_module_hardware.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
+        working-directory: affise-attribution-module-hardware
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish --tag beta
 
       # Package affise-attribution-module-huawei
       - name: NPM Install
+        id: install_module_huawei
+        continue-on-error: true
         working-directory: affise-attribution-module-huawei
         run: npm install
 
       - name: Publish module-huawei
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_huawei
+        if: ${{ steps.install_module_huawei.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-huawei
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-huawei
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_huawei
+        if: ${{ steps.install_module_huawei.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-huawei
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -207,18 +270,24 @@ jobs:
 
       # Package affise-attribution-module-link
       - name: NPM Install
+        id: install_module_link
+        continue-on-error: true
         working-directory: affise-attribution-module-link
         run: npm install
 
       - name: Publish module-link
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_link
+        if: ${{ steps.install_module_link.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-link
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-link
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_link
+        if: ${{ steps.install_module_link.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-link
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -226,18 +295,24 @@ jobs:
 
       # Package affise-attribution-module-meta
       - name: NPM Install
+        id: install_module_meta
+        continue-on-error: true
         working-directory: affise-attribution-module-meta
         run: npm install
 
       - name: Publish module-meta
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_meta
+        if: ${{ steps.install_module_meta.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-meta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-meta
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_meta
+        if: ${{ steps.install_module_meta.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-meta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -245,18 +320,24 @@ jobs:
 
       # Package affise-attribution-module-network
       - name: NPM Install
+        id: install_module_network
+        continue-on-error: true
         working-directory: affise-attribution-module-network
         run: npm install
 
       - name: Publish module-network
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_network
+        if: ${{ steps.install_module_network.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-network
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-network
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_network
+        if: ${{ steps.install_module_network.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-network
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -264,18 +345,24 @@ jobs:
 
       # Package affise-attribution-module-persistent
       - name: NPM Install
+        id: install_module_persistent
+        continue-on-error: true
         working-directory: affise-attribution-module-persistent
         run: npm install
 
       - name: Publish module-persistent
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_persistent
+        if: ${{ steps.install_module_persistent.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-persistent
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-persistent
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_persistent
+        if: ${{ steps.install_module_persistent.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-persistent
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -283,56 +370,75 @@ jobs:
 
       # Package affise-attribution-module-phone
       - name: NPM Install
+        id: install_module_phone
+        continue-on-error: true
         working-directory: affise-attribution-module-phone
         run: npm install
 
       - name: Publish module-phone
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_phone
+        if: ${{ steps.install_module_phone.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-phone
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-phone
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_phone
+        if: ${{ steps.install_module_phone.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-phone
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish --tag beta
 
       # Package affise-attribution-module-rustore
-      - name: NPM Install
-        working-directory: affise-attribution-module-rustore
-        run: npm install
+      # Temporarily disabled until the native module is available.
+      # - name: NPM Install
+      #   id: install_module_rustore
+      #   continue-on-error: true
+      #   working-directory: affise-attribution-module-rustore
+      #   run: npm install
 
-      - name: Publish module-rustore
-        if: ${{ !contains(github.event.ref, '-') }}
-        working-directory: affise-attribution-module-rustore
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
-        run: npm publish
+      # - name: Publish module-rustore
+      #   id: publish_release_module_rustore
+      #   if: ${{ steps.install_module_rustore.outcome == 'success' && !contains(github.event.ref, '-') }}
+      #   continue-on-error: true
+      #   working-directory: affise-attribution-module-rustore
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
+      #   run: npm publish
 
-      - name: Publish Beta module-rustore
-        if: contains(github.event.ref, '-beta')
-        working-directory: affise-attribution-module-rustore
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
-        run: npm publish --tag beta
+      # - name: Publish Beta module-rustore
+      #   id: publish_beta_module_rustore
+      #   if: ${{ steps.install_module_rustore.outcome == 'success' && contains(github.event.ref, '-beta') }}
+      #   continue-on-error: true
+      #   working-directory: affise-attribution-module-rustore
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
+      #   run: npm publish --tag beta
 
       # Package affise-attribution-module-status
       - name: NPM Install
+        id: install_module_status
+        continue-on-error: true
         working-directory: affise-attribution-module-status
         run: npm install
 
       - name: Publish module-status
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_status
+        if: ${{ steps.install_module_status.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-status
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-status
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_status
+        if: ${{ steps.install_module_status.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-status
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -340,18 +446,24 @@ jobs:
 
       # Package affise-attribution-module-subscription
       - name: NPM Install
+        id: install_module_subscription
+        continue-on-error: true
         working-directory: affise-attribution-module-subscription
         run: npm install
 
       - name: Publish module-subscription
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_subscription
+        if: ${{ steps.install_module_subscription.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-subscription
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-subscription
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_subscription
+        if: ${{ steps.install_module_subscription.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-subscription
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
@@ -359,22 +471,64 @@ jobs:
 
       # Package affise-attribution-module-tiktok
       - name: NPM Install
+        id: install_module_tiktok
+        continue-on-error: true
         working-directory: affise-attribution-module-tiktok
         run: npm install
 
       - name: Publish module-tiktok
-        if: ${{ !contains(github.event.ref, '-') }}
+        id: publish_release_module_tiktok
+        if: ${{ steps.install_module_tiktok.outcome == 'success' && !contains(github.event.ref, '-') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-tiktok
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish
 
       - name: Publish Beta module-tiktok
-        if: contains(github.event.ref, '-beta')
+        id: publish_beta_module_tiktok
+        if: ${{ steps.install_module_tiktok.outcome == 'success' && contains(github.event.ref, '-beta') }}
+        continue-on-error: true
         working-directory: affise-attribution-module-tiktok
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # skip for OIDC
         run: npm publish --tag beta
+
+      - name: Summarize npm publication
+        id: publish_summary
+        if: ${{ steps.publish_release_attribution_lib.outcome == 'success' || steps.publish_beta_attribution_lib.outcome == 'success' }}
+        env:
+          PUBLISH_STEPS: ${{ toJSON(steps) }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync } from 'node:fs';
+
+          const steps = JSON.parse(process.env.PUBLISH_STEPS);
+          const isBeta = steps.publish_beta_attribution_lib?.outcome === 'success';
+          const prefix = isBeta ? 'publish_beta_' : 'publish_release_';
+          const packages = Object.entries(steps).filter(([id]) => id.startsWith(prefix));
+          const notPublished = [];
+
+          for (const [id, { outcome }] of packages) {
+            if (outcome === 'success') continue;
+
+            const key = id.slice(prefix.length);
+            const name = key.replaceAll('_', '-');
+            const reason = steps['install_' + key]?.outcome === 'failure'
+              ? 'install failed'
+              : outcome === 'failure' ? 'publish failed' : 'skipped';
+            notPublished.push(name + ' (' + reason + ')');
+          }
+
+          const published = packages.length - notPublished.length;
+          const status = notPublished.length === 0 ? '🟢' : '🟡';
+          const details = notPublished.length === 0 ? '' : 'Not published: ' + notPublished.join('; ');
+          appendFileSync(process.env.GITHUB_OUTPUT,
+            'status=' + status + '\n' +
+            'published=' + published + '\n' +
+            'total=' + packages.length + '\n' +
+            'details=' + details + '\n');
+          NODE
 
       - name: Tg Release failed
         continue-on-error: true
@@ -394,7 +548,7 @@ jobs:
       - name: Tg Release
         continue-on-error: true
         id: tg_success
-        if: ${{ success() }}
+        if: ${{ steps.publish_summary.outcome == 'success' }}
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
@@ -402,7 +556,9 @@ jobs:
           format: markdown
           disable_web_page_preview: true
           message: |
-            🟢 React Native `${{ steps.version_tag.outputs.VERSION }}` release
+            ${{ steps.publish_summary.outputs.status }} React Native `${{ steps.version_tag.outputs.VERSION }}` release
+            published ${{ steps.publish_summary.outputs.published }} / ${{ steps.publish_summary.outputs.total }}
+            ${{ steps.publish_summary.outputs.details }}
 
             [Changelog](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md)
 

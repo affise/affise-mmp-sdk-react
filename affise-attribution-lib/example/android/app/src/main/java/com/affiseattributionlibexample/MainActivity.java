@@ -1,10 +1,35 @@
 package com.affiseattributionlibexample;
 
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
 
 public class MainActivity extends ReactActivity {
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    // On older Android versions, the window already fits the system bars.
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+      return;
+    }
+
+    View content = findViewById(android.R.id.content);
+    ViewCompat.setOnApplyWindowInsetsListener(content, (view, windowInsets) -> {
+      Insets safeArea = windowInsets.getInsets(
+          WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+      view.setPadding(safeArea.left, safeArea.top, safeArea.right, safeArea.bottom);
+      return windowInsets;
+    });
+    ViewCompat.requestApplyInsets(content);
+  }
 
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule

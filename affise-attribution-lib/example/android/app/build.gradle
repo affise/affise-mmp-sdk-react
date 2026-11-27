@@ -141,7 +141,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.7.17"
+        versionName "1.7.18"
     }
 
     buildFeatures {
@@ -203,7 +203,7 @@ android {
     }
 }
 
-final affise_version = '1.7.17'
+final affise_version = '1.7.18'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -212,6 +212,7 @@ dependencies {
     // Affise modules
     // implementation "com.affise:module-advertising:$affise_version"
     // implementation "com.affise:module-androidid:$affise_version"
+    // implementation "com.affise:module-hardware:$affise_version"
     // implementation "com.affise:module-link:$affise_version"
     // implementation "com.affise:module-network:$affise_version"
     // implementation "com.affise:module-phone:$affise_version"

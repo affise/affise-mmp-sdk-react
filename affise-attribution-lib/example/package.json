@@ -1,6 +1,6 @@
 {
     "name": "AffiseAttributionLibExample",
-    "version": "1.7.17",
+    "version": "1.7.18",
     "private": true,
     "scripts": {
         "android": "react-native run-android",
@@ -18,13 +18,13 @@
         "affise-attribution-module-androidid": "file:../../affise-attribution-module-androidid",
         "affise-attribution-module-appsflyer": "file:../../affise-attribution-module-appsflyer",
         "affise-attribution-module-google": "file:../../affise-attribution-module-google",
+        "affise-attribution-module-hardware": "file:../../affise-attribution-module-hardware",
         "affise-attribution-module-huawei": "file:../../affise-attribution-module-huawei",
         "affise-attribution-module-link": "file:../../affise-attribution-module-link",
         "affise-attribution-module-meta": "file:../../affise-attribution-module-meta",
         "affise-attribution-module-network": "file:../../affise-attribution-module-network",
         "affise-attribution-module-persistent": "file:../../affise-attribution-module-persistent",
         "affise-attribution-module-phone": "file:../../affise-attribution-module-phone",
-        "affise-attribution-module-rustore": "file:../../affise-attribution-module-rustore",
         "affise-attribution-module-status": "file:../../affise-attribution-module-status",
         "affise-attribution-module-subscription": "file:../../affise-attribution-module-subscription",
         "affise-attribution-module-tiktok": "file:../../affise-attribution-module-tiktok"

@@ -33,7 +33,7 @@ export class AffiseDebug implements AffiseDebugApi {
      * Debug get version of NPM library
      */
     version(): string {
-        return "1.7.17";
+        return "1.7.18";
     }
 
     /**

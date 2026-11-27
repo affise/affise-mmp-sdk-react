@@ -17,6 +17,7 @@
 | `affise-attribution-module-androidid` | [![latest release](https://badges.ws/npm/v/affise-attribution-module-androidid)](https://www.npmjs.com/package/affise-attribution-module-androidid) |
 | `affise-attribution-module-appsflyer` | [![latest release](https://badges.ws/npm/v/affise-attribution-module-appsflyer)](https://www.npmjs.com/package/affise-attribution-module-appsflyer) |
 | `affise-attribution-module-google` | [![latest release](https://badges.ws/npm/v/affise-attribution-module-google)](https://www.npmjs.com/package/affise-attribution-module-google) |
+| `affise-attribution-module-hardware` | [![latest release](https://badges.ws/npm/v/affise-attribution-module-hardware)](https://www.npmjs.com/package/affise-attribution-module-hardware) |
 | `affise-attribution-module-huawei` | [![latest release](https://badges.ws/npm/v/affise-attribution-module-huawei)](https://www.npmjs.com/package/affise-attribution-module-huawei) |
 | `affise-attribution-module-link` | [![latest release](https://badges.ws/npm/v/affise-attribution-module-link)](https://www.npmjs.com/package/affise-attribution-module-link) |
 | `affise-attribution-module-meta` | [![latest release](https://badges.ws/npm/v/affise-attribution-module-meta)](https://www.npmjs.com/package/affise-attribution-module-meta) |
@@ -167,6 +168,7 @@ yarn add affise-attribution-lib
 | `affise-attribution-module-androidid`        | [![latest release](https://badges.ws/npm/v/affise-attribution-module-androidid)](https://www.npmjs.com/package/affise-attribution-module-androidid) | ✅ | ❌ |
 | `affise-attribution-module-appsflyer`        | [![latest release](https://badges.ws/npm/v/affise-attribution-module-appsflyer)](https://www.npmjs.com/package/affise-attribution-module-appsflyer) | ✅ | ✅ |
 | `affise-attribution-module-google`           | [![latest release](https://badges.ws/npm/v/affise-attribution-module-google)](https://www.npmjs.com/package/affise-attribution-module-google) | ❌ | ✅ |
+| `affise-attribution-module-hardware`         | [![latest release](https://badges.ws/npm/v/affise-attribution-module-hardware)](https://www.npmjs.com/package/affise-attribution-module-hardware) | ✅ | ✅ |
 | `affise-attribution-module-huawei`           | [![latest release](https://badges.ws/npm/v/affise-attribution-module-huawei)](https://www.npmjs.com/package/affise-attribution-module-huawei) | ✅ | ❌ |
 | `affise-attribution-module-link`             | [![latest release](https://badges.ws/npm/v/affise-attribution-module-link)](https://www.npmjs.com/package/affise-attribution-module-link) | ✅ | ✅ |
 | `affise-attribution-module-meta`             | [![latest release](https://badges.ws/npm/v/affise-attribution-module-meta)](https://www.npmjs.com/package/affise-attribution-module-meta) | ✅ | ❌ |
@@ -189,6 +191,7 @@ npm install affise-attribution-module-advertising
 npm install affise-attribution-module-androidid
 npm install affise-attribution-module-appsflyer
 npm install affise-attribution-module-google
+npm install affise-attribution-module-hardware
 npm install affise-attribution-module-huawei
 npm install affise-attribution-module-link
 npm install affise-attribution-module-meta
@@ -214,6 +217,7 @@ Add modules to Android project
 | `ADVERTISING`  | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising) |
 | `ANDROIDID`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://mvnrepository.com/artifact/com.affise/module-androidid)       |
 | `APPSFLYER`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-appsflyer?label=latest)](https://mvnrepository.com/artifact/com.affise/module-appsflyer)       |
+| `HARDWARE`     | [![module-hardware](https://img.shields.io/maven-central/v/com.affise/module-hardware?label=latest)](https://mvnrepository.com/artifact/com.affise/module-hardware) |
 | `LINK`         | [![module-link](https://img.shields.io/maven-central/v/com.affise/module-link?label=latest)](https://mvnrepository.com/artifact/com.affise/module-link)                      |
 | `NETWORK`      | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)             |
 | `PHONE`        | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                   |
@@ -227,12 +231,13 @@ Add modules to Android project
 Example [`example/android/app/build.gradle`](example/android/app/build.gradle)
 
 ```gradle
-final affise_version = '1.7.17'
+final affise_version = '1.7.18'
 
 dependencies {
     // Affise modules
     implementation "com.affise:module-advertising:$affise_version"
     implementation "com.affise:module-androidid:$affise_version"
+    implementation "com.affise:module-hardware:$affise_version"
     implementation "com.affise:module-link:$affise_version"
     implementation "com.affise:module-network:$affise_version"
     implementation "com.affise:module-phone:$affise_version"
@@ -255,6 +260,7 @@ Add modules to iOS project
 | `ADSERVICE`    | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 | `ADVERTISING`  | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 | `APPSFLYER`    | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
+| `HARDWARE`     | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 | `LINK`         | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 | `PERSISTENT`   | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
 | `STATUS`       | [![latest](https://badges.ws/cocoapods/v/AffiseModule)](https://github.com/CocoaPods/Specs/tree/master/Specs/0/3/d/AffiseModule/) |
@@ -267,11 +273,12 @@ Example [example/ios/Podfile](example/ios/Podfile)
 target 'YourAppProject' do
   # ...
 
-  affise_version = '1.7.17'
+  affise_version = '1.7.18'
   # Affise Modules
   pod 'AffiseModule/AdService', affise_version
   pod 'AffiseModule/Advertising', affise_version
   pod 'AffiseModule/AppsFlyer', affise_version
+  pod 'AffiseModule/Hardware', affise_version
   pod 'AffiseModule/Link', affise_version
   pod 'AffiseModule/Persistent', affise_version
   pod 'AffiseModule/Status', affise_version
@@ -794,8 +801,6 @@ To match users with events and data library is sending, these `ProviderType` ide
 - `UNINSTALL_TIME`
 - `REINSTALL_TIME`
 - `LAST_SESSION_TIME`
-- `CPU_TYPE`
-- `HARDWARE_NAME`
 - `DEVICE_MANUFACTURER`
 - `DEEPLINK_CLICK`
 - `DEVICE_ATLAS_ID`
@@ -805,18 +810,6 @@ To match users with events and data library is sending, these `ProviderType` ide
 - `REFTOKENS`
 - `REFERRER`
 - `REFERRER_UPDATED`
-- `USER_AGENT`
-- `MCCODE`
-- `MNCODE`
-- `REGION`
-- `COUNTRY`
-- `LANGUAGE`
-- `DEVICE_NAME`
-- `DEVICE_TYPE`
-- `SCREEN_WIDTH`
-- `SCREEN_HEIGHT`
-- `DENSITY`
-- `CPU_CORES`
 - `TOTAL_DISK`
 - `FREE_DISK`
 - `OS_NAME`
@@ -824,10 +817,8 @@ To match users with events and data library is sending, these `ProviderType` ide
 - `SDK_PLATFORM`
 - `API_LEVEL_OS`
 - `AFFISE_SDK_VERSION`
-- `OS_VERSION`
 - `RANDOM_USER_ID`
 - `AFFISE_SDK_POS`
-- `TIMEZONE_DEV`
 - `AFFISE_EVENT_NAME`
 - `AFFISE_EVENT_TOKEN`
 - `LAST_TIME_SESSION`
@@ -872,6 +863,31 @@ To match users with events and data library is sending, these `ProviderType` ide
 
 - `ANDROID_ID`
 - `ANDROID_ID_MD5`
+
+### Hardware
+
+- `USER_AGENT`
+- `CPU_TYPE`
+- `CPU_CORES`
+- `DEVICE_NAME`
+- `PROXY_IP_ADDRESS`
+- `SCREEN_WIDTH`
+- `SCREEN_HEIGHT`
+- `DENSITY`
+- `HARDWARE_NAME`
+- `DEVICE_TYPE`
+- `OS_VERSION`
+- `MCCODE`
+- `MNCODE`
+- `ISP`
+- `NETWORK_TYPE`
+- `CONNECTION_TYPE`
+- `TIMEZONE_DEV`
+- `LANGUAGE`
+- `COUNTRY`
+- `REGION`
+- `DEVICE_MANUFACTURER`
+- `OS_NAME`
 
 ### Huawei
 

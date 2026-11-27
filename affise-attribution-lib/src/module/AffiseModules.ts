@@ -13,5 +13,6 @@ export enum AffiseModules {
     RUSTORE = "RuStore",
     HUAWEI = "Huawei",
     GOOGLE = "Google",
+    HARDWARE = "Hardware",
     TIKTOK = "TikTok",
 }
